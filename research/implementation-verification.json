@@ -195,7 +195,7 @@
     "Sources/AbsoluteDesktop/Views/AppearanceSettings.swift": "a9042ee1864a07a505a428d83e987ab2799a8a069d240a082041991bf44ba10f",
     "Sources/AbsoluteDesktop/Views/DesktopView.swift": "45321f0934af338214fc311830c34bdefa020259f235fde9193b314e19518ff8",
     "Sources/AbsoluteDesktop/Views/DesktopWindowView.swift": "a19d475cfdef7e9472821cdd79800d541a50da100b8eb036b0daffcb58bab575",
-    "Sources/AbsoluteDesktop/Views/DockView.swift": "a841294b8f0c8f72b86f7d9b1e77411808f79089e15575d713de2555e1866120",
+    "Sources/AbsoluteDesktop/Views/DockView.swift": "e378c2384074aed0e7f40f832d2bad720db5c4ce8f56d5d1df34409a7519a2c4",
     "Sources/AbsoluteDesktop/Views/FileBrowserView.swift": "f3716e19852064e35d488f6f7d58b02c71cff5b46b5225bc5071c0f7cd4a8505",
     "Sources/AbsoluteDesktop/Views/FileInfoView.swift": "973060af2a874e157a7278b6d500ffb271e6a07a3a2771029f9b8dbda072e505",
     "Sources/AbsoluteDesktop/Views/LauncherView.swift": "0e0bda5fc75e574a20a4a9b23b1240e82f87e1235b2c6e7298806faeaf3c435a",
@@ -231,6 +231,7 @@
     "Native desktop and restart checks were rerun after the macOS application discovery fix. A separate accessibility interaction pressed the real Safari Dock button and confirmed Safari activation.",
     "Core, CLI, Mach and Linux desktop sources are unchanged; their earlier verification records are retained. The Linux launcher change only adds viewport scaling to its printed viewer URL, and bash -n passed.",
     "The scaled Linux viewer was checked at 1280x800 and 1024x680 after its first framebuffer arrived. The desktop and Dock fit, and the launcher opens and dismisses. The optional favicon returns 404; no application or transport errors were observed.",
-    "2026-10-15: DockMagnification added; macOS unit tests re-run via script/check_core.sh (44 -> 55: 33 AbsoluteCore + 22 AbsoluteMach, all passed; CLI verify 16/16). The Linux count predates this unit and was not re-run; the GTK host and desktop/restart checks are unchanged."
+    "2026-10-15: DockMagnification added; macOS unit tests re-run via script/check_core.sh (44 -> 55: 33 AbsoluteCore + 22 AbsoluteMach, all passed; CLI verify 16/16). The Linux count predates this unit and was not re-run; the GTK host and desktop/restart checks are unchanged.",
+    "2026-10-15: DockView now lays tiles out through DockMagnification (tileSize 60, largeSize 112) with the measured ramp; the macOS app builds, and the desktop self-check was not re-run in this pass."
   ]
 }

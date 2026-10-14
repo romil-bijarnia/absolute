@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fish Dock</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<style>
+/* Layout: one dark stage with the dock pinned to its floor, readouts above it, the model below. */
+:root {
+  --bg: #0b0b0d;
+  --stage: #141417;
+  --fg: #b4b4ba;
+  --muted: #6c6c75;
+  --line: #26262c;
+  --dock: rgba(190, 190, 205, 0.14);
+  --dock-edge: rgba(210, 210, 225, 0.22);
+  --accent: #3aa6e6;
+  --font: "Inter", -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 17px/1.5 var(--font); padding-inline: 16px; padding-block: 24px 48px; }
+main { max-width: 1040px; margin: 0 auto; display: grid; gap: 28px; }
+h1 { font-size: 30px; font-weight: 500; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h2 { font-size: 20px; font-weight: 500; margin: 0 0 8px; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 14px; height: min(360px, 58vw); overflow: hidden; touch-action: none; cursor: default; }
+canvas { display: block; width: 100%; height: 100%; }
+.readout { position: absolute; top: 16px; left: 18px; right: 18px; display: flex; flex-wrap: wrap; gap: 6px 28px; font: 400 14px/1.4 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; pointer-events: none; }
+.readout b { color: var(--fg); font-weight: 400; }
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px 36px; }
+label { display: grid; gap: 6px; font-size: 15px; color: var(--muted); }
+label span b { color: var(--fg); font-weight: 400; font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.toggle { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--fg); cursor: pointer; }
+.toggle input { width: 20px; height: 20px; accent-color: var(--accent); }
+.model { display: grid; gap: 14px; }
+pre { margin: 0; padding: 14px 16px; background: var(--stage); border: 1px solid var(--line); border-radius: 10px; font: 400 14px/1.6 var(--mono); color: var(--fg); overflow-x: auto; }
+.curve { height: 150px; }
+.note { color: var(--muted); font-size: 15px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Fish Dock</h1>
+    <p class="lede">Dock magnification as recovered from macOS 27.0 Dock.app, drawn with the same arithmetic. Move the pointer along the dock. Set your real Dock to the same tile and magnified sizes and compare.</p>
+  </header>
+
+  <section class="stage" id="stage" aria-label="Simulated dock">
+    <canvas id="dock"></canvas>
+    <div class="readout" id="readout"></div>
+  </section>
+
+  <section class="controls">
+    <label>Tile size <span><b id="tileOut">48</b> pt</span><input type="range" id="tile" min="16" max="128" value="48"></label>
+    <label>Magnified size <span><b id="largeOut">128</b> pt</span><input type="range" id="large" min="16" max="128" value="128"></label>
+    <label class="toggle"><input type="checkbox" id="enabled" checked> Magnification</label>
+  </section>
+
+  <section class="model">
+    <h2>What the Dock computes</h2>
+    <pre>fishSize    = 3 · tileSize
+realScale   = fish · (largeSize − tileSize) / 2 ÷ sin(π · tileSize / (4 · fishSize))
+S(d)        = −1 if d ≤ −fishSize,  +1 if d ≥ fishSize,  sin(π · d / (2 · fishSize)) otherwise
+D(x)        = x + realScale · S(x − fishCenter)
+tile extent = [D(left edge), D(right edge)]
+ramp        = floor(42 · ln(|Δsize| / 2 + 1) + 1) ms, linear</pre>
+    <p class="note">Every tile keeps its unmagnified width in the layout; what you see is each edge displaced through D. Tiles more than three tile widths from the pointer are pushed aside without changing size. The grow and shrink ramps run when the pointer enters and leaves the dock, timed as the real Dock times them. Bar padding, shadows and icon art are not part of the recovered model.</p>
+    <canvas class="curve" id="curve" aria-label="Profile and tile size against distance"></canvas>
+  </section>
+</main>
+
+<script>
+(() => {
+  const F_SIZE = 3, FISH_SPEED = 42;
+  const state = { tile: 48, large: 128, enabled: true, fish: 0, center: 0, pointerIn: false,
+                  ramp: null, hover: false, pointerX: null };
+
+  const profile = (d, fishSize) => d <= -fishSize ? -1 : d >= fishSize ? 1 : Math.sin(Math.PI * d / (2 * fishSize));
+  function model() {
+    const t = state.tile, L = state.large, fishSize = F_SIZE * t;
+    const active = state.enabled && L > t;
+    const realScale = active ? state.fish * (L - t) / 2 / Math.sin(Math.PI * t / (4 * fishSize)) : 0;
+    const currentFish = active ? state.fish * (L - t) : 0;
+    return { t, L, fishSize, realScale, currentFish, active,
+             D: x => x + realScale * profile(x - state.center, fishSize) };
+  }
+  const rampDuration = delta => Math.floor(Math.log(Math.abs(delta) * 0.5 + 1) * FISH_SPEED + 1);
+  function startRamp(to) {
+    const m = model();
+    const delta = to === 1 ? state.large - (state.tile + m.currentFish) : m.currentFish;
+    state.ramp = { from: state.fish, to, start: performance.now(), duration: rampDuration(delta) };
+  }
+  function stepRamp(now) {
+    const r = state.ramp; if (!r) return;
+    const p = r.duration > 0 ? Math.min(Math.max((now - r.start) / r.duration, 0), 1) : 1;
+    state.fish = r.from + (r.to - r.from) * p;
+    if (p >= 1) state.ramp = null;
+  }
+
+  const stage = document.getElementById('stage'), dock = document.getElementById('dock'), ctx = dock.getContext('2d');
+  const curve = document.getElementById('curve'), cctx = curve.getContext('2d');
+  const readout = document.getElementById('readout');
+  const labels = 'ABCDEFGHIJKLMNOP'.split('');
+  const hues = [210, 28, 142, 262, 350, 190, 46, 300, 160, 20, 230, 95, 330, 60, 275, 120];
+  let lastDuration = 0;
+
+  function geometry() {
+    const w = stage.clientWidth, h = stage.clientHeight, t = state.tile;
+    const count = Math.max(3, Math.min(16, Math.floor((w * 0.82) / t)));
+    const left = (w - count * t) / 2;
+    const floor = h - 18;
+    return { w, h, t, count, left, right: left + count * t, floor };
+  }
+  function drawDock(now) {
+    const dpr = window.devicePixelRatio || 1;
+    const g = geometry();
+    if (dock.width !== Math.round(g.w * dpr) || dock.height !== Math.round(g.h * dpr)) {
+      dock.width = Math.round(g.w * dpr); dock.height = Math.round(g.h * dpr);
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, g.w, g.h);
+    if (state.pointerX !== null) state.center = Math.min(Math.max(state.pointerX, g.left), g.right);
+    else state.center = (g.left + g.right) / 2;
+    const m = model();
+    const pad = g.t * 0.2;
+    const barL = m.D(g.left) - pad, barR = m.D(g.right) + pad;
+    const barH = m.active ? Math.max(g.t + 2 * pad, 0) : g.t + 2 * pad;
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--dock');
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--dock-edge');
+    roundRect(ctx, barL, g.floor - barH, barR - barL, barH, 14); ctx.fill(); ctx.stroke();
+    const sizes = [];
+    for (let i = 0; i < g.count; i++) {
+      const p = g.left + i * g.t;
+      const a = m.D(p), b = m.D(p + g.t), size = b - a;
+      sizes.push(size);
+      const inset = size * 0.1;
+      const x = a + inset, y = g.floor - pad - size + inset, s = size - 2 * inset;
+      const grad = ctx.createLinearGradient(x, y, x, y + s);
+      grad.addColorStop(0, `hsl(${hues[i]} 42% 62%)`); grad.addColorStop(1, `hsl(${hues[i]} 46% 40%)`);
+      ctx.fillStyle = grad;
+      roundRect(ctx, x, y, s, s, s * 0.22); ctx.fill();
+      ctx.fillStyle = 'rgba(255,255,255,0.78)';
+      ctx.font = `500 ${Math.max(10, s * 0.42)}px ${getComputedStyle(document.body).fontFamily}`;
+      ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+      ctx.fillText(labels[i], x + s / 2, y + s / 2 + s * 0.02);
+    }
+    if (m.active && state.pointerX !== null) {
+      ctx.strokeStyle = 'rgba(58,166,230,0.55)'; ctx.setLineDash([3, 5]);
+      ctx.beginPath(); ctx.moveTo(m.D(state.center), g.floor + 2); ctx.lineTo(m.D(state.center), g.floor - barH - 10); ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    const nearest = sizes.length ? sizes.reduce((best, s, i) => Math.abs(g.left + (i + 0.5) * g.t - state.center) < Math.abs(g.left + (best + 0.5) * g.t - state.center) ? i : best, 0) : 0;
+    readout.innerHTML =
+      `<span>fish <b>${state.fish.toFixed(3)}</b></span>` +
+      `<span>fishSize <b>${m.fishSize.toFixed(0)}</b> pt</span>` +
+      `<span>realScale <b>${m.realScale.toFixed(2)}</b></span>` +
+      `<span>tile under pointer <b>${(sizes[nearest] || 0).toFixed(1)}</b> pt</span>` +
+      `<span>row width <b>${(barR - barL).toFixed(0)}</b> pt</span>` +
+      `<span>last ramp <b>${lastDuration}</b> ms</span>`;
+  }
+  function roundRect(c, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
+    c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
+  }
+  function drawCurve() {
+    const dpr = window.devicePixelRatio || 1, w = curve.clientWidth, h = curve.clientHeight;
+    curve.width = Math.round(w * dpr); curve.height = Math.round(h * dpr);
+    cctx.setTransform(dpr, 0, 0, dpr, 0, 0); cctx.clearRect(0, 0, w, h);
+    const t = state.tile, L = state.large, fishSize = F_SIZE * t;
+    const saved = { fish: state.fish, center: state.center, enabled: state.enabled };
+    state.fish = 1; state.center = 0; state.enabled = true;
+    const m = model();
+    const span = fishSize + t;
+    const padL = 44, padR = 12, padT = 10, padB = 24, pw = w - padL - padR, ph = h - padT - padB;
+    const xs = d => padL + (d + span) / (2 * span) * pw;
+    const ys = v => padT + ph - (v - t) / Math.max(L - t, 1) * ph;
+    const css = getComputedStyle(document.documentElement);
+    cctx.strokeStyle = css.getPropertyValue('--line'); cctx.lineWidth = 1;
+    for (const d of [-fishSize, 0, fishSize]) { cctx.beginPath(); cctx.moveTo(xs(d), padT); cctx.lineTo(xs(d), padT + ph); cctx.stroke(); }
+    cctx.fillStyle = css.getPropertyValue('--muted'); cctx.font = `12px ${css.getPropertyValue('--mono')}`; cctx.textAlign = 'center'; cctx.textBaseline = 'top';
+    cctx.fillText('−3 tiles', xs(-fishSize), padT + ph + 6); cctx.fillText('pointer', xs(0), padT + ph + 6); cctx.fillText('+3 tiles', xs(fishSize), padT + ph + 6);
+    cctx.textAlign = 'right'; cctx.textBaseline = 'middle';
+    cctx.fillText(`${L}`, padL - 8, ys(L)); cctx.fillText(`${t}`, padL - 8, ys(t));
+    cctx.strokeStyle = css.getPropertyValue('--accent'); cctx.lineWidth = 2; cctx.beginPath();
+    for (let i = 0; i <= 240; i++) {
+      const d = -span + (2 * span) * i / 240;
+      const size = m.active ? m.D(d + t / 2) - m.D(d - t / 2) : t;
+      i ? cctx.lineTo(xs(d), ys(size)) : cctx.moveTo(xs(d), ys(size));
+    }
+    cctx.stroke();
+    Object.assign(state, saved);
+  }
+
+  function frame(now) {
+    stepRamp(now);
+    drawDock(now);
+    requestAnimationFrame(frame);
+  }
+  function enter() { if (!state.hover) { state.hover = true; if (state.enabled) { startRamp(1); lastDuration = state.ramp.duration; } } }
+  function leave() { if (state.hover) { state.hover = false; state.pointerX = state.pointerX; if (state.enabled) { startRamp(0); lastDuration = state.ramp.duration; } } }
+  function inBar(y) { const g = geometry(); return y >= g.floor - state.tile - 2 * state.tile * 0.2 - 24; }
+  stage.addEventListener('pointermove', e => {
+    const r = stage.getBoundingClientRect();
+    state.pointerX = e.clientX - r.left;
+    inBar(e.clientY - r.top) ? enter() : leave();
+  });
+  stage.addEventListener('pointerleave', () => leave());
+  stage.addEventListener('pointerdown', e => { const r = stage.getBoundingClientRect(); state.pointerX = e.clientX - r.left; enter(); });
+
+  const tile = document.getElementById('tile'), large = document.getElementById('large'), enabled = document.getElementById('enabled');
+  function sync() {
+    state.tile = +tile.value; state.large = +large.value; state.enabled = enabled.checked;
+    document.getElementById('tileOut').textContent = tile.value;
+    document.getElementById('largeOut').textContent = large.value;
+    if (!state.enabled) { state.fish = 0; state.ramp = null; }
+    drawCurve();
+  }
+  tile.addEventListener('input', sync); large.addEventListener('input', sync); enabled.addEventListener('change', sync);
+  window.addEventListener('resize', drawCurve);
+  sync();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
