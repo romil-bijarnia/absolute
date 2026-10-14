@@ -1,0 +1,487 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-14T21:56:06.521730+00:00",
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5421a",
+  "scope": "Static recovery of the Dock's minimise effects, their transition clock and duration from the installed Dock executable. No process was executed, attached to or modified.",
+  "target": {
+    "path": "/System/Library/CoreServices/Dock.app/Contents/MacOS/Dock",
+    "sourceSha256": "c8e55d01cbfa33eb68b6d90707da5fd4bd13b27349295e0e732f87eb5263488f",
+    "sourceBytes": 4843616,
+    "copySha256": "c8e55d01cbfa33eb68b6d90707da5fd4bd13b27349295e0e732f87eb5263488f",
+    "architecture": "arm64e",
+    "derivation": "byte copy of the thin arm64e executable"
+  },
+  "providers": {
+    "rea": "6.4.0",
+    "ghidra": "12.1.3",
+    "searchEvidenceId": "ev_bb4e0d190271f61881cd736bc5c0be77b60b8d268c1ef08964a0b2bcc6cc841b"
+  },
+  "procedures": {
+    "0x100026ba8": {
+      "role": "effect dispatcher: reads minimizeEffect, forces Scale when the transition flag is set, calls one builder",
+      "ghidraName": "FUN_100026ba8",
+      "bodyBytes": 188,
+      "callers": [
+        "DOCKWindowTile::updateTransition"
+      ],
+      "callees": [
+        "FUN_100026c64",
+        "FUN_100037fb4",
+        "FUN_100038164",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_release",
+        "_objc_retain",
+        "objc_stub::dock",
+        "objc_stub::minimizeEffect"
+      ],
+      "evidenceId": "ev_6c636d1da3acb34c72df999ee26f91eb6d6d709333485c1226343fdf939520c4"
+    },
+    "0x100026c64": {
+      "role": "Genie builder: step budgets, squeeze and slide ramps, profile rows, two-column warp mesh, thumbnail reveal",
+      "ghidraName": "FUN_100026c64",
+      "bodyBytes": 2676,
+      "callers": [
+        "FUN_100026ba8"
+      ],
+      "callees": [
+        "/usr/lib/libSystem.B.dylib::___chkstk_darwin",
+        "FUN_1000276d8",
+        "FUN_1002dc008",
+        "FUN_1002dc040",
+        "FUN_1002dc08c",
+        "_CGSSetWindowWarp",
+        "___stack_chk_fail",
+        "_acos",
+        "_cos",
+        "_log",
+        "_objc_release",
+        "_objc_retain",
+        "objc_stub::dockConnection",
+        "objc_stub::wid"
+      ],
+      "evidenceId": "ev_daad798ab9bed55ef4ca55415e56b49e2f5749ab7014dfd6ff0304e334667045"
+    },
+    "0x1000276d8": {
+      "role": "Genie profile subdivision: recursive midpoint rows until segments are under 8 pt or within 0.6 pt of straight",
+      "ghidraName": "FUN_1000276d8",
+      "bodyBytes": 596,
+      "callers": [
+        "FUN_100026c64",
+        "FUN_1000276d8"
+      ],
+      "callees": [
+        "FUN_1000276d8",
+        "_cos"
+      ],
+      "evidenceId": "ev_a45d93da01998aa7e105158189112bfc92ae4ef449d36482c49c179c8e32c6ff"
+    },
+    "0x100037fb4": {
+      "role": "Scale builder: rectangle eased toward the target as a 2 x 2 mesh",
+      "ghidraName": "FUN_100037fb4",
+      "bodyBytes": 432,
+      "callers": [
+        "FUN_100026ba8"
+      ],
+      "callees": [
+        "FUN_1002dc008",
+        "FUN_1002dc040",
+        "FUN_1002dc08c",
+        "_CGSSetWindowWarp",
+        "___stack_chk_fail",
+        "_cosf",
+        "_objc_release",
+        "_objc_retain",
+        "objc_stub::dockConnection",
+        "objc_stub::wid"
+      ],
+      "evidenceId": "ev_155d930b8b220b21d2c92590c98cb70e00debc89bfbc0f72240a4200cce17b4b"
+    },
+    "0x100038164": {
+      "role": "Suck builder: grid of one line per 70 pt, at most 19 cells, every point pulled at the same speed",
+      "ghidraName": "FUN_100038164",
+      "bodyBytes": 760,
+      "callers": [
+        "FUN_100026ba8"
+      ],
+      "callees": [
+        "/usr/lib/libSystem.B.dylib::___chkstk_darwin",
+        "FUN_1002dc008",
+        "FUN_1002dc040",
+        "FUN_1002dc08c",
+        "_CGSSetWindowWarp",
+        "___stack_chk_fail",
+        "_cosf",
+        "_objc_release",
+        "_objc_retain",
+        "objc_stub::dockConnection",
+        "objc_stub::wid"
+      ],
+      "evidenceId": "ev_1f8dfab4274777ee46cb7fa664beb320af7e66335a5600b886e8592722575fed"
+    },
+    "0x100026514": {
+      "role": "transition update: progress = 0.5 - 0.5 cos(pi * property value), then setNeedUpdate:",
+      "ghidraName": "FUN_100026514",
+      "bodyBytes": 236,
+      "callers": [],
+      "callees": [
+        "FUN_1002db2e8",
+        "FUN_1002db2f4",
+        "FUN_1002dc028",
+        "FUN_1002dd428",
+        "FUN_1002dd43c",
+        "_cosf",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_release",
+        "_objc_retain",
+        "objc_stub::dock",
+        "objc_stub::setNeedUpdate:"
+      ],
+      "evidenceId": "ev_f35dea1b005012f14e9b788e060ab0162cc58ef2a7092d9d31af71f334ac7fc7"
+    },
+    "0x1000502b4": {
+      "role": "DockFloatAnimatedProperty step: linear clock, cosine only when an easing function is attached",
+      "ghidraName": "FUN_1000502b4",
+      "bodyBytes": 172,
+      "callers": [
+        "DOCKLabelLayer::update",
+        "Tile::updateTransing",
+        "Tile::updateMoving",
+        "Tile::updateSqueezing",
+        "Tile::updateBlending",
+        "Tile::updateIndicatorBlending",
+        "Tile::updateScaling",
+        "DockBar::updateWithContext:showDockWindow:transaction:",
+        "DockBar::quitUpdate"
+      ],
+      "callees": [
+        "FUN_1002dd584",
+        "_cos",
+        "objc_stub::interpolate:"
+      ],
+      "evidenceId": "ev_ddb9a9438558bab2f013487c4ed0bc0035c23cce746d82893a0893f2c08eca87"
+    },
+    "0x100026600": {
+      "role": "DOCKWindowTile::updateTransition: target image rect from the tile's icon rect, dispatch, mask from the reveal",
+      "ghidraName": "DOCKWindowTile::updateTransition",
+      "bodyBytes": 1448,
+      "callers": [],
+      "callees": [
+        "FUN_100026ba8",
+        "FUN_1002db2f4",
+        "FUN_1002dd474",
+        "FUN_1002dd52c",
+        "Tile::dock",
+        "_CGSOrderWindow",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_release",
+        "objc_stub::contents",
+        "objc_stub::dock",
+        "objc_stub::dockConnection",
+        "objc_stub::imageLayer",
+        "objc_stub::minimizeEffect",
+        "objc_stub::prepareWindowForMinMax:duration:",
+        "objc_stub::setBounds:",
+        "objc_stub::setContents:",
+        "objc_stub::setPosition:",
+        "objc_stub::size",
+        "objc_stub::tileInset"
+      ],
+      "evidenceId": "ev_22d0fa9bf9382d979937aeb9d3a618304b8e502e632e8d8a059a97f16264b894"
+    },
+    "0x100034890": {
+      "role": "DOCKWindowTile::beginMinMax:minimizing:animate:: mask layer, stored layer image, window tags, duration in seconds",
+      "ghidraName": "DOCKWindowTile::beginMinMax:minimizing:animate:",
+      "bodyBytes": 628,
+      "callers": [],
+      "callees": [
+        "FUN_100039dac",
+        "_CGColorCreateGenericGray",
+        "_CGSSetWindowTags",
+        "___stack_chk_fail",
+        "_objc_autorelease",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_opt_new",
+        "_objc_release",
+        "_objc_retain",
+        "_objc_storeStrong",
+        "objc_stub::contents",
+        "objc_stub::dockConnection",
+        "objc_stub::imageLayer",
+        "objc_stub::perfLogWindow",
+        "objc_stub::perfLogWithPerfAnalysisWindow",
+        "objc_stub::prepareWindowForMinMax:duration:",
+        "objc_stub::setBackgroundColor:",
+        "objc_stub::setBounds:",
+        "objc_stub::setContents:",
+        "objc_stub::setMask:",
+        "objc_stub::setPosition:"
+      ],
+      "evidenceId": "ev_1634bf548c812b60e56513d7a4c750d5e57726c7136967e4be2be1411cf7fe55"
+    },
+    "0x100099934": {
+      "role": "DockBar::_handleMinimizeWindow:animate:duration:: animated property 0 to 1 over the duration, direction from the bar orientation",
+      "ghidraName": "DockBar::_handleMinimizeWindow:animate:duration:",
+      "bodyBytes": 516,
+      "callers": [
+        "DockBar::handleDockEventMinimizeWindow:context:",
+        "DockBar::handleDockEventMinimizeWindows:animate:context:"
+      ],
+      "callees": [
+        "DockBar::setFTransitionCount:",
+        "FUN_100027b58",
+        "FUN_100034c40",
+        "FUN_1002db128",
+        "FUN_1002db15c",
+        "FUN_1002db2f4",
+        "FUN_1002db378",
+        "FUN_1002db384",
+        "FUN_1002dbfe4",
+        "FUN_1002dc040",
+        "FUN_1002dc0c0",
+        "FUN_1002dd334",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_release",
+        "_objc_retain",
+        "objc_stub::barOrientation",
+        "objc_stub::beginMinMax:minimizing:animate:",
+        "objc_stub::fTransitionCount",
+        "objc_stub::mainMillis",
+        "objc_stub::minimizeEffect",
+        "objc_stub::myRect",
+        "objc_stub::owner",
+        "objc_stub::setAnimateWindow:",
+        "objc_stub::setFTransitionCount:",
+        "objc_stub::setTransactionID:",
+        "objc_stub::transactionID",
+        "objc_stub::wid"
+      ],
+      "evidenceId": "ev_b6d990a468592f7cedba58597ddc8960942447fab6dae5e7a8a48caa9abb4afd"
+    },
+    "0x100097d7c": {
+      "role": "DockBar::handleDockEventMinimizeWindow:context:: effectDur, x10 under the slow-motion modifier, x2 under a second modifier",
+      "ghidraName": "DockBar::handleDockEventMinimizeWindow:context:",
+      "bodyBytes": 360,
+      "callers": [],
+      "callees": [
+        "DockBar::_handleMinimizeWindow:animate:duration:",
+        "DockBar::_postTileCreatedNotification:",
+        "DockBar::insertTile:atIndex:forReason:",
+        "DockBar::tiles",
+        "FUN_100095674",
+        "_CGSInputModifierKeyState",
+        "__os_log_impl",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_release",
+        "_objc_retain",
+        "_os_log_type_enabled",
+        "objc_stub::_handleMinimizeWindow:animate:duration:",
+        "objc_stub::_postTileCreatedNotification:",
+        "objc_stub::addObject:",
+        "objc_stub::count",
+        "objc_stub::effectDur",
+        "objc_stub::insertTile:atIndex:forReason:",
+        "objc_stub::miniWindowTiles",
+        "objc_stub::tiles"
+      ],
+      "evidenceId": "ev_83d3780278cfacb6a4b08f7a80a3d9376b759b5d2d7af80569a07700b2dd495f"
+    },
+    "0x1002564d4": {
+      "role": "DockBar::setEffectDur:",
+      "ghidraName": "DockBar::setEffectDur:",
+      "bodyBytes": 36,
+      "callers": [],
+      "callees": [
+        "FUN_1002564f8"
+      ],
+      "evidenceId": "ev_c38664f880d4c59fc85dcfa89f299af9776993279445b3fd6414d4bba3bf762d"
+    },
+    "0x10002ff18": {
+      "role": "Tile::doCommand:: duration site for the Dock menu, effectDur = 400 ms when minimizeEffect is Suck, else 200 ms",
+      "ghidraName": "Tile::doCommand:",
+      "bodyBytes": 2092,
+      "callers": [
+        "DOCKWindowTile::doCommand:",
+        "DOCKURLTile::doCommand:",
+        "DOCKDesktopTile::doCommand:",
+        "DOCKFileTile::doCommand:",
+        "DOCKProcessTile::doCommand:",
+        "DOCKTrashTile::doCommand:",
+        "DOCKScreenSharingTile::doCommand:"
+      ],
+      "callees": [
+        "FUN_1000112c8",
+        "FUN_100017664",
+        "FUN_100018cdc",
+        "FUN_10005549c",
+        "FUN_10008a164",
+        "FUN_10008a1e0",
+        "FUN_10008a2cc",
+        "FUN_10008c0e4",
+        "FUN_10008c1a4",
+        "FUN_10008c748",
+        "FUN_10008c7a0",
+        "NSURL::URLWithString:",
+        "Tile::bookmark",
+        "Tile::dock",
+        "Tile::psn",
+        "_CFNumberGetValue",
+        "_CFRelease",
+        "_CGSInputModifierKeyState",
+        "_CPSPostHideMostReq",
+        "_CPSPostHideReq",
+        "__CPSSetFrontProcessWithOptions",
+        "__LSASNCreate",
+        "__LSCopyApplicationInformationItem",
+        "__LSKillApplication",
+        "_dispatch_async",
+        "_dispatch_get_global_queue",
+        "_kill",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_release",
+        "_objc_retain",
+        "_proc_get_dirty",
+        "objc_stub::URLWithString:",
+        "objc_stub::accessingLockedEventQueue:",
+        "objc_stub::bookmark",
+        "objc_stub::dock",
+        "objc_stub::makeDirty",
+        "objc_stub::minimizeEffect",
+        "objc_stub::psn",
+        "objc_stub::setEffectDur:",
+        "objc_stub::setMagnification:",
+        "objc_stub::setMinimizeEffect:",
+        "objc_stub::showForTile:allowSlow:",
+        "thunk_FUN_10017420c"
+      ],
+      "evidenceId": "ev_dd82c068f5524324f52c03575863ce3636fad5d902244d0a49b24ec4bda081fc"
+    },
+    "0x100059c80": {
+      "role": "duration site on effect change: effectDur = 500 ms Genie, 400 ms Suck, 200 ms Scale",
+      "ghidraName": "FUN_100059c80",
+      "bodyBytes": 300,
+      "callers": [
+        "FUN_1000bb4a4"
+      ],
+      "callees": [
+        "FUN_100018cdc",
+        "FUN_100056554",
+        "FUN_10008a2cc",
+        "__os_log_impl",
+        "_objc_claimAutoreleasedReturnValue",
+        "_objc_release",
+        "_os_log_type_enabled",
+        "objc_stub::minimizeEffect",
+        "objc_stub::setEffectDur:",
+        "objc_stub::setMinimizeEffect:"
+      ],
+      "evidenceId": "ev_5477da3129b14d5b4b2b7e43ca6b58c2bdbbb26d8900326f3e364fe460f0d393"
+    }
+  },
+  "namedProcedures": {
+    "DOCKWindowTile::_drawWithParentTile:": "0x100025f88",
+    "DOCKWindowTile::setLabel:stripAppSuffix:": "0x100026424",
+    "DOCKWindowTile::updateTransition": "0x100026600",
+    "DOCKWindowTile::wid": "0x10002792c",
+    "DOCKWindowTile::endMinMax": "0x100027a44",
+    "DOCKWindowTile::owner": "0x100027b30",
+    "DOCKWindowTile::transactionID": "0x100027b44",
+    "DOCKWindowTile::doAction:fromKeyboard:": "0x10002800c",
+    "DOCKWindowTile::doCommand:": "0x10002854c",
+    "DOCKWindowTile::setAnimateWindow:": "0x100028834",
+    "DOCKWindowTile::setTransactionID:": "0x100028848",
+    "DOCKWindowTile::animateWindow": "0x1000289a4",
+    "DOCKWindowTile::.cxx_destruct": "0x100028b74",
+    "DOCKWindowTile::initWithDock:window:psn:tid:parentTile:minimizedWindowList:": "0x100033d68",
+    "DOCKWindowTile::render": "0x100033fb0",
+    "DOCKWindowTile::dragEnter:": "0x10003403c",
+    "DOCKWindowTile::isRemovable": "0x1000345f4",
+    "DOCKWindowTile::createMenu:": "0x1000345fc",
+    "DOCKWindowTile::copyFileURLForMenus": "0x100034754",
+    "DOCKWindowTile::updateFromSource:": "0x1000347e8",
+    "DOCKWindowTile::beginMinMax:minimizing:animate:": "0x100034890",
+    "DOCKWindowTile::iconAppearanceChanged:": "0x100034b04",
+    "DOCKWindowTile::minimizingOrMaximizing": "0x100034b08",
+    "DOCKWindowTile::allowsSpringing": "0x100034b3c",
+    "DOCKWindowTile::orderWindow": "0x100034bf0",
+    "DOCKWindowTile::setOrderWindow:": "0x100034c04",
+    "DOCKWindowTile::orderOperation": "0x100034c18",
+    "DOCKWindowTile::setOrderOperation:": "0x100034c2c",
+    "DockEventQueue::addMinimizeWindowForTile:": "0x100077874",
+    "DockEventQueue::addMinimizeWindowsForTiles:animate:": "0x1000778ec",
+    "DockBar::handleDockEventMinimizeWindow:context:": "0x100097d7c",
+    "DockBar::handleDockEventMinimizeWindows:animate:context:": "0x100097ee4",
+    "DockBar::handleDockEventUpdateMinimizeWindow:context:": "0x1000984cc",
+    "DockBar::_handleMinimizeWindow:animate:duration:": "0x100099934",
+    "DockImmutabilityPreferences::minimizeEffect": "0x100175344",
+    "DockImmutabilityPreferences::initWithSize:magnification:autohide:positionOnScreen:minimizeEffect:contents:staticOnly:minimizeInPlace:minimizeTo:": "0x1001754f0",
+    "_TtC8DockCore11DockGlobals::genieSpeed": "0x100243fa0",
+    "_TtC8DockCore11DockGlobals::slowMotionAllowed": "0x10024403c",
+    "_TtC8DockCore11DockGlobals::setSlowMotionAllowed:": "0x100244070",
+    "DockBar::minimizeEffect": "0x100256440",
+    "DockBar::setMinimizeEffect:": "0x100256470",
+    "DockBar::effectDur": "0x1002564a4",
+    "DockBar::setEffectDur:": "0x1002564d4",
+    "WAWindow::genieTo:direction:genie:": "0x10026bf34",
+    "objc_stub::_handleMinimizeWindow:animate:duration:": "0x1002e8ae0",
+    "objc_stub::addMinimizeWindowForTile:": "0x1002ea5c0",
+    "objc_stub::addMinimizeWindowsForTiles:animate:": "0x1002ea5e0",
+    "objc_stub::beginMinMax:minimizing:animate:": "0x1002eb860",
+    "objc_stub::effectDur": "0x1002edf80",
+    "objc_stub::genieTo:direction:genie:": "0x1002eeda0",
+    "objc_stub::handleDockEventMinimizeWindow:context:": "0x1002ef4c0",
+    "objc_stub::handleDockEventMinimizeWindows:animate:context:": "0x1002ef4e0",
+    "objc_stub::handleDockEventUpdateMinimizeWindow:context:": "0x1002ef5e0",
+    "objc_stub::minimizeEffect": "0x1002f2c40",
+    "objc_stub::setEffectDur:": "0x1002f6620",
+    "objc_stub::setMinimizeEffect:": "0x1002f7780",
+    "objc_stub::setSlowMotionAllowed:": "0x1002f8500",
+    "objc_stub::slowMotionAllowed": "0x1002f9440",
+    "objc_stub::updateTransition": "0x1002fac40"
+  },
+  "constants": {
+    "stepsPerLogUnit": 50,
+    "genieMinimumSegment": 8,
+    "genieLinearSegment": 128,
+    "genieLinearTolerance": 0.6,
+    "genieMaximumRows": 400,
+    "genieSubdivisionCalls": 64,
+    "suckCellSize": 70,
+    "suckMaximumCells": 19,
+    "durationMilliseconds": {
+      "genie": 500,
+      "scale": 200,
+      "suck": 400
+    },
+    "slowMotionFactor": 10,
+    "secondModifierFactor": 2,
+    "genieSpeedDefault": 0.5,
+    "genieSpeedPreference": "genie-speed"
+  },
+  "model": {
+    "clock": "p = 0.5 - 0.5 cos(pi * clamp((now - start) / duration, 0, 1)); the property itself is linear",
+    "steps": "steps(d) = floor(ln(|d| / 2 + 1)) * 50",
+    "genie": {
+      "edges": "L = target.leading - window.leading, R = target.trailing - window.trailing",
+      "travel": "T = |window.far - target.far| unless the window overlaps the target, then T = window length",
+      "budgets": "A = steps(max(2 * overlap, (|L| + |R|) / 8)), B = steps(T), enter = B * acos(1 - 2 |T - length| / T) / pi, A = max(A, enter), lead = A - enter",
+      "ramps": "total = p (B + lead); squeeze = ramp(clamp(total, 0, A) / A); slide = ramp(clamp(total - lead, 0, B) / B)",
+      "profile": "sigma(y) = ramp((y - centre) / trunc(travel + 0.5)), centre = window.far + overlap * squeeze",
+      "rows": "far = centre - T * slide; rows from far to max(far - length, target.far) while sliding, then one row at max(far - length, target.near) once |T - length| < T * slide; edge offsets L * squeeze * sigma, R * squeeze * sigma",
+      "mesh": "two points per row, local coordinate linear over the mesh extent, rows ordered by increasing screen coordinate",
+      "reveal": "clamp(1 - (T - T * slide) / (length - target.length), 0, 1), or 1 only at the end when the window is not taller than the target"
+    },
+    "scale": "e = ramp(p); corners = window + (target - window) * e; 2 x 2 mesh; settled when e >= 1",
+    "suck": "e = ramp(p); grid of clamp(trunc(size / 70), 1, 19) cells; reach = largest same-corner displacement; each point moves toward its target place by min(distance, reach * e)"
+  },
+  "implementation": {
+    "source": "Sources/AbsoluteCore/DockMinimise.swift",
+    "tests": "Tests/AbsoluteCoreTests/DockMinimiseTests.swift",
+    "demo": "research/dock-minimise-demo.html"
+  },
+  "limitations": [
+    "Static reading of machine code; no minimise was recorded on screen and no Dock process was attached to.",
+    "Addresses are specific to build 26A5421a.",
+    "The two modifier masks passed to CGSInputModifierKeyState are recorded by value, not by key name.",
+    "The second arrival pass that fades the warped window out once the reveal completes is not modelled."
+  ]
+}

@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Genie Dock</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap">
+<style>
+/* Layout: one dark stage with a window above a dock tile, controls, then the recovered arithmetic. */
+:root {
+  --bg: #0b0b0d;
+  --stage: #141417;
+  --fg: #b4b4ba;
+  --muted: #6c6c75;
+  --line: #26262c;
+  --dock: rgba(190, 190, 205, 0.14);
+  --dock-edge: rgba(210, 210, 225, 0.22);
+  --accent: #3aa6e6;
+  --font: "Inter", -apple-system, "SF Pro Text", system-ui, sans-serif;
+  --mono: "SF Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 400 17px/1.5 var(--font); padding-inline: 16px; padding-block: 24px 48px; }
+main { max-width: 1040px; margin: 0 auto; display: grid; gap: 28px; }
+h1 { font-size: 30px; font-weight: 500; margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+h2 { font-size: 20px; font-weight: 500; margin: 0 0 8px; }
+p { margin: 0; max-width: 68ch; }
+.lede { color: var(--muted); }
+.stage { position: relative; background: var(--stage); border: 1px solid var(--line); border-radius: 14px; height: min(560px, 80vw); overflow: hidden; cursor: pointer; }
+canvas { display: block; width: 100%; height: 100%; }
+.readout { position: absolute; top: 16px; left: 18px; right: 18px; display: flex; flex-wrap: wrap; gap: 6px 28px; font: 400 14px/1.4 var(--mono); color: var(--muted); font-variant-numeric: tabular-nums; pointer-events: none; }
+.readout b { color: var(--fg); font-weight: 400; }
+.hint { position: absolute; bottom: 14px; left: 18px; font-size: 14px; color: var(--muted); pointer-events: none; }
+.controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px 36px; align-items: start; }
+label { display: grid; gap: 6px; font-size: 15px; color: var(--muted); }
+label span b { color: var(--fg); font-weight: 400; font-variant-numeric: tabular-nums; }
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+.segmented { display: flex; gap: 8px; }
+.segmented button { flex: 1; background: var(--stage); color: var(--fg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font: inherit; font-size: 15px; cursor: pointer; }
+.segmented button[aria-pressed="true"] { border-color: var(--accent); color: #fff; }
+.toggle { display: flex; align-items: center; gap: 12px; font-size: 16px; color: var(--fg); cursor: pointer; }
+.toggle input { width: 20px; height: 20px; accent-color: var(--accent); }
+.model { display: grid; gap: 14px; }
+pre { margin: 0; padding: 14px 16px; background: var(--stage); border: 1px solid var(--line); border-radius: 10px; font: 400 14px/1.6 var(--mono); color: var(--fg); overflow-x: auto; }
+.note { color: var(--muted); font-size: 15px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Genie Dock</h1>
+    <p class="lede">The three minimise effects as recovered from macOS 27.0 Dock.app, drawn with the same mesh arithmetic. Click the window to minimise it and click the tile to bring it back. Hold Shift while clicking for the Dock's ten-times slow motion.</p>
+  </header>
+
+  <section class="stage" id="stage" aria-label="Simulated window minimising into a dock tile">
+    <canvas id="scene"></canvas>
+    <div class="readout" id="readout"></div>
+    <div class="hint">Click the window · Shift-click for slow motion · scrub with the slider while paused</div>
+  </section>
+
+  <section class="controls">
+    <label>Effect
+      <div class="segmented" role="group" aria-label="Minimise effect">
+        <button type="button" data-effect="genie" aria-pressed="true">Genie</button>
+        <button type="button" data-effect="scale" aria-pressed="false">Scale</button>
+        <button type="button" data-effect="suck" aria-pressed="false">Suck</button>
+      </div>
+    </label>
+    <label>Progress <span><b id="progressOut">0.000</b></span><input type="range" id="progress" min="0" max="1000" value="0"></label>
+    <label>Dock position
+      <div class="segmented" role="group" aria-label="Dock position">
+        <button type="button" data-edge="bottom" aria-pressed="true">Bottom</button>
+        <button type="button" data-edge="left" aria-pressed="false">Left</button>
+        <button type="button" data-edge="right" aria-pressed="false">Right</button>
+      </div>
+    </label>
+    <label class="toggle"><input type="checkbox" id="mesh"> Show mesh rows</label>
+  </section>
+
+  <section class="model">
+    <h2>What the Dock computes</h2>
+    <pre>clock      p = 0.5 − 0.5·cos(π · t / duration),   duration = 500 ms Genie, 200 ms Scale, 400 ms Suck
+steps(d)   = floor(ln(d / 2 + 1)) · 50
+
+Genie      L = target.left − window.left,  R = target.right − window.right,  T = window.far − target.far
+           A = steps((|L| + |R|) / 8),  B = steps(T),  enter = B · acos(1 − 2·(T − height) / T) / π
+           A = max(A, enter),  lead = A − enter,  total = p · (B + lead)
+           squeeze c = ramp(clamp(total, 0, A) / A),  slide s = ramp(clamp(total − lead, 0, B) / B)
+           edge(y)  = window.edge + L·c·σ(y),  σ(y) = ramp((window.far − y) / round(T))
+           rows from window.far − T·s down to max(window.far − T·s − height, target.far),
+           subdivided until segments are under 8 pt or within 0.6 pt of straight
+           reveal   = clamp(1 − (T − T·s) / (height − target.height), 0, 1)
+
+Scale      e = ramp(p),  corners = window.corners + (target.corners − window.corners) · e
+
+Suck       e = ramp(p),  grid of one line per 70 pt (at most 19),  reach = largest corner displacement
+           each point moves toward its place in the target by min(distance, reach · e)</pre>
+    <p class="note">The rows are the real mesh the Dock hands the window server, two points per row for a vertical Dock; the picture is the window image stretched over them. The thumbnail reveal is drawn as the tile filling in. Window chrome, shadows, the tile's icon art and the second arrival pass that fades the window are not part of the recovered model.</p>
+  </section>
+</main>
+
+<script>
+(() => {
+  const STEPS_PER_LOG = 50, CELL = 70, MAX_CELLS = 19, MIN_SEG = 8, LINEAR_SEG = 128, LINEAR_TOL = 0.6, MAX_ROWS = 400;
+  const DURATION = { genie: 500, scale: 200, suck: 400 };
+  const ramp = v => 0.5 - 0.5 * Math.cos(Math.PI * v);
+  const steps = d => Math.floor(Math.log(Math.abs(d) * 0.5 + 1)) * STEPS_PER_LOG;
+  const clamp = (v, lo, hi) => Math.min(Math.max(v, lo), hi);
+  const trunc = v => Math.trunc(v);
+
+  // Canonical frame: the window travels toward decreasing `along`; y is up, as the Dock measures it.
+  function canonical(direction, r) {
+    const minX = r.x, maxX = r.x + r.w, minY = r.y, maxY = r.y + r.h;
+    switch (direction) {
+      case 1: return { minAlong: minY, maxAlong: maxY, minAcross: minX, maxAcross: maxX };
+      case 2: return { minAlong: -maxY, maxAlong: -minY, minAcross: minX, maxAcross: maxX };
+      case 3: return { minAlong: -maxX, maxAlong: -minX, minAcross: minY, maxAcross: maxY };
+      default: return { minAlong: minX, maxAlong: maxX, minAcross: minY, maxAcross: maxY };
+    }
+  }
+  const screenAlong = (direction, a) => (direction === 2 || direction === 3) ? -a : a;
+  const toScreen = (direction, along, across) => (direction <= 2) ? { x: across, y: along } : { x: along, y: across };
+
+  function genie(window, target, direction, p) {
+    const w = canonical(direction, window), t = canonical(direction, target);
+    const length = w.maxAlong - w.minAlong, breadth = w.maxAcross - w.minAcross;
+    const L = t.minAcross - w.minAcross, R = t.maxAcross - w.maxAcross;
+    const overlap = Math.max(0, t.maxAlong - w.minAlong);
+    const travel = overlap > 0 ? -length : t.maxAlong - w.maxAlong;
+    const distance = Math.abs(travel);
+    let A = steps(Math.max(2 * overlap, (Math.abs(L) + Math.abs(R)) * 0.125));
+    const B = steps(distance);
+    const arg = distance > 0 ? 1 - 2 * Math.abs(travel + length) / distance : 1;
+    const enter = B * Math.acos(clamp(arg, -1, 1)) / Math.PI;
+    let lead = 0;
+    if (A > enter) lead = A - enter; else A = enter;
+    const total = (B + lead) * p;
+    const c = A > 0 ? ramp(clamp(total, 0, A) / A) : 1;
+    const s = B > 0 ? ramp(clamp(total - lead, 0, B) / B) : 1;
+    const Lc = L * c, Rc = R * c;
+    const centre = w.maxAlong + overlap * c;
+    const far = centre + travel * s;
+    const naturalNear = far - length;
+    const anchor = s > 0 ? Math.max(naturalNear, t.maxAlong) : naturalNear;
+    const span = trunc(travel + 0.5);
+    const sigma = y => span !== 0 ? ramp((y - centre) / span) : 1;
+    const row = y => ({ pos: y, lead: Lc * sigma(y), trail: Rc * sigma(y) });
+    const rows = [row(far)];
+    let calls = 0;
+    const subdivide = (a, b) => {
+      if (calls >= 64) { calls++; return; }
+      calls++;
+      const endF = sigma(b);
+      let start = a;
+      for (;;) {
+        if (Math.abs(b - start) < MIN_SEG) return;
+        const mid = (b + start) / 2;
+        const startF = sigma(start), midF = sigma(mid);
+        const lm = Math.fround(Lc * midF), rm = Math.fround(Rc * midF);
+        if (Math.abs(b - start) < LINEAR_SEG) {
+          const ll = (Math.fround(Lc * endF) + Math.fround(Lc * startF)) * 0.5;
+          const rl = (Math.fround(Rc * endF) + Math.fround(Rc * startF)) * 0.5;
+          if (Math.abs(ll - lm) < LINEAR_TOL && Math.abs(rl - rm) < LINEAR_TOL) return;
+        }
+        subdivide(start, mid);
+        if (rows.length >= MAX_ROWS) return;
+        rows.push({ pos: mid, lead: lm, trail: rm });
+        if (calls >= 64) return;
+        calls++;
+        start = mid;
+      }
+    };
+    subdivide(far, anchor);
+    rows.push(row(anchor));
+    if (Math.abs(travel + length) < Math.abs(travel * s)) rows.push({ pos: Math.max(naturalNear, t.minAlong), lead: Lc, trail: Rc });
+    for (const r of rows) r.pos = screenAlong(direction, r.pos);
+    rows.sort((a, b) => a.pos - b.pos);
+    const lowest = rows[0].pos, extent = rows[rows.length - 1].pos - lowest;
+    const mesh = rows.map(r => {
+      const local = extent > 0 ? (r.pos - lowest) * (length / extent) : 0;
+      return { local, a: toScreen(direction, r.pos, w.minAcross + r.lead), b: toScreen(direction, r.pos, w.maxAcross + r.trail) };
+    });
+    const remaining = distance - Math.abs(travel * s);
+    const tLength = t.maxAlong - t.minAlong;
+    const reveal = length <= tLength ? (remaining === 0 ? 1 : 0) : (remaining < length - tLength ? 1 - remaining / (length - tLength) : 0);
+    return { mesh, rows: mesh.length, reveal, squeeze: c, slide: s, breadth, vertical: direction <= 2 };
+  }
+
+  function scale(window, target, p) {
+    const e = ramp(p), lerp = (a, b) => (b - a) * e + a;
+    return { x: lerp(window.x, target.x), y: lerp(window.y, target.y), w: lerp(window.x + window.w, target.x + target.w) - lerp(window.x, target.x), h: lerp(window.y + window.h, target.y + target.h) - lerp(window.y, target.y), e };
+  }
+
+  function suck(window, target, p) {
+    const e = ramp(p);
+    const cells = len => clamp(Math.trunc(len / CELL), 1, MAX_CELLS);
+    const cols = cells(window.w), rowsN = cells(window.h);
+    const corners = [[window.x, window.y, target.x, target.y], [window.x + window.w, window.y, target.x + target.w, target.y],
+                     [window.x, window.y + window.h, target.x, target.y + target.h], [window.x + window.w, window.y + window.h, target.x + target.w, target.y + target.h]];
+    const reach = Math.max(...corners.map(([ax, ay, bx, by]) => Math.hypot(ax - bx, ay - by)));
+    const grid = [];
+    for (let j = 0; j <= rowsN; j++) {
+      const line = [];
+      const sy = window.y + window.h * j / rowsN, ty = target.y + target.h * j / rowsN;
+      for (let i = 0; i <= cols; i++) {
+        const sx = window.x + window.w * i / cols, tx = target.x + target.w * i / cols;
+        const dx = tx - sx, dy = ty - sy, d = Math.hypot(dx, dy);
+        let gx = sx, gy = sy;
+        if (d > 0) { const remaining = clamp(d - reach * e, 0, reach); const f = (d - remaining) / d; gx = sx + f * dx; gy = sy + f * dy; }
+        line.push({ u: i / cols, v: j / rowsN, x: gx, y: gy });
+      }
+      grid.push(line);
+    }
+    return { grid, cols, rows: rowsN, e };
+  }
+
+  // Scene state, in points with y up; the canvas flips it when drawing.
+  const state = { effect: 'genie', edge: 'bottom', progress: 0, anim: null, minimised: false, showMesh: false };
+  const stage = document.getElementById('stage'), canvas = document.getElementById('scene'), ctx = canvas.getContext('2d');
+  const readout = document.getElementById('readout');
+  const slider = document.getElementById('progress'), progressOut = document.getElementById('progressOut');
+  const windowImage = document.createElement('canvas');
+
+  function layout() {
+    const W = stage.clientWidth, H = stage.clientHeight;
+    const tile = Math.max(40, Math.min(72, Math.round(Math.min(W, H) * 0.11)));
+    const dockPad = Math.round(tile * 0.25);
+    let target, window;
+    const winW = Math.round(W * 0.46), winH = Math.round(H * 0.52);
+    if (state.edge === 'bottom') {
+      target = { x: Math.round(W * 0.56), y: dockPad, w: tile, h: tile };
+      window = { x: Math.round(W * 0.14), y: Math.round(H * 0.36), w: winW, h: winH };
+    } else if (state.edge === 'left') {
+      target = { x: dockPad, y: Math.round(H * 0.42), w: tile, h: tile };
+      window = { x: Math.round(W * 0.36), y: Math.round(H * 0.22), w: winW, h: winH };
+    } else {
+      target = { x: W - dockPad - tile, y: Math.round(H * 0.42), w: tile, h: tile };
+      window = { x: Math.round(W * 0.18), y: Math.round(H * 0.22), w: winW, h: winH };
+    }
+    const direction = state.edge === 'bottom' ? 1 : state.edge === 'left' ? 4 : 3;
+    return { W, H, tile, target, window, direction };
+  }
+
+  function paintWindowImage(w, h) {
+    const dpr = window.devicePixelRatio || 1;
+    windowImage.width = Math.round(w * dpr); windowImage.height = Math.round(h * dpr);
+    const c = windowImage.getContext('2d');
+    c.setTransform(dpr, 0, 0, dpr, 0, 0);
+    c.fillStyle = '#1d1d22'; c.fillRect(0, 0, w, h);
+    c.fillStyle = '#2a2a30'; c.fillRect(0, 0, w, 30);
+    for (const [i, col] of [['#ff5f57', 0], ['#febc2e', 1], ['#28c840', 2]].map(([col, i]) => [i, col])) {
+      c.fillStyle = col; c.beginPath(); c.arc(16 + i * 18, 15, 5.5, 0, Math.PI * 2); c.fill();
+    }
+    c.fillStyle = '#3a3a42';
+    for (let y = 52; y < h - 16; y += 22) c.fillRect(20, y, Math.max(40, (w - 40) * (0.35 + 0.5 * Math.abs(Math.sin(y)))), 10);
+    c.strokeStyle = 'rgba(255,255,255,0.12)'; c.lineWidth = 1; c.strokeRect(0.5, 0.5, w - 1, h - 1);
+  }
+
+  function drawDock(g) {
+    const pad = Math.round(g.tile * 0.25);
+    const t = g.target;
+    ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--dock');
+    ctx.strokeStyle = getComputedStyle(document.documentElement).getPropertyValue('--dock-edge');
+    const bar = state.edge === 'bottom'
+      ? { x: t.x - 3 * g.tile - pad, y: 0, w: 7 * g.tile + 2 * pad, h: g.tile + 2 * pad }
+      : state.edge === 'left'
+        ? { x: 0, y: t.y - 3 * g.tile - pad, w: g.tile + 2 * pad, h: 7 * g.tile + 2 * pad }
+        : { x: g.W - g.tile - 2 * pad, y: t.y - 3 * g.tile - pad, w: g.tile + 2 * pad, h: 7 * g.tile + 2 * pad };
+    roundRect(ctx, bar.x, g.H - bar.y - bar.h, bar.w, bar.h, 14); ctx.fill(); ctx.stroke();
+    for (let i = -3; i <= 3; i++) {
+      const x = state.edge === 'bottom' ? t.x + i * g.tile : t.x, y = state.edge === 'bottom' ? t.y : t.y + i * g.tile;
+      const inset = g.tile * 0.1, s = g.tile - 2 * inset;
+      if (i === 0) continue;
+      ctx.fillStyle = `hsl(${(i + 4) * 47} 40% 45%)`;
+      roundRect(ctx, x + inset, g.H - (y + inset) - s, s, s, s * 0.22); ctx.fill();
+    }
+  }
+
+  function drawTile(g, reveal) {
+    const t = g.target, inset = g.tile * 0.1, s = g.tile - 2 * inset;
+    ctx.fillStyle = 'rgba(255,255,255,0.08)';
+    roundRect(ctx, t.x + inset, g.H - (t.y + inset) - s, s, s, s * 0.22); ctx.fill();
+    if (reveal > 0) {
+      ctx.save();
+      roundRect(ctx, t.x + inset, g.H - (t.y + inset) - s, s, s * reveal, s * 0.22); ctx.clip();
+      ctx.drawImage(windowImage, t.x + inset, g.H - (t.y + inset) - s, s, s);
+      ctx.restore();
+    }
+  }
+
+  function drawWarpedRows(g, frame) {
+    // Each pair of rows is a quad; the picture is sampled by the local coordinate and drawn as thin strips.
+    const img = windowImage, dpr = window.devicePixelRatio || 1;
+    const m = frame.mesh, L = g.window.h;
+    for (let k = 0; k + 1 < m.length; k++) {
+      const lo = m[k], hi = m[k + 1];
+      const span = frame.vertical ? hi.a.y - lo.a.y : hi.a.x - lo.a.x;
+      const strips = Math.max(1, Math.ceil(Math.abs(span) / 2));
+      for (let i = 0; i < strips; i++) {
+        const f0 = i / strips, f1 = (i + 1) / strips;
+        const l0 = lo.local + (hi.local - lo.local) * f0, l1 = lo.local + (hi.local - lo.local) * f1;
+        const ax = lo.a.x + (hi.a.x - lo.a.x) * f0, ay = lo.a.y + (hi.a.y - lo.a.y) * f0;
+        const bx = lo.b.x + (hi.b.x - lo.b.x) * f0, by = lo.b.y + (hi.b.y - lo.b.y) * f0;
+        const ax1 = lo.a.x + (hi.a.x - lo.a.x) * f1, ay1 = lo.a.y + (hi.a.y - lo.a.y) * f1;
+        if (frame.vertical) {
+          const srcY = img.height - l1 * dpr * (img.height / (g.window.h * dpr)), srcH = Math.max(1, (l1 - l0) * dpr);
+          const dy = g.H - ay1, dh = Math.max(0.75, ay1 - ay);
+          ctx.drawImage(img, 0, srcY, img.width, srcH, ax, dy, bx - ax, dh);
+        } else {
+          const srcX = l0 * dpr, srcW = Math.max(1, (l1 - l0) * dpr);
+          const dx = ax, dw = Math.max(0.75, ax1 - ax);
+          ctx.drawImage(img, srcX, 0, srcW, img.height, dx, g.H - by, dw, by - ay);
+        }
+      }
+    }
+    if (state.showMesh) {
+      ctx.strokeStyle = 'rgba(58,166,230,0.7)'; ctx.lineWidth = 1;
+      for (const r of m) { ctx.beginPath(); ctx.moveTo(r.a.x, g.H - r.a.y); ctx.lineTo(r.b.x, g.H - r.b.y); ctx.stroke(); }
+    }
+  }
+
+  function drawSuck(g, s) {
+    const img = windowImage, dpr = window.devicePixelRatio || 1;
+    for (let j = 0; j < s.rows; j++) for (let i = 0; i < s.cols; i++) {
+      const p = s.grid[j][i], q = s.grid[j][i + 1], r = s.grid[j + 1][i], t = s.grid[j + 1][i + 1];
+      const x0 = Math.min(p.x, r.x), x1 = Math.max(q.x, t.x), y0 = Math.min(p.y, q.y), y1 = Math.max(r.y, t.y);
+      ctx.drawImage(img, p.u * img.width, img.height - r.v * img.height, (q.u - p.u) * img.width, (r.v - p.v) * img.height,
+                    x0, g.H - y1, Math.max(0.75, x1 - x0), Math.max(0.75, y1 - y0));
+    }
+    if (state.showMesh) {
+      ctx.strokeStyle = 'rgba(58,166,230,0.7)'; ctx.lineWidth = 1;
+      for (const line of s.grid) { ctx.beginPath(); line.forEach((p, i) => i ? ctx.lineTo(p.x, g.H - p.y) : ctx.moveTo(p.x, g.H - p.y)); ctx.stroke(); }
+    }
+  }
+
+  function draw() {
+    const dpr = window.devicePixelRatio || 1;
+    const g = layout();
+    if (canvas.width !== Math.round(g.W * dpr) || canvas.height !== Math.round(g.H * dpr)) {
+      canvas.width = Math.round(g.W * dpr); canvas.height = Math.round(g.H * dpr);
+      paintWindowImage(g.window.w, g.window.h);
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, g.W, g.H);
+    drawDock(g);
+    const p = state.progress;
+    let reveal = 0, info = '';
+    if (state.effect === 'genie') {
+      const frame = genie(g.window, g.target, g.direction, p);
+      reveal = frame.reveal;
+      if (p < 1) drawWarpedRows(g, frame); else reveal = 1;
+      info = `<span>squeeze <b>${frame.squeeze.toFixed(3)}</b></span><span>slide <b>${frame.slide.toFixed(3)}</b></span><span>rows <b>${frame.rows}</b></span><span>reveal <b>${frame.reveal.toFixed(3)}</b></span>`;
+    } else if (state.effect === 'scale') {
+      const r = scale(g.window, g.target, p);
+      if (p < 1) ctx.drawImage(windowImage, r.x, g.H - r.y - r.h, r.w, r.h); else reveal = 1;
+      info = `<span>eased <b>${r.e.toFixed(3)}</b></span><span>rect <b>${r.w.toFixed(0)}×${r.h.toFixed(0)}</b> pt</span>`;
+    } else {
+      const s = suck(g.window, g.target, p);
+      if (p < 1) drawSuck(g, s); else reveal = 1;
+      info = `<span>eased <b>${s.e.toFixed(3)}</b></span><span>grid <b>${s.cols + 1}×${s.rows + 1}</b></span>`;
+    }
+    drawTile(g, reveal);
+    readout.innerHTML = `<span>${state.effect} <b>${DURATION[state.effect]}</b> ms</span><span>p <b>${p.toFixed(3)}</b></span>` + info;
+  }
+
+  function roundRect(c, x, y, w, h, r) {
+    r = Math.min(r, w / 2, h / 2);
+    c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r);
+    c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath();
+  }
+
+  function animate(to, slow) {
+    const duration = DURATION[state.effect] * (slow ? 10 : 1);
+    const from = state.progress, start = performance.now();
+    state.anim = { from, to, start, duration };
+    const step = now => {
+      if (!state.anim) return;
+      const linear = clamp((now - start) / duration, 0, 1);
+      const eased = 0.5 - 0.5 * Math.cos(Math.PI * linear);
+      state.progress = to === 1 ? Math.max(from, eased) : Math.min(from, 1 - eased);
+      slider.value = Math.round(state.progress * 1000); progressOut.textContent = state.progress.toFixed(3);
+      draw();
+      if (linear < 1) requestAnimationFrame(step); else { state.anim = null; state.minimised = to === 1; }
+    };
+    requestAnimationFrame(step);
+  }
+
+  stage.addEventListener('click', e => {
+    if (state.anim) return;
+    const g = layout(), r = stage.getBoundingClientRect(), x = e.clientX - r.left, y = g.H - (e.clientY - r.top);
+    const inside = (b) => x >= b.x && x <= b.x + b.w && y >= b.y && y <= b.y + b.h;
+    if (!state.minimised && inside(g.window)) animate(1, e.shiftKey);
+    else if (state.minimised && inside(g.target)) animate(0, e.shiftKey);
+    else if (!state.minimised) animate(1, e.shiftKey);
+    else animate(0, e.shiftKey);
+  });
+  slider.addEventListener('input', () => { state.anim = null; state.progress = slider.value / 1000; state.minimised = state.progress >= 1; progressOut.textContent = state.progress.toFixed(3); draw(); });
+  for (const b of document.querySelectorAll('[data-effect]')) b.addEventListener('click', () => {
+    document.querySelectorAll('[data-effect]').forEach(o => o.setAttribute('aria-pressed', o === b ? 'true' : 'false'));
+    state.effect = b.dataset.effect; draw();
+  });
+  for (const b of document.querySelectorAll('[data-edge]')) b.addEventListener('click', () => {
+    document.querySelectorAll('[data-edge]').forEach(o => o.setAttribute('aria-pressed', o === b ? 'true' : 'false'));
+    state.edge = b.dataset.edge; canvas.width = 0; draw();
+  });
+  document.getElementById('mesh').addEventListener('change', e => { state.showMesh = e.target.checked; draw(); });
+  window.addEventListener('resize', () => { canvas.width = 0; draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>

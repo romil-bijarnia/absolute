@@ -14,9 +14,11 @@ installation on the user's physical Mac, developed into a daily macOS replacemen
 The Ubuntu VM preview below records earlier development work; it is not the
 requested deliverable. See [ROADMAP.md](ROADMAP.md).
 
-Since 15 October 2026 work proceeds in behavior units; the first,
-[Dock magnification](research/DOCK-MAGNIFICATION.md), is recovered from the
-installed Dock and implemented as `DockMagnification` in `AbsoluteCore`.
+Since 15 October 2026 work proceeds in behavior units. The first two,
+[Dock magnification](research/DOCK-MAGNIFICATION.md) and the
+[minimise effects](research/DOCK-MINIMISE.md), are recovered from the installed
+Dock and implemented as `DockMagnification` and `DockMinimise` in `AbsoluteCore`,
+each with a browser demo under `research/`.
 [System research and current coverage](research/SYSTEM-COVERAGE.md) records
 what has been inspected, what has been implemented, and what remains open.
 Current deliverables are desktop prototypes, verified file-service behavior,
@@ -202,6 +204,7 @@ python3 script/research_graphics.py --probe
 python3 script/research_shared_cache.py
 python3 script/research_native_code.py
 python3 script/research_dock_magnification.py
+python3 script/research_dock_minimise.py
 python3 script/research_status.py
 ```
 

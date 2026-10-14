@@ -9,10 +9,13 @@ The local checkout is `/Users/romilbijarnia/absolute`.
 Current direction (2026-10-15): the ultimate goal is an open-source macOS
 clone, a free Fedora-based system that looks and behaves like macOS as closely
 as possible, built one measured behavior at a time; see ROADMAP.md. The first
-behavior unit, Dock magnification, is complete: see
-[research/DOCK-MAGNIFICATION.md](research/DOCK-MAGNIFICATION.md) and
-`Sources/AbsoluteCore/DockMagnification.swift` (11 tests). The next Dock unit
-wires that model into the GTK host's pointer handling. Asahi lists the M3 Max GPU as TBA and the
+two behavior units are complete: Dock magnification
+([research/DOCK-MAGNIFICATION.md](research/DOCK-MAGNIFICATION.md),
+`Sources/AbsoluteCore/DockMagnification.swift`, 11 tests) and the minimise
+effects ([research/DOCK-MINIMISE.md](research/DOCK-MINIMISE.md),
+`Sources/AbsoluteCore/DockMinimise.swift`, 15 tests), each with a browser demo
+under `research/`. The next Dock unit renders both models on Fedora: the GTK
+host's pointer handling for magnification and a KWin effect for minimising. Asahi lists the M3 Max GPU as TBA and the
 display controller as WIP, so daily use on this Mac waits on upstream driver
 work. The full behavior backlog, including System Settings, Passwords and the
 M3 DCP/AGX firmware protocols, is the table in ROADMAP.md. The paragraphs

@@ -23,10 +23,13 @@ Work proceeds one behavior at a time. Each unit observes the behavior on the
 reference Mac, records a specification with an executable check, and implements
 it for Plasma/KWin or as an Absolute component. System-wide inventories and
 research sweeps are not units of work. The first unit, Dock magnification, is
-complete ([research/DOCK-MAGNIFICATION.md](research/DOCK-MAGNIFICATION.md));
-its raw evidence lives under `research/local/dock-magnification/`. Next on the
-Dock: hover magnification in the GTK host using that model, then the minimise
-effects whose dossiers the same pass retained.
+complete ([research/DOCK-MAGNIFICATION.md](research/DOCK-MAGNIFICATION.md)),
+and so is the second, the three minimise effects (Genie, Scale and the hidden
+Suck) with their clock and the tile's arrival reveal
+([research/DOCK-MINIMISE.md](research/DOCK-MINIMISE.md)); the raw evidence for
+both lives under `research/local/dock-magnification/`. Next on the Dock: the
+GTK host and the KWin effect that render these two models on Fedora, then
+bounce, indicators and autohide timing.
 
 ## Behavior backlog, 15 October 2026
 
@@ -38,7 +41,7 @@ implementation on Plasma/KWin or in Absolute.
 
 | Order | Target | Units | State |
 | --- | --- | --- | --- |
-| 1 | Dock | Magnification geometry and ramp; minimise effects (Genie, scale); bounce, indicators, autohide timing; GTK host wiring | Magnification done; minimise dossiers retained |
+| 1 | Dock | Magnification geometry and ramp; minimise effects (Genie, Scale, Suck); bounce, indicators, autohide timing; GTK host and KWin wiring | Magnification and minimise effects done; hosts open |
 | 2 | Input physics | Trackpad acceleration (IOHIDFamily is published source), scroll momentum and rubber-banding, gesture thresholds | Open |
 | 3 | Window management | Traffic lights, shadows, zoom and minimise animations, Mission Control, Spaces, app switcher, menu bar model | Open |
 | 4 | Finder | Views, sidebar, Quick Look, Get Info, drag semantics, file operations | Partial (Files prototype, link semantics) |
