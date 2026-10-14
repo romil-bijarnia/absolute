@@ -24,6 +24,26 @@ its raw evidence lives under `research/local/dock-magnification/`. Next on the
 Dock: hover magnification in the GTK host using that model, then the minimise
 effects whose dossiers the same pass retained.
 
+## Behavior backlog, 15 October 2026
+
+Romil's stated scope is everything: every part of macOS reproduced, down to
+settings, the password manager and the firmware. Each line below is a unit or
+a group of units, in the order that makes the clone usable soonest. A unit is
+done when it has a report under `research/`, an executable check and an
+implementation on Plasma/KWin or in Absolute.
+
+| Order | Target | Units | State |
+| --- | --- | --- | --- |
+| 1 | Dock | Magnification geometry and ramp; minimise effects (Genie, scale); bounce, indicators, autohide timing; GTK host wiring | Magnification done; minimise dossiers retained |
+| 2 | Input physics | Trackpad acceleration (IOHIDFamily is published source), scroll momentum and rubber-banding, gesture thresholds | Open |
+| 3 | Window management | Traffic lights, shadows, zoom and minimise animations, Mission Control, Spaces, app switcher, menu bar model | Open |
+| 4 | Finder | Views, sidebar, Quick Look, Get Info, drag semantics, file operations | Partial (Files prototype, link semantics) |
+| 5 | System Settings | Pane by pane: layout, controls and behavior, each wired to the Fedora setting underneath | Open |
+| 6 | Passwords | List, groups, verification codes, autofill prompts and sheets; local store on Fedora, sync by the user's choice | Open; iCloud Keychain sync is Apple-server-bound and stays out |
+| 7 | Text and appearance | CoreText-like rendering (unhinted, subpixel-positioned), materials, dark/light appearance, SF-metric open typeface | Open |
+| 8 | Spotlight, Notification Centre, Control Centre | Search ranking and layout; notification grouping and timing; control panels | Open |
+| 9 | Firmware | M3 display-controller (DCP) and GPU (AGX) command protocols traced from macOS under the m1n1 hypervisor, Asahi's method, feeding driver work upstream; SEP and Boot ROM are signed and stay Apple's | Open; this is the item that unblocks daily use on this Mac |
+
 ## Foundation: Fedora, Asahi and macOS compatibility
 
 Build Absolute by combining existing open-source infrastructure with macOS

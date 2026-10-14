@@ -14,7 +14,9 @@ behavior unit, Dock magnification, is complete: see
 `Sources/AbsoluteCore/DockMagnification.swift` (11 tests). The next Dock unit
 wires that model into the GTK host's pointer handling. Asahi lists the M3 Max GPU as TBA and the
 display controller as WIP, so daily use on this Mac waits on upstream driver
-work. The paragraphs below describe the earlier framing.
+work. The full behavior backlog, including System Settings, Passwords and the
+M3 DCP/AGX firmware protocols, is the table in ROADMAP.md. The paragraphs
+below describe the earlier framing.
 
 Combine Fedora/Asahi with macOS reverse engineering. Fedora supplies the
 planned operating-system base; Asahi supplies reusable Apple Silicon boot,
