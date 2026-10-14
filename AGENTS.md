@@ -1,16 +1,17 @@
 # Absolute project
 
-The goal is an open-source macOS-compatible system developed from investigation
-of the user's Mac. The requested scope includes the entire system, graphics,
-boot, drivers and firmware. Desktop Preview 0.3 has native macOS and GTK Linux hosts,
-saved sessions, file services, and a verified portable command-line host.
-Current work expands system research and converts bounded behavioral findings
-into verified Absolute implementations. The delivery target is the user's
-existing Fedora/Asahi installation on the physical Mac, developed into a daily
-macOS replacement with Absolute's desktop and compatibility components.
-The Linux host currently manages only its own Files windows.
-Preserve this objective when resuming a thread.
+The ultimate goal is an open-source macOS clone: a free Fedora-based system
+that looks and behaves like macOS as closely as possible. Behavior is cloned;
+Apple code, fonts, icons, sounds and names are not. Build on the installed
+Plasma/KWin session and real Fedora applications, adding Absolute components
+only where no upstream piece matches observed macOS behavior. See "Direction,
+15 October 2026" in ROADMAP.md. Daily use on the reference Mac (M3 Max) waits
+on Asahi GPU and display-controller support; that gap is not project work.
+Desktop Preview 0.3, the Mach subset and the research inventories are earlier
+work and remain available as evidence. Preserve this objective when resuming
+a thread.
 
+- Work in behavior units: observe one macOS behavior on the reference Mac, record a specification with an executable check, implement it for Plasma/KWin or as an Absolute component. Do not start new system-wide inventories or research sweeps.
 - The implementation strategy combines Fedora/Asahi reuse with macOS reverse engineering. Use Fedora for the operating-system base and Asahi's boot tooling, drivers, graphics and hardware research where supported; build Absolute's desktop and macOS-compatible interfaces above that foundation. Prefer upstream integration before writing a replacement.
 - Interpret the full subsystem backlog as research, compatibility and integration scope. An unresolved subsystem does not automatically require a new kernel, driver, firmware image or service implementation. Keep firmware investigation in scope while reusing existing supported boot and device interfaces.
 - The user explicitly rejected a VM deliverable. Do not create, provision or run VMs for this work unless the user later requests one. The existing Ubuntu preview is historical development evidence, not the next milestone. Inspect and build on the physical Fedora installation already present on the laptop.

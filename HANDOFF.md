@@ -6,6 +6,13 @@ The local checkout is `/Users/romilbijarnia/absolute`.
 
 ## Implementation direction
 
+Current direction (2026-10-15): the ultimate goal is an open-source macOS
+clone, a free Fedora-based system that looks and behaves like macOS as closely
+as possible, built one measured behavior at a time; see ROADMAP.md. The first
+behavior unit is Dock magnification. Asahi lists the M3 Max GPU as TBA and the
+display controller as WIP, so daily use on this Mac waits on upstream driver
+work. The paragraphs below describe the earlier framing.
+
 Combine Fedora/Asahi with macOS reverse engineering. Fedora supplies the
 planned operating-system base; Asahi supplies reusable Apple Silicon boot,
 driver and graphics work where supported. Absolute supplies desktop behavior

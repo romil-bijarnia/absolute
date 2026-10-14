@@ -1,5 +1,26 @@
 # Development sequence
 
+## Direction, 15 October 2026
+
+The ultimate goal of Absolute is an open-source macOS clone: a free
+Fedora-based system on which anything can be done and which looks and behaves
+like macOS as closely as possible. Behavior is cloned; Apple code, fonts,
+icons, sounds and names are not. Resemblance is built on the installed
+Plasma/KWin session and real Fedora applications, with Absolute components
+where no upstream piece matches the observed behavior.
+
+Asahi's M3 feature table on 2026-10-15 lists the M3 Max GPU as TBA, the display
+controller as WIP and brightness as WIP; the main display runs on the boot
+framebuffer with software rendering. Daily use on this Mac waits on that driver
+work, which this project cannot close. Development continues so the result is
+ready when the driver lands or on other supported hardware.
+
+Work proceeds one behavior at a time. Each unit observes the behavior on the
+reference Mac, records a specification with an executable check, and implements
+it for Plasma/KWin or as an Absolute component. System-wide inventories and
+research sweeps are not units of work. The first unit is Dock magnification;
+its evidence lives under `research/local/dock-magnification/`.
+
 ## Foundation: Fedora, Asahi and macOS compatibility
 
 Build Absolute by combining existing open-source infrastructure with macOS
