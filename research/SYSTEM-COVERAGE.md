@@ -47,7 +47,7 @@ macOS and Ubuntu preview results below.
 | Mach-message native checks passed | 211 |
 | Recorded Mach operations replayed per pass | 386 |
 | Selected kernel-send function-start spans inspected | 6 |
-| Behavior units specified, implemented and tested | 1 |
+| Behavior units specified, implemented and tested | 2 |
 
 These counts measure different kinds of work and overlap. They do not form
 a completion percentage. File names, export names and dependency edges do
@@ -76,9 +76,15 @@ timing recovered from the installed Dock are implemented as
 decompiled and the two measured constants decoded from the binary. See
 [DOCK-MAGNIFICATION.md](DOCK-MAGNIFICATION.md).
 
+The second behavior unit is the minimise effects: the Genie, Scale and Suck
+warp meshes, their cosine clock, the effect durations and the tile's arrival
+reveal recovered from the installed Dock are implemented as `DockMinimise`
+in AbsoluteCore, with 14 Dock procedures decompiled. See
+[DOCK-MINIMISE.md](DOCK-MINIMISE.md).
+
 | Verification | macOS | Linux |
 | --- | ---: | ---: |
-| Unit tests | 55 | 43 |
+| Unit tests | 70 | 43 |
 | CLI integration checks | 16 | 16 |
 | Desktop and restart checks | 33 | 27 |
 

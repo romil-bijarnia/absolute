@@ -38,7 +38,7 @@
     },
     {
       "file": "implementation-verification.json",
-      "sha256": "2abe275e240a33d5228859117c5f762f957ad521c378fcb82b49d22f1d7ec92b"
+      "sha256": "fd240fcb8204c4ccf267b3f0cf2e2cebdcf704910b333b86692b9f5a26514e1b"
     },
     {
       "file": "mach-message-findings.json",
@@ -59,6 +59,10 @@
     {
       "file": "dock-magnification-findings.json",
       "sha256": "3a38de1547e58581bcc0b0c676ff08c5966b42a835a7e16bcdd4c5addfbdb54d"
+    },
+    {
+      "file": "dock-minimise-findings.json",
+      "sha256": "341897c1bd524607944f7d70cb21c989cb9ee02ff75e31dc91dc8ac0c33cf8ea"
     }
   ],
   "limits": [
@@ -68,7 +72,7 @@
     "All subsystem scopes still contain unresolved work. No standalone macOS-compatible OS or firmware replacement is claimed."
   ],
   "metrics": {
-    "behavior_units_implemented": 1,
+    "behavior_units_implemented": 2,
     "filesystem_runtime_cases_captured": 73,
     "firmware_and_boot_artifact_records": 180,
     "graphics_reference_probes_passed": 5,

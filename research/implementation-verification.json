@@ -1,5 +1,5 @@
 {
-  "captured_at": "2026-10-14T09:16:26.998095+00:00",
+  "captured_at": "2026-10-14T21:58:18.112078+00:00",
   "linux": {
     "browser_preview": {
       "check_count": 10,
@@ -169,9 +169,9 @@
       "sha256": "b7efd02d71b12afac46fe5313b37696598404e7e730e65e6e92e655e00ab2f31"
     },
     "unit_command": "./script/check_core.sh",
-    "unit_log": "research/local/mach-messages/macos-core-check.log",
-    "unit_log_sha256": "c94de988f2616a28916f6bc02f889db1140f806f5d24639d92a87fe7ee4dd4a1",
-    "unit_tests_passed": 55
+    "unit_log": "research/local/dock-magnification/macos-core-check-20261015.log",
+    "unit_log_sha256": "55e84d1cc4f22c2600c53e6c9dea211b6257fb285d0d80c2bf4db5e6456dee40",
+    "unit_tests_passed": 70
   },
   "schema": 1,
   "scope": "Declared Absolute behavior and bounded native-reference replay; not whole-system equivalence.",
@@ -181,6 +181,8 @@
     "Sources/AbsoluteCore/DesktopSession.swift": "a69dd216f3f0af9b95c4e0655915d92b77bc0712ba954da06efa9fa7da0ac11f",
     "Sources/AbsoluteCore/DesktopSnapshot.swift": "64740aea3f6dce9764f489b1a0aa9cdd7d717f9c56658063513268302c809452",
     "Sources/AbsoluteCore/DesktopStateRepository.swift": "91ef0a690f14f5d88040e7b98431b6d81e8dc7e5ffdccfe5c5e6a016c0d8a2de",
+    "Sources/AbsoluteCore/DockMagnification.swift": "5a5b06893b0df113be70018075d4951bda4f9acd303787de582b5fad4af0de52",
+    "Sources/AbsoluteCore/DockMinimise.swift": "427ac5aae0d674907d0983ecab19b3e935cb49f93ade61075dfc84f81dcdbd80",
     "Sources/AbsoluteCore/FileEntry.swift": "2551ef69ff818c68006c9fc8539d7aebe5ec1c211e34c2563c257f5b1b63e969",
     "Sources/AbsoluteCore/FileResolution.swift": "7e3c666808fe21c4f58f0ef75e76776db0abe2df8b0e615c7494b1d5545e0d4c",
     "Sources/AbsoluteCore/FileService.swift": "0a46f1aac2d7dbdafc3d3ce4782492f0ca26e5a9bef5b72d4381027cb879fa6e",
@@ -205,6 +207,8 @@
     "Sources/AbsoluteMach/MachPortSpace.swift": "e58758f8d805422a57124cdb82cb62f278bfcfb5582741191f89dfdbe5e2045a",
     "Tests/AbsoluteCoreTests/AbsoluteCoreTests.swift": "2d75a00a9a69fe38a72fa43bbe01fbd834f7a01be21311a7c6cce37b0e916c00",
     "Tests/AbsoluteCoreTests/DesktopStateTests.swift": "72ac51ca79249d0ec673de4fc824bf898c3308759dda5ca9d89ef29b53f062b4",
+    "Tests/AbsoluteCoreTests/DockMagnificationTests.swift": "8902eddabda39beeb7397e85df670324de4cee6f6b35b7d9323d5fdcafdaac3d",
+    "Tests/AbsoluteCoreTests/DockMinimiseTests.swift": "175db799b2c7b3a2f0b4a6097778652a4e1b710d949f19ebdae54ad85b77dde1",
     "Tests/AbsoluteCoreTests/FileServiceTests.swift": "2cc38ecf3cf7c269261d8ccb3804b6d3b6238ed5819d1e5b94c115bd39f6dd73",
     "Tests/AbsoluteMachTests/Fixtures/mach-message-reference.json": "b50ec14db6cce9dcddcce1b42a52144919af61480539255c02cbab21ef43b5cf",
     "Tests/AbsoluteMachTests/MachMessageTests.swift": "feed00a2d74b7df912d8f9a8702e09560534d517648d53d9e36397d911508c1d",
@@ -223,15 +227,14 @@
     "script/check_core.sh": "7b0cf8daaba852e8cbf23caceedd84484dd091b85e84b5b55b38f9d4a4061d3e",
     "script/check_linux.sh": "2e64e5ea42b0232e099e63acd268af52c02d91b8ba58a5457b8a6d51f7d60530",
     "script/check_linux_desktop.py": "6aa9e152c8c913f5bc968b24ac3c76935cd545b38dba1df491db9b50c7f00536",
-    "script/run_linux.sh": "3af4913bd3dab5ad33b192b93e872646d4a4ad6273ce11b7df4e1cb2e08d7b0d",
-    "Sources/AbsoluteCore/DockMagnification.swift": "5a5b06893b0df113be70018075d4951bda4f9acd303787de582b5fad4af0de52",
-    "Tests/AbsoluteCoreTests/DockMagnificationTests.swift": "8902eddabda39beeb7397e85df670324de4cee6f6b35b7d9323d5fdcafdaac3d"
+    "script/run_linux.sh": "3af4913bd3dab5ad33b192b93e872646d4a4ad6273ce11b7df4e1cb2e08d7b0d"
   },
   "verification_notes": [
     "Native desktop and restart checks were rerun after the macOS application discovery fix. A separate accessibility interaction pressed the real Safari Dock button and confirmed Safari activation.",
     "Core, CLI, Mach and Linux desktop sources are unchanged; their earlier verification records are retained. The Linux launcher change only adds viewport scaling to its printed viewer URL, and bash -n passed.",
     "The scaled Linux viewer was checked at 1280x800 and 1024x680 after its first framebuffer arrived. The desktop and Dock fit, and the launcher opens and dismisses. The optional favicon returns 404; no application or transport errors were observed.",
     "2026-10-15: DockMagnification added; macOS unit tests re-run via script/check_core.sh (44 -> 55: 33 AbsoluteCore + 22 AbsoluteMach, all passed; CLI verify 16/16). The Linux count predates this unit and was not re-run; the GTK host and desktop/restart checks are unchanged.",
-    "2026-10-15: DockView now lays tiles out through DockMagnification (tileSize 60, largeSize 112) with the measured ramp; the macOS app builds, and the desktop self-check was not re-run in this pass."
+    "2026-10-15: DockView now lays tiles out through DockMagnification (tileSize 60, largeSize 112) with the measured ramp; the macOS app builds, and the desktop self-check was not re-run in this pass.",
+    "2026-10-15: DockMinimise added; macOS unit tests re-run via script/check_core.sh (55 -> 70: 48 AbsoluteCore + 22 AbsoluteMach, all passed; CLI verify 16/16). The Linux count and the desktop/restart checks were not re-run; no host code changed."
   ]
 }

@@ -23,6 +23,7 @@ INPUTS = {
     "mach_compatibility": "mach-compatibility.json",
     "fedora_native": "fedora-native-verification.json",
     "dock_magnification": "dock-magnification-findings.json",
+    "dock_minimise": "dock-minimise-findings.json",
 }
 
 
@@ -128,7 +129,7 @@ def generate():
         "mach_native_checks": oracle["check_count"],
         "mach_reference_operations": sum(len(item["operations"]) for item in oracle["scenarios"]),
         "kernel_send_function_start_spans": data["mach_kernel"]["coverage"]["functionStartSpansDisassembled"],
-        "behavior_units_implemented": 1 if data["dock_magnification"]["implementation"]["tests"] else 0,
+        "behavior_units_implemented": sum(1 for key in ("dock_magnification", "dock_minimise") if data[key]["implementation"]["tests"]),
     }
     summary = {
         "schema": 1, "overall_status": "in_progress", "completion_percentage": None,
@@ -209,6 +210,11 @@ def generate():
         "`DockMagnification` in AbsoluteCore, with " + str(len(data["dock_magnification"]["procedures"])) + " Dock procedures",
         "decompiled and the two measured constants decoded from the binary. See",
         "[DOCK-MAGNIFICATION.md](DOCK-MAGNIFICATION.md).", "",
+        "The second behavior unit is the minimise effects: the Genie, Scale and Suck",
+        "warp meshes, their cosine clock, the effect durations and the tile's arrival",
+        "reveal recovered from the installed Dock are implemented as `DockMinimise`",
+        "in AbsoluteCore, with " + str(len(data["dock_minimise"]["procedures"])) + " Dock procedures decompiled. See",
+        "[DOCK-MINIMISE.md](DOCK-MINIMISE.md).", "",
         "| Verification | macOS | Linux |", "| --- | ---: | ---: |",
         "| Unit tests | " + str(verification["macos"]["unit_tests_passed"]) + " | "
             + str(verification["linux"]["unit_tests_passed"]) + " |",
