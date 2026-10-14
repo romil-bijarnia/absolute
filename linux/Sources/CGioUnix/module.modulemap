@@ -1,0 +1,4 @@
+module CGioUnix [system] {
+    header "shim.h"
+    export *
+}

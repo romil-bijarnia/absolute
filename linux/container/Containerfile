@@ -1,0 +1,7 @@
+FROM docker.io/library/swift:6.2-noble@sha256:eccc7a97f9b9881d9659e2e788081fd7675f86d39793b51200bfb178398b3784
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update -qq && apt-get install -y --no-install-recommends \
+    libgtk-4-dev libglib2.0-dev librsvg2-common adwaita-icon-theme fonts-dejavu-core at-spi2-core \
+    xvfb xdotool x11vnc novnc websockify imagemagick dbus-x11 xterm \
+    && rm -rf /var/lib/apt/lists/*
+ENV GDK_BACKEND=x11 GSK_RENDERER=cairo DISPLAY=:99

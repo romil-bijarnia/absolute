@@ -1,16 +1,17 @@
 # Absolute
 
-A desktop developed on macOS, with a shared Swift core now running on macOS
-and Linux, and an incremental path toward a bootable open-source system.
+A macOS-style desktop with native macOS and Linux hosts, a shared Swift core,
+and an incremental path toward a bootable open-source system.
 
-Desktop Preview 0.2 includes:
+Desktop Preview 0.3 includes:
 
 - A desktop with three procedural wallpapers and draggable, resizable windows.
 - A Dock that opens Files, searches installed apps, launches pinned apps, and restores minimized windows.
 - A file browser that reads real folders, with icon and list views, navigation history, sorting, hidden files, and folder search.
 - An application launcher with ranked search, keyboard navigation, and native application launching.
-- Text and image previews, copying paths, revealing files in our own Files app, and a read-only Get Info panel.
+- Text previews, revealing files in our own Files app, and a read-only Get Info panel on both platforms. The macOS host also supports image previews and copying paths.
 - Saved desktop sessions: window positions, sizes, order, minimized state, folders, view preferences, and wallpaper.
+- A native GTK 4 Linux desktop, with real mouse and keyboard interactions and session restoration.
 - A command-line host that uses the same file and session services on macOS and Linux.
 
 ## Run on your Mac
@@ -54,7 +55,46 @@ its error appears in the Absolute menu. On Linux the default state location is
 `$XDG_STATE_HOME/absolute/desktop-session.json`, falling back to
 `~/.local/state/absolute/desktop-session.json`.
 
-## Run the shared core on Linux
+## Run the Linux desktop
+
+On an Apple Silicon Mac with Lima installed:
+
+```sh
+./script/run_linux.sh
+```
+
+Open [the local desktop viewer](http://localhost:6090/vnc_lite.html). The viewer
+streams a real GTK desktop running inside the project-owned Ubuntu VM. Linux
+renders the interface; noVNC carries its display and input to your browser.
+The VM mounts this project and keeps build caches and desktop state in separate
+container volumes.
+
+```sh
+./script/run_linux.sh --build-only
+./script/run_linux.sh --self-check
+./script/run_linux.sh --stop
+```
+
+The graphical self-check drives X11 mouse and keyboard events, then quits and
+relaunches the desktop to check saved sessions. All 27 checks passed on the
+tested Ubuntu 24.04 ARM64 / GTK 4.14.5 / Swift 6.2.4 configuration.
+Reports and screenshots are generated under `research/local/`.
+See [research/LINUX-DESKTOP.md](research/LINUX-DESKTOP.md) for the tested scope.
+Stopping the desktop preserves its state. Stop the VM separately with
+`limactl stop absolute-dev`.
+
+On a Linux machine with Swift 6 and GTK 4.12 or newer development libraries:
+
+```sh
+swift run --package-path linux AbsoluteLinux --project "$PWD"
+```
+
+Linux shortcuts use **Ctrl** (or **Super**): **K** opens the launcher, **N** opens
+Files, **I** shows file information, **[ / ]** navigate, **↑** opens the parent
+folder, **Shift+.** shows hidden files, **Shift+D** changes the wallpaper, and
+**Q** quits. **Space** previews a focused file; **Escape** closes an overlay.
+
+## Run the shared command-line core
 
 The command-line host has no AppKit or SwiftUI dependency:
 
@@ -93,12 +133,19 @@ ledger links observations to their evidence in [research/FINDINGS.md](research/F
 Reruns reuse successful records. The tool version, target identities, scope,
 and errors are retained so later investigations can build on this pass.
 
+This research is an initial static inspection of Dock and Finder. It has not
+completed macOS reverse engineering, recovered their implementations, or
+established compatibility with Apple's private protocols or application binaries.
+
 ## Structure
 
 ```text
 Sources/AbsoluteCore/            File services, navigation, search ranking, saved desktop state, text previews
 Sources/AbsoluteDesktop/         macOS development host, native views, platform services
 Sources/AbsoluteCLI/             Shared command-line host for macOS and Linux
+linux/Sources/AbsoluteLinux/     Native Linux host using the shared core
+linux/Sources/DesktopToolkit/    GTK and GIO bridge for Linux rendering and services
+linux/container/                Pinned Linux development image and display startup
 Tests/AbsoluteCoreTests/         Behavior tests for the portable core
 script/                         Reproducible build, run, test, and REA workflows
 research/                       Findings ledger and local evidence
@@ -106,16 +153,18 @@ tools/                          Project-local research dependencies
 ```
 
 `AbsoluteCore` imports Foundation and has no AppKit or SwiftUI dependency. The
-macOS host owns application discovery, icons, launching, clipboard access, and
-window rendering. That boundary is deliberate: moving the core to another
-system requires a new platform adapter and renderer.
+macOS host owns its application discovery, icons, launching, clipboard access,
+and window rendering. The separate Linux package supplies GTK rendering and
+GIO application discovery and launching without introducing GTK dependencies
+into the core.
 
-This version is a desktop application running on macOS. A standalone system
-still needs an open-source display/compositor backend, system services, boot
-integration, and drivers. Native Mac application compatibility is a later,
-separate implementation effort.
+Both hosts currently run desktop applications on an existing operating system.
+The Linux host manages its own Files windows; external application windows
+still need a compositor and complete session integration. A standalone system
+also needs system services, boot integration, and hardware support. Native Mac
+application compatibility is a separate implementation effort.
 
-The next slice is a Linux graphical host for the verified core, followed by
-packaging a desktop session into a bootable VM image. See [ROADMAP.md](ROADMAP.md).
+The next slice is a self-contained bootable VM image that starts the desktop
+without a mounted Mac source directory. See [ROADMAP.md](ROADMAP.md).
 
 Original project code is available under the MIT license.

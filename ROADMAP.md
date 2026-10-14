@@ -30,26 +30,27 @@ Preserve OS build and artifact hashes with each research run.
 Source code, static metadata, and runtime behavior answer different questions.
 The findings ledger identifies which type of evidence supports each statement.
 
-## Next: Linux graphical host
+## Completed: Linux graphical host 0.3
 
-Use the verified Linux core to implement the host boundary for file opening,
-application discovery, clipboard, icons, and graphical rendering.
-The current SwiftUI renderer is a macOS development host and will need a
-counterpart on the new platform.
+The Linux host renders a native GTK 4 desktop and Files windows using the same
+file services, navigation, search ranking, and versioned session model.
+GIO supplies installed applications and native launch operations.
 
-First acceptance target: render the desktop and a Files window inside the Linux
-VM; navigate real folders, reveal a file, display its information, and restore the
-window and folder after a fresh launch using the existing core services.
+All 27 graphical integration checks passed: real folder navigation, search,
+hidden files, views, information, reveal, text previews, dragging, resizing,
+minimize/restore, launcher selection, wallpaper, and a full process restart.
+See [research/LINUX-DESKTOP.md](research/LINUX-DESKTOP.md).
 
-Then add desktop file operations and checks for the Linux graphical host before
-making it a complete desktop session.
+The development VM exposes its virtual display through a local browser viewer.
+Window management currently covers the desktop's own Files windows.
 
-## Bootable system
+## Next: Self-contained bootable system
 
-Package the desktop session with an existing open-source base. Add a compositor,
+Package the desktop with an existing open-source base and start it automatically
+in a VM without mounting the Mac source directory. Add a compositor,
 input and display handling, login/session management, settings, notifications,
-installation, and updates. Verify the initial image in a VM before targeting
-hardware.
+desktop file operations, installation, and updates. Verify the initial image
+and its external application windows in a VM before targeting hardware.
 
 Choose kernel and hardware targets using the working second host. Supporting
 macOS application binaries requires a compatible loader, runtimes, frameworks,
