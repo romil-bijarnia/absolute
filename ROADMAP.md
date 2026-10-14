@@ -5,7 +5,11 @@
 The ultimate goal of Absolute is an open-source macOS clone: a free
 Fedora-based system on which anything can be done and which looks and behaves
 like macOS as closely as possible. Behavior is cloned; Apple code, fonts,
-icons, sounds and names are not. Resemblance is built on the installed
+icons, sounds and names are not. The motive, in Romil's words: using an
+assistant on macOS "runs into many different blocks"; the point is a system
+with no TCC prompts, sealed volumes, notarisation or unpatchable system apps,
+where automation and root are unrestricted. The Fedora base supplies that on
+day one; the resemblance is the long tail. Resemblance is built on the installed
 Plasma/KWin session and real Fedora applications, with Absolute components
 where no upstream piece matches the observed behavior.
 
