@@ -1,5 +1,7 @@
 # Absolute
 
+[Current handoff](HANDOFF.md) · [Research coverage](research/SYSTEM-COVERAGE.md)
+
 An open-source operating-system project with native macOS and Linux desktop
 prototypes and a shared Swift core. The goal is macOS compatibility, with
 research spanning applications, system services, graphics, boot and firmware.
@@ -20,6 +22,7 @@ Desktop Preview 0.3 includes:
 - A native GTK 4 Linux desktop, with real mouse and keyboard interactions and session restoration.
 - A command-line host that uses the same file and session services on macOS and Linux.
 - File and session paths that preserve symbolic-link traversal, including dangling-link metadata and explicit follow/no-follow resolution.
+- A portable inline Mach-message component checked against native macOS observations on both macOS and Linux.
 
 ## Run on your Mac
 
@@ -109,6 +112,7 @@ The command-line host has no AppKit or SwiftUI dependency:
 swift run absolute ls .
 swift run absolute info Package.swift
 swift run absolute reveal Package.swift
+swift run absolute mach-demo
 ./script/check_core.sh
 ```
 
@@ -119,8 +123,9 @@ On this Mac, reproduce the Linux run in the project-owned Lima VM:
 ```
 
 The script starts an Ubuntu 24.04 ARM64 VM and runs a pinned Swift 6.2 container,
-with a separate Linux build cache. It runs the same 22 core tests and fifteen
-integration checks as the macOS core host. The VM uses two CPUs, 4 GB of memory,
+with a separate Linux build cache. The suites run 44 unit tests on macOS and
+43 on Linux, plus 16 CLI integration checks on each; the extra Mac test checks
+the native SDK header layout. The VM uses two CPUs, 4 GB of memory,
 and a 16 GB disk; its writable host mount is this project. Stop it when done with
 `limactl stop absolute-dev`. See [research/PORTABILITY.md](research/PORTABILITY.md)
 for the recorded results and tested boundaries.
@@ -180,6 +185,8 @@ tools/                          Project-local research dependencies
 ```
 
 `AbsoluteCore` imports Foundation and has no AppKit or SwiftUI dependency. The
+separate `AbsoluteMach` module implements a measured inline-message subset in
+one process; see [its contract and conformance results](research/MACH-COMPATIBILITY.md). The
 macOS host owns its application discovery, icons, launching, clipboard access,
 and window rendering. The separate Linux package supplies GTK rendering and
 GIO application discovery and launching without introducing GTK dependencies

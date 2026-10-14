@@ -18,6 +18,9 @@ INPUTS = {
     "native": "native-code-findings.json",
     "cache": "shared-cache-findings.json",
     "implementation": "implementation-verification.json",
+    "mach_messages": "mach-message-findings.json",
+    "mach_kernel": "mach-kernel-findings.json",
+    "mach_compatibility": "mach-compatibility.json",
 }
 
 
@@ -41,7 +44,7 @@ def generate():
         str(path.relative_to(ROOT))
         for directory in ["Sources", "Tests", "linux/Sources"]
         for path in (ROOT / directory).rglob("*")
-        if path.is_file() and path.suffix in {".swift", ".c", ".h", ".m", ".mm", ".cc", ".cpp", ".hpp", ".modulemap"}
+        if path.is_file() and path.suffix in {".swift", ".c", ".h", ".m", ".mm", ".cc", ".cpp", ".hpp", ".modulemap", ".json"}
     }
     source_paths.update({
         "Package.swift", "linux/Package.swift", "script/check_core.sh",
@@ -72,6 +75,20 @@ def generate():
                 raise ValueError("Invalid implementation verification: " + platform + "/" + name)
     if any(item["status"] == "complete" for item in scope["subsystems"]):
         raise ValueError("A new subsystem completion claim needs explicit contract-level validation")
+    reference = data["mach_messages"]
+    oracle = reference["oracle"]
+    fixture = ROOT / "Tests/AbsoluteMachTests/Fixtures/mach-message-reference.json"
+    if fixture.read_bytes() != (RESEARCH / INPUTS["mach_messages"]).read_bytes():
+        raise ValueError("Mach test fixture and native reference differ")
+    if (not oracle["passed"] or not reference["repeatability"]["identical"]
+            or oracle["scenario_count"] != len(oracle["scenarios"])
+            or any(not item["passed"] for item in oracle["scenarios"])):
+        raise ValueError("Mach native reference checks did not pass")
+    if data["mach_compatibility"]["reference_evidence_id"] != reference["evidence_id"]:
+        raise ValueError("Mach conformance references another capture")
+    for name, expected in data["mach_compatibility"]["source_files_sha256"].items():
+        if sha((ROOT / name).read_bytes()) != expected:
+            raise ValueError("Mach conformance is stale for " + name)
 
     metrics = {
         "readable_regular_file_paths": inventory["file_count"],
@@ -93,6 +110,10 @@ def generate():
         "filesystem_runtime_cases_captured": data["native"]["coverage"]["runtimeCases"],
         "kernel_reference_checks_passed": len(kernel_result["checks"]),
         "graphics_reference_probes_passed": len(graphics_probes),
+        "mach_native_scenarios": oracle["scenario_count"],
+        "mach_native_checks": oracle["check_count"],
+        "mach_reference_operations": sum(len(item["operations"]) for item in oracle["scenarios"]),
+        "kernel_send_function_start_spans": data["mach_kernel"]["coverage"]["functionStartSpansDisassembled"],
     }
     summary = {
         "schema": 1, "overall_status": "in_progress", "completion_percentage": None,
@@ -119,6 +140,10 @@ def generate():
         "filesystem_runtime_cases_captured": "Filesystem runtime cases captured",
         "kernel_reference_checks_passed": "Owned-process kernel reference checks passed",
         "graphics_reference_probes_passed": "Headless graphics reference probes passed",
+        "mach_native_scenarios": "Mach-message reference scenarios",
+        "mach_native_checks": "Mach-message native checks passed",
+        "mach_reference_operations": "Recorded Mach operations replayed per pass",
+        "kernel_send_function_start_spans": "Selected kernel-send function-start spans inspected",
     }
     lines = [
         "# System research coverage", "",
@@ -140,8 +165,13 @@ def generate():
         "literal link destinations from successful target resolution. Symbolic-link",
         "traversal survives CLI parsing, navigation, snapshots and session-state paths.",
         "See [NATIVE-CODE.md](NATIVE-CODE.md) for the observed contract and remaining limits.", "",
+        "The separate AbsoluteMach component now implements the measured in-process",
+        "inline-message subset. Its tests replay the independent native reference",
+        "with two name assignments on both hosts, comparing returned bytes, rights,",
+        "queue state, timeouts and trailers. See",
+        "[MACH-COMPATIBILITY.md](MACH-COMPATIBILITY.md).", "",
         "| Verification | macOS | Linux |", "| --- | ---: | ---: |",
-        "| Core unit tests | " + str(verification["macos"]["unit_tests_passed"]) + " | "
+        "| Unit tests | " + str(verification["macos"]["unit_tests_passed"]) + " | "
             + str(verification["linux"]["unit_tests_passed"]) + " |",
         "| CLI integration checks | " + str(verification["macos"]["cli"]["check_count"]) + " | "
             + str(verification["linux"]["cli"]["check_count"]) + " |",

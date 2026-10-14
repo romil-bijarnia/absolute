@@ -1,8 +1,8 @@
 {
-  "captured_at": "2026-10-14T08:00:10.361327+00:00",
+  "captured_at": "2026-10-14T08:48:27.057381+00:00",
   "linux": {
     "cli": {
-      "check_count": 15,
+      "check_count": 16,
       "checks": {
         "cli_directory_link_with_trailing_slash": true,
         "cli_info_preserves_symlink_parent": true,
@@ -13,6 +13,7 @@
         "cli_session_preserves_symlink_parent": true,
         "desktop_state_round_trip": true,
         "file_information": true,
+        "portable_mach_message_round_trip": true,
         "read_project_directory": true,
         "reject_stale_save": true,
         "restore_minimized_window": true,
@@ -22,7 +23,7 @@
       },
       "local_report": "research/local/linux-core-report.json",
       "passed": true,
-      "sha256": "1166d1e6c51ad9fda182fa2da646ae32918b5f315099123ca1dc96665bcc08b8"
+      "sha256": "dfcb782a64611c03617535e84acd180686d06d943f4a6a9d1cca415938e5d830"
     },
     "desktop": {
       "check_count": 27,
@@ -55,18 +56,18 @@
         "space_opens_text_preview": true,
         "wallpaper_action": true
       },
-      "local_report": "research/local/linux-ui-check-20261014-075724/results.json",
+      "local_report": "research/local/linux-ui-check-20261014-083916/results.json",
       "passed": true,
       "sha256": "321728ac7fed3d79f9a703402a5134443cc76150cec97c92651e0cda39ef2178"
     },
     "unit_command": "./script/check_linux.sh",
-    "unit_log": "research/local/final-linux-core.log",
-    "unit_log_sha256": "7bdacadce068f97938468ff42d70092a447b08393e0a9d6ff7db17f1ba2d8465",
-    "unit_tests_passed": 22
+    "unit_log": "research/local/mach-messages/linux-core-check.log",
+    "unit_log_sha256": "953c269afdfe5830971cc276715e9911b078b728412bce486fb87fae6a7c3b7d",
+    "unit_tests_passed": 43
   },
   "macos": {
     "cli": {
-      "check_count": 15,
+      "check_count": 16,
       "checks": {
         "cli_directory_link_with_trailing_slash": true,
         "cli_info_preserves_symlink_parent": true,
@@ -77,6 +78,7 @@
         "cli_session_preserves_symlink_parent": true,
         "desktop_state_round_trip": true,
         "file_information": true,
+        "portable_mach_message_round_trip": true,
         "read_project_directory": true,
         "reject_stale_save": true,
         "restore_minimized_window": true,
@@ -86,7 +88,7 @@
       },
       "local_report": "research/local/macos-core-report.json",
       "passed": true,
-      "sha256": "cc17bbe5276d55d0fa5bbc9751ccb410aa77eadfe9383ebac498ef04b8a9709d"
+      "sha256": "51a9b0bf7a1d14a479605212cb48abf03edbba2d9e1958741c12fdf65143cc85"
     },
     "desktop": {
       "check_count": 26,
@@ -118,9 +120,9 @@
         "reveal_navigates_and_selects": true,
         "state_save_has_no_error": true
       },
-      "local_report": "research/local/ui-check-20261014-185722/results.json",
+      "local_report": "research/local/ui-check-20261014-193916/results.json",
       "passed": true,
-      "sha256": "4616bdff17ba4ac482d01e3727a47416aa2fdd1292d929509b72585452b9b8bb"
+      "sha256": "130b4213aac152da42d40c37aa3280bd474e5df03d3486592e1622860a5a0dc5"
     },
     "restart": {
       "check_count": 7,
@@ -133,19 +135,20 @@
         "restored_folders_loaded": true,
         "window_layout_and_minimization_restored": true
       },
-      "local_report": "research/local/ui-check-20261014-185722/restore-results.json",
+      "local_report": "research/local/ui-check-20261014-193916/restore-results.json",
       "passed": true,
-      "sha256": "8a1e323957418b78053eb97a1ed99cb1cb202eb086afec07e44c696cc1328a3f"
+      "sha256": "1eef356274a4c36340843dff1671a1a343665bb8cde03376d7bb7c46628bff9d"
     },
     "unit_command": "./script/check_core.sh",
-    "unit_evidence": "Successful command output in this work session; CLI record retained below.",
-    "unit_tests_passed": 22
+    "unit_log": "research/local/mach-messages/macos-core-check.log",
+    "unit_log_sha256": "c94de988f2616a28916f6bc02f889db1140f806f5d24639d92a87fe7ee4dd4a1",
+    "unit_tests_passed": 44
   },
   "schema": 1,
-  "scope": "Tests establish the declared Absolute behaviors, not overall macOS equivalence.",
+  "scope": "Declared Absolute behavior and bounded native-reference replay; not whole-system equivalence.",
   "source_files_sha256": {
-    "Package.swift": "bfb813f7cc54a3e51a3266948195d5af81f1cbfad375cdd14aa91a673727e440",
-    "Sources/AbsoluteCLI/AbsoluteCLI.swift": "00f5ebc9f8796ec039987efad9575ed6f133dc939e6ab224f0575aad2b7d4806",
+    "Package.swift": "10e29bae0dbb2bde41b7aa9e4cc6cab3ecf993fd11872dcc7f8d3d96783b495b",
+    "Sources/AbsoluteCLI/AbsoluteCLI.swift": "d892bb7aa9f7f29305d41a8aa0f9a78b659c71ddbd9b367219e0ed9301fd8412",
     "Sources/AbsoluteCore/DesktopSession.swift": "a69dd216f3f0af9b95c4e0655915d92b77bc0712ba954da06efa9fa7da0ac11f",
     "Sources/AbsoluteCore/DesktopSnapshot.swift": "64740aea3f6dce9764f489b1a0aa9cdd7d717f9c56658063513268302c809452",
     "Sources/AbsoluteCore/DesktopStateRepository.swift": "91ef0a690f14f5d88040e7b98431b6d81e8dc7e5ffdccfe5c5e6a016c0d8a2de",
@@ -169,9 +172,14 @@
     "Sources/AbsoluteDesktop/Views/LauncherView.swift": "0e0bda5fc75e574a20a4a9b23b1240e82f87e1235b2c6e7298806faeaf3c435a",
     "Sources/AbsoluteDesktop/Views/QuickPreviewView.swift": "68b2de85788307bf68bb0afae58497fa83878eeddc19da17215c4648d81b8323",
     "Sources/AbsoluteDesktop/Views/WallpaperView.swift": "0fbc5f432d54ca1a176f2fbfbf4df15f0cefce770748c44e6cd2ae8d01b00c92",
+    "Sources/AbsoluteMach/MachMessage.swift": "d02fdabc11133975d2023d0444e67fb5a79bb0a6ba8ee4015bb4c9791c7d6d6b",
+    "Sources/AbsoluteMach/MachPortSpace.swift": "e58758f8d805422a57124cdb82cb62f278bfcfb5582741191f89dfdbe5e2045a",
     "Tests/AbsoluteCoreTests/AbsoluteCoreTests.swift": "2d75a00a9a69fe38a72fa43bbe01fbd834f7a01be21311a7c6cce37b0e916c00",
     "Tests/AbsoluteCoreTests/DesktopStateTests.swift": "72ac51ca79249d0ec673de4fc824bf898c3308759dda5ca9d89ef29b53f062b4",
     "Tests/AbsoluteCoreTests/FileServiceTests.swift": "2cc38ecf3cf7c269261d8ccb3804b6d3b6238ed5819d1e5b94c115bd39f6dd73",
+    "Tests/AbsoluteMachTests/Fixtures/mach-message-reference.json": "b50ec14db6cce9dcddcce1b42a52144919af61480539255c02cbab21ef43b5cf",
+    "Tests/AbsoluteMachTests/MachMessageTests.swift": "feed00a2d74b7df912d8f9a8702e09560534d517648d53d9e36397d911508c1d",
+    "Tests/AbsoluteMachTests/MachPortSpaceTests.swift": "a29a6b289ff3f91e9602581e2589948b2e90167893a5de640f0d72bee2ba6a36",
     "linux/Package.swift": "bb80d5dd8cb2ec3f677dd5e074e114cd4dea644e3c7451110ef72253021acc6e",
     "linux/Sources/AbsoluteLinux/AbsoluteLinux.swift": "e207508c0a138285d7c51280770c7bbecb21c26f2c883c248f23000650f19ca4",
     "linux/Sources/CGTK/module.modulemap": "06d6af399ec192a55aed3952c14c6d66a637eac5b9c0b875937366b1e691bdf0",

@@ -1,5 +1,6 @@
 import Foundation
 import AbsoluteCore
+import AbsoluteMach
 #if canImport(Glibc)
 import Glibc
 #else
@@ -28,6 +29,7 @@ struct AbsoluteCLI {
               absolute reveal PATH
               absolute session STATE_FILE
               absolute verify PROJECT_PATH [REPORT_FILE]
+              absolute mach-demo [REPORT_FILE]
             """)
         case "ls":
             guard arguments.count == 2 || (arguments.count == 3 && arguments[2] == "--hidden") else { throw CommandError.usage }
@@ -42,6 +44,16 @@ struct AbsoluteCLI {
             guard arguments.count == 2 else { throw CommandError.usage }
             let repository = DesktopStateRepository(url: fileURL(arguments[1]))
             try await output(repository.load())
+        case "mach-demo":
+            guard arguments.count <= 2 else { throw CommandError.usage }
+            let report = try await machDemo()
+            if arguments.count == 2 {
+                let destination = fileURL(arguments[1])
+                try FileManager.default.createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
+                try encoded(report).write(to: destination, options: .atomic)
+            }
+            try output(report)
+            if !report.passed { throw CommandError.checkFailed }
         case "verify":
             guard (2...3).contains(arguments.count) else { throw CommandError.usage }
             let report = try await verify(project: fileURL(arguments[1]))
@@ -109,6 +121,8 @@ struct AbsoluteCLI {
         if case .text(let text, _) = preview { checks["text_preview"] = text.contains("PackageDescription") }
         else { checks["text_preview"] = false }
         checks.merge(try await verifySymbolicParentPaths(in: temporary)) { _, new in new }
+        let mach = try await machDemo()
+        checks["portable_mach_message_round_trip"] = mach.passed
         #if os(Linux)
         let platform = "linux"
         #else
@@ -121,6 +135,50 @@ struct AbsoluteCLI {
         #endif
         return CoreReport(platform: platform, architecture: architecture,
             operatingSystem: ProcessInfo.processInfo.operatingSystemVersionString, checks: checks)
+    }
+
+    private static func machDemo() async throws -> MachDemoReport {
+        let namespace = MachPortSpace()
+        let destination = try await namespace.allocateReceiveRight()
+        let inserted = try await namespace.insertSendRight(destination)
+        let payload = Data("Absolute IPC v1.".utf8)
+        let request = try MachMessage(bits: MachMessageHeader.makeBits(remote: 19),
+            remotePort: destination, id: 42, payload: payload)
+        let sent = try await namespace.send(request.encode())
+        let received = try await namespace.receive(destination, capacity: 256)
+        let reply = try MachMessage.decode(received.buffer)
+        let state = await namespace.state(of: destination)
+        let releasedReceive = await namespace.releaseReceiveRight(destination)
+        let releasedSend = await namespace.deallocateNameReference(destination)
+        let checks = [
+            "send_right_created": inserted == .success,
+            "send_and_receive_succeeded": sent.status == .success && received.status == .success,
+            "payload_preserved": reply.payload == payload,
+            "header_transformed": reply.header.bits == 0x1100 && reply.header.remotePort == 0
+                && reply.header.localPort == destination && reply.header.id == 42,
+            "default_trailer_returned": reply.trailingBytes == Data([0, 0, 0, 0, 8, 0, 0, 0]),
+            "copy_send_reference_preserved": state.sendReferences == 1 && state.queueCount == 0,
+            "rights_released": releasedReceive == .success && releasedSend == .success
+        ]
+        #if os(Linux)
+        let platform = "linux"
+        #else
+        let platform = "macos"
+        #endif
+        return MachDemoReport(platform: platform,
+            scope: "AbsoluteMach in-process namespace; nonblocking inline message subset.",
+            receivedText: String(decoding: reply.payload, as: UTF8.self),
+            receivedMessageHex: reply.encode().map { String(format: "%02x", $0) }.joined(),
+            checks: checks, passed: checks.values.allSatisfy { $0 })
+    }
+
+    private struct MachDemoReport: Encodable {
+        let platform: String
+        let scope: String
+        let receivedText: String
+        let receivedMessageHex: String
+        let checks: [String: Bool]
+        let passed: Bool
     }
 
     private static func verifySymbolicParentPaths(in temporary: URL) async throws -> [String: Bool] {

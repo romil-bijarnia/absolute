@@ -1,0 +1,72 @@
+{
+  "demos": {
+    "linux": {
+      "local_report": "research/local/mach-messages/absolute-linux-demo.json",
+      "result": {
+        "checks": {
+          "copy_send_reference_preserved": true,
+          "default_trailer_returned": true,
+          "header_transformed": true,
+          "payload_preserved": true,
+          "rights_released": true,
+          "send_and_receive_succeeded": true,
+          "send_right_created": true
+        },
+        "passed": true,
+        "platform": "linux",
+        "receivedMessageHex": "00110000280000000000000001000000000000002a0000004162736f6c757465204950432076312e",
+        "receivedText": "Absolute IPC v1.",
+        "scope": "AbsoluteMach in-process namespace; nonblocking inline message subset."
+      },
+      "sha256": "a90c2a404ea76275365008039a3a7a5581659d87e1774c92a96abfe0b259a8ea"
+    },
+    "macos": {
+      "local_report": "research/local/mach-messages/absolute-macos-demo.json",
+      "result": {
+        "checks": {
+          "copy_send_reference_preserved": true,
+          "default_trailer_returned": true,
+          "header_transformed": true,
+          "payload_preserved": true,
+          "rights_released": true,
+          "send_and_receive_succeeded": true,
+          "send_right_created": true
+        },
+        "passed": true,
+        "platform": "macos",
+        "receivedMessageHex": "00110000280000000000000001000000000000002a0000004162736f6c757465204950432076312e",
+        "receivedText": "Absolute IPC v1.",
+        "scope": "AbsoluteMach in-process namespace; nonblocking inline message subset."
+      },
+      "sha256": "4f3e9f8503353735c60ac677329984ad093cb9e5db0f2cc200c0dda8185d4ffb"
+    }
+  },
+  "limits": [
+    "No cross-process transport or task isolation.",
+    "No reply/send-once rights, descriptors, vouchers, port sets or notifications.",
+    "No blocking waits, syscall interception or execution of macOS binaries.",
+    "Component resource limits are implementation choices, not native maximums."
+  ],
+  "reference_evidence_id": "absolute-mach-messages-sha256:e5723631bb484e1e5036b2f4314a1823d241c7995c1e365efbed04b19de9ad3e",
+  "reference_fixture_sha256": "b50ec14db6cce9dcddcce1b42a52144919af61480539255c02cbab21ef43b5cf",
+  "replay": {
+    "linux_passed": true,
+    "macos_passed": true,
+    "native_checks": 211,
+    "passes_per_host": 2,
+    "port_name_assignments": "direct role tokens and three reserved names",
+    "recorded_operations": 386,
+    "scenarios": 23
+  },
+  "schema": 1,
+  "scope": "In-process namespace; zero-timeout inline user messages with COPY_SEND/MOVE_SEND and the measured default trailer.",
+  "source_files_sha256": {
+    "Package.swift": "10e29bae0dbb2bde41b7aa9e4cc6cab3ecf993fd11872dcc7f8d3d96783b495b",
+    "Sources/AbsoluteCLI/AbsoluteCLI.swift": "d892bb7aa9f7f29305d41a8aa0f9a78b659c71ddbd9b367219e0ed9301fd8412",
+    "Sources/AbsoluteMach/MachMessage.swift": "d02fdabc11133975d2023d0444e67fb5a79bb0a6ba8ee4015bb4c9791c7d6d6b",
+    "Sources/AbsoluteMach/MachPortSpace.swift": "e58758f8d805422a57124cdb82cb62f278bfcfb5582741191f89dfdbe5e2045a",
+    "Tests/AbsoluteMachTests/Fixtures/mach-message-reference.json": "b50ec14db6cce9dcddcce1b42a52144919af61480539255c02cbab21ef43b5cf",
+    "Tests/AbsoluteMachTests/MachMessageTests.swift": "feed00a2d74b7df912d8f9a8702e09560534d517648d53d9e36397d911508c1d",
+    "Tests/AbsoluteMachTests/MachPortSpaceTests.swift": "a29a6b289ff3f91e9602581e2589948b2e90167893a5de640f0d72bee2ba6a36"
+  }
+}

@@ -1,0 +1,4580 @@
+{
+  "evidence_id": "absolute-mach-messages-sha256:e5723631bb484e1e5036b2f4314a1823d241c7995c1e365efbed04b19de9ad3e",
+  "evidence_type": "owned-process-runtime-reference",
+  "limitations": [
+    "All ports belong to a single fresh process. This does not establish cross-process transfer, notification, scheduling, or security policy behavior.",
+    "Messages contain inline bytes only. Reply and voucher names are null; complex descriptors, out-of-line memory, port arrays and vouchers are not exercised.",
+    "Every send and receive uses an explicit zero timeout. Blocking, interruption, concurrent destruction and priority inheritance are outside this contract.",
+    "Receive storage is physically 256 bytes and is zero-initialized. Declared capacities are bounded independently. Unchanged zero fields on errors are not proof that the kernel clears arbitrary preexisting buffer contents.",
+    "Normalized bytes substitute scenario-local role tokens in the three header port-name fields. Remaining observed header and body bytes are unmodified. These are not actual task port names.",
+    "For sends shorter than a header, normalized_bytes records the complete initialized 24-byte header for inspection; send_size remains the actual argument passed to Mach.",
+    "Receive normalized_storage_prefix_64_bytes is a snapshot of owned storage, not a claim that all 64 bytes were written by the kernel. Structured trailers are included only when their observed size and declared capacity establish their presence.",
+    "Port-state fields are meaningful only when their associated query status succeeds. A null queue_count_after means no receive queue could be inspected for that name.",
+    "The oracle is compiled from this repository's C source and calls installed Mach APIs. It does not import or execute Absolute's IPC implementation.",
+    "The reference is for this host/kernel/SDK build and tested sizes/dispositions. It is not a complete Mach specification or evidence of native macOS application compatibility."
+  ],
+  "oracle": {
+    "abi": {
+      "default_trailer_header_bytes": 8,
+      "header_bytes": 24,
+      "payload_bytes": 16,
+      "physical_buffer_bytes": 256,
+      "port_name_bytes": 4,
+      "port_offsets": [
+        8,
+        12,
+        16
+      ]
+    },
+    "check_count": 211,
+    "constants": {
+      "KERN_INVALID_NAME": 15,
+      "KERN_INVALID_RIGHT": 17,
+      "KERN_SUCCESS": 0,
+      "MACH_MSG_SUCCESS": 0,
+      "MACH_MSG_TRAILER_FORMAT_0": 0,
+      "MACH_MSG_TYPE_COPY_SEND": 19,
+      "MACH_MSG_TYPE_MAKE_SEND": 20,
+      "MACH_MSG_TYPE_MOVE_SEND": 17,
+      "MACH_MSG_TYPE_PORT_SEND": 17,
+      "MACH_PORT_QLIMIT_DEFAULT": 5,
+      "MACH_PORT_TYPE_DEAD_NAME": 1048576,
+      "MACH_PORT_TYPE_RECEIVE": 131072,
+      "MACH_PORT_TYPE_SEND": 65536,
+      "MACH_RCV_INVALID_NAME": 268451842,
+      "MACH_RCV_LARGE": 4,
+      "MACH_RCV_MSG": 2,
+      "MACH_RCV_TIMED_OUT": 268451843,
+      "MACH_RCV_TIMEOUT": 256,
+      "MACH_RCV_TOO_LARGE": 268451844,
+      "MACH_SEND_INVALID_DEST": 268435459,
+      "MACH_SEND_INVALID_HEADER": 268435472,
+      "MACH_SEND_INVALID_RIGHT": 268435466,
+      "MACH_SEND_MSG": 1,
+      "MACH_SEND_MSG_TOO_SMALL": 268435464,
+      "MACH_SEND_TIMED_OUT": 268435460,
+      "MACH_SEND_TIMEOUT": 16
+    },
+    "normalization": "Port-name words use scenario-local role tokens; all other header and payload bytes are preserved. Token 0 is null and token 4294967295 is the dead-name sentinel.",
+    "passed": true,
+    "scenario_count": 23,
+    "scenarios": [
+      {
+        "check_count": 11,
+        "name": "copy_send_inline",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "label": "before_send",
+            "operation": "port_state",
+            "sequence": 4,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565313,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001004d41010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565313,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001004d41010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "inline_message",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 5,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 6
+          },
+          {
+            "label": "after_send",
+            "operation": "port_state",
+            "sequence": 7,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "send_reference_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "capacity": 256,
+            "label": "inline_message",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565313,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000001004d41010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000001004d41010003020504070609080b0a0d0c0f0e000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 9,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "receive_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "inline_bytes_preserved",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "name": "zero_reply_and_voucher",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          },
+          {
+            "name": "received_header_dispositions",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "label": "after_receive",
+            "operation": "port_state",
+            "sequence": 14,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 15,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 17
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 18,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 19
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 9,
+        "name": "move_send_inline",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "label": "before_send",
+            "operation": "port_state",
+            "sequence": 4,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "after": {
+              "bits": 17,
+              "id": 1095565313,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "110000002800000001000000000000000000000001004d41010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 17,
+              "id": 1095565313,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "110000002800000001000000000000000000000001004d41010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "inline_message",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 5,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 6
+          },
+          {
+            "label": "after_send",
+            "operation": "port_state",
+            "sequence": 7,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 0,
+              "send_refs_status": 0,
+              "type": 131072,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "send_reference_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "capacity": 256,
+            "label": "inline_message",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565313,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000001004d41010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000001004d41010003020504070609080b0a0d0c0f0e000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 9,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "receive_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "inline_bytes_preserved",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "name": "zero_reply_and_voucher",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          },
+          {
+            "name": "received_header_dispositions",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "label": "after_receive",
+            "operation": "port_state",
+            "sequence": 14,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 0,
+              "send_refs_status": 0,
+              "type": 131072,
+              "type_status": 0
+            }
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 15,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 20,
+        "name": "queue_limit_fifo_and_move_timeout",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "limit": 2,
+            "operation": "set_queue_limit",
+            "role": "destination",
+            "sequence": 4,
+            "status": 0
+          },
+          {
+            "name": "queue_limit_set",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "queue_fill",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 6,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "queued_message_sent",
+            "operation": "check",
+            "passed": true,
+            "sequence": 7
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000280000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000280000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "queue_fill",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 8,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "queued_message_sent",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "label": "full_queue_before_move",
+            "operation": "port_state",
+            "sequence": 10,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 2,
+              "queue_limit": 2,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "after": {
+              "bits": 17,
+              "id": 3,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000280000000100000000000000000000000300000003020100070605040b0a09080f0e0d0c",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 17,
+              "id": 3,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000280000000100000000000000000000000300000003020100070605040b0a09080f0e0d0c",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "move_on_full_queue",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 11,
+            "status": 268435460,
+            "timeout_ms": 0
+          },
+          {
+            "name": "full_queue_times_out",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          },
+          {
+            "label": "after_move_timeout",
+            "operation": "port_state",
+            "sequence": 13,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 2,
+              "queue_limit": 2,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "move_timeout_restores_send_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 14
+          },
+          {
+            "name": "failed_send_did_not_queue",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "after": {
+              "bits": 17,
+              "id": 4,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000280000000100000000000000000000000400000004050607000102030c0d0e0f08090a0b",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 4,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000280000000100000000000000000000000400000004050607000102030c0d0e0f08090a0b",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "copy_on_full_queue",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 16,
+            "status": 268435460,
+            "timeout_ms": 0
+          },
+          {
+            "name": "copy_on_full_queue_times_out",
+            "operation": "check",
+            "passed": true,
+            "sequence": 17
+          },
+          {
+            "label": "after_copy_timeout",
+            "operation": "port_state",
+            "sequence": 18,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 2,
+              "queue_limit": 2,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 2,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "copy_timeout_returns_additional_send_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 19
+          },
+          {
+            "name": "copy_timeout_rewrites_remote_disposition",
+            "operation": "check",
+            "passed": true,
+            "sequence": 20
+          },
+          {
+            "capacity": 256,
+            "label": "fifo_drain",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000001000000010003020504070609080b0a0d0c0f0e000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 1,
+            "role": "destination",
+            "sequence": 21,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "fifo_message_id",
+            "operation": "check",
+            "passed": true,
+            "sequence": 22
+          },
+          {
+            "capacity": 256,
+            "label": "fifo_drain",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 2,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "00110000280000000000000001000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00110000280000000000000001000000000000000200000002030001060704050a0b08090e0f0c0d000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 23,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "fifo_message_id",
+            "operation": "check",
+            "passed": true,
+            "sequence": 24
+          },
+          {
+            "after": {
+              "bits": 17,
+              "id": 4,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000280000000100000000000000000000000400000004050607000102030c0d0e0f08090a0b",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 17,
+              "id": 4,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000280000000100000000000000000000000400000004050607000102030c0d0e0f08090a0b",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "retry_returned_copy_right",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 25,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "returned_move_header_can_retry",
+            "operation": "check",
+            "passed": true,
+            "sequence": 26
+          },
+          {
+            "label": "after_returned_right_retry",
+            "operation": "port_state",
+            "sequence": 27,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 2,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "retry_consumes_only_returned_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 28
+          },
+          {
+            "capacity": 256,
+            "label": "receive_retried_message",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 4,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "00110000280000000000000001000000000000000400000004050607000102030c0d0e0f08090a0b",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00110000280000000000000001000000000000000400000004050607000102030c0d0e0f08090a0b000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 29,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "retried_payload_received",
+            "operation": "check",
+            "passed": true,
+            "sequence": 30
+          },
+          {
+            "capacity": 256,
+            "label": "empty_queue",
+            "large": false,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000000000000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 0,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 31,
+            "status": 268451843,
+            "timeout_ms": 0
+          },
+          {
+            "name": "empty_receive_times_out",
+            "operation": "check",
+            "passed": true,
+            "sequence": 32
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 33,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 34
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 35
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 36,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 37
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 14,
+        "name": "queue_full_header_size_differs_from_send_argument",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "limit": 1,
+            "operation": "set_queue_limit",
+            "role": "destination",
+            "sequence": 4,
+            "status": 0
+          },
+          {
+            "name": "queue_limit_set",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "fill_queue",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 6,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "queue_filled",
+            "operation": "check",
+            "passed": true,
+            "sequence": 7
+          },
+          {
+            "after": {
+              "bits": 17,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000280000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000180000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "label": "mismatched_copy_timeout",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 8,
+            "status": 268435460,
+            "timeout_ms": 0
+          },
+          {
+            "name": "mismatched_copy_times_out",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "label": "after_mismatched_copy_timeout",
+            "operation": "port_state",
+            "sequence": 10,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 1,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 2,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "copy_error_reports_send_argument_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "after": {
+              "bits": 17,
+              "id": 3,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000280000000100000000000000000000000300000003020100070605040b0a09080f0e0d0c",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 17,
+              "id": 3,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "11000000180000000100000000000000000000000300000003020100070605040b0a09080f0e0d0c",
+              "remote_disposition": 17,
+              "remote_role": "destination",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "label": "mismatched_move_timeout",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 12,
+            "status": 268435460,
+            "timeout_ms": 0
+          },
+          {
+            "name": "mismatched_move_times_out",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "label": "after_mismatched_move_timeout",
+            "operation": "port_state",
+            "sequence": 14,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 1,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 2,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "move_error_reports_send_argument_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "name": "failed_sends_preserve_queue",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "capacity": 256,
+            "label": "drain_original",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000001000000010003020504070609080b0a0d0c0f0e000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 17,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "queued_original_drained",
+            "operation": "check",
+            "passed": true,
+            "sequence": 18
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 19,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 20
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 21
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 22,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 23
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 24,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 25
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 11,
+        "name": "receive_capacity_24_large_false",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 24,
+            "label": "bounded_receive",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100001800000000000000010000000000000010004d41",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100001800000000000000010000000000000010004d4100000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 7,
+            "status": 268451844,
+            "timeout_ms": 0
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "too_large_reported_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "too_large_minimal_trailer_capacity",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "too_large_queue_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "capacity": 256,
+            "label": "retry_with_room",
+            "large": false,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000000000000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 0,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 12,
+            "status": 268451843,
+            "timeout_ms": 0
+          },
+          {
+            "name": "large_option_preserves_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 17,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 18
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 11,
+        "name": "receive_capacity_24_large_true",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 24,
+            "label": "bounded_receive",
+            "large": true,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000002800000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000280000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 1,
+            "role": "destination",
+            "sequence": 7,
+            "status": 268451844,
+            "timeout_ms": 0
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "too_large_reported_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "too_large_minimal_trailer_capacity",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "too_large_queue_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "capacity": 256,
+            "label": "retry_with_room",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 12,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "large_option_preserves_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 17,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 18
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 11,
+        "name": "receive_capacity_32_large_false",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 32,
+            "label": "bounded_receive",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100001800000000000000010000000000000010004d41",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100001800000000000000010000000000000010004d4100000000080000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 7,
+            "status": 268451844,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 24,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "too_large_reported_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "too_large_minimal_trailer_capacity",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "too_large_queue_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "capacity": 256,
+            "label": "retry_with_room",
+            "large": false,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000000000000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 0,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 12,
+            "status": 268451843,
+            "timeout_ms": 0
+          },
+          {
+            "name": "large_option_preserves_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 17,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 18
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 11,
+        "name": "receive_capacity_32_large_true",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 32,
+            "label": "bounded_receive",
+            "large": true,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000002800000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000280000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 1,
+            "role": "destination",
+            "sequence": 7,
+            "status": 268451844,
+            "timeout_ms": 0
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "too_large_reported_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "too_large_minimal_trailer_capacity",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "too_large_queue_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "capacity": 256,
+            "label": "retry_with_room",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 12,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "large_option_preserves_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 17,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 18
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 11,
+        "name": "receive_capacity_40_large_false",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 40,
+            "label": "bounded_receive",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100001800000000000000010000000000000010004d41",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100001800000000000000010000000000000010004d4100000000080000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 7,
+            "status": 268451844,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 24,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "too_large_reported_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "too_large_minimal_trailer_capacity",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "too_large_queue_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "capacity": 256,
+            "label": "retry_with_room",
+            "large": false,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000000000000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 0,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 12,
+            "status": 268451843,
+            "timeout_ms": 0
+          },
+          {
+            "name": "large_option_preserves_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 17,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 18
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 11,
+        "name": "receive_capacity_40_large_true",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 40,
+            "label": "bounded_receive",
+            "large": true,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000002800000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000280000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 1,
+            "role": "destination",
+            "sequence": 7,
+            "status": 268451844,
+            "timeout_ms": 0
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "too_large_reported_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "too_large_minimal_trailer_capacity",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "name": "too_large_queue_effect",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "capacity": 256,
+            "label": "retry_with_room",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 12,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "large_option_preserves_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 16
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 17,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 18
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 8,
+        "name": "receive_capacity_48_large_false",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 48,
+            "label": "bounded_receive",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 7,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "successful_receive_consumes_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 10,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 13,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 14
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 8,
+        "name": "receive_capacity_48_large_true",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1095565328,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "before_bounded_receive",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "initial_send_succeeded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "before_bounded_receive",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 1,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "capacity": 48,
+            "label": "bounded_receive",
+            "large": true,
+            "message": {
+              "bits": 4352,
+              "id": 1095565328,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100002800000000000000010000000000000010004d41101112131415161718191a1b1c1d1e1f000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 7,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "capacity_includes_default_trailer",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "successful_receive_consumes_message",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 10,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 13,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 14
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 4,
+        "name": "copy_send_on_receive_only_name",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "label": "before_invalid_send",
+            "operation": "port_state",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 0,
+              "send_refs_status": 0,
+              "type": 131072,
+              "type_status": 0
+            }
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "receive_only_destination",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 3,
+            "status": 268435459,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_without_send_right_fails",
+            "operation": "check",
+            "passed": true,
+            "sequence": 4
+          },
+          {
+            "label": "after_invalid_send",
+            "operation": "port_state",
+            "sequence": 5,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 0,
+              "send_refs_status": 0,
+              "type": 131072,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "invalid_send_did_not_queue",
+            "operation": "check",
+            "passed": true,
+            "sequence": 6
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 7,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 8,
+        "name": "receive_destruction_and_dead_send_name",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "queued_message",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "queued_before_destruction",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "operation": "destroy_receive_right",
+            "role": "destination",
+            "sequence": 6,
+            "status": 0
+          },
+          {
+            "name": "receive_right_destroyed",
+            "operation": "check",
+            "passed": true,
+            "sequence": 7
+          },
+          {
+            "label": "after_receive_destruction",
+            "operation": "port_state",
+            "sequence": 8,
+            "state": {
+              "dead_refs": 1,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 0,
+              "queue_status": 15,
+              "receive_refs": 0,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 0,
+              "send_refs_status": 0,
+              "type": 1048576,
+              "type_status": 0
+            }
+          },
+          {
+            "name": "send_name_became_dead",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000280000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000280000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "dead_destination",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 10,
+            "status": 268435459,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_to_dead_name_fails",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          },
+          {
+            "capacity": 256,
+            "label": "dead_receive",
+            "large": false,
+            "message": {
+              "bits": 0,
+              "id": 0,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000000000000000000000000000000000000000000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 0,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": null,
+            "role": "destination",
+            "sequence": 12,
+            "status": 268451842,
+            "timeout_ms": 0
+          },
+          {
+            "name": "receive_from_dead_name_fails",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "release_dead_name",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "dead_name_released",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          },
+          {
+            "label": "after_dead_name_release",
+            "operation": "port_state",
+            "sequence": 16,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 15,
+              "queue_count": 0,
+              "queue_limit": 0,
+              "queue_status": 15,
+              "receive_refs": 0,
+              "receive_refs_status": 15,
+              "role": "destination",
+              "send_refs": 0,
+              "send_refs_status": 15,
+              "type": 0,
+              "type_status": 15
+            }
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 9,
+        "name": "bounded_size_validation",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000002800000001000000000000000000000001000000",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "smaller_than_header",
+            "operation": "send",
+            "send_size": 20,
+            "sequence": 4,
+            "status": 268435464,
+            "timeout_ms": 0
+          },
+          {
+            "name": "undersized_header_rejected",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "name": "undersized_send_did_not_queue",
+            "operation": "check",
+            "passed": true,
+            "sequence": 6
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000180000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 2,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000180000000100000000000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "label": "header_size_differs_from_send_argument",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 7,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "size_argument_message_sent",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "capacity": 256,
+            "label": "argument_sized_message",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 2,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "00110000280000000000000001000000000000000200000002030001060704050a0b08090e0f0c0d",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00110000280000000000000001000000000000000200000002030001060704050a0b08090e0f0c0d000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 9,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "send_argument_determines_received_size",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 11,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 13
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 14,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 15
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 7,
+        "name": "send_size_24",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 24,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000001800000001000000000000000000000018000000",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 24,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000001800000001000000000000000000000018000000",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "label": "declared_send_size",
+            "operation": "send",
+            "send_size": 24,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_size_alignment_outcome",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "capacity": 256,
+            "label": "declared_size_receive",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 24,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100001800000000000000010000000000000018000000",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 24,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00110000180000000000000001000000000000001800000000000000080000000000000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 6,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 24,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "admitted_size_preserved",
+            "operation": "check",
+            "passed": true,
+            "sequence": 7
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 8,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 11,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 7,
+        "name": "send_size_25",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 25,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000190000000100000000000000000000001900000019",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 25,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 25,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000190000000100000000000000000000001900000019",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 25,
+              "voucher_role": "null"
+            },
+            "label": "declared_send_size",
+            "operation": "send",
+            "send_size": 25,
+            "sequence": 4,
+            "status": 268435464,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_size_alignment_outcome",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "name": "rejected_size_did_not_queue",
+            "operation": "check",
+            "passed": true,
+            "sequence": 6
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 7,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 10,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 7,
+        "name": "send_size_27",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 27,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000001b0000000100000000000000000000001b0000001b1a19",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 27,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 27,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000001b0000000100000000000000000000001b0000001b1a19",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 27,
+              "voucher_role": "null"
+            },
+            "label": "declared_send_size",
+            "operation": "send",
+            "send_size": 27,
+            "sequence": 4,
+            "status": 268435464,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_size_alignment_outcome",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "name": "rejected_size_did_not_queue",
+            "operation": "check",
+            "passed": true,
+            "sequence": 6
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 7,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 10,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 7,
+        "name": "send_size_28",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 28,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000001c0000000100000000000000000000001c0000001c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 28,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 28,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "130000001c0000000100000000000000000000001c0000001c1d1e1f",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 28,
+              "voucher_role": "null"
+            },
+            "label": "declared_send_size",
+            "operation": "send",
+            "send_size": 28,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_size_alignment_outcome",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "capacity": 256,
+            "label": "declared_size_receive",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 28,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "001100001c0000000000000001000000000000001c0000001c1d1e1f",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 28,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "001100001c0000000000000001000000000000001c0000001c1d1e1f000000000800000000000000000000000000000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 6,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 28,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "admitted_size_preserved",
+            "operation": "check",
+            "passed": true,
+            "sequence": 7
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 8,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 11,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 7,
+        "name": "send_size_39",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 39,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000270000000100000000000000000000002700000027262524232221202f2e2d2c2b2a29",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 39,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 39,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000270000000100000000000000000000002700000027262524232221202f2e2d2c2b2a29",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 39,
+              "voucher_role": "null"
+            },
+            "label": "declared_send_size",
+            "operation": "send",
+            "send_size": 39,
+            "sequence": 4,
+            "status": 268435464,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_size_alignment_outcome",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "name": "rejected_size_did_not_queue",
+            "operation": "check",
+            "passed": true,
+            "sequence": 6
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 7,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 10,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 7,
+        "name": "send_size_40",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 19,
+              "id": 40,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000280000000100000000000000000000002800000028292a2b2c2d2e2f2021222324252627",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 19,
+              "id": 40,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "13000000280000000100000000000000000000002800000028292a2b2c2d2e2f2021222324252627",
+              "remote_disposition": 19,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "declared_send_size",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 0,
+            "timeout_ms": 0
+          },
+          {
+            "name": "send_size_alignment_outcome",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "capacity": 256,
+            "label": "declared_size_receive",
+            "large": false,
+            "message": {
+              "bits": 4352,
+              "id": 40,
+              "local_disposition": 17,
+              "local_role": "destination",
+              "normalized_bytes": "00110000280000000000000001000000000000002800000028292a2b2c2d2e2f2021222324252627",
+              "remote_disposition": 0,
+              "remote_role": "null",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "normalized_storage_prefix_64_bytes": "00110000280000000000000001000000000000002800000028292a2b2c2d2e2f2021222324252627000000000800000000000000000000000000000000000000",
+            "operation": "receive",
+            "queue_count_after": 0,
+            "role": "destination",
+            "sequence": 6,
+            "status": 0,
+            "timeout_ms": 0,
+            "trailer": {
+              "bytes": "0000000008000000",
+              "offset": 40,
+              "size": 8,
+              "type": 0
+            }
+          },
+          {
+            "name": "admitted_size_preserved",
+            "operation": "check",
+            "passed": true,
+            "sequence": 7
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 8,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 10
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 11,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 12
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 6,
+        "name": "remote_disposition_0",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 0,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 0,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 0,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "000000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 0,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "unsupported_remote_disposition",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 268435472,
+            "timeout_ms": 0
+          },
+          {
+            "name": "unsupported_remote_disposition_rejected",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "after_invalid_disposition",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 7,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 10,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          }
+        ],
+        "passed": true
+      },
+      {
+        "check_count": 6,
+        "name": "remote_disposition_16",
+        "operations": [
+          {
+            "operation": "allocate_receive",
+            "role": "destination",
+            "sequence": 0,
+            "status": 0,
+            "token": 1
+          },
+          {
+            "name": "receive_right_allocated",
+            "operation": "check",
+            "passed": true,
+            "sequence": 1
+          },
+          {
+            "operation": "insert_make_send",
+            "role": "destination",
+            "sequence": 2,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            },
+            "status": 0
+          },
+          {
+            "name": "send_right_inserted",
+            "operation": "check",
+            "passed": true,
+            "sequence": 3
+          },
+          {
+            "after": {
+              "bits": 16,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "100000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 16,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "before": {
+              "bits": 16,
+              "id": 1,
+              "local_disposition": 0,
+              "local_role": "null",
+              "normalized_bytes": "100000002800000001000000000000000000000001000000010003020504070609080b0a0d0c0f0e",
+              "remote_disposition": 16,
+              "remote_role": "destination",
+              "size": 40,
+              "voucher_role": "null"
+            },
+            "label": "unsupported_remote_disposition",
+            "operation": "send",
+            "send_size": 40,
+            "sequence": 4,
+            "status": 268435472,
+            "timeout_ms": 0
+          },
+          {
+            "name": "unsupported_remote_disposition_rejected",
+            "operation": "check",
+            "passed": true,
+            "sequence": 5
+          },
+          {
+            "label": "after_invalid_disposition",
+            "operation": "port_state",
+            "sequence": 6,
+            "state": {
+              "dead_refs": 0,
+              "dead_refs_status": 0,
+              "queue_count": 0,
+              "queue_limit": 5,
+              "queue_status": 0,
+              "receive_refs": 1,
+              "receive_refs_status": 0,
+              "role": "destination",
+              "send_refs": 1,
+              "send_refs_status": 0,
+              "type": 196608,
+              "type_status": 0
+            }
+          },
+          {
+            "operation": "cleanup_receive_right",
+            "role": "destination",
+            "sequence": 7,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_receive_right",
+            "operation": "check",
+            "passed": true,
+            "sequence": 8
+          },
+          {
+            "name": "cleanup_reference_count_bounded",
+            "operation": "check",
+            "passed": true,
+            "sequence": 9
+          },
+          {
+            "operation": "cleanup_name_reference",
+            "role": "destination",
+            "sequence": 10,
+            "status": 0
+          },
+          {
+            "name": "cleanup_owned_name_reference",
+            "operation": "check",
+            "passed": true,
+            "sequence": 11
+          }
+        ],
+        "passed": true
+      }
+    ],
+    "schema": 1
+  },
+  "provenance": {
+    "binary": {
+      "file": "mach-message-probe",
+      "sha256": "2f058453ecdc3ce35c3f5e102b8ba0aec87e4aa37764ea8f709099128a4d8fce"
+    },
+    "capture": "research/local/mach-messages/20261014T082933188957Z",
+    "compiler": {
+      "command": [
+        "xcrun",
+        "clang",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-O2",
+        "-isysroot",
+        "<sdk>",
+        "<capture>/research_mach_messages.c",
+        "-o",
+        "<capture>/mach-message-probe"
+      ],
+      "version": "Apple clang version 21.0.0 (clang-2100.3.30.1)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode-beta.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+    },
+    "headers": [
+      {
+        "file": "usr/include/mach/message.h",
+        "sha256": "86e9e87ba2a736236613f2c0a8563dbacaeec1a761654b12812eaf8599b55e67"
+      },
+      {
+        "file": "usr/include/mach/port.h",
+        "sha256": "959cc098bb307ccc44a2193a9ff7b8ec8bbcedc335933512cdbe13d3c9088185"
+      },
+      {
+        "file": "usr/include/mach/mach_port.h",
+        "sha256": "c088bfd374e15020d6c0eadc43031d06a8fb05bfa5d1b1828d65d28618717a0f"
+      },
+      {
+        "file": "usr/include/mach/kern_return.h",
+        "sha256": "2d4b89f7cf91cf7bffafe457cdba8884c3f2e5596a9ef7d5e4a9ea4b239558d8"
+      }
+    ],
+    "host": {
+      "build": "26A5421a",
+      "kernel": "Darwin Kernel Version 27.0.0: Tue Aug 11 22:01:56 PDT 2026; root:xnu-13432.1.9~3/RELEASE_ARM64_T6031",
+      "version": "27.0"
+    },
+    "runs": [
+      {
+        "bytes": 76483,
+        "exit_code": 0,
+        "file": "runtime-1.json",
+        "sha256": "0533fd8681f1d68e0e3cb8973d2856e2023ae5892fe945afb4114cbd1d64d088"
+      },
+      {
+        "bytes": 76483,
+        "exit_code": 0,
+        "file": "runtime-2.json",
+        "sha256": "0533fd8681f1d68e0e3cb8973d2856e2023ae5892fe945afb4114cbd1d64d088"
+      }
+    ],
+    "script": {
+      "file": "script/research_mach_messages.py",
+      "sha256": "bbbcc6fe35c49ad9d64db4cca2d6967e2ecb2930edd5512901da57d5d53f0a07"
+    },
+    "sdk": {
+      "name": "macosx27.0",
+      "settings_sha256": "dc95454ae84e0d194bc755e3e5a352d615237ae6788fbc77e61829afae56ac08",
+      "version": "27.0"
+    },
+    "source": {
+      "file": "script/research_mach_messages.c",
+      "sha256": "3a7b1aed80a50fbfd55720f57505e544bf3989f0bb564fff5c642e606de78718"
+    }
+  },
+  "repeatability": {
+    "all_checks_passed": true,
+    "identical": true,
+    "runs": 2
+  },
+  "schema": 1
+}

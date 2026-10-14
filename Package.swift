@@ -3,12 +3,15 @@ import PackageDescription
 
 var products: [Product] = [
     .library(name: "AbsoluteCore", targets: ["AbsoluteCore"]),
+    .library(name: "AbsoluteMach", targets: ["AbsoluteMach"]),
     .executable(name: "absolute", targets: ["AbsoluteCLI"])
 ]
 var targets: [Target] = [
     .target(name: "AbsoluteCore"),
-    .executableTarget(name: "AbsoluteCLI", dependencies: ["AbsoluteCore"]),
-    .testTarget(name: "AbsoluteCoreTests", dependencies: ["AbsoluteCore"])
+    .target(name: "AbsoluteMach"),
+    .executableTarget(name: "AbsoluteCLI", dependencies: ["AbsoluteCore", "AbsoluteMach"]),
+    .testTarget(name: "AbsoluteCoreTests", dependencies: ["AbsoluteCore"]),
+    .testTarget(name: "AbsoluteMachTests", dependencies: ["AbsoluteMach"], resources: [.copy("Fixtures")])
 ]
 
 #if os(macOS)

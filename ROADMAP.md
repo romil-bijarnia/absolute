@@ -28,6 +28,10 @@ in [research/SYSTEM-COVERAGE.md](research/SYSTEM-COVERAGE.md) and
 Initial inventories now support targeted native-code and runtime investigations.
 The first resulting compatibility change preserves symbolic-link traversal
 through file services, CLI paths, navigation and saved sessions.
+A subsequent `AbsoluteMach` component implements a measured in-process inline
+message subset and matches an independent native oracle on macOS and Linux.
+Cross-process transport, broader rights transfer and binary trapping remain
+open; see [research/MACH-COMPATIBILITY.md](research/MACH-COMPATIBILITY.md).
 
 For each component, choose a bounded question, observe it, and write an
 interaction contract with an executable check. Begin with Dock activation,

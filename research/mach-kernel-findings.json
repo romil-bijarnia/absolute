@@ -1,0 +1,769 @@
+{
+  "capturedAt": "2026-10-14T08:25:08.376022+00:00",
+  "coverage": {
+    "canonicalReaFunctionDossiersAdded": 0,
+    "functionStartSpansDisassembled": 6,
+    "kernelBytesExecuted": false,
+    "liveKernelAttached": false,
+    "scalarDataBytesInspected": 24,
+    "selectedCodeBytes": 3944,
+    "selectedInstructionSlots": 986,
+    "unreviewedDirectEdgeTargetCount": 24,
+    "unreviewedDirectEdgeTargets": [
+      "0xfffffe000730d494",
+      "0xfffffe000732ff68",
+      "0xfffffe0007330618",
+      "0xfffffe0007331368",
+      "0xfffffe0007331a0c",
+      "0xfffffe0007331b20",
+      "0xfffffe0007331ee4",
+      "0xfffffe0007332488",
+      "0xfffffe0007333810",
+      "0xfffffe00073372b0",
+      "0xfffffe00073388a8",
+      "0xfffffe0007338d94",
+      "0xfffffe000733b7a4",
+      "0xfffffe0007349428",
+      "0xfffffe00073633d4",
+      "0xfffffe0007379d50",
+      "0xfffffe00073e448c",
+      "0xfffffe00073ede84",
+      "0xfffffe0007400cf8",
+      "0xfffffe0007c94074",
+      "0xfffffe0007c942dc",
+      "0xfffffe0007cac5b0",
+      "0xfffffe0007cb2170",
+      "0xfffffe0007cb2320"
+    ]
+  },
+  "dispositionTable": {
+    "address": "0xfffffe0007008ab0",
+    "addressProducer": "0xfffffe0007336290",
+    "byteCount": 24,
+    "entryWidthBytes": 4,
+    "fileOffset": 19120,
+    "inputCodes": [
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "localBytes": "research/local/mach-kernel/disposition-table.bin",
+    "outputCodes": [
+      16,
+      17,
+      18,
+      17,
+      17,
+      18
+    ],
+    "segment": "__TEXT",
+    "sha256": "66914d12635830874f0e971ea3d36a0bb90474061335499d64b829647c75cf0d"
+  },
+  "evidenceId": "absolute-mach-kernel-sha256:cc47181b49576241ee81bd1a0c1335bb8c95f4749b6c96d80ba8725ddba3fc48",
+  "evidenceType": "static-kernel-binary-and-sdk-observation",
+  "findings": [
+    {
+      "claim": "The exported kernel-origin send API and its immediate callees have a different header representation from the user API: the local SDK specifies 32 kernel bytes and 24 user bytes.",
+      "id": "KMSG-001",
+      "kind": "artifact-observation-and-sdk-declaration",
+      "limit": "Kernel-origin results cannot substitute for user mach_msg2 trap behavior.",
+      "locations": [
+        "0xfffffe0007364938",
+        "0xfffffe0007335f80"
+      ]
+    },
+    {
+      "claim": "The wrapper has ordered copy, header/disposition, and dispatch stages. It returns a nonzero first-stage status directly, invokes an early cleanup after second-stage failure, and a different cleanup after dispatch failure.",
+      "id": "KMSG-002",
+      "kind": "static-control-flow-inference",
+      "limit": "Stage labels describe inferred roles, not recovered private names or complete ownership semantics.",
+      "locations": [
+        "0xfffffe0007364964",
+        "0xfffffe0007364974",
+        "0xfffffe0007364984",
+        "0xfffffe00073649a8",
+        "0xfffffe00073649bc"
+      ]
+    },
+    {
+      "claim": "For a non-complex kernel header, the first stage compares the supplied size against 32 and returns 0x1000000e when it is smaller. A null result from the buffer-producing callee returns 0x1000000d. The local SDK names these MACH_SEND_TOO_LARGE and MACH_SEND_NO_BUFFER.",
+      "id": "KMSG-003",
+      "kind": "static-control-flow-inference",
+      "limit": "This is a trusted kernel-origin path; no malformed input was executed and no userspace size-validation rule follows.",
+      "locations": [
+        "0xfffffe0007335f70",
+        "0xfffffe0007335f98",
+        "0xfffffe0007335fec"
+      ]
+    },
+    {
+      "claim": "The second stage returns 0x10000003 before port-processing calls when its 64-bit destination value is zero or all ones. The local SDK names this MACH_SEND_INVALID_DEST.",
+      "id": "KMSG-004",
+      "kind": "static-control-flow-inference",
+      "limit": "This checks internal pointer sentinel values, not the user's task-local port-name validity.",
+      "locations": [
+        "0xfffffe00073361ec",
+        "0xfffffe0007336210",
+        "0xfffffe000733621c"
+      ]
+    },
+    {
+      "claim": "A six-entry table maps disposition codes 16 through 21 to 16, 17, 18, 17, 17, 18. The header-processing stage uses it for the remote, local, and voucher bit fields; COPY_SEND and MAKE_SEND normalize to the internal send code, and MAKE_SEND_ONCE to the internal send-once code.",
+      "id": "KMSG-005",
+      "kind": "static-data-and-control-flow-inference",
+      "limit": "Normalization alone does not establish that a right is valid, which reference counts change, or how a user receive header is rewritten.",
+      "locations": [
+        "0xfffffe0007008ab0",
+        "0xfffffe000733628c",
+        "0xfffffe00073362cc",
+        "0xfffffe0007336304"
+      ]
+    },
+    {
+      "claim": "The wrapper supplies option value 0x2000050001 to the first stage. Before dispatch a thread-state bit can remove 0x40000. The low flags correspond in the SDK to MACH_SEND_MSG, MACH_SEND_ALWAYS, and MACH_SEND_NOIMPORTANCE.",
+      "id": "KMSG-006",
+      "kind": "static-instruction-inference",
+      "limit": "The high option bit remains unnamed here, and downstream option changes prevent inferring complete queue or timeout behavior.",
+      "locations": [
+        "0xfffffe000736494c",
+        "0xfffffe0007364990"
+      ]
+    }
+  ],
+  "functions": [
+    {
+      "address": "0xfffffe0007364938",
+      "boundarySource": "LC_FUNCTION_STARTS next entry; half-open range",
+      "byteCount": 156,
+      "carrierSha256": "36fbf1e2a232b44a79d5766c068c3574d623dee27efd8bb0922949fd2e1155ee",
+      "codeSha256": "a1b2b65c730aa18bd8e8a2694166739a163fef070dd9d3730d75a2dbb8337e15",
+      "directEdges": [
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007364964",
+          "target": "0xfffffe0007335f40",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007364974",
+          "target": "0xfffffe000733618c",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007364984",
+          "target": "0xfffffe0007331ff0",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073649a8",
+          "target": "0xfffffe00073366bc",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073649bc",
+          "target": "0xfffffe00073322bc",
+          "targetIsFunctionStart": true
+        }
+      ],
+      "disassemblySha256": "9ee2b8a357c80ab07f8200528d9d697c233209a58ec5c31396093895b701c7b9",
+      "endExclusive": "0xfffffe00073649d4",
+      "exactSymbols": [
+        "_mach_msg_send_from_kernel_proper"
+      ],
+      "fileOffset": 3541304,
+      "inferredRole": "exported-kernel-send-wrapper",
+      "instructionSlots": 39,
+      "interpretationCoverage": "Selected control/data paths; not a complete semantic reconstruction",
+      "localCarrier": "research/local/mach-kernel/send-wrapper.o",
+      "localDisassembly": "research/local/mach-kernel/send-wrapper.txt",
+      "privateRoleIsInferred": false,
+      "section": "__text",
+      "segment": "__TEXT_EXEC"
+    },
+    {
+      "address": "0xfffffe0007335f40",
+      "boundarySource": "LC_FUNCTION_STARTS next entry; half-open range",
+      "byteCount": 588,
+      "carrierSha256": "9102c9a97f8c2efc79baa71f9bcb9df67f4d6c8f3b86c209daf9624e0fc3aefb",
+      "codeSha256": "10a613105f6c61428aac33c37483af426615d2fb844de658dfb948a6e254dd21",
+      "directEdges": [
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007335fc0",
+          "target": "0xfffffe0007331b20",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [
+            "_memcpy",
+            "_memmove"
+          ],
+          "kind": "direct-call",
+          "source": "0xfffffe000733603c",
+          "target": "0xfffffe0007cb2170",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [
+            "_memcpy",
+            "_memmove"
+          ],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336068",
+          "target": "0xfffffe0007cb2170",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe000733615c",
+          "target": "0xfffffe0007331a0c",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336188",
+          "target": "0xfffffe0007c94074",
+          "targetIsFunctionStart": true
+        }
+      ],
+      "disassemblySha256": "0925a008e4068f2d5891fd8160a69194ca4bbc6d4e62d978338f0a9ff4185d2b",
+      "endExclusive": "0xfffffe000733618c",
+      "exactSymbols": [],
+      "fileOffset": 3350336,
+      "inferredRole": "message-copy-stage",
+      "instructionSlots": 147,
+      "interpretationCoverage": "Selected control/data paths; not a complete semantic reconstruction",
+      "localCarrier": "research/local/mach-kernel/callee-fffffe0007335f40.o",
+      "localDisassembly": "research/local/mach-kernel/callee-fffffe0007335f40.txt",
+      "privateRoleIsInferred": true,
+      "section": "__text",
+      "segment": "__TEXT_EXEC"
+    },
+    {
+      "address": "0xfffffe000733618c",
+      "boundarySource": "LC_FUNCTION_STARTS next entry; half-open range",
+      "byteCount": 1328,
+      "carrierSha256": "10407cca08bb93aff5a6c1dbad05911f9f306924610a44ad8e43b87bb0402ca9",
+      "codeSha256": "5d17eda17b780de36813974762ac18e04bd182fb91f198568b78438ddf18b0ab",
+      "directEdges": [
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe000733623c",
+          "target": "0xfffffe0007338d94",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336254",
+          "target": "0xfffffe0007338d94",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336270",
+          "target": "0xfffffe0007338d94",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073363a8",
+          "target": "0xfffffe0007333810",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336540",
+          "target": "0xfffffe0007338d94",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe000733656c",
+          "target": "0xfffffe000732ff68",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073365e8",
+          "target": "0xfffffe0007338d94",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336670",
+          "target": "0xfffffe0007338d94",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe000733669c",
+          "target": "0xfffffe000732ff68",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073366b8",
+          "target": "0xfffffe0007c94074",
+          "targetIsFunctionStart": true
+        }
+      ],
+      "disassemblySha256": "8dcc73736f686ccee258f6486821dbbbf55a49428242beb208a41ca9ad4825bf",
+      "endExclusive": "0xfffffe00073366bc",
+      "exactSymbols": [],
+      "fileOffset": 3350924,
+      "inferredRole": "header-and-disposition-stage",
+      "instructionSlots": 332,
+      "interpretationCoverage": "Selected control/data paths; not a complete semantic reconstruction",
+      "localCarrier": "research/local/mach-kernel/callee-fffffe000733618c.o",
+      "localDisassembly": "research/local/mach-kernel/callee-fffffe000733618c.txt",
+      "privateRoleIsInferred": true,
+      "section": "__text",
+      "segment": "__TEXT_EXEC"
+    },
+    {
+      "address": "0xfffffe0007331ff0",
+      "boundarySource": "LC_FUNCTION_STARTS next entry; half-open range",
+      "byteCount": 168,
+      "carrierSha256": "24326da091d6d580640c915d2c5dac9bdd880527f0bb4116f92d937c9289b2d5",
+      "codeSha256": "5c12df81b1f12b762306d6876686b31f9cf54dacd3983f3a17bb6bec1291b7b9",
+      "directEdges": [
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007332038",
+          "target": "0xfffffe0007331ee4",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [
+            "___bzero",
+            "_bzero"
+          ],
+          "kind": "direct-call",
+          "source": "0xfffffe0007332054",
+          "target": "0xfffffe0007cb2320",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "external-unconditional-branch",
+          "source": "0xfffffe0007332078",
+          "target": "0xfffffe00073e448c",
+          "targetIsFunctionStart": true
+        }
+      ],
+      "disassemblySha256": "b7a9c378b481919fc7a418b21012ce789c4b3d736776bd638e92897f19245b6d",
+      "endExclusive": "0xfffffe0007332098",
+      "exactSymbols": [],
+      "fileOffset": 3334128,
+      "inferredRole": "early-cleanup-stage",
+      "instructionSlots": 42,
+      "interpretationCoverage": "Selected control/data paths; not a complete semantic reconstruction",
+      "localCarrier": "research/local/mach-kernel/callee-fffffe0007331ff0.o",
+      "localDisassembly": "research/local/mach-kernel/callee-fffffe0007331ff0.txt",
+      "privateRoleIsInferred": true,
+      "section": "__text",
+      "segment": "__TEXT_EXEC"
+    },
+    {
+      "address": "0xfffffe00073366bc",
+      "boundarySource": "LC_FUNCTION_STARTS next entry; half-open range",
+      "byteCount": 1244,
+      "carrierSha256": "bacc55029949963c9f9b9a5d0573c53237f379c3270320f14696358c766deea5",
+      "codeSha256": "518ea87d5e6c4ca5424590ee85cb8e17fbd25ca3ce8a5b5d248b60752fba528a",
+      "directEdges": [
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336728",
+          "target": "0xfffffe0007349428",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336734",
+          "target": "0xfffffe000733b7a4",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073367a0",
+          "target": "0xfffffe0007400cf8",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073367f8",
+          "target": "0xfffffe0007330618",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336844",
+          "target": "0xfffffe0007379d50",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe000733689c",
+          "target": "0xfffffe0007332488",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073368b0",
+          "target": "0xfffffe0007379d50",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073368c8",
+          "target": "0xfffffe00073372b0",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073368fc",
+          "target": "0xfffffe0007331368",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336928",
+          "target": "0xfffffe0007379d50",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336930",
+          "target": "0xfffffe0007331368",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336954",
+          "target": "0xfffffe00073322bc",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336994",
+          "target": "0xfffffe0007379d50",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe000733699c",
+          "target": "0xfffffe00073ede84",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073369bc",
+          "target": "0xfffffe00073633d4",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe00073369fc",
+          "target": "0xfffffe0007379d50",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336a04",
+          "target": "0xfffffe00073ede84",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336a24",
+          "target": "0xfffffe00073633d4",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336a74",
+          "target": "0xfffffe0007333810",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336a80",
+          "target": "0xfffffe000733b7a4",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336ad8",
+          "target": "0xfffffe0007c942dc",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336ae8",
+          "target": "0xfffffe0007379d50",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336b08",
+          "target": "0xfffffe0007333810",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336b14",
+          "target": "0xfffffe000733b7a4",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336b44",
+          "target": "0xfffffe0007cac5b0",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007336b50",
+          "target": "0xfffffe00073388a8",
+          "targetIsFunctionStart": true
+        }
+      ],
+      "disassemblySha256": "d0d9d5c4d1e5f423a21fc4ba7b3ba79cc465b506bc8c4aae70aecc8e18764ba7",
+      "endExclusive": "0xfffffe0007336b98",
+      "exactSymbols": [],
+      "fileOffset": 3352252,
+      "inferredRole": "send-dispatch-stage",
+      "instructionSlots": 311,
+      "interpretationCoverage": "Selected control/data paths; not a complete semantic reconstruction",
+      "localCarrier": "research/local/mach-kernel/callee-fffffe00073366bc.o",
+      "localDisassembly": "research/local/mach-kernel/callee-fffffe00073366bc.txt",
+      "privateRoleIsInferred": true,
+      "section": "__text",
+      "segment": "__TEXT_EXEC"
+    },
+    {
+      "address": "0xfffffe00073322bc",
+      "boundarySource": "LC_FUNCTION_STARTS next entry; half-open range",
+      "byteCount": 460,
+      "carrierSha256": "f1426758b62cdea93745ef33e1f793de5a7e65bd7189dfa3c74773323587f8d5",
+      "codeSha256": "ef3dc65193918d6fa9db9fb0101de8ea10bff6edc4c139daab243bcd20a2b7ce",
+      "directEdges": [
+        {
+          "exactTargetSymbols": [
+            "_ptrauth_utils_sign_blob_generic"
+          ],
+          "kind": "direct-call",
+          "source": "0xfffffe000733241c",
+          "target": "0xfffffe000730d494",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [
+            "_ptrauth_utils_sign_blob_generic"
+          ],
+          "kind": "direct-call",
+          "source": "0xfffffe0007332430",
+          "target": "0xfffffe000730d494",
+          "targetIsFunctionStart": true
+        },
+        {
+          "exactTargetSymbols": [],
+          "kind": "direct-call",
+          "source": "0xfffffe0007332470",
+          "target": "0xfffffe0007332488",
+          "targetIsFunctionStart": true
+        }
+      ],
+      "disassemblySha256": "f639005fbde53e89e9195ee1b49e59416ee1414a723e10b6f7aed7bfe24f5d26",
+      "endExclusive": "0xfffffe0007332488",
+      "exactSymbols": [],
+      "fileOffset": 3334844,
+      "inferredRole": "late-cleanup-stage",
+      "instructionSlots": 115,
+      "interpretationCoverage": "Selected control/data paths; not a complete semantic reconstruction",
+      "localCarrier": "research/local/mach-kernel/callee-fffffe00073322bc.o",
+      "localDisassembly": "research/local/mach-kernel/callee-fffffe00073322bc.txt",
+      "privateRoleIsInferred": true,
+      "section": "__text",
+      "segment": "__TEXT_EXEC"
+    }
+  ],
+  "host": {
+    "BuildVersion": "26A5421a",
+    "ProductName": "macOS",
+    "ProductVersion": "27.0"
+  },
+  "kernel": {
+    "addressSpace": "Unslid link-time virtual addresses; installed file, not live kernel memory",
+    "bytes": 17082360,
+    "functionStartTable": {
+      "byteCount": 37848,
+      "entryCount": 22991,
+      "fileOffset": 16709064,
+      "sha256": "6c5fc63313a56f4cc03ecbbacdb1c58b038ea5c3f7ab8c7e28944310d715e1fe"
+    },
+    "headerAndCommandsSha256": "d0fd7c7ffe39f9aa17f67fe483ecfd7fdae631ab492f7e260ea7d220d65ecc13",
+    "path": "/System/Library/Kernels/kernel.release.t6031",
+    "reaMetadata": {
+      "evidenceId": "ev_65909f9a2ed46e58d4594cff09e4521adcb48b65b59faddbdf7cdb6765eb5dc6",
+      "file": "research/local/boot-firmware/kernel.release.t6031.rea-macho.json",
+      "operation": "inspect_macho",
+      "sha256": "47f4c3b6a03b6ab2e7b5e244efc8c15bffa33776a01fc616282b4109fa464cdb"
+    },
+    "sha256": "ca7d17c39aa7a68ef280f3aa84e9d57a7c6be8630fa13d5a891e75db0fb9ae5e",
+    "sourceVersion": "13432.1.9",
+    "symbolTable": {
+      "entriesSha256": "3fa9f6d5110c558d5ea51a8590ee3fb99f53f79e0b582a2e1409bf7ea1237bd8",
+      "entryCount": 6947,
+      "fileOffset": 16746912,
+      "stringsByteCount": 224296,
+      "stringsFileOffset": 16858064,
+      "stringsSha256": "00c1f3ac2365f821062ab632e1849dfe7f03e22c9ecef4e7ffd0746ba6d45c80"
+    },
+    "uuid": "449CB33B-7B1E-3D30-8A86-BF2DCFA4B49F"
+  },
+  "limits": [
+    "Only six selected function-start spans and one 24-byte table were inspected; no complete kernel, Mach subsystem, or user trap implementation was recovered.",
+    "LC_FUNCTION_STARTS gives next-entry extraction bounds, not a proof of complete logical function bodies, cold fragments, or exhaustive function coverage.",
+    "Private callees have no exact symbol names in this retained table. Inferred role labels do not identify original source functions.",
+    "Direct-edge inventory omits conditional cross-function edges, indirect calls, and transitive callees; unreviewed targets remain unresolved.",
+    "The reported instructions come from the installed file at unslid addresses; live patches, relocated memory, scheduling, rights ownership, and runtime results were not observed.",
+    "No kernel code was executed or attached, no protected process was attached, and no installed OS component was changed.",
+    "Prior REA Mach-O metadata is reused by exact digest. New bounded disassembly is from Apple otool and is not a canonical REA function dossier.",
+    "Apple binaries, derived carriers, raw disassembly, and captured SDK headers remain machine-local; public output contains original explanations and identities."
+  ],
+  "schema": 1,
+  "scriptSha256": "db8a47d1831f8f1eeb229b53fd1811361928b86f9813cdbdbdd4952d6391103b",
+  "sdk": {
+    "constants": {
+      "MACH_MSGH_BITS_COMPLEX": 2147483648,
+      "MACH_MSG_TYPE_COPY_SEND": 19,
+      "MACH_MSG_TYPE_MAKE_SEND": 20,
+      "MACH_MSG_TYPE_MAKE_SEND_ONCE": 21,
+      "MACH_MSG_TYPE_MOVE_RECEIVE": 16,
+      "MACH_MSG_TYPE_MOVE_SEND": 17,
+      "MACH_MSG_TYPE_MOVE_SEND_ONCE": 18,
+      "MACH_SEND_ALWAYS": 65536,
+      "MACH_SEND_INVALID_DEST": 268435459,
+      "MACH_SEND_MSG": 1,
+      "MACH_SEND_NOIMPORTANCE": 262144,
+      "MACH_SEND_NO_BUFFER": 268435469,
+      "MACH_SEND_TOO_LARGE": 268435470
+    },
+    "headers": [
+      {
+        "localCapture": "research/local/mach-kernel/sdk-mach-message.h",
+        "path": "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Kernel.framework/Headers/mach/message.h",
+        "sha256": "69b8c70a29c637e08ef4d63cea06fe03f9b27df74269d49b777148558c15afdd"
+      },
+      {
+        "localCapture": "research/local/mach-kernel/sdk-ipc-mig.h",
+        "path": "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/Kernel.framework/Headers/kern/ipc_mig.h",
+        "sha256": "4328cc76b0ed25f1b9b501fa87b9ba00878e7c4c36e4dd6f70642f04f4dd8ae6"
+      }
+    ],
+    "kernelHeaderBytes": 32,
+    "kernelSendArgumentNames": [
+      "msg",
+      "send_size"
+    ],
+    "limit": "SDK declarations are independent evidence; no source-version equivalence is asserted",
+    "path": "/Applications/Xcode-beta.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+    "userHeaderBytes": 24
+  },
+  "status": "partial",
+  "symbolSearch": {
+    "capture": "research/local/mach-kernel/kernel-symbols.txt",
+    "exactNamePresent": {
+      "_ipc_kmsg_copyin": false,
+      "_ipc_kmsg_get": false,
+      "_ipc_kmsg_send": false,
+      "_ipc_mqueue_send": false,
+      "_mach_msg2_trap": false,
+      "_mach_msg_overwrite_trap": false,
+      "_mach_msg_trap": false
+    },
+    "limit": "Absent names in this retained symbol table do not establish absent code or an identified user trap",
+    "matches": [
+      {
+        "address": "0xfffffe0007008aac",
+        "name": "_ipc_mqueue_full"
+      },
+      {
+        "address": "0xfffffe0007364c40",
+        "name": "_kernel_mach_msg_send_with_builder"
+      },
+      {
+        "address": "0xfffffe0007365124",
+        "name": "_mach_msg_destroy_from_kernel_proper"
+      },
+      {
+        "address": "0xfffffe000734d074",
+        "name": "_mach_msg_filter_register_callback"
+      },
+      {
+        "address": "0xfffffe00073650a8",
+        "name": "_mach_msg_rpc_from_kernel_proper"
+      },
+      {
+        "address": "0xfffffe0007364938",
+        "name": "_mach_msg_send_from_kernel_proper"
+      }
+    ],
+    "pattern": "mach_msg|ipc_kmsg|ipc_mqueue",
+    "sha256": "c7c647c6d874a62d07baef4e0659be92724bd3da3422cd7fd6c78028cca8d542",
+    "symbolAddressPairsVerifiedAgainstBinary": 6947
+  }
+}

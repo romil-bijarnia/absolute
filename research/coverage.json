@@ -4,7 +4,7 @@
   "inputs": [
     {
       "file": "scope.json",
-      "sha256": "3898505bde960c3f4a2a820c217daacaa229f65077cbce34e2190f36795fc0de"
+      "sha256": "584a76a017ecda08fc061722ba85ca07d87c7ac89ee2f4b3225fcfbabd238269"
     },
     {
       "file": "system-inventory.json",
@@ -36,7 +36,19 @@
     },
     {
       "file": "implementation-verification.json",
-      "sha256": "a553012ddf86d5bda77420351d462ec3fb740aa5844401e7807cb18bcdba5619"
+      "sha256": "7b73d3df098de55de222ca4c7c5bc4e94bc1ed35df5d564d7665407fb4067d48"
+    },
+    {
+      "file": "mach-message-findings.json",
+      "sha256": "b50ec14db6cce9dcddcce1b42a52144919af61480539255c02cbab21ef43b5cf"
+    },
+    {
+      "file": "mach-kernel-findings.json",
+      "sha256": "f88b0f78d3d475fa91060478cf53d3ea8282f4aafd0931c1a5d5dd5205a487a5"
+    },
+    {
+      "file": "mach-compatibility.json",
+      "sha256": "bc763d0c1b9e23995580aff3db6bf1dc585b90a9af5e2fc57bb6494c2d2340cc"
     }
   ],
   "limits": [
@@ -51,8 +63,12 @@
     "graphics_reference_probes_passed": 5,
     "iosurface_and_kernel_library_functions_selected": 23,
     "kernel_reference_checks_passed": 26,
+    "kernel_send_function_start_spans": 6,
     "launch_job_declarations": 902,
+    "mach_native_checks": 211,
+    "mach_native_scenarios": 23,
     "mach_o_file_paths": 5458,
+    "mach_reference_operations": 386,
     "mach_service_declarations": 2054,
     "rea_function_dossiers": 11,
     "readable_regular_file_paths": 334215,
@@ -100,12 +116,16 @@
       "id": "kernel",
       "name": "Kernel memory, IPC and synchronization",
       "remaining": [
-        "Full VM and Mach IPC implementation",
-        "Scheduler, exceptions and process lifecycle",
+        "Cross-process Mach transport and rights/descriptor transfer",
+        "Blocking waits, port sets, notifications and complete trap handling",
+        "Full VM, scheduler, exceptions and process lifecycle",
         "BSD syscall handlers and ABI translation",
         "XNU source-to-installed-build matching"
       ],
       "reports": [
+        "MACH-COMPATIBILITY.md",
+        "MACH-MESSAGES.md",
+        "MACH-KERNEL.md",
         "KERNEL-ABI.md",
         "SHARED-CACHE.md"
       ],

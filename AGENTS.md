@@ -11,6 +11,7 @@ The Linux host currently manages only its own Files windows.
 Preserve this objective when resuming a thread.
 
 - Keep `AbsoluteCore` free of AppKit and SwiftUI; platform work belongs in the desktop host.
+- `AbsoluteMach` is a portable in-process inline-message subset, not a system Mach IPC service or binary-compatibility layer. Keep its native C oracle independent of the Swift implementation; replay the frozen fixture on both hosts when behavior changes.
 - Use `script/build_and_run.sh` for builds, launches, core tests, and the native self-check.
 - Use `script/check_core.sh` for portable checks and `script/check_linux.sh` for the project-owned Linux VM.
 - Use `script/run_linux.sh` to run, build, check, or stop the Linux desktop. Its separate Swift package under `linux/` owns GTK and GIO dependencies.

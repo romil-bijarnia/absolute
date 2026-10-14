@@ -38,12 +38,16 @@
       "name": "Kernel memory, IPC and synchronization",
       "status": "partial",
       "reports": [
+        "MACH-COMPATIBILITY.md",
+        "MACH-MESSAGES.md",
+        "MACH-KERNEL.md",
         "KERNEL-ABI.md",
         "SHARED-CACHE.md"
       ],
       "remaining": [
-        "Full VM and Mach IPC implementation",
-        "Scheduler, exceptions and process lifecycle",
+        "Cross-process Mach transport and rights/descriptor transfer",
+        "Blocking waits, port sets, notifications and complete trap handling",
+        "Full VM, scheduler, exceptions and process lifecycle",
         "BSD syscall handlers and ABI translation",
         "XNU source-to-installed-build matching"
       ]

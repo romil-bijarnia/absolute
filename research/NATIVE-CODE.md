@@ -1,5 +1,8 @@
 # Native macOS file semantics
 
+This records the file-service compatibility checkpoint. Current overall test
+counts, including later Mach work, are in [SYSTEM-COVERAGE.md](SYSTEM-COVERAGE.md).
+
 This pass analyzes actual machine code in the installed `/usr/bin/readlink` and
 `/usr/bin/stat`, then checks their behavior in isolated fixtures. It covers one
 small filesystem utility boundary on macOS 27.0, build 26A5421a. Six native

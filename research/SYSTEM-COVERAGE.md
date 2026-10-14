@@ -22,6 +22,10 @@ This index is generated from the linked reports and their hashed JSON records.
 | Filesystem runtime cases captured | 73 |
 | Owned-process kernel reference checks passed | 26 |
 | Headless graphics reference probes passed | 5 |
+| Mach-message reference scenarios | 23 |
+| Mach-message native checks passed | 211 |
+| Recorded Mach operations replayed per pass | 386 |
+| Selected kernel-send function-start spans inspected | 6 |
 
 These counts measure different kinds of work and overlap. They do not form
 a completion percentage. File names, export names and dependency edges do
@@ -38,10 +42,16 @@ literal link destinations from successful target resolution. Symbolic-link
 traversal survives CLI parsing, navigation, snapshots and session-state paths.
 See [NATIVE-CODE.md](NATIVE-CODE.md) for the observed contract and remaining limits.
 
+The separate AbsoluteMach component now implements the measured in-process
+inline-message subset. Its tests replay the independent native reference
+with two name assignments on both hosts, comparing returned bytes, rights,
+queue state, timeouts and trailers. See
+[MACH-COMPATIBILITY.md](MACH-COMPATIBILITY.md).
+
 | Verification | macOS | Linux |
 | --- | ---: | ---: |
-| Core unit tests | 22 | 22 |
-| CLI integration checks | 15 | 15 |
+| Unit tests | 44 | 43 |
+| CLI integration checks | 16 | 16 |
 | Desktop and restart checks | 33 | 27 |
 
 The [verification record](implementation-verification.json) binds these
@@ -54,7 +64,7 @@ runs in a development VM; it is not a self-contained bootable OS image.
 | --- | --- | --- | --- |
 | Boot chain and monitor startup | Partial investigation | [BOOT-FIRMWARE](BOOT-FIRMWARE.md), [BOOT-MONITORS](BOOT-MONITORS.md) | Boot ROM and LLB implementation |
 | Device firmware and coprocessors | Partial investigation | [BOOT-FIRMWARE](BOOT-FIRMWARE.md) | AGX/DCP command protocols and firmware logic |
-| Kernel memory, IPC and synchronization | Partial investigation | [KERNEL-ABI](KERNEL-ABI.md), [SHARED-CACHE](SHARED-CACHE.md) | Full VM and Mach IPC implementation |
+| Kernel memory, IPC and synchronization | Partial investigation | [MACH-COMPATIBILITY](MACH-COMPATIBILITY.md), [MACH-MESSAGES](MACH-MESSAGES.md), [MACH-KERNEL](MACH-KERNEL.md), [KERNEL-ABI](KERNEL-ABI.md), [SHARED-CACHE](SHARED-CACHE.md) | Cross-process Mach transport and rights/descriptor transfer |
 | Window server, drawing and GPU | Partial investigation | [GRAPHICS](GRAPHICS.md) | WindowServer and compositor internals |
 | File paths and link semantics | Partial investigation | [NATIVE-CODE](NATIVE-CODE.md) | Races and concurrent filesystem mutation |
 | Filesystems and storage | Inventory only | [SYSTEM-INVENTORY](SYSTEM-INVENTORY.md), [BOOT-FIRMWARE](BOOT-FIRMWARE.md) | APFS structures and operations |
