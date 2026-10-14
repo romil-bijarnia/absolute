@@ -16,6 +16,32 @@ final class AbsoluteCoreTests: XCTestCase {
         XCTAssertEqual(history.current.path, "/different")
     }
 
+    func testNavigationPreservesTraversalThroughSymbolicParent() throws {
+        let root = try temporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: root) }
+        try FileManager.default.createDirectory(at: root.appendingPathComponent("target/nested"),
+            withIntermediateDirectories: true)
+        try FileManager.default.createSymbolicLink(atPath: root.appendingPathComponent("alias").path,
+            withDestinationPath: "target/nested")
+        try Data("actual".utf8).write(to: root.appendingPathComponent("target/child.txt"))
+        try Data("different file".utf8).write(to: root.appendingPathComponent("child.txt"))
+        let request = root.appendingPathComponent("alias/..")
+        let service = LocalFileService()
+        var history = NavigationHistory(initial: request)
+        XCTAssertEqual(history.current.path, request.path)
+        XCTAssertEqual(try service.information(for: history.current.appendingPathComponent("child.txt")).entry.size, 6)
+
+        history.navigate(to: root)
+        XCTAssertEqual(try service.information(for: history.current.appendingPathComponent("child.txt")).entry.size, 14)
+        history.goBack()
+        XCTAssertEqual(history.current.path, request.path)
+        XCTAssertEqual(try service.information(for: history.current.appendingPathComponent("child.txt")).entry.size, 6)
+        history.goForward()
+        history.navigate(to: request)
+        XCTAssertEqual(history.current.path, request.path)
+        XCTAssertEqual(try service.information(for: history.current.appendingPathComponent("child.txt")).entry.size, 6)
+    }
+
     func testLauncherPrioritizesExactAndPrefixOverFuzzyMatches() {
         let apps = ["Terminal", "Thermal Monitor", "Terminal Helper", "Notes"].map {
             InstalledApplication(name: $0, url: URL(fileURLWithPath: "/apps/\($0).app"))

@@ -5,12 +5,12 @@ public struct NavigationHistory: Sendable {
     public private(set) var backStack: [URL] = []
     public private(set) var forwardStack: [URL] = []
 
-    public init(initial: URL) { current = initial.standardizedFileURL }
+    public init(initial: URL) { current = initial.absoluteURL }
     public var canGoBack: Bool { !backStack.isEmpty }
     public var canGoForward: Bool { !forwardStack.isEmpty }
 
     public mutating func navigate(to url: URL) {
-        let next = url.standardizedFileURL
+        let next = url.absoluteURL
         guard next != current else { return }
         backStack.append(current)
         current = next

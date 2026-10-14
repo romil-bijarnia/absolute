@@ -1,5 +1,7 @@
 # Local macOS desktop evidence
 
+This report covers the initial Dock/Finder bundle pass. See [SYSTEM-COVERAGE.md](SYSTEM-COVERAGE.md) for the current system-wide investigation.
+
 REA 6.4.0; macOS 27.0, build 26A5421a.
 The targets were `/System/Library/CoreServices/Dock.app` and `/System/Library/CoreServices/Finder.app`.
 All eight static inspections completed. No target process was launched or modified.

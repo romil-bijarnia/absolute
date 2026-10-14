@@ -1,0 +1,2781 @@
+{
+  "evidence_id": "absolute-kernel-abi-sha256:bbb7fb1debddf46b49d159a5535481a7134dd489661f45ea6df228a88e25f6d4",
+  "host": {
+    "build": "26A5421a",
+    "version": "27.0"
+  },
+  "kernel_version": "Darwin Kernel Version 27.0.0: Tue Aug 11 22:01:56 PDT 2026; root:xnu-13432.1.9~3/RELEASE_ARM64_T6031",
+  "libraries": [
+    {
+      "available": true,
+      "converted_sha256": "8d1c1e3eb5b714f6304a9d1400aaa24fac7bcc6e67ea8dc0e940130637543d16",
+      "libraries": [
+        {
+          "install_names": [
+            "/usr/lib/libSystem.B.dylib"
+          ],
+          "reexports": [
+            "/usr/lib/system/libcache.dylib",
+            "/usr/lib/system/libcommonCrypto.dylib",
+            "/usr/lib/system/libcompiler_rt.dylib",
+            "/usr/lib/system/libcopyfile.dylib",
+            "/usr/lib/system/libcorecrypto.dylib",
+            "/usr/lib/system/libdispatch.dylib",
+            "/usr/lib/system/libdyld.dylib",
+            "/usr/lib/system/libkeymgr.dylib",
+            "/usr/lib/system/libmacho.dylib",
+            "/usr/lib/system/libquarantine.dylib",
+            "/usr/lib/system/libremovefile.dylib",
+            "/usr/lib/system/libsystem_asl.dylib",
+            "/usr/lib/system/libsystem_blocks.dylib",
+            "/usr/lib/system/libsystem_c.dylib",
+            "/usr/lib/system/libsystem_collections.dylib",
+            "/usr/lib/system/libsystem_configuration.dylib",
+            "/usr/lib/system/libsystem_containermanager.dylib",
+            "/usr/lib/system/libsystem_coreservices.dylib",
+            "/usr/lib/system/libsystem_darwin.dylib",
+            "/usr/lib/system/libsystem_darwindirectory.dylib",
+            "/usr/lib/system/libsystem_dnssd.dylib",
+            "/usr/lib/system/libsystem_eligibility.dylib",
+            "/usr/lib/system/libsystem_featureflags.dylib",
+            "/usr/lib/system/libsystem_info.dylib",
+            "/usr/lib/system/libsystem_kernel.dylib",
+            "/usr/lib/system/libsystem_m.dylib",
+            "/usr/lib/system/libsystem_malloc.dylib",
+            "/usr/lib/system/libsystem_networkextension.dylib",
+            "/usr/lib/system/libsystem_notify.dylib",
+            "/usr/lib/system/libsystem_platform.dylib",
+            "/usr/lib/system/libsystem_pthread.dylib",
+            "/usr/lib/system/libsystem_sandbox.dylib",
+            "/usr/lib/system/libsystem_sanitizers.dylib",
+            "/usr/lib/system/libsystem_secinit.dylib",
+            "/usr/lib/system/libsystem_symptoms.dylib",
+            "/usr/lib/system/libsystem_trace.dylib",
+            "/usr/lib/system/libsystem_trial.dylib",
+            "/usr/lib/system/libunwind.dylib",
+            "/usr/lib/system/libxpc.dylib"
+          ],
+          "symbol_categories": {
+            "data.global": 3
+          },
+          "symbol_count": 3,
+          "symbol_names_sha256": "4cd26de5247bb2f519596ba76defd8f37ede346aaa946a52d278f6b0f0007da0",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "1359"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libcache.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 34
+          },
+          "symbol_count": 34,
+          "symbol_names_sha256": "14ba1cbf1c5cb91522fe157b963b8424f332f80328b0e054badb8d479e643c67",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "95"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libcommonCrypto.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 247
+          },
+          "symbol_count": 247,
+          "symbol_names_sha256": "2f3fc12480940ec5a65e684af83ece477159ec14dfc41161f84ded3b84081b3f",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "65535"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libcompiler_rt.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 392
+          },
+          "symbol_count": 392,
+          "symbol_names_sha256": "f42912835925bb72e51cc6b1adf64cc1fc7ac631059e689453533ff4c02a942e",
+          "targets": [
+            "arm64e-macos"
+          ],
+          "versions": [
+            "103.4"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libcopyfile.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 11
+          },
+          "symbol_count": 11,
+          "symbol_names_sha256": "a929167bab2a4123a86e6ffda127526e52d9421ac96e33442b748a373552e370",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libcorecrypto.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 1139
+          },
+          "symbol_count": 1139,
+          "symbol_names_sha256": "26884590cf3bf0e5417a9e69a4a0d3a90282f114cc7d4c0c7d1feba23f0f6473",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "2109.0.22"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libdispatch.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 363,
+            "data.objc_class": 25
+          },
+          "symbol_count": 388,
+          "symbol_names_sha256": "35a12bd721d54f3bfa7e73177c89f04e5d2fe0201459a8de8947d03cfa96e08f",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "1605.0.2"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libdyld.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 228
+          },
+          "symbol_count": 228,
+          "symbol_names_sha256": "af1a5e7a8a6b3d9ed090a7c01d5a7bd72738cb8ead8d0874caf9d279daf94464",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "0"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libkeymgr.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 11
+          },
+          "symbol_count": 11,
+          "symbol_names_sha256": "20f6af62b9914388143ff5212424235f247caae267edad1c68a9d98c7e98dce6",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "31"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libmacho.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 90
+          },
+          "symbol_count": 90,
+          "symbol_names_sha256": "db6a9ed10650f869068e4bb8cfb0bdcc1ed810aab1fac3c297654ed5e4b210b5",
+          "targets": [
+            "arm64e-macos"
+          ],
+          "versions": [
+            "1040"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libquarantine.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 78
+          },
+          "symbol_count": 78,
+          "symbol_names_sha256": "e4bfaa4b42b38d22b65ebd47b023b687953d9f57bc238029814fd71f131e416c",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "217.0.4"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libremovefile.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 14
+          },
+          "symbol_count": 14,
+          "symbol_names_sha256": "8907d2fec40df32e404af7d93a9706b5948750d8ed3cd1303eb1cd5ce742d9ea",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "96"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_asl.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 219
+          },
+          "symbol_count": 219,
+          "symbol_names_sha256": "b315366c771fc0b0b4e0455da43813ffd1341b605088ed73460086aad751ec96",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "409"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_blocks.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 19
+          },
+          "symbol_count": 19,
+          "symbol_names_sha256": "e4efb9307f9c950934b7f4c708807518b0f5549a4b1a1c917619566c0bfb9894",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "98.1"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_c.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 1300,
+            "data.weak": 1
+          },
+          "symbol_count": 1301,
+          "symbol_names_sha256": "11a025373d0c4a1c9c5e9e142b297864e0b1d8f87029387a3c4b1b3769d781fe",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "1786.0.3"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_collections.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 65
+          },
+          "symbol_count": 65,
+          "symbol_names_sha256": "effb746adf4a89d01faa87bbd50916f2cd8e8f729de6546652efc785ea4c9bdb",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "1786.0.3"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_configuration.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 36
+          },
+          "symbol_count": 36,
+          "symbol_names_sha256": "03acf45b564c76f1a52c15644e7ac805cb487191d18c99afb1c0a27e21e9ef3c",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "1446"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_containermanager.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 437
+          },
+          "symbol_count": 437,
+          "symbol_names_sha256": "e766616fb92ae62ddd6288e66ca8defcb3752c93af735e17d1247ece1be77b56",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_coreservices.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 18
+          },
+          "symbol_count": 18,
+          "symbol_names_sha256": "ad875aec1c3edb664bebf7fd61050e03865e4ea80146855fc824eb8107d05692",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "129"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_darwin.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 76
+          },
+          "symbol_count": 76,
+          "symbol_names_sha256": "f5b7cd4bc2c92cb3f0590b0f22fdc8778844d974a913cd9e2a63299727a7478e",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_darwindirectory.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 3
+          },
+          "symbol_count": 3,
+          "symbol_names_sha256": "ff2b08a2e8619bfbee627ed97891f1d5c08cfe3f55fc75d03840015de3eef9ab",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_dnssd.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 61
+          },
+          "symbol_count": 61,
+          "symbol_names_sha256": "fe67791a76c514c029533d887cde1b6a1ae5037173ca4a98a4a4a5d8d1f79e10",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "3111.0.5"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_eligibility.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 19
+          },
+          "symbol_count": 19,
+          "symbol_names_sha256": "2349b3556488b0d28923eeecf69479fb13fd86223f170585ffc9cf674af96d68",
+          "targets": [
+            "arm64e-macos"
+          ],
+          "versions": [
+            "446.1.1"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_featureflags.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 2
+          },
+          "symbol_count": 2,
+          "symbol_names_sha256": "37bbab27a290bc51705f1cdfe210c9faf002d2d5385c80627442b1543f7c668c",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "108"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_info.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 431
+          },
+          "symbol_count": 431,
+          "symbol_names_sha256": "8795ff91b00907b9ebbe1714e0c9c20adba6d645317a9ba83792c7cf1034bbe1",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_kernel.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 1614
+          },
+          "symbol_count": 1614,
+          "symbol_names_sha256": "f7da7ba86912cc85da1b1ca2f0def3d125acb37d390d7673dc1b803fe1615b9b",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "13432.1.6"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_m.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 444
+          },
+          "symbol_count": 444,
+          "symbol_names_sha256": "a6ebd9045243f355cd8466ef3e3a4353d508d06feead5b3ef3207a8f2c2e10c3",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "3326.0.1"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_malloc.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 118
+          },
+          "symbol_count": 118,
+          "symbol_names_sha256": "3a0abfc9b4f95bddd75e39836b3a81918c0d09d4ce4eff4b939464544ead5886",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "886.0.8"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_networkextension.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 181
+          },
+          "symbol_count": 181,
+          "symbol_names_sha256": "4622419e9b51cef2daf0be7949b8e9b7bdbb9d828e1215e62ff333bfd33b5697",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_notify.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 23
+          },
+          "symbol_count": 23,
+          "symbol_names_sha256": "91cf12e5b0dba9d8e7dd93ff65270f157d0e0443928fcc434c3d8a994d231044",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "368"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_platform.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 185
+          },
+          "symbol_count": 185,
+          "symbol_names_sha256": "958b5431587f301608d1573b3fa2bf56c4e213c5bd4451b65b46514fb7708f3c",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "402.0.1"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_pthread.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 209
+          },
+          "symbol_count": 209,
+          "symbol_names_sha256": "9b1bc6cd2a53ab4d89f9902c5c48e940b8be53b8fdb7e4615a7d6cf2fef17268",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "553.0.1"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_sandbox.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 173
+          },
+          "symbol_count": 173,
+          "symbol_names_sha256": "48bacf849cd2b834f28bccd42e8fc086ba80783db65f75ad9ec97d4f3f13cede",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "3051.0.52"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_sanitizers.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 64
+          },
+          "symbol_count": 64,
+          "symbol_names_sha256": "bf9f24f081e19e0d7813cd09365c3df57235e523258d622f005f6f142b801117",
+          "targets": [
+            "arm64e-macos"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_secinit.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 5
+          },
+          "symbol_count": 5,
+          "symbol_names_sha256": "40e8a80d2ccc793bd9d6e8d91f5098901b7b43cdb669d8537c13216e718fadbf",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "182"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_symptoms.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 10
+          },
+          "symbol_count": 10,
+          "symbol_names_sha256": "92230c8e50a28c8d3b08183520015990f06cafda157d7560e953763fab683a65",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": []
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_trace.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 202,
+            "data.objc_class": 1
+          },
+          "symbol_count": 203,
+          "symbol_names_sha256": "604a8943ff6ab0ac26a118d19e319b44e53a84d34b8e3e1724257e84b762b02a",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "1966.0.6"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libsystem_trial.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 3
+          },
+          "symbol_count": 3,
+          "symbol_names_sha256": "4bf75e61136f0ab4455b58feb36104f70109bef225d191a1160ba9b5a9e92a10",
+          "targets": [
+            "arm64e-macos"
+          ],
+          "versions": [
+            "511"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libunwind.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 44
+          },
+          "symbol_count": 44,
+          "symbol_names_sha256": "2bc765f39aa741cc3ff62d01197b810438119246f16521e7a577a74394ab7c34",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "2200.5"
+          ]
+        },
+        {
+          "install_names": [
+            "/usr/lib/system/libxpc.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 802,
+            "data.objc_class": 1
+          },
+          "symbol_count": 803,
+          "symbol_names_sha256": "db30c938e8302b43dc62b67e63f550094c6ac3b5671c8625e2f8da9a852a5017",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "3298.0.26"
+          ]
+        }
+      ],
+      "sha256": "a5f03ca433f2fe80c4421810cf6f990e5088e0410db9df4a3f2119fe6be2fd54",
+      "source": "usr/lib/libSystem.tbd"
+    },
+    {
+      "available": true,
+      "converted_sha256": "a86d1d7d998f4145ae13b1dce0fd5b5817ab0c7845390e929f0bd6cb7920bb97",
+      "libraries": [
+        {
+          "install_names": [
+            "/usr/lib/libobjc.A.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 437,
+            "data.objc_class": 3,
+            "data.objc_ivar": 2
+          },
+          "symbol_count": 442,
+          "symbol_names_sha256": "6202a912afa7ed208a73cc348fa3564b589ad84ae96966fd2c57b62c70bd570d",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "228"
+          ]
+        }
+      ],
+      "sha256": "9c5e15a62d91233ee689928ef0b7f8ff1d4798cdb9b9ec9596d6e2dc0df23381",
+      "source": "usr/lib/libobjc.tbd"
+    },
+    {
+      "available": true,
+      "converted_sha256": "498f9d0e068108be77832b6d01c82f93f372acdef04b9753100af75733e0283b",
+      "libraries": [
+        {
+          "install_names": [
+            "/usr/lib/libc++.1.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 1972,
+            "data.weak": 1
+          },
+          "symbol_count": 1973,
+          "symbol_names_sha256": "ccc2e810dfdd1a0a82f4998d20320a108806e73210462ae161ca11a1cc80b9e4",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "2200.27"
+          ]
+        }
+      ],
+      "sha256": "24e919c60a15d1341c280b168b826187237d34e2f53f7729d92d5cb7c1993c1b",
+      "source": "usr/lib/libc++.tbd"
+    },
+    {
+      "available": true,
+      "converted_sha256": "70eb1f3895b01c596b3447f61c0391d7f82d47b01447cf4e77420544706d9ed4",
+      "libraries": [
+        {
+          "install_names": [
+            "/usr/lib/libc++abi.dylib"
+          ],
+          "reexports": [],
+          "symbol_categories": {
+            "data.global": 341,
+            "data.weak": 47
+          },
+          "symbol_count": 388,
+          "symbol_names_sha256": "e504e5e85041976906ea3058cf34b698a345f8d6b3311cb584055d0cc8dad0dc",
+          "targets": [
+            "arm64e-macos",
+            "arm64e-maccatalyst"
+          ],
+          "versions": [
+            "2200.27"
+          ]
+        }
+      ],
+      "sha256": "e1134ba3f5ac0cf6c8d8549c93fb9bca9ec4f693642f9e4dce22205b89fae48f",
+      "source": "usr/lib/libc++abi.tbd"
+    }
+  ],
+  "limitations": [
+    "SDK declarations describe a build interface; they do not prove installed implementation or behavior.",
+    "TBD v4 to v5 conversion preserves symbol declarations but cannot recover function-versus-data classification.",
+    "The macro table is not proof that every number has an implemented or available kernel handler.",
+    "Runtime checks exercise only this owned process and the specific operations recorded.",
+    "No kernel implementation, scheduler, cross-process IPC, exception delivery or syscall emulator is reconstructed here."
+  ],
+  "local_capture": "research/local/kernel-abi/20261014T071950499563Z",
+  "runtime": {
+    "binary_sha256": "5ecc3bc132e9ce5f6ae25a3e08bed7976737dc748e75121bbff15425cd85072c",
+    "exit_code": 0,
+    "result": {
+      "check_count": 26,
+      "checks": {
+        "allocate_owned_virtual_memory": true,
+        "allocate_receive_right": true,
+        "anonymous_page_starts_zero_filled": true,
+        "create_owned_semaphore": true,
+        "deallocate_owned_virtual_memory": true,
+        "destroy_owned_port": true,
+        "destroy_owned_semaphore": true,
+        "drained_pipe_is_not_reported_readable": true,
+        "empty_port_receive_times_out": true,
+        "empty_semaphore_wait_times_out": true,
+        "insert_send_right": true,
+        "kqueue_reports_readable_bytes": true,
+        "mach_clock_advances_with_nonzero_timebase": true,
+        "message_id_size_and_payload_preserved": true,
+        "null_destination_send_fails": true,
+        "pipe_message_round_trip": true,
+        "protect_owned_page_read_only": true,
+        "receive_message_from_owned_port": true,
+        "received_header_names_receive_port": true,
+        "region_reports_read_without_write": true,
+        "register_owned_pipe_with_kqueue": true,
+        "restore_write_permission_and_read_back": true,
+        "semaphore_signal_is_consumed_once": true,
+        "send_message_to_owned_port": true,
+        "send_right_has_one_user_reference": true,
+        "signal_makes_one_semaphore_wait_succeed": true
+      },
+      "observations": {
+        "empty_receive_status": 268451843,
+        "empty_semaphore_status": 49,
+        "message_bytes": 32,
+        "null_send_status": 268435459,
+        "timebase_denom": 3,
+        "timebase_numer": 125,
+        "vm_page_bytes": 16384
+      },
+      "passed": true
+    },
+    "scope": "Fresh owned process: Mach ports/messages, virtual memory, semaphores, pipe/kqueue, monotonic time.",
+    "source_sha256": "c0967d5ae070f98d2611f12c8d47afd1486f0c7b7a3fa100e877cf61a3946b89"
+  },
+  "schema": 1,
+  "script_sha256": "cc0843565582dc2980c9237da2d7a7ae3dfa051faf986d35ea981d48748338b9",
+  "sdk": {
+    "name": "macosx27.0",
+    "settings_sha256": "dc95454ae84e0d194bc755e3e5a352d615237ae6788fbc77e61829afae56ac08",
+    "version": "27.0"
+  },
+  "syscalls": {
+    "declared_name_count": 466,
+    "distinct_number_count": 466,
+    "entries": [
+      {
+        "name": "syscall",
+        "number": 0
+      },
+      {
+        "name": "exit",
+        "number": 1
+      },
+      {
+        "name": "fork",
+        "number": 2
+      },
+      {
+        "name": "read",
+        "number": 3
+      },
+      {
+        "name": "write",
+        "number": 4
+      },
+      {
+        "name": "open",
+        "number": 5
+      },
+      {
+        "name": "close",
+        "number": 6
+      },
+      {
+        "name": "wait4",
+        "number": 7
+      },
+      {
+        "name": "link",
+        "number": 9
+      },
+      {
+        "name": "unlink",
+        "number": 10
+      },
+      {
+        "name": "chdir",
+        "number": 12
+      },
+      {
+        "name": "fchdir",
+        "number": 13
+      },
+      {
+        "name": "mknod",
+        "number": 14
+      },
+      {
+        "name": "chmod",
+        "number": 15
+      },
+      {
+        "name": "chown",
+        "number": 16
+      },
+      {
+        "name": "getfsstat",
+        "number": 18
+      },
+      {
+        "name": "getpid",
+        "number": 20
+      },
+      {
+        "name": "setuid",
+        "number": 23
+      },
+      {
+        "name": "getuid",
+        "number": 24
+      },
+      {
+        "name": "geteuid",
+        "number": 25
+      },
+      {
+        "name": "ptrace",
+        "number": 26
+      },
+      {
+        "name": "recvmsg",
+        "number": 27
+      },
+      {
+        "name": "sendmsg",
+        "number": 28
+      },
+      {
+        "name": "recvfrom",
+        "number": 29
+      },
+      {
+        "name": "accept",
+        "number": 30
+      },
+      {
+        "name": "getpeername",
+        "number": 31
+      },
+      {
+        "name": "getsockname",
+        "number": 32
+      },
+      {
+        "name": "access",
+        "number": 33
+      },
+      {
+        "name": "chflags",
+        "number": 34
+      },
+      {
+        "name": "fchflags",
+        "number": 35
+      },
+      {
+        "name": "sync",
+        "number": 36
+      },
+      {
+        "name": "kill",
+        "number": 37
+      },
+      {
+        "name": "crossarch_trap",
+        "number": 38
+      },
+      {
+        "name": "getppid",
+        "number": 39
+      },
+      {
+        "name": "dup",
+        "number": 41
+      },
+      {
+        "name": "pipe",
+        "number": 42
+      },
+      {
+        "name": "getegid",
+        "number": 43
+      },
+      {
+        "name": "sigaction",
+        "number": 46
+      },
+      {
+        "name": "getgid",
+        "number": 47
+      },
+      {
+        "name": "sigprocmask",
+        "number": 48
+      },
+      {
+        "name": "getlogin",
+        "number": 49
+      },
+      {
+        "name": "setlogin",
+        "number": 50
+      },
+      {
+        "name": "acct",
+        "number": 51
+      },
+      {
+        "name": "sigpending",
+        "number": 52
+      },
+      {
+        "name": "sigaltstack",
+        "number": 53
+      },
+      {
+        "name": "ioctl",
+        "number": 54
+      },
+      {
+        "name": "reboot",
+        "number": 55
+      },
+      {
+        "name": "revoke",
+        "number": 56
+      },
+      {
+        "name": "symlink",
+        "number": 57
+      },
+      {
+        "name": "readlink",
+        "number": 58
+      },
+      {
+        "name": "execve",
+        "number": 59
+      },
+      {
+        "name": "umask",
+        "number": 60
+      },
+      {
+        "name": "chroot",
+        "number": 61
+      },
+      {
+        "name": "invalid",
+        "number": 63
+      },
+      {
+        "name": "msync",
+        "number": 65
+      },
+      {
+        "name": "vfork",
+        "number": 66
+      },
+      {
+        "name": "oslog_coproc_reg",
+        "number": 67
+      },
+      {
+        "name": "oslog_coproc",
+        "number": 68
+      },
+      {
+        "name": "munmap",
+        "number": 73
+      },
+      {
+        "name": "mprotect",
+        "number": 74
+      },
+      {
+        "name": "madvise",
+        "number": 75
+      },
+      {
+        "name": "mincore",
+        "number": 78
+      },
+      {
+        "name": "getgroups",
+        "number": 79
+      },
+      {
+        "name": "setgroups",
+        "number": 80
+      },
+      {
+        "name": "getpgrp",
+        "number": 81
+      },
+      {
+        "name": "setpgid",
+        "number": 82
+      },
+      {
+        "name": "setitimer",
+        "number": 83
+      },
+      {
+        "name": "swapon",
+        "number": 85
+      },
+      {
+        "name": "getitimer",
+        "number": 86
+      },
+      {
+        "name": "getdtablesize",
+        "number": 89
+      },
+      {
+        "name": "dup2",
+        "number": 90
+      },
+      {
+        "name": "fcntl",
+        "number": 92
+      },
+      {
+        "name": "select",
+        "number": 93
+      },
+      {
+        "name": "fsync",
+        "number": 95
+      },
+      {
+        "name": "setpriority",
+        "number": 96
+      },
+      {
+        "name": "socket",
+        "number": 97
+      },
+      {
+        "name": "connect",
+        "number": 98
+      },
+      {
+        "name": "getpriority",
+        "number": 100
+      },
+      {
+        "name": "bind",
+        "number": 104
+      },
+      {
+        "name": "setsockopt",
+        "number": 105
+      },
+      {
+        "name": "listen",
+        "number": 106
+      },
+      {
+        "name": "sigsuspend",
+        "number": 111
+      },
+      {
+        "name": "gettimeofday",
+        "number": 116
+      },
+      {
+        "name": "getrusage",
+        "number": 117
+      },
+      {
+        "name": "getsockopt",
+        "number": 118
+      },
+      {
+        "name": "readv",
+        "number": 120
+      },
+      {
+        "name": "writev",
+        "number": 121
+      },
+      {
+        "name": "settimeofday",
+        "number": 122
+      },
+      {
+        "name": "fchown",
+        "number": 123
+      },
+      {
+        "name": "fchmod",
+        "number": 124
+      },
+      {
+        "name": "setreuid",
+        "number": 126
+      },
+      {
+        "name": "setregid",
+        "number": 127
+      },
+      {
+        "name": "rename",
+        "number": 128
+      },
+      {
+        "name": "flock",
+        "number": 131
+      },
+      {
+        "name": "mkfifo",
+        "number": 132
+      },
+      {
+        "name": "sendto",
+        "number": 133
+      },
+      {
+        "name": "shutdown",
+        "number": 134
+      },
+      {
+        "name": "socketpair",
+        "number": 135
+      },
+      {
+        "name": "mkdir",
+        "number": 136
+      },
+      {
+        "name": "rmdir",
+        "number": 137
+      },
+      {
+        "name": "utimes",
+        "number": 138
+      },
+      {
+        "name": "futimes",
+        "number": 139
+      },
+      {
+        "name": "adjtime",
+        "number": 140
+      },
+      {
+        "name": "gethostuuid",
+        "number": 142
+      },
+      {
+        "name": "setsid",
+        "number": 147
+      },
+      {
+        "name": "pipe2",
+        "number": 148
+      },
+      {
+        "name": "dup3",
+        "number": 149
+      },
+      {
+        "name": "getpgid",
+        "number": 151
+      },
+      {
+        "name": "setprivexec",
+        "number": 152
+      },
+      {
+        "name": "pread",
+        "number": 153
+      },
+      {
+        "name": "pwrite",
+        "number": 154
+      },
+      {
+        "name": "nfssvc",
+        "number": 155
+      },
+      {
+        "name": "statfs",
+        "number": 157
+      },
+      {
+        "name": "fstatfs",
+        "number": 158
+      },
+      {
+        "name": "unmount",
+        "number": 159
+      },
+      {
+        "name": "getfh",
+        "number": 161
+      },
+      {
+        "name": "funmount",
+        "number": 164
+      },
+      {
+        "name": "quotactl",
+        "number": 165
+      },
+      {
+        "name": "mount",
+        "number": 167
+      },
+      {
+        "name": "csops",
+        "number": 169
+      },
+      {
+        "name": "csops_audittoken",
+        "number": 170
+      },
+      {
+        "name": "waitid",
+        "number": 173
+      },
+      {
+        "name": "kdebug_typefilter",
+        "number": 177
+      },
+      {
+        "name": "kdebug_trace_string",
+        "number": 178
+      },
+      {
+        "name": "kdebug_trace64",
+        "number": 179
+      },
+      {
+        "name": "kdebug_trace",
+        "number": 180
+      },
+      {
+        "name": "setgid",
+        "number": 181
+      },
+      {
+        "name": "setegid",
+        "number": 182
+      },
+      {
+        "name": "seteuid",
+        "number": 183
+      },
+      {
+        "name": "sigreturn",
+        "number": 184
+      },
+      {
+        "name": "panic_with_data",
+        "number": 185
+      },
+      {
+        "name": "thread_selfcounts",
+        "number": 186
+      },
+      {
+        "name": "fdatasync",
+        "number": 187
+      },
+      {
+        "name": "stat",
+        "number": 188
+      },
+      {
+        "name": "fstat",
+        "number": 189
+      },
+      {
+        "name": "lstat",
+        "number": 190
+      },
+      {
+        "name": "pathconf",
+        "number": 191
+      },
+      {
+        "name": "fpathconf",
+        "number": 192
+      },
+      {
+        "name": "getrlimit",
+        "number": 194
+      },
+      {
+        "name": "setrlimit",
+        "number": 195
+      },
+      {
+        "name": "getdirentries",
+        "number": 196
+      },
+      {
+        "name": "mmap",
+        "number": 197
+      },
+      {
+        "name": "lseek",
+        "number": 199
+      },
+      {
+        "name": "truncate",
+        "number": 200
+      },
+      {
+        "name": "ftruncate",
+        "number": 201
+      },
+      {
+        "name": "sysctl",
+        "number": 202
+      },
+      {
+        "name": "mlock",
+        "number": 203
+      },
+      {
+        "name": "munlock",
+        "number": 204
+      },
+      {
+        "name": "undelete",
+        "number": 205
+      },
+      {
+        "name": "fchflagsat",
+        "number": 214
+      },
+      {
+        "name": "getumask",
+        "number": 215
+      },
+      {
+        "name": "open_dprotected_np",
+        "number": 216
+      },
+      {
+        "name": "fsgetpath_ext",
+        "number": 217
+      },
+      {
+        "name": "openat_dprotected_np",
+        "number": 218
+      },
+      {
+        "name": "getattrlist",
+        "number": 220
+      },
+      {
+        "name": "setattrlist",
+        "number": 221
+      },
+      {
+        "name": "getdirentriesattr",
+        "number": 222
+      },
+      {
+        "name": "exchangedata",
+        "number": 223
+      },
+      {
+        "name": "searchfs",
+        "number": 225
+      },
+      {
+        "name": "delete",
+        "number": 226
+      },
+      {
+        "name": "copyfile",
+        "number": 227
+      },
+      {
+        "name": "fgetattrlist",
+        "number": 228
+      },
+      {
+        "name": "fsetattrlist",
+        "number": 229
+      },
+      {
+        "name": "poll",
+        "number": 230
+      },
+      {
+        "name": "getxattr",
+        "number": 234
+      },
+      {
+        "name": "fgetxattr",
+        "number": 235
+      },
+      {
+        "name": "setxattr",
+        "number": 236
+      },
+      {
+        "name": "fsetxattr",
+        "number": 237
+      },
+      {
+        "name": "removexattr",
+        "number": 238
+      },
+      {
+        "name": "fremovexattr",
+        "number": 239
+      },
+      {
+        "name": "listxattr",
+        "number": 240
+      },
+      {
+        "name": "flistxattr",
+        "number": 241
+      },
+      {
+        "name": "fsctl",
+        "number": 242
+      },
+      {
+        "name": "initgroups",
+        "number": 243
+      },
+      {
+        "name": "posix_spawn",
+        "number": 244
+      },
+      {
+        "name": "ffsctl",
+        "number": 245
+      },
+      {
+        "name": "aio_readv",
+        "number": 246
+      },
+      {
+        "name": "aio_writev",
+        "number": 247
+      },
+      {
+        "name": "fhopen",
+        "number": 248
+      },
+      {
+        "name": "fsctlat",
+        "number": 249
+      },
+      {
+        "name": "minherit",
+        "number": 250
+      },
+      {
+        "name": "semsys",
+        "number": 251
+      },
+      {
+        "name": "msgsys",
+        "number": 252
+      },
+      {
+        "name": "shmsys",
+        "number": 253
+      },
+      {
+        "name": "semctl",
+        "number": 254
+      },
+      {
+        "name": "semget",
+        "number": 255
+      },
+      {
+        "name": "semop",
+        "number": 256
+      },
+      {
+        "name": "msgctl",
+        "number": 258
+      },
+      {
+        "name": "msgget",
+        "number": 259
+      },
+      {
+        "name": "msgsnd",
+        "number": 260
+      },
+      {
+        "name": "msgrcv",
+        "number": 261
+      },
+      {
+        "name": "shmat",
+        "number": 262
+      },
+      {
+        "name": "shmctl",
+        "number": 263
+      },
+      {
+        "name": "shmdt",
+        "number": 264
+      },
+      {
+        "name": "shmget",
+        "number": 265
+      },
+      {
+        "name": "shm_open",
+        "number": 266
+      },
+      {
+        "name": "shm_unlink",
+        "number": 267
+      },
+      {
+        "name": "sem_open",
+        "number": 268
+      },
+      {
+        "name": "sem_close",
+        "number": 269
+      },
+      {
+        "name": "sem_unlink",
+        "number": 270
+      },
+      {
+        "name": "sem_wait",
+        "number": 271
+      },
+      {
+        "name": "sem_trywait",
+        "number": 272
+      },
+      {
+        "name": "sem_post",
+        "number": 273
+      },
+      {
+        "name": "sysctlbyname",
+        "number": 274
+      },
+      {
+        "name": "open_extended",
+        "number": 277
+      },
+      {
+        "name": "umask_extended",
+        "number": 278
+      },
+      {
+        "name": "stat_extended",
+        "number": 279
+      },
+      {
+        "name": "lstat_extended",
+        "number": 280
+      },
+      {
+        "name": "fstat_extended",
+        "number": 281
+      },
+      {
+        "name": "chmod_extended",
+        "number": 282
+      },
+      {
+        "name": "fchmod_extended",
+        "number": 283
+      },
+      {
+        "name": "access_extended",
+        "number": 284
+      },
+      {
+        "name": "settid",
+        "number": 285
+      },
+      {
+        "name": "gettid",
+        "number": 286
+      },
+      {
+        "name": "setsgroups",
+        "number": 287
+      },
+      {
+        "name": "getsgroups",
+        "number": 288
+      },
+      {
+        "name": "setwgroups",
+        "number": 289
+      },
+      {
+        "name": "getwgroups",
+        "number": 290
+      },
+      {
+        "name": "mkfifo_extended",
+        "number": 291
+      },
+      {
+        "name": "mkdir_extended",
+        "number": 292
+      },
+      {
+        "name": "identitysvc",
+        "number": 293
+      },
+      {
+        "name": "shared_region_check_np",
+        "number": 294
+      },
+      {
+        "name": "vm_pressure_monitor",
+        "number": 296
+      },
+      {
+        "name": "psynch_rw_longrdlock",
+        "number": 297
+      },
+      {
+        "name": "psynch_rw_yieldwrlock",
+        "number": 298
+      },
+      {
+        "name": "psynch_rw_downgrade",
+        "number": 299
+      },
+      {
+        "name": "psynch_rw_upgrade",
+        "number": 300
+      },
+      {
+        "name": "psynch_mutexwait",
+        "number": 301
+      },
+      {
+        "name": "psynch_mutexdrop",
+        "number": 302
+      },
+      {
+        "name": "psynch_cvbroad",
+        "number": 303
+      },
+      {
+        "name": "psynch_cvsignal",
+        "number": 304
+      },
+      {
+        "name": "psynch_cvwait",
+        "number": 305
+      },
+      {
+        "name": "psynch_rw_rdlock",
+        "number": 306
+      },
+      {
+        "name": "psynch_rw_wrlock",
+        "number": 307
+      },
+      {
+        "name": "psynch_rw_unlock",
+        "number": 308
+      },
+      {
+        "name": "psynch_rw_unlock2",
+        "number": 309
+      },
+      {
+        "name": "getsid",
+        "number": 310
+      },
+      {
+        "name": "settid_with_pid",
+        "number": 311
+      },
+      {
+        "name": "psynch_cvclrprepost",
+        "number": 312
+      },
+      {
+        "name": "aio_fsync",
+        "number": 313
+      },
+      {
+        "name": "aio_return",
+        "number": 314
+      },
+      {
+        "name": "aio_suspend",
+        "number": 315
+      },
+      {
+        "name": "aio_cancel",
+        "number": 316
+      },
+      {
+        "name": "aio_error",
+        "number": 317
+      },
+      {
+        "name": "aio_read",
+        "number": 318
+      },
+      {
+        "name": "aio_write",
+        "number": 319
+      },
+      {
+        "name": "lio_listio",
+        "number": 320
+      },
+      {
+        "name": "iopolicysys",
+        "number": 322
+      },
+      {
+        "name": "process_policy",
+        "number": 323
+      },
+      {
+        "name": "mlockall",
+        "number": 324
+      },
+      {
+        "name": "munlockall",
+        "number": 325
+      },
+      {
+        "name": "issetugid",
+        "number": 327
+      },
+      {
+        "name": "__pthread_kill",
+        "number": 328
+      },
+      {
+        "name": "__pthread_sigmask",
+        "number": 329
+      },
+      {
+        "name": "__sigwait",
+        "number": 330
+      },
+      {
+        "name": "__disable_threadsignal",
+        "number": 331
+      },
+      {
+        "name": "__pthread_markcancel",
+        "number": 332
+      },
+      {
+        "name": "__pthread_canceled",
+        "number": 333
+      },
+      {
+        "name": "__semwait_signal",
+        "number": 334
+      },
+      {
+        "name": "proc_info",
+        "number": 336
+      },
+      {
+        "name": "sendfile",
+        "number": 337
+      },
+      {
+        "name": "stat64",
+        "number": 338
+      },
+      {
+        "name": "fstat64",
+        "number": 339
+      },
+      {
+        "name": "lstat64",
+        "number": 340
+      },
+      {
+        "name": "stat64_extended",
+        "number": 341
+      },
+      {
+        "name": "lstat64_extended",
+        "number": 342
+      },
+      {
+        "name": "fstat64_extended",
+        "number": 343
+      },
+      {
+        "name": "getdirentries64",
+        "number": 344
+      },
+      {
+        "name": "statfs64",
+        "number": 345
+      },
+      {
+        "name": "fstatfs64",
+        "number": 346
+      },
+      {
+        "name": "getfsstat64",
+        "number": 347
+      },
+      {
+        "name": "__pthread_chdir",
+        "number": 348
+      },
+      {
+        "name": "__pthread_fchdir",
+        "number": 349
+      },
+      {
+        "name": "audit",
+        "number": 350
+      },
+      {
+        "name": "auditon",
+        "number": 351
+      },
+      {
+        "name": "guarded_ftruncate_np",
+        "number": 352
+      },
+      {
+        "name": "getauid",
+        "number": 353
+      },
+      {
+        "name": "setauid",
+        "number": 354
+      },
+      {
+        "name": "getaudit_addr",
+        "number": 357
+      },
+      {
+        "name": "setaudit_addr",
+        "number": 358
+      },
+      {
+        "name": "auditctl",
+        "number": 359
+      },
+      {
+        "name": "bsdthread_create",
+        "number": 360
+      },
+      {
+        "name": "bsdthread_terminate",
+        "number": 361
+      },
+      {
+        "name": "kqueue",
+        "number": 362
+      },
+      {
+        "name": "kevent",
+        "number": 363
+      },
+      {
+        "name": "lchown",
+        "number": 364
+      },
+      {
+        "name": "bsdthread_register",
+        "number": 366
+      },
+      {
+        "name": "workq_open",
+        "number": 367
+      },
+      {
+        "name": "workq_kernreturn",
+        "number": 368
+      },
+      {
+        "name": "kevent64",
+        "number": 369
+      },
+      {
+        "name": "thread_selfid",
+        "number": 372
+      },
+      {
+        "name": "ledger",
+        "number": 373
+      },
+      {
+        "name": "kevent_qos",
+        "number": 374
+      },
+      {
+        "name": "kevent_id",
+        "number": 375
+      },
+      {
+        "name": "__mac_execve",
+        "number": 380
+      },
+      {
+        "name": "__mac_syscall",
+        "number": 381
+      },
+      {
+        "name": "__mac_get_file",
+        "number": 382
+      },
+      {
+        "name": "__mac_set_file",
+        "number": 383
+      },
+      {
+        "name": "__mac_get_link",
+        "number": 384
+      },
+      {
+        "name": "__mac_set_link",
+        "number": 385
+      },
+      {
+        "name": "__mac_get_proc",
+        "number": 386
+      },
+      {
+        "name": "__mac_set_proc",
+        "number": 387
+      },
+      {
+        "name": "__mac_get_fd",
+        "number": 388
+      },
+      {
+        "name": "__mac_set_fd",
+        "number": 389
+      },
+      {
+        "name": "__mac_get_pid",
+        "number": 390
+      },
+      {
+        "name": "pselect",
+        "number": 394
+      },
+      {
+        "name": "pselect_nocancel",
+        "number": 395
+      },
+      {
+        "name": "read_nocancel",
+        "number": 396
+      },
+      {
+        "name": "write_nocancel",
+        "number": 397
+      },
+      {
+        "name": "open_nocancel",
+        "number": 398
+      },
+      {
+        "name": "close_nocancel",
+        "number": 399
+      },
+      {
+        "name": "wait4_nocancel",
+        "number": 400
+      },
+      {
+        "name": "recvmsg_nocancel",
+        "number": 401
+      },
+      {
+        "name": "sendmsg_nocancel",
+        "number": 402
+      },
+      {
+        "name": "recvfrom_nocancel",
+        "number": 403
+      },
+      {
+        "name": "accept_nocancel",
+        "number": 404
+      },
+      {
+        "name": "msync_nocancel",
+        "number": 405
+      },
+      {
+        "name": "fcntl_nocancel",
+        "number": 406
+      },
+      {
+        "name": "select_nocancel",
+        "number": 407
+      },
+      {
+        "name": "fsync_nocancel",
+        "number": 408
+      },
+      {
+        "name": "connect_nocancel",
+        "number": 409
+      },
+      {
+        "name": "sigsuspend_nocancel",
+        "number": 410
+      },
+      {
+        "name": "readv_nocancel",
+        "number": 411
+      },
+      {
+        "name": "writev_nocancel",
+        "number": 412
+      },
+      {
+        "name": "sendto_nocancel",
+        "number": 413
+      },
+      {
+        "name": "pread_nocancel",
+        "number": 414
+      },
+      {
+        "name": "pwrite_nocancel",
+        "number": 415
+      },
+      {
+        "name": "waitid_nocancel",
+        "number": 416
+      },
+      {
+        "name": "poll_nocancel",
+        "number": 417
+      },
+      {
+        "name": "msgsnd_nocancel",
+        "number": 418
+      },
+      {
+        "name": "msgrcv_nocancel",
+        "number": 419
+      },
+      {
+        "name": "sem_wait_nocancel",
+        "number": 420
+      },
+      {
+        "name": "aio_suspend_nocancel",
+        "number": 421
+      },
+      {
+        "name": "__sigwait_nocancel",
+        "number": 422
+      },
+      {
+        "name": "__semwait_signal_nocancel",
+        "number": 423
+      },
+      {
+        "name": "__mac_mount",
+        "number": 424
+      },
+      {
+        "name": "__mac_get_mount",
+        "number": 425
+      },
+      {
+        "name": "__mac_getfsstat",
+        "number": 426
+      },
+      {
+        "name": "fsgetpath",
+        "number": 427
+      },
+      {
+        "name": "audit_session_self",
+        "number": 428
+      },
+      {
+        "name": "audit_session_join",
+        "number": 429
+      },
+      {
+        "name": "fileport_makeport",
+        "number": 430
+      },
+      {
+        "name": "fileport_makefd",
+        "number": 431
+      },
+      {
+        "name": "audit_session_port",
+        "number": 432
+      },
+      {
+        "name": "pid_suspend",
+        "number": 433
+      },
+      {
+        "name": "pid_resume",
+        "number": 434
+      },
+      {
+        "name": "pid_hibernate",
+        "number": 435
+      },
+      {
+        "name": "pid_shutdown_sockets",
+        "number": 436
+      },
+      {
+        "name": "kas_info",
+        "number": 439
+      },
+      {
+        "name": "memorystatus_control",
+        "number": 440
+      },
+      {
+        "name": "guarded_open_np",
+        "number": 441
+      },
+      {
+        "name": "guarded_close_np",
+        "number": 442
+      },
+      {
+        "name": "guarded_kqueue_np",
+        "number": 443
+      },
+      {
+        "name": "change_fdguard_np",
+        "number": 444
+      },
+      {
+        "name": "usrctl",
+        "number": 445
+      },
+      {
+        "name": "proc_rlimit_control",
+        "number": 446
+      },
+      {
+        "name": "connectx",
+        "number": 447
+      },
+      {
+        "name": "disconnectx",
+        "number": 448
+      },
+      {
+        "name": "peeloff",
+        "number": 449
+      },
+      {
+        "name": "socket_delegate",
+        "number": 450
+      },
+      {
+        "name": "telemetry",
+        "number": 451
+      },
+      {
+        "name": "proc_uuid_policy",
+        "number": 452
+      },
+      {
+        "name": "memorystatus_get_level",
+        "number": 453
+      },
+      {
+        "name": "system_override",
+        "number": 454
+      },
+      {
+        "name": "vfs_purge",
+        "number": 455
+      },
+      {
+        "name": "sfi_ctl",
+        "number": 456
+      },
+      {
+        "name": "sfi_pidctl",
+        "number": 457
+      },
+      {
+        "name": "coalition",
+        "number": 458
+      },
+      {
+        "name": "coalition_info",
+        "number": 459
+      },
+      {
+        "name": "necp_match_policy",
+        "number": 460
+      },
+      {
+        "name": "getattrlistbulk",
+        "number": 461
+      },
+      {
+        "name": "clonefileat",
+        "number": 462
+      },
+      {
+        "name": "openat",
+        "number": 463
+      },
+      {
+        "name": "openat_nocancel",
+        "number": 464
+      },
+      {
+        "name": "renameat",
+        "number": 465
+      },
+      {
+        "name": "faccessat",
+        "number": 466
+      },
+      {
+        "name": "fchmodat",
+        "number": 467
+      },
+      {
+        "name": "fchownat",
+        "number": 468
+      },
+      {
+        "name": "fstatat",
+        "number": 469
+      },
+      {
+        "name": "fstatat64",
+        "number": 470
+      },
+      {
+        "name": "linkat",
+        "number": 471
+      },
+      {
+        "name": "unlinkat",
+        "number": 472
+      },
+      {
+        "name": "readlinkat",
+        "number": 473
+      },
+      {
+        "name": "symlinkat",
+        "number": 474
+      },
+      {
+        "name": "mkdirat",
+        "number": 475
+      },
+      {
+        "name": "getattrlistat",
+        "number": 476
+      },
+      {
+        "name": "proc_trace_log",
+        "number": 477
+      },
+      {
+        "name": "bsdthread_ctl",
+        "number": 478
+      },
+      {
+        "name": "openbyid_np",
+        "number": 479
+      },
+      {
+        "name": "recvmsg_x",
+        "number": 480
+      },
+      {
+        "name": "sendmsg_x",
+        "number": 481
+      },
+      {
+        "name": "thread_selfusage",
+        "number": 482
+      },
+      {
+        "name": "csrctl",
+        "number": 483
+      },
+      {
+        "name": "guarded_open_dprotected_np",
+        "number": 484
+      },
+      {
+        "name": "guarded_write_np",
+        "number": 485
+      },
+      {
+        "name": "guarded_pwrite_np",
+        "number": 486
+      },
+      {
+        "name": "guarded_writev_np",
+        "number": 487
+      },
+      {
+        "name": "renameatx_np",
+        "number": 488
+      },
+      {
+        "name": "mremap_encrypted",
+        "number": 489
+      },
+      {
+        "name": "netagent_trigger",
+        "number": 490
+      },
+      {
+        "name": "stack_snapshot_with_config",
+        "number": 491
+      },
+      {
+        "name": "microstackshot",
+        "number": 492
+      },
+      {
+        "name": "grab_pgo_data",
+        "number": 493
+      },
+      {
+        "name": "persona",
+        "number": 494
+      },
+      {
+        "name": "mach_eventlink_signal",
+        "number": 496
+      },
+      {
+        "name": "mach_eventlink_wait_until",
+        "number": 497
+      },
+      {
+        "name": "mach_eventlink_signal_wait_until",
+        "number": 498
+      },
+      {
+        "name": "work_interval_ctl",
+        "number": 499
+      },
+      {
+        "name": "getentropy",
+        "number": 500
+      },
+      {
+        "name": "necp_open",
+        "number": 501
+      },
+      {
+        "name": "necp_client_action",
+        "number": 502
+      },
+      {
+        "name": "__nexus_open",
+        "number": 503
+      },
+      {
+        "name": "__nexus_register",
+        "number": 504
+      },
+      {
+        "name": "__nexus_deregister",
+        "number": 505
+      },
+      {
+        "name": "__nexus_create",
+        "number": 506
+      },
+      {
+        "name": "__nexus_destroy",
+        "number": 507
+      },
+      {
+        "name": "__nexus_get_opt",
+        "number": 508
+      },
+      {
+        "name": "__nexus_set_opt",
+        "number": 509
+      },
+      {
+        "name": "__channel_open",
+        "number": 510
+      },
+      {
+        "name": "__channel_get_info",
+        "number": 511
+      },
+      {
+        "name": "__channel_sync",
+        "number": 512
+      },
+      {
+        "name": "__channel_get_opt",
+        "number": 513
+      },
+      {
+        "name": "__channel_set_opt",
+        "number": 514
+      },
+      {
+        "name": "ulock_wait",
+        "number": 515
+      },
+      {
+        "name": "ulock_wake",
+        "number": 516
+      },
+      {
+        "name": "fclonefileat",
+        "number": 517
+      },
+      {
+        "name": "fs_snapshot",
+        "number": 518
+      },
+      {
+        "name": "register_uexc_handler",
+        "number": 519
+      },
+      {
+        "name": "terminate_with_payload",
+        "number": 520
+      },
+      {
+        "name": "abort_with_payload",
+        "number": 521
+      },
+      {
+        "name": "necp_session_open",
+        "number": 522
+      },
+      {
+        "name": "necp_session_action",
+        "number": 523
+      },
+      {
+        "name": "setattrlistat",
+        "number": 524
+      },
+      {
+        "name": "net_qos_guideline",
+        "number": 525
+      },
+      {
+        "name": "fmount",
+        "number": 526
+      },
+      {
+        "name": "ntp_adjtime",
+        "number": 527
+      },
+      {
+        "name": "ntp_gettime",
+        "number": 528
+      },
+      {
+        "name": "os_fault_with_payload",
+        "number": 529
+      },
+      {
+        "name": "kqueue_workloop_ctl",
+        "number": 530
+      },
+      {
+        "name": "__mach_bridge_remote_time",
+        "number": 531
+      },
+      {
+        "name": "coalition_ledger",
+        "number": 532
+      },
+      {
+        "name": "log_data",
+        "number": 533
+      },
+      {
+        "name": "memorystatus_available_memory",
+        "number": 534
+      },
+      {
+        "name": "objc_bp_assist_cfg_np",
+        "number": 535
+      },
+      {
+        "name": "shared_region_map_and_slide_2_np",
+        "number": 536
+      },
+      {
+        "name": "pivot_root",
+        "number": 537
+      },
+      {
+        "name": "task_inspect_for_pid",
+        "number": 538
+      },
+      {
+        "name": "task_read_for_pid",
+        "number": 539
+      },
+      {
+        "name": "preadv",
+        "number": 540
+      },
+      {
+        "name": "pwritev",
+        "number": 541
+      },
+      {
+        "name": "preadv_nocancel",
+        "number": 542
+      },
+      {
+        "name": "pwritev_nocancel",
+        "number": 543
+      },
+      {
+        "name": "ulock_wait2",
+        "number": 544
+      },
+      {
+        "name": "proc_info_extended_id",
+        "number": 545
+      },
+      {
+        "name": "tracker_action",
+        "number": 546
+      },
+      {
+        "name": "debug_syscall_reject",
+        "number": 547
+      },
+      {
+        "name": "debug_syscall_reject_config",
+        "number": 548
+      },
+      {
+        "name": "graftdmg",
+        "number": 549
+      },
+      {
+        "name": "map_with_linking_np",
+        "number": 550
+      },
+      {
+        "name": "freadlink",
+        "number": 551
+      },
+      {
+        "name": "record_system_event",
+        "number": 552
+      },
+      {
+        "name": "mkfifoat",
+        "number": 553
+      },
+      {
+        "name": "mknodat",
+        "number": 554
+      },
+      {
+        "name": "ungraftdmg",
+        "number": 555
+      },
+      {
+        "name": "coalition_policy_set",
+        "number": 556
+      },
+      {
+        "name": "coalition_policy_get",
+        "number": 557
+      }
+    ],
+    "evidence_type": "preprocessed-sdk-declarations",
+    "header": "usr/include/sys/syscall.h",
+    "header_sha256": "82f226f3d33f8afbef34c60e00c178b71ba3aef0e31626e25b36fdf431c2df54",
+    "macro_output_sha256": "fc9bef7aa68a624adad3c697a2a10cc070b8256658b1ef195a623abe61cfd9ae",
+    "maximum_defined_number": 557,
+    "maximum_syscall_constant": 558
+  }
+}

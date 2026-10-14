@@ -36,6 +36,41 @@ final class DesktopStateTests: XCTestCase, @unchecked Sendable {
         XCTAssertEqual(restored, recent)
     }
 
+    func testSnapshotAndStateLocationPreserveSymbolicParentTraversal() async throws {
+        let root = try temporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: root) }
+        let target = root.appendingPathComponent("target")
+        try FileManager.default.createDirectory(at: target.appendingPathComponent("nested"),
+            withIntermediateDirectories: true)
+        try FileManager.default.createSymbolicLink(atPath: root.appendingPathComponent("alias").path,
+            withDestinationPath: "target/nested")
+        try Data("actual".utf8).write(to: target.appendingPathComponent("child.txt"))
+        try Data("different file".utf8).write(to: root.appendingPathComponent("child.txt"))
+        let directory = root.appendingPathComponent("alias/..")
+        let statePath = directory.appendingPathComponent("state.json")
+        let decoy = root.appendingPathComponent("state.json")
+        let original = Data("preserve the unrelated file".utf8)
+        try original.write(to: decoy)
+        var session = DesktopSession()
+        let id = session.open(.files)
+        let snapshot = DesktopSnapshot(session: session,
+            browsers: [FileBrowserSnapshot(windowID: id, directory: directory)],
+            wallpaper: .dusk, revision: 2)
+        XCTAssertEqual(snapshot.schemaVersion, 1)
+        XCTAssertEqual(snapshot.browsers.first?.directory.path, directory.path)
+
+        let repository = DesktopStateRepository(url: statePath)
+        XCTAssertEqual(repository.url.path, statePath.path)
+        _ = try await repository.save(snapshot)
+        XCTAssertEqual(try Data(contentsOf: decoy), original)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: target.appendingPathComponent("state.json").path))
+        let restored = try await DesktopStateRepository(url: statePath).load()
+        XCTAssertEqual(restored, snapshot)
+        let restoredDirectory = try XCTUnwrap(restored?.browsers.first?.directory)
+        let history = NavigationHistory(initial: restoredDirectory)
+        XCTAssertEqual(try LocalFileService().information(for: history.current.appendingPathComponent("child.txt")).entry.size, 6)
+    }
+
     func testUnreadableSnapshotIsPreservedWhenSaveIsAttempted() async throws {
         let folder = try temporaryDirectory()
         defer { try? FileManager.default.removeItem(at: folder) }

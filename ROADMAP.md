@@ -22,6 +22,13 @@ See [research/PORTABILITY.md](research/PORTABILITY.md).
 
 ## Behavior specifications
 
+The full requested research scope, including graphics and firmware, is tracked
+in [research/SYSTEM-COVERAGE.md](research/SYSTEM-COVERAGE.md) and
+[research/scope.json](research/scope.json). Every subsystem remains open.
+Initial inventories now support targeted native-code and runtime investigations.
+The first resulting compatibility change preserves symbolic-link traversal
+through file services, CLI paths, navigation and saved sessions.
+
 For each component, choose a bounded question, observe it, and write an
 interaction contract with an executable check. Begin with Dock activation,
 minimize/restore, keyboard launcher selection, folder navigation, and sorting.

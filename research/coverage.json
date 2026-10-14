@@ -1,0 +1,342 @@
+{
+  "completion_percentage": null,
+  "completion_rule": "A component is complete only for an explicit target and contract after evidence, implementation and differential/integration verification. Artifact counts are not a whole-OS completion measure.",
+  "inputs": [
+    {
+      "file": "scope.json",
+      "sha256": "3898505bde960c3f4a2a820c217daacaa229f65077cbce34e2190f36795fc0de"
+    },
+    {
+      "file": "system-inventory.json",
+      "sha256": "9939c069374a9e14789f02bf44b85bdb91f6204cae891f18fb135edde0950d2b"
+    },
+    {
+      "file": "boot-firmware-findings.json",
+      "sha256": "47eb117698702ef986e97f38e8f519d2c6460f7570da9cf3aab3dde725b7734b"
+    },
+    {
+      "file": "boot-monitor-findings.json",
+      "sha256": "bb9287b3aefb36b58027e02daf7839070357c106909361510050c668bd6ee8a1"
+    },
+    {
+      "file": "kernel-abi-findings.json",
+      "sha256": "613d904fc4a64f062a9764bac9c15d3961ff0f9f2d2e33da97fbdd2f48977202"
+    },
+    {
+      "file": "graphics-findings.json",
+      "sha256": "4ca03f93bdb7c7d7ba70f6a3f96e85ebd8db981e4e6646b451326da01beca738"
+    },
+    {
+      "file": "native-code-findings.json",
+      "sha256": "3d5ec25011ffd8cfec6dec601c3c101c20a25b79f8b7c4d9c878ea2878c6e944"
+    },
+    {
+      "file": "shared-cache-findings.json",
+      "sha256": "18e3ee8a43a555796ccffefc183d7705efa137ad4761b3e5eb46ae364cf05093"
+    },
+    {
+      "file": "implementation-verification.json",
+      "sha256": "a553012ddf86d5bda77420351d462ec3fb740aa5844401e7807cb18bcdba5619"
+    }
+  ],
+  "limits": [
+    "Inventory, static-code analysis, observed behavior and compatible implementation are separate measures.",
+    "Counts overlap between filesystem, cache, firmware and SDK records and cannot be added into whole-OS coverage.",
+    "A function dossier can contain unresolved flows and decompiler limitations; it does not mean the full function is understood.",
+    "All subsystem scopes still contain unresolved work. No standalone macOS-compatible OS or firmware replacement is claimed."
+  ],
+  "metrics": {
+    "filesystem_runtime_cases_captured": 73,
+    "firmware_and_boot_artifact_records": 180,
+    "graphics_reference_probes_passed": 5,
+    "iosurface_and_kernel_library_functions_selected": 23,
+    "kernel_reference_checks_passed": 26,
+    "launch_job_declarations": 902,
+    "mach_o_file_paths": 5458,
+    "mach_service_declarations": 2054,
+    "rea_function_dossiers": 11,
+    "readable_regular_file_paths": 334215,
+    "shared_cache_dependency_edges": 89379,
+    "shared_cache_images": 4083
+  },
+  "objective": "Build Absolute into an open-source macOS-compatible system; research scope includes graphics, boot and firmware.",
+  "overall_status": "in_progress",
+  "reference_host": {
+    "build": "26A5421a",
+    "product": "macOS",
+    "version": "27.0"
+  },
+  "schema": 1,
+  "subsystems": [
+    {
+      "id": "boot_chain",
+      "name": "Boot chain and monitor startup",
+      "remaining": [
+        "Boot ROM and LLB implementation",
+        "iBoot control flow and handoff",
+        "Full SPTM and TXM behavior",
+        "A verified Absolute boot path"
+      ],
+      "reports": [
+        "BOOT-FIRMWARE.md",
+        "BOOT-MONITORS.md"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "device_firmware",
+      "name": "Device firmware and coprocessors",
+      "remaining": [
+        "AGX/DCP command protocols and firmware logic",
+        "SEP ROM and sepOS implementation",
+        "AOP, ANE, ISP, SIO, storage and input firmware behavior"
+      ],
+      "reports": [
+        "BOOT-FIRMWARE.md"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "kernel",
+      "name": "Kernel memory, IPC and synchronization",
+      "remaining": [
+        "Full VM and Mach IPC implementation",
+        "Scheduler, exceptions and process lifecycle",
+        "BSD syscall handlers and ABI translation",
+        "XNU source-to-installed-build matching"
+      ],
+      "reports": [
+        "KERNEL-ABI.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "graphics",
+      "name": "Window server, drawing and GPU",
+      "remaining": [
+        "WindowServer and compositor internals",
+        "Complete CoreGraphics, CoreAnimation and Metal behavior",
+        "AGX command submission and GPU ISA",
+        "Physical display and GPU drivers"
+      ],
+      "reports": [
+        "GRAPHICS.md"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "file_paths",
+      "name": "File paths and link semantics",
+      "remaining": [
+        "Races and concurrent filesystem mutation",
+        "Permissions and extended attributes across hosts",
+        "Finder-level filesystem behavior beyond the tested link cases"
+      ],
+      "reports": [
+        "NATIVE-CODE.md"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "storage",
+      "name": "Filesystems and storage",
+      "remaining": [
+        "APFS structures and operations",
+        "Mount, snapshot, clone, encryption and recovery semantics",
+        "Block and storage-controller protocols"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "drivers",
+      "name": "Drivers and I/O",
+      "remaining": [
+        "IOKit/DriverKit object and message contracts",
+        "Interrupts, DMA, IOMMU and PCIe",
+        "USB, Thunderbolt, cameras and peripheral support"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "runtime",
+      "name": "Binary loading and language runtimes",
+      "remaining": [
+        "Mach-O loading and dyld fixups",
+        "Objective-C and Swift runtime behavior",
+        "Foundation, AppKit and SwiftUI compatibility",
+        "Mac application binary execution"
+      ],
+      "reports": [
+        "KERNEL-ABI.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "services",
+      "name": "Local services and IPC protocols",
+      "remaining": [
+        "Launchd scheduling and lifecycle semantics",
+        "XPC serialization and service protocols",
+        "Endpoint ownership and bootstrap namespaces"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "network",
+      "name": "Networking and discovery",
+      "remaining": [
+        "Sockets and packet behavior",
+        "DNS, mDNS, routing and interface configuration",
+        "Wi-Fi and Bluetooth protocols/drivers",
+        "Network extension and VPN interfaces"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "security",
+      "name": "Security and identity",
+      "remaining": [
+        "Keychain and authentication behavior",
+        "Sandbox, entitlements and code-signing validation",
+        "Authorization and trust services",
+        "Cryptographic service interfaces"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "media",
+      "name": "Audio, video and imaging",
+      "remaining": [
+        "CoreAudio graph, timing and device behavior",
+        "Video decode/encode and camera pipelines",
+        "Image codecs, color and media-framework contracts"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "input",
+      "name": "Input and accessibility",
+      "remaining": [
+        "HID and event delivery",
+        "Trackpad, keyboard and multitouch protocols",
+        "Accessibility tree, assistive actions and input methods"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "desktop",
+      "name": "Desktop and applications",
+      "remaining": [
+        "Finder and Dock behavior beyond current prototypes",
+        "Application lifecycle and inter-app windows",
+        "Menus, settings, notifications and workspace behavior"
+      ],
+      "reports": [
+        "FINDINGS.md",
+        "NATIVE-CODE.md",
+        "LINUX-DESKTOP.md"
+      ],
+      "status": "partial"
+    },
+    {
+      "id": "power",
+      "name": "Power and thermal management",
+      "remaining": [
+        "Sleep, wake and shutdown transitions",
+        "CPU/GPU frequency and thermal control",
+        "Battery and power-controller behavior"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "updates",
+      "name": "Installation, updates and recovery",
+      "remaining": [
+        "Installation and update state machines",
+        "Recovery environment behavior",
+        "System-volume sealing and rollback",
+        "Absolute installer and update implementation"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "text_print",
+      "name": "Text, localization and printing",
+      "remaining": [
+        "Text shaping and font contracts",
+        "Locale behavior and resource selection",
+        "Printing pipeline and device protocols"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud and continuity clients",
+      "remaining": [
+        "Local client behavior and synchronization contracts",
+        "Continuity and device-discovery protocols",
+        "Remote service implementations are not present in this Mac filesystem"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "inventory_only"
+    },
+    {
+      "id": "automation",
+      "name": "Automation and development interfaces",
+      "remaining": [
+        "Apple Events and scripting behavior",
+        "Developer tools and debugging interfaces",
+        "Extension loading and automation integration"
+      ],
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "status": "inventory_only"
+    }
+  ]
+}

@@ -180,6 +180,8 @@ if (results.some(item => item.exitCode !== 0 || !item.evidenceId)) {
   const markdown = [
     '# Local macOS desktop evidence',
     '',
+    'This report covers the initial Dock/Finder bundle pass. See [SYSTEM-COVERAGE.md](SYSTEM-COVERAGE.md) for the current system-wide investigation.',
+    '',
     `REA ${findings.rea}; ${findings.host.ProductName} ${findings.host.ProductVersion}, build ${findings.host.BuildVersion}.`,
     'The targets were `/System/Library/CoreServices/Dock.app` and `/System/Library/CoreServices/Finder.app`.',
     'All eight static inspections completed. No target process was launched or modified.',

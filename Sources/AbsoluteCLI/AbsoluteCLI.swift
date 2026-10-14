@@ -58,7 +58,11 @@ struct AbsoluteCLI {
     }
 
     private static func fileURL(_ value: String) -> URL {
-        URL(fileURLWithPath: (value as NSString).expandingTildeInPath).standardizedFileURL
+        let expanded = (value as NSString).expandingTildeInPath
+        // NSString's tilde expansion removes trailing slashes even when the
+        // input contains no tilde. Retain the caller's directory requirement.
+        if value.hasSuffix("/") { return URL(fileURLWithPath: expanded, isDirectory: true) }
+        return URL(fileURLWithPath: expanded)
     }
     private static func encoded<T: Encodable>(_ value: T) throws -> Data {
         let encoder = JSONEncoder()
@@ -104,6 +108,7 @@ struct AbsoluteCLI {
         let preview = try TextPreviewReader().read(package)
         if case .text(let text, _) = preview { checks["text_preview"] = text.contains("PackageDescription") }
         else { checks["text_preview"] = false }
+        checks.merge(try await verifySymbolicParentPaths(in: temporary)) { _, new in new }
         #if os(Linux)
         let platform = "linux"
         #else
@@ -116,6 +121,94 @@ struct AbsoluteCLI {
         #endif
         return CoreReport(platform: platform, architecture: architecture,
             operatingSystem: ProcessInfo.processInfo.operatingSystemVersionString, checks: checks)
+    }
+
+    private static func verifySymbolicParentPaths(in temporary: URL) async throws -> [String: Bool] {
+        let root = temporary.appendingPathComponent("path-traversal")
+        let target = root.appendingPathComponent("target")
+        try FileManager.default.createDirectory(at: target.appendingPathComponent("nested"),
+            withIntermediateDirectories: true)
+        try FileManager.default.createSymbolicLink(atPath: root.appendingPathComponent("alias").path,
+            withDestinationPath: "target/nested")
+        try Data("actual".utf8).write(to: target.appendingPathComponent("child.txt"))
+        try Data("different file".utf8).write(to: root.appendingPathComponent("child.txt"))
+        let directory = root.appendingPathComponent("alias/..")
+        let requestedFile = directory.appendingPathComponent("child.txt")
+        var checks: [String: Bool] = [:]
+
+        // Run real child commands so argument parsing and serialization are part
+        // of the check, including the literal link/../child path from the shell.
+        let information = try captureCommand(["info", requestedFile.path], as: FileInformation.self)
+        checks["cli_info_preserves_symlink_parent"] = information.entry.size == 6 &&
+            information.entry.url.path == requestedFile.path
+        let entries = try captureCommand(["ls", directory.path], as: [FileEntry].self)
+        checks["cli_ls_preserves_symlink_parent"] = entries.contains { $0.name == "child.txt" && $0.size == 6 } &&
+            entries.contains { $0.name == "nested" && $0.isDirectory }
+        let revealed = try captureCommand(["reveal", requestedFile.path], as: FileRevealLocation.self)
+        checks["cli_reveal_preserves_symlink_parent"] = revealed.directory.path == directory.path &&
+            revealed.selectedURL?.path == requestedFile.path
+
+        var session = DesktopSession()
+        let id = session.open(.files)
+        let snapshot = DesktopSnapshot(session: session,
+            browsers: [FileBrowserSnapshot(windowID: id, directory: directory)],
+            wallpaper: .forest, revision: 2)
+        let decoy = root.appendingPathComponent("desktop.json")
+        let original = Data("preserve the unrelated file".utf8)
+        try original.write(to: decoy)
+        let statePath = directory.appendingPathComponent("desktop.json")
+        _ = try await DesktopStateRepository(url: statePath).save(snapshot)
+        checks["session_write_preserves_symlink_parent"] = try Data(contentsOf: decoy) == original &&
+            FileManager.default.fileExists(atPath: target.appendingPathComponent("desktop.json").path)
+        let restored = try captureCommand(["session", statePath.path], as: DesktopSnapshot.self)
+        checks["cli_session_preserves_symlink_parent"] = restored == snapshot &&
+            restored.browsers.first?.directory.path == directory.path
+
+        let directoryLink = root.appendingPathComponent("directory-link", isDirectory: false)
+        let danglingLink = root.appendingPathComponent("dangling-link", isDirectory: false)
+        try FileManager.default.createSymbolicLink(atPath: directoryLink.path, withDestinationPath: "target")
+        try FileManager.default.createSymbolicLink(atPath: danglingLink.path, withDestinationPath: "missing")
+        for (name, path) in [
+            ("cli_rejects_file_with_trailing_slash", requestedFile.path + "/"),
+            ("cli_rejects_dangling_link_with_trailing_slash", danglingLink.path + "/")
+        ] {
+            var rejected = true
+            for command in ["info", "reveal"] {
+                let result = try runCheckCommand([command, path], suppressError: true)
+                rejected = rejected && result.exited && result.status == 1
+            }
+            checks[name] = rejected
+        }
+        let directoryArgument = directoryLink.path + "/"
+        let linkInfo = try captureCommand(["info", directoryArgument], as: FileInformation.self)
+        let linkReveal = try captureCommand(["reveal", directoryArgument], as: FileRevealLocation.self)
+        checks["cli_directory_link_with_trailing_slash"] = linkInfo.entry.isDirectory &&
+            !linkInfo.entry.isSymbolicLink && linkInfo.symbolicLinkDestination == nil &&
+            linkReveal.selectedURL?.hasDirectoryPath == true &&
+            linkReveal.selectedURL?.path == directoryLink.path
+        return checks
+    }
+
+    private static func captureCommand<T: Decodable>(_ arguments: [String], as type: T.Type) throws -> T {
+        let result = try runCheckCommand(arguments)
+        guard result.exited, result.status == 0 else { throw CommandError.checkFailed }
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(type, from: result.data)
+    }
+
+    private static func runCheckCommand(_ arguments: [String], suppressError: Bool = false) throws
+        -> (exited: Bool, status: Int32, data: Data) {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: CommandLine.arguments[0])
+        process.arguments = arguments
+        let pipe = Pipe()
+        process.standardOutput = pipe
+        process.standardError = suppressError ? FileHandle.nullDevice : FileHandle.standardError
+        try process.run()
+        let data = pipe.fileHandleForReading.readDataToEndOfFile()
+        process.waitUntilExit()
+        return (process.terminationReason == .exit, process.terminationStatus, data)
     }
 
     private struct CoreReport: Encodable {

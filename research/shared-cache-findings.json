@@ -1,0 +1,732 @@
+{
+  "cacheFileCount": 80,
+  "cacheImageUuidsVerified": 4083,
+  "cacheMapImageCount": 4083,
+  "capturedAt": "2026-10-14T08:02:31.750004+00:00",
+  "dependencyAttributeCounts": {
+    "delay-init": 133,
+    "delay-init weak-link": 16,
+    "lazy-load": 38,
+    "ordinary": 61583,
+    "re-export": 360,
+    "upward": 201,
+    "upward delay-init": 9,
+    "upward delay-init weak-link": 9,
+    "upward weak-link": 19,
+    "weak-lazy-load": 55,
+    "weak-link": 26956
+  },
+  "dependencyEdgeCount": 89379,
+  "evidenceId": "absolute-shared-cache-sha256:66f47be44c83fb9d4d07adfaece35ee175fe25dcdf7f60a12b0c4c0975bdf478",
+  "evidenceType": "static-cache-header-and-disassembly-observation",
+  "gpuExecutableRecords": {
+    "baseCpuName": null,
+    "baseCpuType": 19,
+    "cpuArchitectureBit": "CPU_ARCH_ABI64",
+    "cpuType": "0x01000013",
+    "fileCount": 29,
+    "fileType": "MH_GPU_EXECUTE",
+    "inventoryEvidenceId": "absolute-inventory-sha256:a79254d0f1363940fd2fa3d3a7a0b1f40c517fc20ab4540ccec4fbfe55a095b0",
+    "limits": [
+      "The local machine.h skips base CPU type 19; otool prints its numeric type.",
+      "GPU program file type is identified, but a named architecture or subtype-to-chip mapping is not established.",
+      "These are slices within files, not 229 separately understood GPU programs."
+    ],
+    "lipoArchitectureOutput": "unknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknownunknown",
+    "lipoOutputSha256": "49bd85f980c2d3b873a8039085d50654b42f5deb70deac1027407624fed087da",
+    "loaderHeaderSha256": "5862aeb7fbf183453080bc887c0d502fe25a86ff5bd81291bbcc408bd7fe6e74",
+    "localHeaderSkipsBase19": true,
+    "machineHeaderSha256": "039d19b5b9a96a941760830bb05ae4cdda3ecfa35a9ea2aab697f341ccf56a3f",
+    "representativeHeaderOutputSha256": "170c94ffbc0c373d4d2eeba215ca21abf85374b61aa668f5407eaf72a26e04c1",
+    "representativePath": "/System/Library/PrivateFrameworks/Vista.framework/Versions/A/Resources/VSTPrecompiledPipelines.metallib",
+    "sdkHeaderFileTypeValue": 13,
+    "sliceCount": 229
+  },
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5421a",
+  "imageCount": 4083,
+  "kernelFileSha256": "69d2c1dfe9a6208735f6bde0047ebe3a39bd7dbd27f5b1aea502e319a83a574f",
+  "kernelImage": {
+    "bsdSelectorComparisons": [
+      {
+        "api": "read",
+        "functionLabel": "_read",
+        "matches": true,
+        "observedSelector": 3,
+        "sdkSyscallNumber": 3
+      },
+      {
+        "api": "write",
+        "functionLabel": "_write",
+        "matches": true,
+        "observedSelector": 4,
+        "sdkSyscallNumber": 4
+      },
+      {
+        "api": "getpid",
+        "functionLabel": "___getpid",
+        "matches": true,
+        "observedSelector": 20,
+        "sdkSyscallNumber": 20
+      }
+    ],
+    "cacheHeader": {
+      "cpuSubtype": 2147483650,
+      "cpuType": 16777228,
+      "fileType": 6,
+      "headerAddress": "0x180848000",
+      "headerAndCommandsSha256": "517a456cfcd5339862e990be6aa503ab80de3d38f744f0490398e3c7c838a7cd",
+      "sourceVersion": "13432.1.9",
+      "uuid": "1D409488-002C-3663-9BA9-37C334D384C1"
+    },
+    "diskDisassemblySha256": "240d4c8afc7ea9c0ca8dd488d08196ee75513690d03a38b21d93bd49de1fa27e",
+    "getpidExportAliasOffsets": {
+      "___getpid": [
+        4452
+      ],
+      "_getpid": [
+        4452
+      ]
+    },
+    "kernelAbiEvidenceId": "absolute-kernel-abi-sha256:bbb7fb1debddf46b49d159a5535481a7134dd489661f45ea6df228a88e25f6d4",
+    "kernelAbiReportSha256": "613d904fc4a64f062a9764bac9c15d3961ff0f9f2d2e33da97fbdd2f48977202",
+    "machMessageConstants": {
+      "MACH_RCV_INTERRUPT": 1024,
+      "MACH_RCV_INTERRUPTED": 268451845,
+      "MACH_SEND_INTERRUPT": 64,
+      "MACH_SEND_INTERRUPTED": 268435463,
+      "MACH_SEND_INVALID_DEST": 268435459
+    },
+    "machMessageHeaderSha256": "86e9e87ba2a736236613f2c0a8563dbacaeec1a761654b12812eaf8599b55e67",
+    "minimumOS": "27.0",
+    "path": "/usr/lib/system/libsystem_kernel.dylib",
+    "sdk": "27.0",
+    "sdkTbdVersions": [
+      "13432.1.6"
+    ],
+    "selectedFunctions": [
+      {
+        "byteCount": 44,
+        "cacheAddress": "0x180849908",
+        "cacheBytesEqualDisk": true,
+        "cacheDisassemblyFile": "research/local/shared-cache/read-cache.txt",
+        "cacheDisassemblySha256": "4fd078d49deb6b689db9a13543fe81d88dc94a53ac56ab41d25f3d31fe933d9f",
+        "cachedCodeSha256": "be4392a472b290d469c3d048d3add897ff3f3bf960287205cee5a9a1e03c7a0d",
+        "changedInstructionOffsets": [],
+        "diskCodeSha256": "be4392a472b290d469c3d048d3add897ff3f3bf960287205cee5a9a1e03c7a0d",
+        "fileImageOffset": 6408,
+        "instructionCount": 11,
+        "name": "_read",
+        "selectorVerifiedFromCacheBytes": true,
+        "svcImmediate": 128,
+        "x16TrapSelector": 3
+      },
+      {
+        "byteCount": 44,
+        "cacheAddress": "0x18084c830",
+        "cacheBytesEqualDisk": true,
+        "cacheDisassemblyFile": "research/local/shared-cache/write-cache.txt",
+        "cacheDisassemblySha256": "c278132a6bcbfb9e09c69e3a89a3be82d552a3c73e50125a53e073ad1b4390df",
+        "cachedCodeSha256": "fbab9569eb57421d935cc70e047b4872b0e3e580c2d8792c06c4f4a62b85af7e",
+        "changedInstructionOffsets": [],
+        "diskCodeSha256": "fbab9569eb57421d935cc70e047b4872b0e3e580c2d8792c06c4f4a62b85af7e",
+        "fileImageOffset": 18480,
+        "instructionCount": 11,
+        "name": "_write",
+        "selectorVerifiedFromCacheBytes": true,
+        "svcImmediate": 128,
+        "x16TrapSelector": 4
+      },
+      {
+        "byteCount": 80,
+        "cacheAddress": "0x180849164",
+        "cacheBytesEqualDisk": false,
+        "cacheDisassemblyFile": "research/local/shared-cache/getpid-cache.txt",
+        "cacheDisassemblySha256": "a6f990b1e58512c01eacafff429024c8650b6153f2926943fd731b0bf49dd78f",
+        "cachedCodeSha256": "6ddc6395fcca62eb8c136d08f3ee2bc2cfe02f374bc5f0ae22f43f48812ab5e5",
+        "changedInstructionOffsets": [
+          0,
+          4
+        ],
+        "diskCodeSha256": "987a35eb5b3479b7b7282bc6b1b0cda674a885328421bd4a8fa12ac8157d64f8",
+        "fileImageOffset": 4452,
+        "instructionCount": 20,
+        "name": "___getpid",
+        "selectorVerifiedFromCacheBytes": true,
+        "svcImmediate": 128,
+        "x16TrapSelector": 20
+      },
+      {
+        "byteCount": 12,
+        "cacheAddress": "0x180848c18",
+        "cacheBytesEqualDisk": true,
+        "cacheDisassemblyFile": "research/local/shared-cache/mach_msg2_trap-cache.txt",
+        "cacheDisassemblySha256": "7cec105f2d05cfae53a0fdd11972c1b823422588746ffe96c44961a91fc9ee46",
+        "cachedCodeSha256": "8345c1083e855dec7c5f49fe5f2ec91adb3c5d362fbc0ae4d1609fc65bac467f",
+        "changedInstructionOffsets": [],
+        "diskCodeSha256": "8345c1083e855dec7c5f49fe5f2ec91adb3c5d362fbc0ae4d1609fc65bac467f",
+        "fileImageOffset": 3096,
+        "instructionCount": 3,
+        "name": "_mach_msg2_trap",
+        "selectorVerifiedFromCacheBytes": true,
+        "svcImmediate": 128,
+        "x16TrapSelector": -47
+      },
+      {
+        "byteCount": 12,
+        "cacheAddress": "0x180848a74",
+        "cacheBytesEqualDisk": true,
+        "cacheDisassemblyFile": "research/local/shared-cache/kernelrpc_mach_vm_allocate_trap-cache.txt",
+        "cacheDisassemblySha256": "f55a4ddfc40fbefadd4ceaade25872ee65d44bcd1bc789b0cc49d10e5e2ca20d",
+        "cachedCodeSha256": "9a278f736c098897a02037e2cbe4ca80072c98ed64a199c7716b93ed571bbdb0",
+        "changedInstructionOffsets": [],
+        "diskCodeSha256": "9a278f736c098897a02037e2cbe4ca80072c98ed64a199c7716b93ed571bbdb0",
+        "fileImageOffset": 2676,
+        "instructionCount": 3,
+        "name": "__kernelrpc_mach_vm_allocate_trap",
+        "selectorVerifiedFromCacheBytes": true,
+        "svcImmediate": 128,
+        "x16TrapSelector": -10
+      },
+      {
+        "byteCount": 12,
+        "cacheAddress": "0x180848a8c",
+        "cacheBytesEqualDisk": true,
+        "cacheDisassemblyFile": "research/local/shared-cache/kernelrpc_mach_vm_deallocate_trap-cache.txt",
+        "cacheDisassemblySha256": "af23366937eb64f136e1ce27984f15976972115240a8dd3dcfcb0fc6f310b0dd",
+        "cachedCodeSha256": "b0bc22dd2544cdf3706c5b2550b5826a77382fe9bec39d54e342a878423664e7",
+        "changedInstructionOffsets": [],
+        "diskCodeSha256": "b0bc22dd2544cdf3706c5b2550b5826a77382fe9bec39d54e342a878423664e7",
+        "fileImageOffset": 2700,
+        "instructionCount": 3,
+        "name": "__kernelrpc_mach_vm_deallocate_trap",
+        "selectorVerifiedFromCacheBytes": true,
+        "svcImmediate": 128,
+        "x16TrapSelector": -12
+      },
+      {
+        "byteCount": 72,
+        "cacheAddress": "0x18084a5cc",
+        "cacheBytesEqualDisk": false,
+        "cacheDisassemblyFile": "research/local/shared-cache/cerror-cache.txt",
+        "cacheDisassemblySha256": "ac0daf62770917fbf52ab624c0a1cdb79f20b02902f131c854fa5e7e453b0fb5",
+        "cachedCodeSha256": "5baebcc179de57386acf96581aad5f078b970a3bb7967539e13bff35c0a4b5be",
+        "changedInstructionOffsets": [
+          20,
+          24
+        ],
+        "diskCodeSha256": "525e715d9194be2e49b629156c6bc2419f11734fd0e5363e321a5adc91b06c76",
+        "fileImageOffset": 9676,
+        "instructionCount": 18,
+        "name": "_cerror",
+        "svcImmediate": null,
+        "x16TrapSelector": null
+      },
+      {
+        "byteCount": 36,
+        "cacheAddress": "0x1808495e0",
+        "cacheBytesEqualDisk": false,
+        "cacheDisassemblyFile": "research/local/shared-cache/cerror_nocancel-cache.txt",
+        "cacheDisassemblySha256": "fa6c9234296a5b98a912da7dec7da701762d10ee0f420ca86ab279b8c5e9a47d",
+        "cachedCodeSha256": "83d4f9cc4d1985bd02346d13b7f2060ede5865f14e53c83479f0c29c0f806b5f",
+        "changedInstructionOffsets": [
+          0,
+          4
+        ],
+        "diskCodeSha256": "6e7a74de0262321a8240c8c2f0c2a90b627394fdb28384b6ec997f1b6c242f32",
+        "fileImageOffset": 5600,
+        "instructionCount": 9,
+        "name": "_cerror_nocancel",
+        "svcImmediate": null,
+        "x16TrapSelector": null
+      },
+      {
+        "byteCount": 256,
+        "cacheAddress": "0x18085b894",
+        "cacheBytesEqualDisk": true,
+        "cacheDisassemblyFile": "research/local/shared-cache/mach_msg2_internal-cache.txt",
+        "cacheDisassemblySha256": "c5b3d1b8afc55e3f1788ef554787d3298e2268f92033c096bb3d6f9f1df0c3fb",
+        "cachedCodeSha256": "01be716da03315fd1bdfd0a120dbcaebeea02aa30ed93a2e9ce5541d833b5317",
+        "changedInstructionOffsets": [],
+        "diskCodeSha256": "01be716da03315fd1bdfd0a120dbcaebeea02aa30ed93a2e9ce5541d833b5317",
+        "fileImageOffset": 80020,
+        "instructionCount": 64,
+        "name": "_mach_msg2_internal",
+        "svcImmediate": null,
+        "x16TrapSelector": null
+      },
+      {
+        "byteCount": 176,
+        "cacheAddress": "0x18084b000",
+        "cacheBytesEqualDisk": false,
+        "cacheDisassemblyFile": "research/local/shared-cache/mach_vm_allocate-cache.txt",
+        "cacheDisassemblySha256": "ad1fac4647287382c530340bdcaca685186ec4601ef678069048f9f53e45e983",
+        "cachedCodeSha256": "00fece7b867ad1fec2647cac86556774cf0cb8860d913fe8a95e7a4a16aee7d7",
+        "changedInstructionOffsets": [
+          112,
+          116
+        ],
+        "diskCodeSha256": "591951ddbb7fa93052ca687079c39ea89bd4c6e52951b4f87c4a817eac8afaa8",
+        "fileImageOffset": 12288,
+        "instructionCount": 44,
+        "name": "_mach_vm_allocate",
+        "svcImmediate": null,
+        "x16TrapSelector": null
+      },
+      {
+        "byteCount": 168,
+        "cacheAddress": "0x18084a7a4",
+        "cacheBytesEqualDisk": false,
+        "cacheDisassemblyFile": "research/local/shared-cache/mach_vm_deallocate-cache.txt",
+        "cacheDisassemblySha256": "ee675c2627b5b01ade90ee5d3495b4e06d0bfb4cf597ed15c770e490617045eb",
+        "cachedCodeSha256": "8ce453688b8c34dd7abfb42de57636243ae7d460fff1e29b75a9c9252fb2a361",
+        "changedInstructionOffsets": [
+          32,
+          36
+        ],
+        "diskCodeSha256": "7f7c21dce2c81eec9a2ce6c0631992d2363005c25519bd108b8e32e6604e625a",
+        "fileImageOffset": 10148,
+        "instructionCount": 42,
+        "name": "_mach_vm_deallocate",
+        "svcImmediate": null,
+        "x16TrapSelector": null
+      }
+    ],
+    "uuid": "1D409488-002C-3663-9BA9-37C334D384C1"
+  },
+  "limits": [
+    "Image/load counts are inventory completeness within this cache, not implementation coverage.",
+    "Only eleven selected libsystem_kernel functions were interpreted; the remaining disassembly is unreviewed.",
+    "No guessed trap or private syscall was executed; these are user-space entry conventions, not kernel-handler implementations.",
+    "Cached code can differ from standalone code through relocation/optimization; selected actual cache bytes and derived disassembly are retained locally.",
+    "Dependencies outside the catalog may be optional, aliased or supplied elsewhere; this inventory does not prove runtime failure.",
+    "SDK declarations and implementation source versions are recorded separately; matching selectors do not establish complete ABI compatibility."
+  ],
+  "localInventory": "research/local/shared-cache/complete-inventory.json",
+  "localInventorySha256": "8802705f1598afdd728bd105d49d2bac33b0996216c76557db725c36b0437e66",
+  "mapSha256": "9bd6b24132902d34c45df05d024ffdf5e59f21cd3dc4dc9930547483c0fd4b32",
+  "minimumOSCounts": {
+    "11.0": 33,
+    "12.0": 3,
+    "13.0": 6,
+    "14.0": 6,
+    "15.0": 9,
+    "16.0": 4,
+    "17.0": 4,
+    "17.4": 1,
+    "18.0": 5,
+    "26.0": 8,
+    "26.2": 1,
+    "26.4": 3,
+    "26.6": 1,
+    "27.0": 3999
+  },
+  "outsideLiteralCatalogEdges": [
+    {
+      "attributes": "weak-link",
+      "from": "/usr/lib/libobjc.A.dylib",
+      "ordinaryFilePresent": false,
+      "path": "/usr/lib/libobjc-env.dylib",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/usr/lib/libobjc-env.dylib"
+    },
+    {
+      "attributes": "delay-init weak-link",
+      "from": "/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/Espresso.framework/Versions/A/Espresso",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/MLCompilerServices.framework/MLCompilerServices",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/Library/PrivateFrameworks/MLCompilerServices.framework/Versions/A/MLCompilerServices"
+    },
+    {
+      "attributes": "weak-lazy-load",
+      "from": "/System/Library/PrivateFrameworks/TrialServer.framework/Versions/A/TrialServer",
+      "ordinaryFilePresent": false,
+      "path": "/AppleInternal/Library/Frameworks/TrialEncryption.framework/Versions/A/TrialEncryption",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/AppleInternal/Library/Frameworks/TrialEncryption.framework/Versions/A/TrialEncryption"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AudioDSPManager.framework/Versions/A/AudioDSPManager",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AudioServerDriver.framework/Versions/A/AudioServerDriver",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/usr/lib/libcryptex_core.dylib",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/Frameworks/SecureConfigDB.framework/Versions/A/SecureConfigDB",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/Frameworks/SecureConfigDB.framework/Versions/A/SecureConfigDB"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/Frameworks/FoundationModels.framework/Versions/A/FoundationModels",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AccessibilityUIService.framework/Versions/A/AccessibilityUIService",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/TouchAccommodations.framework/Versions/A/TouchAccommodations",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/TouchAccommodations.framework/Versions/A/TouchAccommodations"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/ActionKit.framework/Versions/A/ActionKit",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AdaptiveVoiceShortcuts.framework/Versions/A/AdaptiveVoiceShortcuts",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/AccessibilityPhysicalInteraction.framework/Versions/A/AccessibilityPhysicalInteraction",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/AccessibilityPhysicalInteraction.framework/Versions/A/AccessibilityPhysicalInteraction"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AnteroAgent.framework/Versions/A/AnteroAgent",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AppleDepth.framework/Versions/A/AppleDepth",
+      "ordinaryFilePresent": false,
+      "path": "/AppleInternal/Library/Frameworks/VisualLogger.framework/Versions/A/VisualLogger",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/AppleInternal/Library/Frameworks/VisualLogger.framework/Versions/A/VisualLogger"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AppleIntelligenceReporting.framework/Versions/A/AppleIntelligenceReporting",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AppleIntelligenceReportingProcessing.framework/Versions/A/AppleIntelligenceReportingProcessing",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/AudioDSPGraph.framework/Versions/A/AudioDSPGraph",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/CloudAttestation.framework/Versions/A/CloudAttestation",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/libnarrativecert.framework/Versions/A/libnarrativecert",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/libnarrativecert.framework/Versions/A/libnarrativecert"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/CloudAttestation.framework/Versions/A/CloudAttestation",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/Frameworks/SecureConfigDB.framework/Versions/A/SecureConfigDB",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/Frameworks/SecureConfigDB.framework/Versions/A/SecureConfigDB"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/CoreDiagnostics.framework/Versions/A/CoreDiagnostics",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/Frameworks/SecureConfigDB.framework/Versions/A/SecureConfigDB",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/Frameworks/SecureConfigDB.framework/Versions/A/SecureConfigDB"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/DataAccess.framework/Frameworks/DADaemonSupport.framework/Versions/A/DADaemonSupport",
+      "ordinaryFilePresent": false,
+      "path": "/AppleInternal/Library/Frameworks/CalDAVServerSimulator.framework/Versions/A/CalDAVServerSimulator",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/AppleInternal/Library/Frameworks/CalDAVServerSimulator.framework/Versions/A/CalDAVServerSimulator"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/ExposureNotificationDaemon.framework/Versions/A/ExposureNotificationDaemon",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/Frameworks/ExposureNotification.framework/Versions/A/ExposureNotification",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/Frameworks/ExposureNotification.framework/Versions/A/ExposureNotification"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/GenerativeAgents.framework/Versions/A/GenerativeAgents",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/MLCompilerRuntime.framework/Versions/A/MLCompilerRuntime",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/MLCompilerRuntime.framework/Versions/A/Libraries/libmlc_rt.dylib",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/MLCompilerRuntime.framework/Versions/A/Libraries/libmlc_rt.dylib"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/OmniSearch.framework/Versions/A/OmniSearch",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/SiriAppIntentsRuntime.framework/Versions/A/SiriAppIntentsRuntime",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/TokenGeneration.framework/Versions/A/TokenGeneration",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/Library/PrivateFrameworks/VoiceProcessor.framework/Versions/A/VoiceProcessor",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/RemoteProcessingBlock.framework/Versions/A/RemoteProcessingBlock"
+    },
+    {
+      "attributes": "",
+      "from": "/usr/lib/libramrod.dylib",
+      "ordinaryFilePresent": false,
+      "path": "/usr/lib/libimg4.dylib",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/usr/lib/libimg4.dylib"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/Frameworks/Assignables.framework/Versions/A/Assignables",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/Frameworks/CoreAudioKit.framework/Versions/A/CoreAudioKit",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/Frameworks/RoomPlan.framework/Versions/A/RoomPlan",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/USDKit.framework/Versions/A/USDKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/Library/Frameworks/USDKit.framework/Versions/A/USDKit"
+    },
+    {
+      "attributes": "weak-link",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/ActionKit.framework/Versions/A/ActionKit",
+      "ordinaryFilePresent": false,
+      "path": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal",
+      "resolution": "outside-catalog",
+      "resolvedPath": "/System/Library/PrivateFrameworks/IntelligencePlatformLibrary_AppleInternal.framework/Versions/A/IntelligencePlatformLibrary_AppleInternal"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/AppleMediaServicesUIDynamic.framework/Versions/A/AppleMediaServicesUIDynamic",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/CoreHapticsTools.framework/Versions/A/CoreHapticsTools",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/JITAppKit.framework/Versions/A/JITAppKit",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/PrintKitUI.framework/Versions/A/PrintKitUI",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/SearchToShareCore.framework/Versions/A/SearchToShareCore",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/StickersUI.framework/Versions/A/StickersUI",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    },
+    {
+      "attributes": "",
+      "from": "/System/iOSSupport/System/Library/PrivateFrameworks/TouchML.framework/Versions/A/TouchML",
+      "ordinaryFilePresent": false,
+      "path": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/UIKit",
+      "resolution": "filesystem-symlink-to-cache-path",
+      "resolvedPath": "/System/iOSSupport/System/Library/Frameworks/UIKit.framework/Versions/A/UIKit"
+    }
+  ],
+  "platformCounts": {
+    "macCatalyst": 520,
+    "macOS": 2016,
+    "zippered(macOS/Catalyst)": 1547
+  },
+  "rawInventorySha256": "e975e34d88b6e24462fd4a3464020c24471e343327ac1581e4b0f028bb426985",
+  "resolutionCounts": {
+    "filesystem-symlink-to-cache-path": 11,
+    "literal-cache-path": 89340,
+    "outside-catalog": 28
+  },
+  "schema": 1,
+  "scriptSha256": "82ecf1e8af81721053b9ede3960409c344478f3696726a3a990f1064c380cc40",
+  "topIncomingDependencies": [
+    {
+      "count": 4037,
+      "path": "/usr/lib/libSystem.B.dylib"
+    },
+    {
+      "count": 3491,
+      "path": "/usr/lib/libobjc.A.dylib"
+    },
+    {
+      "count": 3447,
+      "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+    },
+    {
+      "count": 3054,
+      "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+    },
+    {
+      "count": 1987,
+      "path": "/usr/lib/swift/libswiftCore.dylib"
+    },
+    {
+      "count": 1953,
+      "path": "/usr/lib/swift/libswift_Builtin_float.dylib"
+    },
+    {
+      "count": 1952,
+      "path": "/usr/lib/swift/libswiftObjectiveC.dylib"
+    },
+    {
+      "count": 1946,
+      "path": "/usr/lib/swift/libswiftDispatch.dylib"
+    },
+    {
+      "count": 1940,
+      "path": "/usr/lib/swift/libswiftCoreFoundation.dylib"
+    },
+    {
+      "count": 1938,
+      "path": "/usr/lib/swift/libswiftXPC.dylib"
+    },
+    {
+      "count": 1936,
+      "path": "/usr/lib/swift/libswiftIOKit.dylib"
+    },
+    {
+      "count": 1812,
+      "path": "/usr/lib/swift/libswiftos.dylib"
+    },
+    {
+      "count": 1408,
+      "path": "/usr/lib/swift/libswiftMetal.dylib"
+    },
+    {
+      "count": 1407,
+      "path": "/usr/lib/swift/libswiftOSLog.dylib"
+    },
+    {
+      "count": 1384,
+      "path": "/usr/lib/swift/libswiftsimd.dylib"
+    },
+    {
+      "count": 1383,
+      "path": "/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib"
+    },
+    {
+      "count": 1328,
+      "path": "/usr/lib/swift/libswift_Concurrency.dylib"
+    },
+    {
+      "count": 1298,
+      "path": "/usr/lib/swift/libswiftQuartzCore.dylib"
+    },
+    {
+      "count": 1131,
+      "path": "/usr/lib/swift/libswiftAccelerate.dylib"
+    },
+    {
+      "count": 1092,
+      "path": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics"
+    }
+  ]
+}

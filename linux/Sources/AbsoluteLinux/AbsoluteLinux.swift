@@ -427,7 +427,7 @@ struct AbsoluteLinux {
             guard let index = arguments.firstIndex(of: flag), arguments.indices.contains(index + 1) else { return nil }
             return arguments[index + 1]
         }
-        let project = URL(fileURLWithPath: value("--project") ?? FileManager.default.currentDirectoryPath).standardizedFileURL
+        let project = URL(fileURLWithPath: value("--project") ?? FileManager.default.currentDirectoryPath)
         let repository = DesktopStateRepository(url: value("--state-file").map { URL(fileURLWithPath: $0) }
             ?? DesktopStateRepository.defaultURL())
         let debugURL = value("--debug-state").map { URL(fileURLWithPath: $0) }

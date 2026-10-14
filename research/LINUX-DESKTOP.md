@@ -1,5 +1,8 @@
 # Linux desktop verification
 
+This records the initial Preview 0.3 graphical milestone. Current regression
+results are recorded in [SYSTEM-COVERAGE.md](SYSTEM-COVERAGE.md).
+
 Desktop Preview 0.3 implements a native GTK 4 Linux host for `AbsoluteCore`.
 It compiled with Swift 6.2.4 and ran on Ubuntu 24.04 ARM64 with GTK 4.14.5
 inside the project-owned Lima VM.

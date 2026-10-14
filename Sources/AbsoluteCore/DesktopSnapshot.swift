@@ -16,7 +16,7 @@ public struct FileBrowserSnapshot: Codable, Equatable, Sendable {
     public init(windowID: UUID, directory: URL, showHidden: Bool = false,
                 sort: FileSort = .name, gridView: Bool = true) {
         self.windowID = windowID
-        self.directory = directory.standardizedFileURL
+        self.directory = directory.absoluteURL
         self.showHidden = showHidden
         self.sort = sort
         self.gridView = gridView

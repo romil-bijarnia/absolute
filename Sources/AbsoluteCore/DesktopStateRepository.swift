@@ -8,7 +8,7 @@ public actor DesktopStateRepository {
     private var latestRevision: UInt64 = 0
     private static let byteLimit = 1024 * 1024
 
-    public init(url: URL = DesktopStateRepository.defaultURL()) { self.url = url.isFileURL ? url.standardizedFileURL : url }
+    public init(url: URL = DesktopStateRepository.defaultURL()) { self.url = url.isFileURL ? url.absoluteURL : url }
 
     public nonisolated static func defaultURL() -> URL {
         let home = FileManager.default.homeDirectoryForCurrentUser

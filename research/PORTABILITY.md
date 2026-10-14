@@ -1,5 +1,8 @@
 # Shared core verification — 2026-10-14
 
+This is the initial Preview 0.2 portability record. Current regression results
+are recorded in [SYSTEM-COVERAGE.md](SYSTEM-COVERAGE.md).
+
 `AbsoluteCore` and the `absolute` command-line host compiled and executed on both
 systems below. Each run passed 12 behavior tests and seven integration checks.
 These are runtime observations from this project, separate from REA's static

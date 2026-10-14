@@ -1,0 +1,279 @@
+{
+  "schema": 1,
+  "objective": "Build Absolute into an open-source macOS-compatible system; research scope includes graphics, boot and firmware.",
+  "overall_status": "in_progress",
+  "completion_percentage": null,
+  "completion_rule": "A component is complete only for an explicit target and contract after evidence, implementation and differential/integration verification. Artifact counts are not a whole-OS completion measure.",
+  "subsystems": [
+    {
+      "id": "boot_chain",
+      "name": "Boot chain and monitor startup",
+      "status": "partial",
+      "reports": [
+        "BOOT-FIRMWARE.md",
+        "BOOT-MONITORS.md"
+      ],
+      "remaining": [
+        "Boot ROM and LLB implementation",
+        "iBoot control flow and handoff",
+        "Full SPTM and TXM behavior",
+        "A verified Absolute boot path"
+      ]
+    },
+    {
+      "id": "device_firmware",
+      "name": "Device firmware and coprocessors",
+      "status": "partial",
+      "reports": [
+        "BOOT-FIRMWARE.md"
+      ],
+      "remaining": [
+        "AGX/DCP command protocols and firmware logic",
+        "SEP ROM and sepOS implementation",
+        "AOP, ANE, ISP, SIO, storage and input firmware behavior"
+      ]
+    },
+    {
+      "id": "kernel",
+      "name": "Kernel memory, IPC and synchronization",
+      "status": "partial",
+      "reports": [
+        "KERNEL-ABI.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "Full VM and Mach IPC implementation",
+        "Scheduler, exceptions and process lifecycle",
+        "BSD syscall handlers and ABI translation",
+        "XNU source-to-installed-build matching"
+      ]
+    },
+    {
+      "id": "graphics",
+      "name": "Window server, drawing and GPU",
+      "status": "partial",
+      "reports": [
+        "GRAPHICS.md"
+      ],
+      "remaining": [
+        "WindowServer and compositor internals",
+        "Complete CoreGraphics, CoreAnimation and Metal behavior",
+        "AGX command submission and GPU ISA",
+        "Physical display and GPU drivers"
+      ]
+    },
+    {
+      "id": "file_paths",
+      "name": "File paths and link semantics",
+      "status": "partial",
+      "reports": [
+        "NATIVE-CODE.md"
+      ],
+      "remaining": [
+        "Races and concurrent filesystem mutation",
+        "Permissions and extended attributes across hosts",
+        "Finder-level filesystem behavior beyond the tested link cases"
+      ]
+    },
+    {
+      "id": "storage",
+      "name": "Filesystems and storage",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "remaining": [
+        "APFS structures and operations",
+        "Mount, snapshot, clone, encryption and recovery semantics",
+        "Block and storage-controller protocols"
+      ]
+    },
+    {
+      "id": "drivers",
+      "name": "Drivers and I/O",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "remaining": [
+        "IOKit/DriverKit object and message contracts",
+        "Interrupts, DMA, IOMMU and PCIe",
+        "USB, Thunderbolt, cameras and peripheral support"
+      ]
+    },
+    {
+      "id": "runtime",
+      "name": "Binary loading and language runtimes",
+      "status": "partial",
+      "reports": [
+        "KERNEL-ABI.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "Mach-O loading and dyld fixups",
+        "Objective-C and Swift runtime behavior",
+        "Foundation, AppKit and SwiftUI compatibility",
+        "Mac application binary execution"
+      ]
+    },
+    {
+      "id": "services",
+      "name": "Local services and IPC protocols",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "Launchd scheduling and lifecycle semantics",
+        "XPC serialization and service protocols",
+        "Endpoint ownership and bootstrap namespaces"
+      ]
+    },
+    {
+      "id": "network",
+      "name": "Networking and discovery",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "Sockets and packet behavior",
+        "DNS, mDNS, routing and interface configuration",
+        "Wi-Fi and Bluetooth protocols/drivers",
+        "Network extension and VPN interfaces"
+      ]
+    },
+    {
+      "id": "security",
+      "name": "Security and identity",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "remaining": [
+        "Keychain and authentication behavior",
+        "Sandbox, entitlements and code-signing validation",
+        "Authorization and trust services",
+        "Cryptographic service interfaces"
+      ]
+    },
+    {
+      "id": "media",
+      "name": "Audio, video and imaging",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "CoreAudio graph, timing and device behavior",
+        "Video decode/encode and camera pipelines",
+        "Image codecs, color and media-framework contracts"
+      ]
+    },
+    {
+      "id": "input",
+      "name": "Input and accessibility",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md"
+      ],
+      "remaining": [
+        "HID and event delivery",
+        "Trackpad, keyboard and multitouch protocols",
+        "Accessibility tree, assistive actions and input methods"
+      ]
+    },
+    {
+      "id": "desktop",
+      "name": "Desktop and applications",
+      "status": "partial",
+      "reports": [
+        "FINDINGS.md",
+        "NATIVE-CODE.md",
+        "LINUX-DESKTOP.md"
+      ],
+      "remaining": [
+        "Finder and Dock behavior beyond current prototypes",
+        "Application lifecycle and inter-app windows",
+        "Menus, settings, notifications and workspace behavior"
+      ]
+    },
+    {
+      "id": "power",
+      "name": "Power and thermal management",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "remaining": [
+        "Sleep, wake and shutdown transitions",
+        "CPU/GPU frequency and thermal control",
+        "Battery and power-controller behavior"
+      ]
+    },
+    {
+      "id": "updates",
+      "name": "Installation, updates and recovery",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "BOOT-FIRMWARE.md"
+      ],
+      "remaining": [
+        "Installation and update state machines",
+        "Recovery environment behavior",
+        "System-volume sealing and rollback",
+        "Absolute installer and update implementation"
+      ]
+    },
+    {
+      "id": "text_print",
+      "name": "Text, localization and printing",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "Text shaping and font contracts",
+        "Locale behavior and resource selection",
+        "Printing pipeline and device protocols"
+      ]
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud and continuity clients",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "Local client behavior and synchronization contracts",
+        "Continuity and device-discovery protocols",
+        "Remote service implementations are not present in this Mac filesystem"
+      ]
+    },
+    {
+      "id": "automation",
+      "name": "Automation and development interfaces",
+      "status": "inventory_only",
+      "reports": [
+        "SYSTEM-INVENTORY.md",
+        "SHARED-CACHE.md"
+      ],
+      "remaining": [
+        "Apple Events and scripting behavior",
+        "Developer tools and debugging interfaces",
+        "Extension loading and automation integration"
+      ]
+    }
+  ]
+}

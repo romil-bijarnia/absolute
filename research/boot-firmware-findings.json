@@ -1,0 +1,3373 @@
+{
+  "schema": 1,
+  "capturedAt": "2026-10-14T07:06:25.366638+00:00",
+  "evidenceType": "static-artifact-observation",
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5421a",
+  "scope": "Installed kernel files, standalone firmware/support inventory, model-specific restore IM4P payloads and public boot IMG4 payloads.",
+  "counts": {
+    "/System/Library/Kernels": 14,
+    "/usr/standalone": 109,
+    "Preboot/restore": 18,
+    "Preboot/restore-staged": 18,
+    "Preboot/boot": 21
+  },
+  "artifacts": [
+    {
+      "path": "/System/Library/Kernels/kernel",
+      "scope": "/System/Library/Kernels",
+      "bytes": 21115728,
+      "sha256": "363f79ca4ad9b29fe1d4aec5469cc6c00e9ed440f65c9e8ffa66191da06e0635",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x1000007",
+        "cpuSubtype": "0x3",
+        "architecture": "unknown",
+        "fileType": 2,
+        "loadCommands": 22,
+        "flags": "0x218001",
+        "symbolCount": 24380,
+        "stringTableBytes": 672792,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST",
+          "__KLDDATA",
+          "__HIB",
+          "__VECTORS",
+          "__KLD",
+          "__LAST",
+          "__LASTDATA_CONST",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-5b6a04a251401aad49f9"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t6000",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17158088,
+      "sha256": "0149b4bf588a89ac882e43da8337d1cfe64dbe8dcea0dabd9abc945c25804c8a",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-a8b3a3f1271ac93ef25b"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t6020",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17012224,
+      "sha256": "5055afdf67d8cc1430181e3167f6e80ff7167ee6dc2f940d9266c52c01065f1e",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-bbd0055582b122cfaa23"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t6030",
+      "scope": "/System/Library/Kernels",
+      "bytes": 16995800,
+      "sha256": "e303bba7af5d7dd744d86b8322dda7df1e53401888c7af4b347c4ee58cbc9975",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-3f9dbfa0fe822ff491a3"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t6031",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17082360,
+      "sha256": "ca7d17c39aa7a68ef280f3aa84e9d57a7c6be8630fa13d5a891e75db0fb9ae5e",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-88b470ed8902ca02c7bb"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t6041",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17099232,
+      "sha256": "48c270a9dd2971201cc5e1b9a0a3caae95a3fffb1c44af76bfbef76327cf4a2e",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-a6af8a9f408ea38245ac"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t6050",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17655200,
+      "sha256": "0cee2c8204917e0c087e26b8424db810d3cfd77028cb0c5be79f6b919fa8ff10",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-4df89244e5a4d9cc2583"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t8103",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17157544,
+      "sha256": "681e1712ba2eeab85de635a6e11fd95278435405494a51dd45065bcde11ad723",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-0418ec3725b2192eb652"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t8112",
+      "scope": "/System/Library/Kernels",
+      "bytes": 16993336,
+      "sha256": "7fbcc735f21a47ee72d76a9290cbf581facfd271819c309f22c773756b38b0c9",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-c2b00d31cc0e09802f55"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t8122",
+      "scope": "/System/Library/Kernels",
+      "bytes": 16995928,
+      "sha256": "cb6195d35b6746a655b54f2c9e7c465b40646a0330dc0ae51e99c5b76e7e8595",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-77bdbd9ab8a6d72308e3"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t8132",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17012880,
+      "sha256": "f309dac4300d9ca52d495f09b75f804f9dae956fa946ae08869745941abf9e15",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-ee5720d6db6ad914827e"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t8140",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17425280,
+      "sha256": "df448dc69a182faad236f84130ee2129a1973d5385bb9fd0a5ee1c5fad0db2a0",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-c051be4c6ed2cb6164db"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.t8142",
+      "scope": "/System/Library/Kernels",
+      "bytes": 17535672,
+      "sha256": "16a5c4eb9e503cdd498c5fd05549278e335755c9cf0f27d619b66d6629bb71aa",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 31,
+        "flags": "0x200001",
+        "symbolCount": 6947,
+        "stringTableBytes": 224296,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__DATA_SPTM",
+          "__TEXT_EXEC",
+          "__TEXT_BOOT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__HIBDATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-fe67fa8ddad64b7793af"
+    },
+    {
+      "path": "/System/Library/Kernels/kernel.release.vmapple",
+      "scope": "/System/Library/Kernels",
+      "bytes": 16683712,
+      "sha256": "3e1d791e05972e4b86e2dfcd6f3a6e38db66d2bf9591d02acdfc830bcefbc303",
+      "layout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0xc0000002",
+        "architecture": "arm64e",
+        "fileType": 2,
+        "loadCommands": 28,
+        "flags": "0x200001",
+        "symbolCount": 6925,
+        "stringTableBytes": 223472,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA_CONST",
+          "__TEXT_EXEC",
+          "__KLD",
+          "__LASTDATA_CONST",
+          "__LAST",
+          "__KLDDATA",
+          "__DATA",
+          "__BOOTDATA",
+          "__PRELINK_TEXT",
+          "__PRELINK_INFO",
+          "__PLK_TEXT_EXEC",
+          "__PRELINK_DATA",
+          "__PLK_DATA_CONST",
+          "__PLK_LLVM_COV",
+          "__PLK_LINKEDIT",
+          "__LINKINFO",
+          "__CTF",
+          "__LINKEDIT"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-1d237df5128cc6c5c0b0"
+    },
+    {
+      "path": "/usr/standalone/bootcaches.plist",
+      "scope": "/usr/standalone",
+      "bytes": 22776,
+      "sha256": "03c5d2ad3e430818f98ee0163e6ac68864f18c8f570330d41905d10afc6f5a6e",
+      "evidenceId": "absolute-boot-artifact-576302e23e2d4f3dde2a"
+    },
+    {
+      "path": "/usr/standalone/firmware/DP865/X2232_LGD_BUNDLE_LC8.bin",
+      "scope": "/usr/standalone",
+      "bytes": 32088064,
+      "sha256": "74a2007b78ce81bab1e3bd8f5730b6c3ea7dd0f1621244c01785e97653442fef",
+      "evidenceId": "absolute-boot-artifact-92afbed06f4c436184a7"
+    },
+    {
+      "path": "/usr/standalone/firmware/FUD/USBCAccessoryFirmwareUpdater/HPMUtil.efi",
+      "scope": "/usr/standalone",
+      "bytes": 91832,
+      "sha256": "f3fa46e2a79c04452af2d13c1457af1e6975929dc3ee3063ebf9392f39b50f21",
+      "evidenceId": "absolute-boot-artifact-618281f80f4eedb3cc5a"
+    },
+    {
+      "path": "/usr/standalone/firmware/MCDP29XX/app",
+      "scope": "/usr/standalone",
+      "bytes": 524402,
+      "sha256": "dec3b73102ce44b28d186297d6aa26ce725835f7793bdfeea7fa74d574b0873b",
+      "evidenceId": "absolute-boot-artifact-36f00945eefc8bc99c13"
+    },
+    {
+      "path": "/usr/standalone/firmware/MCDP29XX/isp",
+      "scope": "/usr/standalone",
+      "bytes": 18490,
+      "sha256": "4af0059745960c2ef361e2fd356cfebb1a949e7480d45f29af6cd55edd29c174",
+      "evidenceId": "absolute-boot-artifact-7345000cc1750b936a95"
+    },
+    {
+      "path": "/usr/standalone/firmware/MCDP29XX/versions.plist",
+      "scope": "/usr/standalone",
+      "bytes": 193,
+      "sha256": "2f913b218eb8f835fd7c4c510c1ecd6aa0ca6a262dd561410949b718dd3af30e",
+      "evidenceId": "absolute-boot-artifact-d770042f49458180a4c4"
+    },
+    {
+      "path": "/usr/standalone/firmware/PFX/PFX_J180dAP.uarp",
+      "scope": "/usr/standalone",
+      "bytes": 1475250,
+      "sha256": "0a387af623b50a0e2e3fadb248b67436127f5f144bd311412e5ff60726ce5af5",
+      "evidenceId": "absolute-boot-artifact-9676b4b9cb25584d56ba"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/msp_fubfh_loader.bin",
+      "scope": "/usr/standalone",
+      "bytes": 86016,
+      "sha256": "13f2176ba8f80d18d5da96c581138ef4d7f8829280fe0cbcef196c8a3244078d",
+      "evidenceId": "absolute-boot-artifact-35e9c4560f5ed3ac5d15"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_hynix_itlc_3d_g3_4p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 434176,
+      "sha256": "ec600aa0ec05ff6c1b23459e237a1551af1e426f86741e9274a9a2154a7a096f",
+      "evidenceId": "absolute-boot-artifact-81823dab34af969e95cc"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_hynix_itlc_3d_g4_4p_512.bin",
+      "scope": "/usr/standalone",
+      "bytes": 438272,
+      "sha256": "617b3e0a45e8682bccab3b4891403445016d02b10e30dbbaf06eb7db55fb8c9b",
+      "evidenceId": "absolute-boot-artifact-2d81dec3bd9850453d1f"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_hynix_tlc_3d_g3_4p_512.bin",
+      "scope": "/usr/standalone",
+      "bytes": 405504,
+      "sha256": "27ed53af60a1aa184ccd12b81d3051e485f0001eed83ab10a5ac7881967adba6",
+      "evidenceId": "absolute-boot-artifact-f9caf4d50dc8a559929a"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_samsung_itlc_3d_g4_2p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 434176,
+      "sha256": "7450d6726eb41d008c485c6cd1fb58705a89642fad750ba4d38957c09411d7db",
+      "evidenceId": "absolute-boot-artifact-c976f3a6f801a4e9e67e"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_samsung_mlc_3d_g2_2p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 401408,
+      "sha256": "89a16f3982412b62af6284f27111c413ef41ac06093245bbdfc7bbdefde72ff8",
+      "evidenceId": "absolute-boot-artifact-63821f5a4d3987e12952"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_samsung_mlc_3d_g3_2p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 405504,
+      "sha256": "4a420b5e9f44cc3acc902bb3c46db76ac20e5516234ff215581d0fbee63ccc3b",
+      "evidenceId": "absolute-boot-artifact-64891e72795aad946c7d"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_sandisk_itlc_3d_g4_2p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 434176,
+      "sha256": "596af306dea59c58ef5f1a7f514c17a1cdb3be682352fc9c3fe02aefeb326558",
+      "evidenceId": "absolute-boot-artifact-47269564f861d60d6225"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_sandisk_mlc_2d_1z_4p_128.bin",
+      "scope": "/usr/standalone",
+      "bytes": 405504,
+      "sha256": "c64c71c21baba325242592ae391c101f9d7529bd273b7641608184f6416d1451",
+      "evidenceId": "absolute-boot-artifact-999cb7710f92e89fe69b"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_sandisk_mlc_3d_g3_2p_170.bin",
+      "scope": "/usr/standalone",
+      "bytes": 409600,
+      "sha256": "3e1fad2380176a7b2a74477476f15a417ece262206eba20ed778c3d6bce3c0fc",
+      "evidenceId": "absolute-boot-artifact-9f709b573db0e75251be"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_sandisk_tlc_3d_g3_2p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 425984,
+      "sha256": "00f2fe0c14ba73ff272645bbe4ad2b5fcebdce23da5a698289b4316494e8d72d",
+      "evidenceId": "absolute-boot-artifact-5e418968bc005fdf9564"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_sandisk_tlc_3d_g4_2p_512.bin",
+      "scope": "/usr/standalone",
+      "bytes": 434176,
+      "sha256": "8b946326219304af190ff9cfe919b2ff24f4cf92086a29ad7f159f7d71793a0e",
+      "evidenceId": "absolute-boot-artifact-06ca3114ea57577285b7"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_toshiba_itlc_3d_g4_2p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 434176,
+      "sha256": "826ae5ee3065d46ddf833a1f6507cb6b10f6481a91aec0e76a0d218679e8bc3b",
+      "evidenceId": "absolute-boot-artifact-ee969efbda3eef5836ba"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_toshiba_mlc_3d_g3_2p_170.bin",
+      "scope": "/usr/standalone",
+      "bytes": 409600,
+      "sha256": "02fc1a9e219bea54ce4cd1c8f0d8efc74b63437b134ad1c4cd3f36e64a3a9533",
+      "evidenceId": "absolute-boot-artifact-8a6def84ad8ae0c84bea"
+    },
+    {
+      "path": "/usr/standalone/firmware/S4E/s4e_ofw_toshiba_tlc_3d_g3_2p_256.bin",
+      "scope": "/usr/standalone",
+      "bytes": 425984,
+      "sha256": "85ee30eb122fbc54b8d7369828e42f4c187c84278859287087cfdb3b92b3a193",
+      "evidenceId": "absolute-boot-artifact-a3116bfe1fab27a37fe5"
+    },
+    {
+      "path": "/usr/standalone/firmware/SLAM/SLAM.sefw",
+      "scope": "/usr/standalone",
+      "bytes": 7933298,
+      "sha256": "6c3e22224420052c93a88d8e2922e61e79959b6e585ec4a667ccf36f4d4d116b",
+      "evidenceId": "absolute-boot-artifact-a1a095c351a61e4f720f"
+    },
+    {
+      "path": "/usr/standalone/firmware/SLAM/Stockholm91.measurements.der",
+      "scope": "/usr/standalone",
+      "bytes": 1911,
+      "sha256": "ae32a0e372e7a3504baf5d22fe0141d7b53f532cc4e69a012144133168449dca",
+      "evidenceId": "absolute-boot-artifact-190dd703d874cccd82fa"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Info.plist",
+      "scope": "/usr/standalone",
+      "bytes": 569,
+      "sha256": "2e785053978ec34e0773236c523195d5d82789723d4bca982fc6a9bc6d53f822",
+      "evidenceId": "absolute-boot-artifact-d1fb8ead40dc02755504"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/version.plist",
+      "scope": "/usr/standalone",
+      "bytes": 464,
+      "sha256": "3259acf48fa8861d7de95efa6e47727c22713dabae31acde21158dbd66ee9ee2",
+      "evidenceId": "absolute-boot-artifact-ea5f2ba21eadf629d6d6"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/018-50236-010.dmg",
+      "scope": "/usr/standalone",
+      "bytes": 25755675,
+      "sha256": "fed34409899f05d985d40cfe2eaf9ea7e55bd6ceb8a9cf087b94ad6affe05b57",
+      "evidenceId": "absolute-boot-artifact-38c64b7536ea1e6a7da0"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/018-50238-010.dmg",
+      "scope": "/usr/standalone",
+      "bytes": 19499398,
+      "sha256": "120a8b6c7cbf5691bf60484c5e7fcd2c0bdb6df54e5d1ebbb4e8b9f21438d67d",
+      "evidenceId": "absolute-boot-artifact-f92e077a46550f6522c5"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/BuildManifest.plist",
+      "scope": "/usr/standalone",
+      "bytes": 71136,
+      "sha256": "b90678c0ef85d898b9d2bec4711377081d743e87968da7617d17549fc47e3711",
+      "evidenceId": "absolute-boot-artifact-0e9d3478c11aa0319a27"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Restore.plist",
+      "scope": "/usr/standalone",
+      "bytes": 1926,
+      "sha256": "6bf34d5671ea295aa07fa1049afc056fcbd072c8469ffe138c50f06434ad23b3",
+      "evidenceId": "absolute-boot-artifact-8558670cbcc2b362550b"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/kernelcache.release.x619",
+      "scope": "/usr/standalone",
+      "bytes": 5844033,
+      "sha256": "8e162a11940d9004b51eab3c48bde12ce1f749d51aba322cb7344568372a8f22",
+      "evidenceId": "absolute-boot-artifact-53adcbe9421d0dbd58aa"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/DeviceTree.x619ap.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 66939,
+      "sha256": "fb0f146626b910fa30802923f2a92f12e0b9b5bd23267d0e048e040b93cdb888",
+      "evidenceId": "absolute-boot-artifact-804bc386eb6245b7e1fe"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/DeviceTree.x619ap.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 474,
+      "sha256": "919e1a19321e39c820b82dd7a0814c4de437fcae3316fe7c5338e79827430915",
+      "evidenceId": "absolute-boot-artifact-6ff0b66b3ac83dc1c845"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/LLB.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 254159,
+      "sha256": "9bfc8f8fa7e93350818fd27c6e43e9ccd9d493c80608c901480276337f770875",
+      "evidenceId": "absolute-boot-artifact-267f47fcf9852056b2c5"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/LLB.x619.RELEASE.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 331,
+      "sha256": "996bcefc0776f6f5782814576b847f77b32b53f6c1c25be221172b4c1dcb23b0",
+      "evidenceId": "absolute-boot-artifact-7e3bb60a23c5840b1eb9"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/iBoot.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 254159,
+      "sha256": "b651ccd34e37597604ceee740a71ed4b599ba636f7c5e0da7287f3ee732fb183",
+      "evidenceId": "absolute-boot-artifact-e40cbfdea0f7936256f1"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/iBoot.x619.RELEASE.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 331,
+      "sha256": "f94bf4a0a52829f6903f081a705f10e92aaf81d2e7e3a841553e3d6a0dcdc57c",
+      "evidenceId": "absolute-boot-artifact-8e7535527c4723f1924c"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/manifest",
+      "scope": "/usr/standalone",
+      "bytes": 100,
+      "sha256": "99c60556d1d36fc5670967d2d1ee62c7bfdfe6e22f5bd7a1af98d150654b9ea2",
+      "evidenceId": "absolute-boot-artifact-ccafd4cc25f3bb5576d2"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/sep-firmware.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 5296271,
+      "sha256": "71696bb96ace498d0a7c597b5eebc329af889dd891c26e84fedd10f6232b171f",
+      "evidenceId": "absolute-boot-artifact-69ba7e7f06602dd748ea"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619ap.production/sep-firmware.x619.RELEASE.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 474,
+      "sha256": "dc105cd43d0c28883e8f5eace3621cb07fa0446a18f9e4b2abf5d6f95cfc2cbb",
+      "evidenceId": "absolute-boot-artifact-87e4dfb7ce4e53a55b69"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/DeviceTree.x619dev.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 64957,
+      "sha256": "66ade6f2ce5f6b962a10e5f1a8f108541ea9480a4748ac213fa79dcffcc09b4e",
+      "evidenceId": "absolute-boot-artifact-d84a9c9b4d5dbcf41327"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/DeviceTree.x619dev.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 474,
+      "sha256": "510273d7a21b26168eebabf921da8407d488067f6223a13858c26a74a28769c6",
+      "evidenceId": "absolute-boot-artifact-d45beea48a9ce24617dc"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/LLB.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 254159,
+      "sha256": "9bfc8f8fa7e93350818fd27c6e43e9ccd9d493c80608c901480276337f770875",
+      "evidenceId": "absolute-boot-artifact-41af34f516145cecfb10"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/LLB.x619.RELEASE.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 331,
+      "sha256": "996bcefc0776f6f5782814576b847f77b32b53f6c1c25be221172b4c1dcb23b0",
+      "evidenceId": "absolute-boot-artifact-2c2f4b43fc72b6d2c4c0"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/iBoot.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 254159,
+      "sha256": "b651ccd34e37597604ceee740a71ed4b599ba636f7c5e0da7287f3ee732fb183",
+      "evidenceId": "absolute-boot-artifact-3ab72b17b4931925e0ce"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/iBoot.x619.RELEASE.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 331,
+      "sha256": "f94bf4a0a52829f6903f081a705f10e92aaf81d2e7e3a841553e3d6a0dcdc57c",
+      "evidenceId": "absolute-boot-artifact-20d745a4ae982cf60cc8"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/manifest",
+      "scope": "/usr/standalone",
+      "bytes": 101,
+      "sha256": "ee73d2312227ecc96f765a480f820847f5606a028af720019abed52e10c11001",
+      "evidenceId": "absolute-boot-artifact-c84936e5a356af2376db"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/sep-firmware.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 5296271,
+      "sha256": "71696bb96ace498d0a7c597b5eebc329af889dd891c26e84fedd10f6232b171f",
+      "evidenceId": "absolute-boot-artifact-baaa7b483592bfcd0bea"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/all_flash/all_flash.x619dev.production/sep-firmware.x619.RELEASE.im4p.plist",
+      "scope": "/usr/standalone",
+      "bytes": 474,
+      "sha256": "dc105cd43d0c28883e8f5eace3621cb07fa0446a18f9e4b2abf5d6f95cfc2cbb",
+      "evidenceId": "absolute-boot-artifact-15578a7bf44076ea90ad"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/dfu/iBEC.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 254159,
+      "sha256": "256f0bdfefaea88f774c4777d227ebd62cea451fbde60136e776cbb5057d845e",
+      "evidenceId": "absolute-boot-artifact-1d5677b6f97fbaadb0e3"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/Resources/Firmware/dfu/iBSS.x619.RELEASE.im4p",
+      "scope": "/usr/standalone",
+      "bytes": 254159,
+      "sha256": "abcd03f0c6523d2d882cb73eeb3a1f05333ec3d2b52d136c1c151a6fb7313b87",
+      "evidenceId": "absolute-boot-artifact-68833c50ea387eb067e8"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/_CodeSignature/CodeDirectory",
+      "scope": "/usr/standalone",
+      "bytes": 205,
+      "sha256": "67390d7bc085efd6a894f5ca0d6c6c6d01b62cd1803654a48dbdd76b7e23094b",
+      "evidenceId": "absolute-boot-artifact-8b6dac457d16645f1b96"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/_CodeSignature/CodeRequirements",
+      "scope": "/usr/standalone",
+      "bytes": 76,
+      "sha256": "37667daa1ea1f974a968fbeaccafc790446557aaece0ff51be8b5d2512400733",
+      "evidenceId": "absolute-boot-artifact-49326b1cbc71014fe7c5"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/_CodeSignature/CodeResources",
+      "scope": "/usr/standalone",
+      "bytes": 747,
+      "sha256": "54c07b4c0c0587dc53fa4b37dec98526993eb4eae392938164f42157b4e90378",
+      "evidenceId": "absolute-boot-artifact-56fa304ac8fff5807985"
+    },
+    {
+      "path": "/usr/standalone/firmware/iBridge1_1Customer.bundle/Contents/_CodeSignature/CodeSignature",
+      "scope": "/usr/standalone",
+      "bytes": 4202,
+      "sha256": "9d5b23a8f70f2ae52fe74e5ab9629235778cdbd56f18e0532551555835d41961",
+      "evidenceId": "absolute-boot-artifact-4ec9e353959942373f1c"
+    },
+    {
+      "path": "/usr/standalone/firmware/nfrestore/firmware/fw/PN552_FW_02_01_6A_rev125914.bin",
+      "scope": "/usr/standalone",
+      "bytes": 34562,
+      "sha256": "95373b104b422c3f9587a5b8be89db3e1dd8c5dbbe54f69dbe845d905b1519c0",
+      "evidenceId": "absolute-boot-artifact-c8bca7efbde3a3e1d75a"
+    },
+    {
+      "path": "/usr/standalone/firmware/nfrestore/firmware/fw/SE310S_FW_A0_01_01_41_rev172736.bin",
+      "scope": "/usr/standalone",
+      "bytes": 64756,
+      "sha256": "902660303f506a19193659e7f783d61decdbfa2683da7667ec31130c6a6b8f1b",
+      "evidenceId": "absolute-boot-artifact-7266cf6c2b1408c253a9"
+    },
+    {
+      "path": "/usr/standalone/firmware/nfrestore/firmware/fw/SN100V_FW_A3_01_01_B6_rev157827.bin",
+      "scope": "/usr/standalone",
+      "bytes": 205070,
+      "sha256": "9acf197a4ef1968567c23961e0edc9cbf3337716f324261f0e3e5f4bb7617120",
+      "evidenceId": "absolute-boot-artifact-32946c09fbf257ce58d7"
+    },
+    {
+      "path": "/usr/standalone/firmware/nfrestore/firmware/fw/SN200V_FW_B1_02_01_BA_rev170350.bin",
+      "scope": "/usr/standalone",
+      "bytes": 203966,
+      "sha256": "17fc24ee35031df9919add634dd73d68ad2ff80e58c6bc76aa0e724976601fa5",
+      "evidenceId": "absolute-boot-artifact-d324265e0a8f2e09a2f7"
+    },
+    {
+      "path": "/usr/standalone/firmware/nfrestore/firmware/fw/SN300V_FW_B0_02_01_88_rev172757.bin",
+      "scope": "/usr/standalone",
+      "bytes": 263812,
+      "sha256": "a6e9560e2e034a6748c303a30ea77bee37c6dadaddeb2173e09c09d6909936df",
+      "evidenceId": "absolute-boot-artifact-067aa1b4786314d6834b"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.hynix_tlc_3d_g4_4p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 696320,
+      "sha256": "d6a846eaed226ec34b25c2abfe4d889e75a7d8d72d3b661d43233f50f067e2ff",
+      "evidenceId": "absolute-boot-artifact-93187d5b003adb82fd43"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.hynix_tlc_3d_g5_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 712704,
+      "sha256": "5e2b12dddac9501677854781ddc4f4eb70beec4f4ac1e98b182f7cece13400d4",
+      "evidenceId": "absolute-boot-artifact-e700d1ca92b2fddc6b89"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.hynix_tlc_3d_g5_4p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 704512,
+      "sha256": "f477435f8cf1e6fde54b7440743868fe4a1cac229fa69853710f2374949b0986",
+      "evidenceId": "absolute-boot-artifact-318bce3a437bba3ac485"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.hynix_tlc_3d_g6_4p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 684032,
+      "sha256": "5b59aec22a3eb1a4d0f83abcb27dd70e7a507a03b8f1007b35c766897118f231",
+      "evidenceId": "absolute-boot-artifact-91af1ea9b61436e9741a"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.hynix_tlc_3d_g7_4p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 688128,
+      "sha256": "6b5eefaffd626c6cc56a600d89fcb6fd60824b8cceee207f59a653822b0000a4",
+      "evidenceId": "absolute-boot-artifact-6331b9e9d6d838066e38"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.samsung_tlc_3d_g5_2p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 684032,
+      "sha256": "7b428d0cbe8f28883b4a7d448ae5bb744f552c5a3adce5960fdc03426f286fe0",
+      "evidenceId": "absolute-boot-artifact-500b6b9d638804ffa331"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.samsung_tlc_3d_g7_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 696320,
+      "sha256": "cee6f1ca30f78aca8de2f7ff35f18917b1daaa4e4787a2abaf22c4c902515426",
+      "evidenceId": "absolute-boot-artifact-6426f1ea9cfaf6f44c7f"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.sandisk_itlc_3d_g4_2p_256gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 692224,
+      "sha256": "359f669ba008757afbae497f1fac21425508dbf691a54bfb305e080a9e08971d",
+      "evidenceId": "absolute-boot-artifact-275d83ba97d6264bdf12"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.sandisk_itlc_3d_g4_2p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 688128,
+      "sha256": "22f33e91115c25303955d766bcf7ab5aaf6367354e8d931e1b3bfd2cdf6e9904",
+      "evidenceId": "absolute-boot-artifact-4fd1dc93cac01a8d8d75"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.sandisk_tlc_3d_g5_2p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 712704,
+      "sha256": "1f07f80b51c8e0c28e3ddf9c1f2e3e379929a0be6cfd84da8be5dd2d45f2ca9a",
+      "evidenceId": "absolute-boot-artifact-45f4aff72f15720c071f"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.sandisk_tlc_3d_g5_2p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 712704,
+      "sha256": "00497fc264002adbfb9517b27831ec071859a13372f93bb97fdee6776006ceac",
+      "evidenceId": "absolute-boot-artifact-6ba00239b9b459b63b3e"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.toshiba_itlc_3d_g4_2p_256gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 688128,
+      "sha256": "d9191cc96ad55d45dfb8d3e8e0963b481102627cc009cba2160abaf0a7ec5244",
+      "evidenceId": "absolute-boot-artifact-8b0e9350cc3567915463"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.toshiba_itlc_3d_g4_2p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 688128,
+      "sha256": "15e16470771b6369dbb5ab418e34037b21dae32041073a8adee47cff7977954f",
+      "evidenceId": "absolute-boot-artifact-09293b40b646430597cc"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.toshiba_tlc_3d_g5_2p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 712704,
+      "sha256": "b2ed11ada680ee004b961dbbd8c8a6674205ec98d1fa5c8338aa7527a1760cd1",
+      "evidenceId": "absolute-boot-artifact-bf8ba72a396d2fcf104b"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.toshiba_tlc_3d_g5_2p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 712704,
+      "sha256": "c91c3366cbe4b89f6f1f4dd04afb8534b55dfa1844672fd7f5259bbd9e2163a2",
+      "evidenceId": "absolute-boot-artifact-3faf807d947cb579cf95"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.toshiba_tlc_3d_g5_4p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 688128,
+      "sha256": "b3b5b83e89ef9460276c532f280cbfc0330f50b33f5fbea067d6d8ad7c91128d",
+      "evidenceId": "absolute-boot-artifact-2c6ce8c28e91f8e13722"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.toshiba_tlc_3d_g6_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 692224,
+      "sha256": "997ce4437399c5c991f6c1693a1329d526f7224c30767c6c8f0209f4661c9e7a",
+      "evidenceId": "absolute-boot-artifact-eee240487e9bbb51baf4"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.toshiba_tlc_3d_g8_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 696320,
+      "sha256": "78fed92ac13c7c022ab17e852a9c7d7b4a9d98f290cc2c3fae1073519b47c937",
+      "evidenceId": "absolute-boot-artifact-0cf9c9fea8786fa8fc0e"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.ymtc_tlc_3d_g5_4p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 684032,
+      "sha256": "7fc407943e7134893003556adc43be10120bdffd519d72eaf133723edacba896",
+      "evidenceId": "absolute-boot-artifact-b5c70a3227bbc6fff60f"
+    },
+    {
+      "path": "/usr/standalone/firmware/t302/bfh_ofw.t302.ofw.ymtc_tlc_3d_g6_6p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 684032,
+      "sha256": "68aa0f46b99e4f75d35500bf2c1b5f453b7f71a5926955a050f4adc7785f3c09",
+      "evidenceId": "absolute-boot-artifact-954bd47270462bcf0ccf"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.hynix_qlc_3d_g8_6p_2048gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 1089536,
+      "sha256": "b7c330e87516881e9afe687d61a1d4a33f9d67233e25444fd9a538d1e6336d55",
+      "evidenceId": "absolute-boot-artifact-76450b089ecf27a86cac"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.hynix_tlc_3d_g7_4p_512gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 770048,
+      "sha256": "b78dd6fda6af3890ed28d3c403e9c5422e60f712ae2f6b08dcfd782eeb8dbc01",
+      "evidenceId": "absolute-boot-artifact-6bd7ee864fca2e243b52"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.hynix_tlc_3d_g8_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 880640,
+      "sha256": "3da010d292d1d542210c59e508a3925bc63abad750f3416a58e866a22ce800dc",
+      "evidenceId": "absolute-boot-artifact-fa336cd9fbd3b2658a0d"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.samsung_tlc_3d_g7_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 880640,
+      "sha256": "da7c00661c6a19fe649eafa6da0f4a07afa9cfb31f8853dd357cdf14505737e0",
+      "evidenceId": "absolute-boot-artifact-7fe140f1e5bd80b92a2f"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.sandisk_tlc_3d_g8_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 880640,
+      "sha256": "95202e0783e5156d81bdfdbdef69b563d66b6876b48cd32ed06ed603707387be",
+      "evidenceId": "absolute-boot-artifact-b4e0eaedba541c79a160"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.toshiba_qlc_3d_g8_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 897024,
+      "sha256": "746d12b5101a27da1e3a90b12a3da8bcfa8c92c5158786e909672988f0a06efd",
+      "evidenceId": "absolute-boot-artifact-256eb092891caa7e329d"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.toshiba_qlc_3d_g8_4p_2048gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 1089536,
+      "sha256": "f182c2b5865fb729da5c1699be0cc1e3a05b2c92811fbf64fc2838eba7243189",
+      "evidenceId": "absolute-boot-artifact-e8fd7f3af1b72d810b98"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/bfh_ofw.t303.ofw.toshiba_tlc_3d_g8_4p_1024gb.bin",
+      "scope": "/usr/standalone",
+      "bytes": 880640,
+      "sha256": "892998731a3e7fd229ee268185dbbc21e11e847836fc6a3354e0771f7af83d25",
+      "evidenceId": "absolute-boot-artifact-bb03f510dfdb42a03a5a"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/phy/t303.aus5.data.bin",
+      "scope": "/usr/standalone",
+      "bytes": 14080,
+      "sha256": "ed67a817704d667afcea22b82a3635457d5aa4377199747831af42b1501dfd1a",
+      "evidenceId": "absolute-boot-artifact-956bf287b50f8f337cbd"
+    },
+    {
+      "path": "/usr/standalone/firmware/t303/phy/t303.aus5.text.bin",
+      "scope": "/usr/standalone",
+      "bytes": 58880,
+      "sha256": "9477f6cd52e1fa68a3c4d80f2db7154521c647d70aee9bce20eff62d9c620fb1",
+      "evidenceId": "absolute-boot-artifact-c7c4d8b7490b587a1969"
+    },
+    {
+      "path": "/usr/standalone/i386/Firmware.scap",
+      "scope": "/usr/standalone",
+      "bytes": 15729264,
+      "sha256": "ee783355cc1387e1135f375af71d3dc3343e43ef82d211e1d9cb8f17888bc039",
+      "evidenceId": "absolute-boot-artifact-9900c5d940b2561f9496"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/Lucida13.efires",
+      "scope": "/usr/standalone",
+      "bytes": 1069412,
+      "sha256": "475d19010cdcfcd397720d9eb8be83aca16a53df6184de94f1edb39c54f2e414",
+      "evidenceId": "absolute-boot-artifact-d33662979f955e828380"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/Lucida13White.efires",
+      "scope": "/usr/standalone",
+      "bytes": 1067888,
+      "sha256": "7d079036687c304f264dda78f4818f9978efd92213ef0b4ee3c2f5c636d33be6",
+      "evidenceId": "absolute-boot-artifact-1a578bbdd10ccaebf0bc"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/appleLogo.efires",
+      "scope": "/usr/standalone",
+      "bytes": 13578,
+      "sha256": "786d0b311eff2c92b7878c3a652c59cc13c4c4b7287a256ea14a9fdfbe2afba2",
+      "evidenceId": "absolute-boot-artifact-5ba7f2a7fac469d0d4a8"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/battery.efires",
+      "scope": "/usr/standalone",
+      "bytes": 1086419,
+      "sha256": "4f996b910ddee7fda336eba4ebbf21eeaf4fc065a8204937183929e3b7150d25",
+      "evidenceId": "absolute-boot-artifact-bd36f17ae6df1cb146c3"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/disk_passwordUI.efires",
+      "scope": "/usr/standalone",
+      "bytes": 960488,
+      "sha256": "bdcc39a6254961b1c2c354a3f422905a4bc3994d0e46b5e9595b7689c63dae20",
+      "evidenceId": "absolute-boot-artifact-716bc0056e833df43955"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/flag_picker.efires",
+      "scope": "/usr/standalone",
+      "bytes": 3095272,
+      "sha256": "8cbe8a582efa6a5ec9c437ef2d3fe6e900e438bd5a5b5a02a250489303b74956",
+      "evidenceId": "absolute-boot-artifact-057b3c323115518c0b6c"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/guest_userUI.efires",
+      "scope": "/usr/standalone",
+      "bytes": 507264,
+      "sha256": "e10cdfa6284c706a775d9c826f11fef772ada1e47ab8197a0e769b3f19486fe7",
+      "evidenceId": "absolute-boot-artifact-6fa9d3b3e0a5ec0a2ab7"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/loginui.efires",
+      "scope": "/usr/standalone",
+      "bytes": 2350676,
+      "sha256": "ea20d8ebcd7dbddf89acb4a4cc50679efb6bce507bd15711520d36e11f4a2e56",
+      "evidenceId": "absolute-boot-artifact-7c0f426cc624a336e8fa"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/recoveryUI.efires",
+      "scope": "/usr/standalone",
+      "bytes": 56468,
+      "sha256": "f3e24ecaf9f97de78a8ea12abdf4b66ab8375125eb7cae03f5a7d46af48e8cd1",
+      "evidenceId": "absolute-boot-artifact-aa69c0e55a86bdfac519"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/recovery_user.efires",
+      "scope": "/usr/standalone",
+      "bytes": 9882,
+      "sha256": "84270bf39b0b1f5697d45aaca31569b130d9ee7795dd9841fc496b21a0fc6dcb",
+      "evidenceId": "absolute-boot-artifact-4cc718ef3fbdb634e9f3"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/sound.efires",
+      "scope": "/usr/standalone",
+      "bytes": 171012,
+      "sha256": "1b7b2203cb725f6634e0327e05170d2184e2cf7084870ebd4f96182cd77c39b3",
+      "evidenceId": "absolute-boot-artifact-218bdbcf997a95751271"
+    },
+    {
+      "path": "/usr/standalone/i386/EfiLoginUI/unknown_userUI.efires",
+      "scope": "/usr/standalone",
+      "bytes": 589705,
+      "sha256": "0cdb4bcbac69f44827e740fcfca185c0084fc3ffaebf1feab6ec32ca0424d963",
+      "evidenceId": "absolute-boot-artifact-1f859775d8e17d9cd15b"
+    },
+    {
+      "path": "/usr/standalone/i386/SecureBoot.bundle/Contents/Info.plist",
+      "scope": "/usr/standalone",
+      "bytes": 544,
+      "sha256": "ad5422ada5eb24262ecb366783d7aa356047e76aa3b2508909acef20d854eaa3",
+      "evidenceId": "absolute-boot-artifact-ae712bff185be045968e"
+    },
+    {
+      "path": "/usr/standalone/i386/SecureBoot.bundle/Contents/version.plist",
+      "scope": "/usr/standalone",
+      "bytes": 459,
+      "sha256": "3aafcf4a51e8ddf7fd81fca2b6d28312f1a0715400d7af67573300719e9d7ecd",
+      "evidenceId": "absolute-boot-artifact-8b3169987022813d66da"
+    },
+    {
+      "path": "/usr/standalone/i386/SecureBoot.bundle/Contents/_CodeSignature/CodeDirectory",
+      "scope": "/usr/standalone",
+      "bytes": 197,
+      "sha256": "e4c402794b0b07313cd1de5dc247be3187137a47f1b943ccd79d23cd337c52e3",
+      "evidenceId": "absolute-boot-artifact-4560b6c17a6bb4a183c6"
+    },
+    {
+      "path": "/usr/standalone/i386/SecureBoot.bundle/Contents/_CodeSignature/CodeRequirements",
+      "scope": "/usr/standalone",
+      "bytes": 68,
+      "sha256": "477b569f578204cc2fb05208cabe3c92e7afda7653fa9422afc5274fab479381",
+      "evidenceId": "absolute-boot-artifact-acae7cebee4fdae23620"
+    },
+    {
+      "path": "/usr/standalone/i386/SecureBoot.bundle/Contents/_CodeSignature/CodeResources",
+      "scope": "/usr/standalone",
+      "bytes": 747,
+      "sha256": "54c07b4c0c0587dc53fa4b37dec98526993eb4eae392938164f42157b4e90378",
+      "evidenceId": "absolute-boot-artifact-ffda05074626a9436eef"
+    },
+    {
+      "path": "/usr/standalone/i386/SecureBoot.bundle/Contents/_CodeSignature/CodeSignature",
+      "scope": "/usr/standalone",
+      "bytes": 4202,
+      "sha256": "86600dac09039d5554baf453659bfcb5929a533fd5eb3a4a41a0a619a2a718d8",
+      "evidenceId": "absolute-boot-artifact-7e5f6eee60078d193cac"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/AOP/aopfw-mac15jaop.RELEASE.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 2154521,
+      "sha256": "992c5961088d8c5e2c069a98b645bfae935681f7de3c9647f86342cdff23b7a1",
+      "image": {
+        "container": "IM4P",
+        "imageType": "aopf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 2154496,
+        "payloadSha256": "b39ed33814f83111fd9ce72e3eb936889890f23e4be4d9db8efd700b6307fe43",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x80000002",
+        "architecture": "arm64e",
+        "fileType": 5,
+        "loadCommands": 12,
+        "flags": "0x200001",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__ETEXT",
+          "__EDATA",
+          "__OS_LOG",
+          "__MISC",
+          "__CMA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-f950f80d283abe68326b"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/J514M_InputDevice.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 95821,
+      "sha256": "6d2fc500a3b826aa0dd28b2fd9694b116de052beba7af4c012d38735b73ec573",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ipdf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 95796,
+        "payloadSha256": "4e7ef4702d9cc9cbbb86bf1590162d989fb37f80f639b0b8adae8809bddacbdb",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-1f84a528fc96d862ddd8"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/J514M_MtpFirmware.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 903817,
+      "sha256": "cd5bd4f57ea358895611e3be92465961031265b228a380a0691036e820e612aa",
+      "image": {
+        "container": "IM4P",
+        "imageType": "mtpf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 903792,
+        "payloadSha256": "890532e92d0bf0650cf449407edfeb2d8d33cb0f52a4858847b1633d4f6a40d7",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-66551f034b0f291961cd"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/J514m_Multitouch.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 109831,
+      "sha256": "1dbb3193537274ec26073658162407cb0d30a0edcce92d3a6619e704e3c2341b",
+      "image": {
+        "container": "IM4P",
+        "imageType": "mtfw",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 109806,
+        "payloadSha256": "8db60f62addb1da03198a4224043762fcd3decf91f38e2ab553fec70c3aaa42d",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-95f4f4be0c29b796bf01"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/SmartIOFirmware_ASCv6.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 1140621,
+      "sha256": "232eec294a4c73c34e9d26ac493df3f956a019ba11b495f5cb94289976de0d8c",
+      "image": {
+        "container": "IM4P",
+        "imageType": "siof",
+        "description": "1.0.0",
+        "payloadOffset": 29,
+        "payloadBytes": 1140592,
+        "payloadSha256": "de8d3487365e0f13cd1bd873c7837d4b00f058d6cf10fcaa02e827aeddb54cdb",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x0",
+        "architecture": "arm64",
+        "fileType": 5,
+        "loadCommands": 6,
+        "flags": "0x1",
+        "symbolCount": 154,
+        "stringTableBytes": 3536,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-c44151834630a3f9b499"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/agx/armfw_g15c.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 3356713,
+      "sha256": "d7474efec11745b9a38723369076eaa3622c46f72f0339af5e7334b25d183a8f",
+      "image": {
+        "container": "IM4P",
+        "imageType": "gfxf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 3356688,
+        "payloadSha256": "0fa13f5ecabdac5d96aee9200dfe34919cfac7727ae9b16a276277e16c1c7f3c",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-342c9ebbd2313c65f094"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/all_flash/DeviceTree.j514map.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 63305,
+      "sha256": "45fd6fdbb9d691afd8ddd18ae5360651974419e3988f5830f4c8f80130437566",
+      "image": {
+        "container": "IM4P",
+        "imageType": "dtre",
+        "description": "EmbeddedDeviceTrees-12661.1.5",
+        "payloadOffset": 51,
+        "payloadBytes": 63244,
+        "payloadSha256": "10db5be270114daa0246e8494724150f6a9a2e290a59e1cbed7ea801d831284f",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 406948,
+        "sha256": "63cdaab074e11245a758c1c38978c27548495365d2f7021a65fbcc45f930c09a",
+        "layout": null,
+        "deviceTree": {
+          "nodes": 548,
+          "properties": 6753,
+          "consumedBytes": 406948,
+          "trailingBytes": 0,
+          "scope": "Static shipped template; live boot properties and values were not captured.",
+          "interfaceNodeCount": 208,
+          "selectedInterfaces": [
+            {
+              "path": "/device-tree/arm-io",
+              "propertyCount": 17,
+              "children": 179,
+              "compatible": [
+                "arm-io,t6031"
+              ],
+              "device_type": [
+                "t603x-palma"
+              ],
+              "regBytes": 48
+            },
+            {
+              "path": "/device-tree/arm-io/mtp",
+              "propertyCount": 13,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "mtp"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/aic",
+              "propertyCount": 27,
+              "children": 0,
+              "compatible": [
+                "aic,3"
+              ],
+              "device_type": [
+                "interrupt-controller"
+              ],
+              "regBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/aop",
+              "propertyCount": 14,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "aop"
+              ],
+              "regBytes": 64,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/pmgr",
+              "propertyCount": 84,
+              "children": 3,
+              "compatible": [
+                "pmgr1,t6031"
+              ],
+              "device_type": [
+                "pmgr"
+              ],
+              "regBytes": 960,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/sio",
+              "propertyCount": 16,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "sio"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/sep",
+              "propertyCount": 17,
+              "children": 1,
+              "compatible": [
+                "iop-sep,ascwrap-v6"
+              ],
+              "device_type": [
+                "sep"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/ans",
+              "propertyCount": 21,
+              "children": 2,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "ans"
+              ],
+              "regBytes": 112,
+              "interruptsBytes": 20
+            },
+            {
+              "path": "/device-tree/arm-io/smc",
+              "propertyCount": 13,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "smc"
+              ],
+              "regBytes": 48,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/uart0",
+              "propertyCount": 13,
+              "children": 1,
+              "compatible": [
+                "uart-1,samsung"
+              ],
+              "device_type": [
+                "uart"
+              ],
+              "regBytes": 16,
+              "interruptsBytes": 4
+            },
+            {
+              "path": "/device-tree/arm-io/dcp",
+              "propertyCount": 17,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "dcp"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/dart-dcp",
+              "propertyCount": 19,
+              "children": 1,
+              "compatible": [
+                "dart,t8110"
+              ],
+              "device_type": [
+                "dart"
+              ],
+              "regBytes": 16,
+              "interruptsBytes": 4
+            },
+            {
+              "path": "/device-tree/arm-io/ane0",
+              "propertyCount": 20,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "ane"
+              ],
+              "regBytes": 128,
+              "interruptsBytes": 20
+            }
+          ]
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-cd8bfdeea8288764682c"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/all_flash/iBoot.j514m.RELEASE.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 1102566,
+      "sha256": "915534c9a7b46c77ca6f5ba4fc4084c5d071ad2615c1ea041f32753637c761ed",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ibot",
+        "description": "mBoot-20457.1.29",
+        "payloadOffset": 40,
+        "payloadBytes": 1102486,
+        "payloadSha256": "8ae83d78cfa4bf2aee509542943a7fb5506d868523e8eddee4e53db158d6d672",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 2792368,
+        "sha256": "0b36ae885d9062b553308c0ae81b0d5bba5c81462ba441b87190ac066687dd9c",
+        "layout": null
+      },
+      "evidenceId": "absolute-boot-artifact-6eb74917b577a6dadbc7"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/all_flash/iBootData.j514m.RELEASE.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 69474,
+      "sha256": "dc6c9661a1cb1e95f42ee0f3e120563365adc82f8b15960464012348c5fb3905",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ibdt",
+        "description": "mBoot-20457.1.29",
+        "payloadOffset": 40,
+        "payloadBytes": 69424,
+        "payloadSha256": "2e0f3a2fc77466f942609e308bcbe6b4ee43bec552b314156629ef4e1ea54854",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 744784,
+        "sha256": "4293b971ba335f93654cbfb21e686c8ed559953415c3dff000559bf92c504014",
+        "layout": null
+      },
+      "evidenceId": "absolute-boot-artifact-c1f8dfbfbcda0b3e9a50"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/all_flash/sep-firmware.j514m.RELEASE.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 5931772,
+      "sha256": "70c293ff85c736fe600c9734ffcd93321c2d924ee21db669a173ae4d0714a425",
+      "image": {
+        "container": "IM4P",
+        "imageType": "sepi",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 5931008,
+        "payloadSha256": "88f93d158725773bb44fa578a7a44452679f4d20e4b358494243c421e8ef852d",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-28c8bb6999551a44d3eb"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/ane/t603x_ane0_fw_erebus_pc5x.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 1605657,
+      "sha256": "79a8897ce62cacf2ff163b77eeada3c610df9978501ff999280a75d08f00aab7",
+      "image": {
+        "container": "IM4P",
+        "imageType": "anef",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 1605632,
+        "payloadSha256": "ed458531ac075d27745be5b34239298932e3da452757cee633eefce6361bdf41",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x80000002",
+        "architecture": "arm64e",
+        "fileType": 5,
+        "loadCommands": 7,
+        "flags": "0x200001",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-efbbd85dc9bcd9740705"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/ave/AppleAVE2FW_H15M.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 2748217,
+      "sha256": "a618d2773fdb2104cfafb20867d2d9018ad7fc981770a8f83439d8b7f98cc9d8",
+      "image": {
+        "container": "IM4P",
+        "imageType": "avef",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 2748192,
+        "payloadSha256": "6d4176e6da54dca75716c52da89e8cd80967cc797697f5a8290d57b58145fd53",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x80000002",
+        "architecture": "arm64e",
+        "fileType": 5,
+        "loadCommands": 7,
+        "flags": "0x200001",
+        "symbolCount": 1710,
+        "stringTableBytes": 66624,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-6223f745db8f34d35ad1"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/dcp/t603xdcp.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 3772134,
+      "sha256": "c08a82e188251661453c6bcbf3abca64c1d7b044e07193b93dd43f888ecc04c0",
+      "image": {
+        "container": "IM4P",
+        "imageType": "dcpf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 3772098,
+        "payloadSha256": "49d7a9f04eb5ea576e9f3d78250638fbfbf5a0d9478d0d98cad750a142ea5448",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 10035200,
+        "sha256": "2ddb9d0fa1a16a0c13d4c241c755c782c5bcdd5cc4d6798b4ca7837c2c68bf0e",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0x80000002",
+          "architecture": "arm64e",
+          "fileType": 5,
+          "loadCommands": 8,
+          "flags": "0x200001",
+          "symbolCount": 0,
+          "stringTableBytes": 0,
+          "segmentNames": [
+            "__TEXT",
+            "__DATA",
+            "__OS_LOG",
+            "__DATA_CONST"
+          ],
+          "filesetEntryCount": 0
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-fbde3c50cfef381fc19e"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/isp_bni/adc-aion-pc5x.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 13516825,
+      "sha256": "bee3596b0709cda951db4d1a506cbfd9c2658a4544cbf38fabf1589df2cdbb25",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ispf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 13516800,
+        "payloadSha256": "1eabb2750573311c618f2089ba630e0f686b6add9e1e9c2944803f48b2cc51ae",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x0",
+        "architecture": "arm64",
+        "fileType": 5,
+        "loadCommands": 6,
+        "flags": "0x1",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-1e72ded5a5f18da2a2a5"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/pmp/t6031pmp.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 1028121,
+      "sha256": "1ad6b19073e83095271252881dc94be59e613a2f0e535e12995bb8e287417f9c",
+      "image": {
+        "container": "IM4P",
+        "imageType": "pmpf",
+        "description": "0",
+        "payloadOffset": 25,
+        "payloadBytes": 1028096,
+        "payloadSha256": "6accdd6471bc0e2a293be9b59eba5ffa7c4765e37ec69c82020fcd723f09109e",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x0",
+        "architecture": "arm64",
+        "fileType": 5,
+        "loadCommands": 6,
+        "flags": "0x1",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-473583fd3215b1a3213f"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/sptm.t6031.release.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 200633,
+      "sha256": "e2dd8e9a78add2f5832ee0a6ed0432185d9a0bcd6a20a0cbf5ee6f2a1909e4f6",
+      "image": {
+        "container": "IM4P",
+        "imageType": "sptm",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 200291,
+        "payloadSha256": "00b8bceaf5b72aae983cbe1c79f8e9ec64ab89aca9969058a4679bb7fa915e17",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 1376288,
+        "sha256": "6d811e42c1f3d1be729b3f4b108b261c4aa74ef911c0d7102b2693599563c93a",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0xc0000002",
+          "architecture": "arm64e",
+          "fileType": 2,
+          "loadCommands": 13,
+          "flags": "0x200001",
+          "symbolCount": 1,
+          "stringTableBytes": 16,
+          "segmentNames": [
+            "__TEXT",
+            "__DATA_CONST",
+            "__LATE_CONST",
+            "__TEXT_EXEC",
+            "__LAST",
+            "__DATA",
+            "__BOOTDATA",
+            "__LINKEDIT"
+          ],
+          "filesetEntryCount": 0
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-82c5ac74ad4cdc3c0a67"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/Firmware/txm.macosx.release.im4p",
+      "scope": "Preboot/restore",
+      "bytes": 237470,
+      "sha256": "9c7c0a6923d66dcb0975b58a6223e451b9743e1ae092d8edd02228d01a1b918d",
+      "image": {
+        "container": "IM4P",
+        "imageType": "trxm",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 237150,
+        "payloadSha256": "1ec663b5a919185bd2881884a8d15ee8e574d2000a01a39f13a68e441b297d08",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 589856,
+        "sha256": "1d9ca97be4f2a456c9b88da031bd49d7b617ad8d9ad6c50c2aca4dd17c408289",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0xc0000002",
+          "architecture": "arm64e",
+          "fileType": 2,
+          "loadCommands": 11,
+          "flags": "0x200001",
+          "symbolCount": 1,
+          "stringTableBytes": 16,
+          "segmentNames": [
+            "__TEXT",
+            "__DATA_CONST",
+            "__TEXT_EXEC",
+            "__TEXT_BOOT_EXEC",
+            "__DATA",
+            "__LINKEDIT"
+          ],
+          "filesetEntryCount": 0
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-4d50a9dbdfdf740e8ac8"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/kernelcache.release.mac15j",
+      "scope": "Preboot/restore",
+      "bytes": 33511755,
+      "sha256": "68bea51e40968aa04f1669623bb4e08f5bd4d2637c84ca01ce7991dfabe8a9fc",
+      "image": {
+        "container": "IM4P",
+        "imageType": "krnl",
+        "description": "KernelManagement_host-514.0.2",
+        "payloadOffset": 55,
+        "payloadBytes": 33511352,
+        "payloadSha256": "32b4f7abcba4545407e6623cdb1bf81725eeba15fb586dc772b273ea281768ef",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 124911616,
+        "sha256": "5dd741e5f985277d393f24a6b6962ae13817d8c467adc3ccec18a080018c85d7",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0xc0000002",
+          "architecture": "arm64e",
+          "fileType": 12,
+          "loadCommands": 368,
+          "flags": "0x0",
+          "segmentNames": [
+            "__TEXT",
+            "__PRELINK_TEXT",
+            "__DATA_CONST",
+            "__DATA_SPTM",
+            "__TEXT_EXEC",
+            "__TEXT_BOOT_EXEC",
+            "__PRELINK_INFO",
+            "__DATA",
+            "__LINKEDIT"
+          ],
+          "filesetEntryCount": 355,
+          "selectedFilesetEntries": [
+            "com.apple.kernel",
+            "com.apple.AGXFirmwareKextG15CRTBuddy",
+            "com.apple.AGXFirmwareKextRTBuddy64",
+            "com.apple.AGXG15C",
+            "com.apple.driver.AppleAOPAudio",
+            "com.apple.driver.AppleAOPVoiceTrigger",
+            "com.apple.driver.AppleARMWatchdogTimer",
+            "com.apple.driver.AppleDCP",
+            "com.apple.driver.AppleDCPDPTXProxy",
+            "com.apple.driver.AppleS5L8960XNCO",
+            "com.apple.iokit.AppleSEPGenericTransfer",
+            "com.apple.driver.AppleSEPHDCPManager",
+            "com.apple.driver.AppleSEPKeyStore",
+            "com.apple.driver.AppleSEPManager",
+            "com.apple.driver.AppleT6031ANEHAL",
+            "com.apple.driver.AppleT6031CLPC",
+            "com.apple.driver.AppleT6031PCIe",
+            "com.apple.driver.AppleT6031PMGR",
+            "com.apple.driver.AppleT6031SOCTuner",
+            "com.apple.driver.RTBuddy"
+          ]
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-1eb8ff6aefe51877b0b3"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/AOP/aopfw-mac15jaop.RELEASE.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 2158617,
+      "sha256": "952a33a0ac281812a8e1cfab903b127086dafb872f973b7d92f54269f60137c1",
+      "image": {
+        "container": "IM4P",
+        "imageType": "aopf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 2158592,
+        "payloadSha256": "5cdeb19fc1b290301abcf5bd93e24c22190b9cea4a26b9179a71944ef3e090d5",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x80000002",
+        "architecture": "arm64e",
+        "fileType": 5,
+        "loadCommands": 12,
+        "flags": "0x200001",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__ETEXT",
+          "__EDATA",
+          "__OS_LOG",
+          "__MISC",
+          "__CMA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-f1244c8778245635cde5"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/J514M_InputDevice.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 95821,
+      "sha256": "6d2fc500a3b826aa0dd28b2fd9694b116de052beba7af4c012d38735b73ec573",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ipdf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 95796,
+        "payloadSha256": "4e7ef4702d9cc9cbbb86bf1590162d989fb37f80f639b0b8adae8809bddacbdb",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-85b923d326336c0838b5"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/J514M_MtpFirmware.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 903816,
+      "sha256": "89e682984fc6dcf42c521d0ec10683297d94713239572edbf49a9819a51241af",
+      "image": {
+        "container": "IM4P",
+        "imageType": "mtpf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 903791,
+        "payloadSha256": "d8c1662291808169d37af7a0852193fc53c14fa52f52d52053de85155a8c5d38",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-5d4c206b8df02fc99e1e"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/J514m_Multitouch.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 109831,
+      "sha256": "1dbb3193537274ec26073658162407cb0d30a0edcce92d3a6619e704e3c2341b",
+      "image": {
+        "container": "IM4P",
+        "imageType": "mtfw",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 109806,
+        "payloadSha256": "8db60f62addb1da03198a4224043762fcd3decf91f38e2ab553fec70c3aaa42d",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-35519d4b6061b051bc58"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/SmartIOFirmware_ASCv6.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 1140621,
+      "sha256": "2c67bee4ac66acfaa0194ccfb509118897b06e3fe8b319b8e8891be17a9006e0",
+      "image": {
+        "container": "IM4P",
+        "imageType": "siof",
+        "description": "1.0.0",
+        "payloadOffset": 29,
+        "payloadBytes": 1140592,
+        "payloadSha256": "9538a416886a4c18d7c45cc35016247e88ab8fedea3affd40ca56835ce331def",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x0",
+        "architecture": "arm64",
+        "fileType": 5,
+        "loadCommands": 6,
+        "flags": "0x1",
+        "symbolCount": 154,
+        "stringTableBytes": 3536,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-44f444a1cda3bba66851"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/agx/armfw_g15c.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 3356713,
+      "sha256": "c69b50fa82818881ac7ad6cebe2c50d4fee61d872f89c4c0faf6d36accc83d78",
+      "image": {
+        "container": "IM4P",
+        "imageType": "gfxf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 3356688,
+        "payloadSha256": "b215e89d46da82e8198e8e7226697af5c666b5a3f3a01676076dedd592715787",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-28fb8279cdf0a7e4d2e4"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/all_flash/DeviceTree.j514map.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 63340,
+      "sha256": "fe295f7a7c308b6f34c1621a8e0e1b13f050f63e41bd5042ed42f548e8eb6f90",
+      "image": {
+        "container": "IM4P",
+        "imageType": "dtre",
+        "description": "EmbeddedDeviceTrees-12661.40.115.0.1",
+        "payloadOffset": 58,
+        "payloadBytes": 63272,
+        "payloadSha256": "d86754e5ccfd30a9ba4f5d895d1e953048840439f44b2edeead9ac324a39b4d6",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 407000,
+        "sha256": "57e4b470aa981ac4e64d75a84a0055f4be95addb77ddbad7371ef6b68d1da25b",
+        "layout": null,
+        "deviceTree": {
+          "nodes": 548,
+          "properties": 6754,
+          "consumedBytes": 407000,
+          "trailingBytes": 0,
+          "scope": "Static shipped template; live boot properties and values were not captured.",
+          "interfaceNodeCount": 208,
+          "selectedInterfaces": [
+            {
+              "path": "/device-tree/arm-io",
+              "propertyCount": 17,
+              "children": 179,
+              "compatible": [
+                "arm-io,t6031"
+              ],
+              "device_type": [
+                "t603x-palma"
+              ],
+              "regBytes": 48
+            },
+            {
+              "path": "/device-tree/arm-io/mtp",
+              "propertyCount": 13,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "mtp"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/aic",
+              "propertyCount": 27,
+              "children": 0,
+              "compatible": [
+                "aic,3"
+              ],
+              "device_type": [
+                "interrupt-controller"
+              ],
+              "regBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/aop",
+              "propertyCount": 14,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "aop"
+              ],
+              "regBytes": 64,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/pmgr",
+              "propertyCount": 84,
+              "children": 3,
+              "compatible": [
+                "pmgr1,t6031"
+              ],
+              "device_type": [
+                "pmgr"
+              ],
+              "regBytes": 960,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/sio",
+              "propertyCount": 16,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "sio"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/sep",
+              "propertyCount": 17,
+              "children": 1,
+              "compatible": [
+                "iop-sep,ascwrap-v6"
+              ],
+              "device_type": [
+                "sep"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/ans",
+              "propertyCount": 21,
+              "children": 2,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "ans"
+              ],
+              "regBytes": 112,
+              "interruptsBytes": 20
+            },
+            {
+              "path": "/device-tree/arm-io/smc",
+              "propertyCount": 13,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "smc"
+              ],
+              "regBytes": 48,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/uart0",
+              "propertyCount": 13,
+              "children": 1,
+              "compatible": [
+                "uart-1,samsung"
+              ],
+              "device_type": [
+                "uart"
+              ],
+              "regBytes": 16,
+              "interruptsBytes": 4
+            },
+            {
+              "path": "/device-tree/arm-io/dcp",
+              "propertyCount": 17,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "dcp"
+              ],
+              "regBytes": 32,
+              "interruptsBytes": 16
+            },
+            {
+              "path": "/device-tree/arm-io/dart-dcp",
+              "propertyCount": 19,
+              "children": 1,
+              "compatible": [
+                "dart,t8110"
+              ],
+              "device_type": [
+                "dart"
+              ],
+              "regBytes": 16,
+              "interruptsBytes": 4
+            },
+            {
+              "path": "/device-tree/arm-io/ane0",
+              "propertyCount": 20,
+              "children": 1,
+              "compatible": [
+                "iop,ascwrap-v6"
+              ],
+              "device_type": [
+                "ane"
+              ],
+              "regBytes": 128,
+              "interruptsBytes": 20
+            }
+          ]
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-57651e535ec7a2905793"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/all_flash/iBoot.j514m.RELEASE.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 1103275,
+      "sha256": "ebe662ed9e82bb6759a8cff8b1609b404a8c10e0a02cd7ed28a8f53190cd3c03",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ibot",
+        "description": "mBoot-20457.40.150.0.1",
+        "payloadOffset": 46,
+        "payloadBytes": 1103189,
+        "payloadSha256": "b673624af452ae3e7195bf5116f4ba44f614b80575f3cb91ba6fea6ae1caafd1",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 2790840,
+        "sha256": "9a5051c9eb087a9d021bc60fee4a891b7b04ef8a4f3ba91ffaff673a48e43f55",
+        "layout": null
+      },
+      "evidenceId": "absolute-boot-artifact-217b0cf9a05ff0737b6a"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/all_flash/iBootData.j514m.RELEASE.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 69484,
+      "sha256": "46e432497a04f685ff55b9a12c00ee1d90422f3f9fc0c2e26db9039a5e76c554",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ibdt",
+        "description": "mBoot-20457.40.150.0.1",
+        "payloadOffset": 46,
+        "payloadBytes": 69428,
+        "payloadSha256": "2b9c0c86104520c5540190bfe3f17eaf840d76746acdbe2fb3d5291037b1af13",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 744784,
+        "sha256": "938c1d52710f6cb3625105c27ca4cec38ddebdc1709350edde684a109c042411",
+        "layout": null
+      },
+      "evidenceId": "absolute-boot-artifact-548b527d10a82b1e8b39"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/all_flash/sep-firmware.j514m.RELEASE.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 5931772,
+      "sha256": "6c00af3fef732485095092bbc8041fc46635db8197ce3fe32ee811f0d84dc5ad",
+      "image": {
+        "container": "IM4P",
+        "imageType": "sepi",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 5931008,
+        "payloadSha256": "a652afc9f48a13c71bb8a9120f51068c7764140661d0996134d7c41ac2d0dadb",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": null,
+      "evidenceId": "absolute-boot-artifact-f66d8ef83107481e855f"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/ane/t603x_ane0_fw_erebus_pc5x.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 1589273,
+      "sha256": "a7749134e5b2a4746e65b854c4efd94757029aa514b89e63bae8fe6030a1a31c",
+      "image": {
+        "container": "IM4P",
+        "imageType": "anef",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 1589248,
+        "payloadSha256": "d7f3b0a2d3073320ad9d57e7b3de61cee87bd5ea0184c48031d9e69c73627ca6",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x80000002",
+        "architecture": "arm64e",
+        "fileType": 5,
+        "loadCommands": 7,
+        "flags": "0x200001",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-354a63b21a9dfe6ceb1c"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/ave/AppleAVE2FW_H15M.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 2748217,
+      "sha256": "14f7bce6ccbe5dcc4c4c059f20ce4af65f9ee38b25d2b8d9e56f7ede48996c7b",
+      "image": {
+        "container": "IM4P",
+        "imageType": "avef",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 2748192,
+        "payloadSha256": "b0f0e5aace3d4aca2ed51ab718bc18e3920508169dfb0cc9ab755cc8a1f9b219",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x80000002",
+        "architecture": "arm64e",
+        "fileType": 5,
+        "loadCommands": 7,
+        "flags": "0x200001",
+        "symbolCount": 1710,
+        "stringTableBytes": 66624,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-ba0ab5f83877c7bc0c39"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/dcp/t603xdcp.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 3773407,
+      "sha256": "02831184ea78baf41573ae0791c13d03b22005eec2137e05194618e9c46bf16c",
+      "image": {
+        "container": "IM4P",
+        "imageType": "dcpf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 3773371,
+        "payloadSha256": "cb22f636d985571e52167e517681d905968dd388749fc3e391e771cdce293726",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 10035200,
+        "sha256": "e3dc97dcfecc1f496d723dfdbc6e2cb2b3cc508cbd2fd62f7b5b2b604725ef97",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0x80000002",
+          "architecture": "arm64e",
+          "fileType": 5,
+          "loadCommands": 8,
+          "flags": "0x200001",
+          "symbolCount": 0,
+          "stringTableBytes": 0,
+          "segmentNames": [
+            "__TEXT",
+            "__DATA",
+            "__OS_LOG",
+            "__DATA_CONST"
+          ],
+          "filesetEntryCount": 0
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-79326442badf145d4f6a"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/isp_bni/adc-aion-pc5x.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 13516825,
+      "sha256": "d308d3b99f0f5abc461f9c3cee8d35ac74ddb8a8bfab4cbc2ecf6b4be964654d",
+      "image": {
+        "container": "IM4P",
+        "imageType": "ispf",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 13516800,
+        "payloadSha256": "064be48ae94603ba4967f5cb0d471be180b0828372a71d5c22c7251a9a2ac682",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x0",
+        "architecture": "arm64",
+        "fileType": 5,
+        "loadCommands": 6,
+        "flags": "0x1",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-2acb3eb6a900566624e8"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/pmp/t6031pmp.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 1028121,
+      "sha256": "c6808950529a89df4070994733690dbdbe12b32f0887c146a14e9ccd991e74cc",
+      "image": {
+        "container": "IM4P",
+        "imageType": "pmpf",
+        "description": "0",
+        "payloadOffset": 25,
+        "payloadBytes": 1028096,
+        "payloadSha256": "6848702c20870e6a13de0f2ef290835c275579a70d7599a703daa7b9f9a00d7b",
+        "compression": "unrecognized-or-none"
+      },
+      "payloadLayout": {
+        "format": "Mach-O 64-bit little-endian",
+        "cpuType": "0x100000c",
+        "cpuSubtype": "0x0",
+        "architecture": "arm64",
+        "fileType": 5,
+        "loadCommands": 6,
+        "flags": "0x1",
+        "symbolCount": 0,
+        "stringTableBytes": 0,
+        "segmentNames": [
+          "__TEXT",
+          "__DATA",
+          "__DATA_CONST"
+        ],
+        "filesetEntryCount": 0
+      },
+      "evidenceId": "absolute-boot-artifact-3cde280e77b4cbc36450"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/sptm.t6031.release.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 201068,
+      "sha256": "d4e13bd024c98bc4fb33ff7300b4ca63ca4cfd44780defe92507b359a9353503",
+      "image": {
+        "container": "IM4P",
+        "imageType": "sptm",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 200726,
+        "payloadSha256": "cdb8f0f59a420e2e6ba8e64c5416fac2ca3ce129d2fe7547150c85671bb6b705",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 1441824,
+        "sha256": "2a00be6e0c8057d9f021bbe9bf46cb7c7441b81eedc217506dc89532535fafbf",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0xc0000002",
+          "architecture": "arm64e",
+          "fileType": 2,
+          "loadCommands": 13,
+          "flags": "0x200001",
+          "symbolCount": 1,
+          "stringTableBytes": 16,
+          "segmentNames": [
+            "__TEXT",
+            "__DATA_CONST",
+            "__LATE_CONST",
+            "__TEXT_EXEC",
+            "__LAST",
+            "__DATA",
+            "__BOOTDATA",
+            "__LINKEDIT"
+          ],
+          "filesetEntryCount": 0
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-20ca6ad59e13defaba8b"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/Firmware/txm.macosx.release.im4p",
+      "scope": "Preboot/restore-staged",
+      "bytes": 237948,
+      "sha256": "1744debc4360027ca1baf582bf1dc4b704536feeb91e0b6345c3123a805dfb10",
+      "image": {
+        "container": "IM4P",
+        "imageType": "trxm",
+        "description": "1",
+        "payloadOffset": 25,
+        "payloadBytes": 237628,
+        "payloadSha256": "9b40edcc57f5ad00229098699deb65bc35ac47fa056f71c5f258cfdc95d1b501",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 589856,
+        "sha256": "df70843f248f0dba956fda13d7edbc1c2ae1dc07e42f287d1fee2c3af8964918",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0xc0000002",
+          "architecture": "arm64e",
+          "fileType": 2,
+          "loadCommands": 11,
+          "flags": "0x200001",
+          "symbolCount": 1,
+          "stringTableBytes": 16,
+          "segmentNames": [
+            "__TEXT",
+            "__DATA_CONST",
+            "__TEXT_EXEC",
+            "__TEXT_BOOT_EXEC",
+            "__DATA",
+            "__LINKEDIT"
+          ],
+          "filesetEntryCount": 0
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-0c6b8255b5c47f71c70e"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/kernelcache.release.mac15j",
+      "scope": "Preboot/restore-staged",
+      "bytes": 33714039,
+      "sha256": "987167d3c31827ef5badd53ef74a9a6a094bff85f4720ecc3b01f1050f2e79e3",
+      "image": {
+        "container": "IM4P",
+        "imageType": "krnl",
+        "description": "KernelManagement_host-514.40.8",
+        "payloadOffset": 56,
+        "payloadBytes": 33713635,
+        "payloadSha256": "062e13cf6638c74753b8e83a1f790c87243b66a4eec97b20c2a6530f87bce4d6",
+        "compression": "lzfse"
+      },
+      "decoded": {
+        "bytes": 126304256,
+        "sha256": "16a1e36dfc33ed74ca4dfbfbdbed186ba9cb8de89253cc5e679260e8a129cb6f",
+        "layout": {
+          "format": "Mach-O 64-bit little-endian",
+          "cpuType": "0x100000c",
+          "cpuSubtype": "0xc0000002",
+          "architecture": "arm64e",
+          "fileType": 12,
+          "loadCommands": 368,
+          "flags": "0x0",
+          "segmentNames": [
+            "__TEXT",
+            "__PRELINK_TEXT",
+            "__DATA_CONST",
+            "__DATA_SPTM",
+            "__TEXT_EXEC",
+            "__TEXT_BOOT_EXEC",
+            "__PRELINK_INFO",
+            "__DATA",
+            "__LINKEDIT"
+          ],
+          "filesetEntryCount": 355,
+          "selectedFilesetEntries": [
+            "com.apple.kernel",
+            "com.apple.AGXFirmwareKextG15CRTBuddy",
+            "com.apple.AGXFirmwareKextRTBuddy64",
+            "com.apple.AGXG15C",
+            "com.apple.driver.AppleAOPAudio",
+            "com.apple.driver.AppleAOPVoiceTrigger",
+            "com.apple.driver.AppleARMWatchdogTimer",
+            "com.apple.driver.AppleDCP",
+            "com.apple.driver.AppleDCPDPTXProxy",
+            "com.apple.driver.AppleS5L8960XNCO",
+            "com.apple.iokit.AppleSEPGenericTransfer",
+            "com.apple.driver.AppleSEPHDCPManager",
+            "com.apple.driver.AppleSEPKeyStore",
+            "com.apple.driver.AppleSEPManager",
+            "com.apple.driver.AppleT6031ANEHAL",
+            "com.apple.driver.AppleT6031CLPC",
+            "com.apple.driver.AppleT6031PCIe",
+            "com.apple.driver.AppleT6031PMGR",
+            "com.apple.driver.AppleT6031SOCTuner",
+            "com.apple.driver.RTBuddy"
+          ]
+        }
+      },
+      "evidenceId": "absolute-boot-artifact-f1f1ec541b080b2848f9"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/System/Library/Caches/com.apple.kernelcaches/kernelcache",
+      "scope": "Preboot/boot",
+      "bytes": 33518879,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "krnl",
+        "description": "KernelManagement_host-514.0.2",
+        "payloadOffset": 67,
+        "payloadBytes": 33511352,
+        "payloadSha256": "32b4f7abcba4545407e6623cdb1bf81725eeba15fb586dc772b273ea281768ef",
+        "compression": "lzfse"
+      },
+      "evidenceId": "absolute-boot-artifact-9485ac70a1cb3ebb5a87"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/ANE.img4",
+      "scope": "Preboot/boot",
+      "bytes": 1612780,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "anef",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 1605632,
+        "payloadSha256": "ed458531ac075d27745be5b34239298932e3da452757cee633eefce6361bdf41",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-e6e98248d6d84848ae5f"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/AOP.img4",
+      "scope": "Preboot/boot",
+      "bytes": 2161644,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "aopf",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 2154496,
+        "payloadSha256": "b39ed33814f83111fd9ce72e3eb936889890f23e4be4d9db8efd700b6307fe43",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-b677b9c64837d8a5566f"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/AVE.img4",
+      "scope": "Preboot/boot",
+      "bytes": 2755340,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "avef",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 2748192,
+        "payloadSha256": "6d4176e6da54dca75716c52da89e8cd80967cc797697f5a8290d57b58145fd53",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-fbf92de94778a4a3ff50"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/Ap,SecurePageTableMonitor.img4",
+      "scope": "Preboot/boot",
+      "bytes": 207756,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "sptm",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 200291,
+        "payloadSha256": "00b8bceaf5b72aae983cbe1c79f8e9ec64ab89aca9969058a4679bb7fa915e17",
+        "compression": "lzfse"
+      },
+      "evidenceId": "absolute-boot-artifact-55d0b6c279e64350632b"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/Ap,TrustedExecutionMonitor.img4",
+      "scope": "Preboot/boot",
+      "bytes": 244593,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "trxm",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 237150,
+        "payloadSha256": "1ec663b5a919185bd2881884a8d15ee8e574d2000a01a39f13a68e441b297d08",
+        "compression": "lzfse"
+      },
+      "evidenceId": "absolute-boot-artifact-a3c8d4d420f309cc804a"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/BaseSystemTrustCache.img4",
+      "scope": "Preboot/boot",
+      "bytes": 33569,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "bstc",
+        "description": "1",
+        "payloadOffset": 33,
+        "payloadBytes": 26424,
+        "payloadSha256": "0575caf9ce0ec2c690c6c18213150adc297cff37b0d8635e26e5143e83519205",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-ef4cfde4c32f3b2ec739"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/DCP.img4",
+      "scope": "Preboot/boot",
+      "bytes": 3779257,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "dcp2",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 3772098,
+        "payloadSha256": "49d7a9f04eb5ea576e9f3d78250638fbfbf5a0d9478d0d98cad750a142ea5448",
+        "compression": "lzfse"
+      },
+      "evidenceId": "absolute-boot-artifact-efec85d1b953e9a14e44"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/GFX.img4",
+      "scope": "Preboot/boot",
+      "bytes": 3363836,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "gfxf",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 3356688,
+        "payloadSha256": "0fa13f5ecabdac5d96aee9200dfe34919cfac7727ae9b16a276277e16c1c7f3c",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-4dbb85fe706ba227f613"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/ISP.img4",
+      "scope": "Preboot/boot",
+      "bytes": 13523948,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "ispf",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 13516800,
+        "payloadSha256": "1eabb2750573311c618f2089ba630e0f686b6add9e1e9c2944803f48b2cc51ae",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-2d27ef36390d4bd1c8d7"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/InputDevice.img4",
+      "scope": "Preboot/boot",
+      "bytes": 102944,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "ipdf",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 95796,
+        "payloadSha256": "4e7ef4702d9cc9cbbb86bf1590162d989fb37f80f639b0b8adae8809bddacbdb",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-77c32ee67ce5a6003f50"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/MtpFirmware.img4",
+      "scope": "Preboot/boot",
+      "bytes": 910940,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "mtpf",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 903792,
+        "payloadSha256": "890532e92d0bf0650cf449407edfeb2d8d33cb0f52a4858847b1633d4f6a40d7",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-6e85a82fc384cd572f53"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/Multitouch.img4",
+      "scope": "Preboot/boot",
+      "bytes": 116954,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "mtfw",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 109806,
+        "payloadSha256": "8db60f62addb1da03198a4224043762fcd3decf91f38e2ab553fec70c3aaa42d",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-fb05ac3028a5efc60b8e"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/PMP.img4",
+      "scope": "Preboot/boot",
+      "bytes": 1035244,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "pmpf",
+        "description": "0",
+        "payloadOffset": 36,
+        "payloadBytes": 1028096,
+        "payloadSha256": "6accdd6471bc0e2a293be9b59eba5ffa7c4765e37ec69c82020fcd723f09109e",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-5804a5532afecafcbe35"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/SIO.img4",
+      "scope": "Preboot/boot",
+      "bytes": 1147744,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "siof",
+        "description": "1.0.0",
+        "payloadOffset": 40,
+        "payloadBytes": 1140592,
+        "payloadSha256": "de8d3487365e0f13cd1bd873c7837d4b00f058d6cf10fcaa02e827aeddb54cdb",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-703ea5c60d4adb9ddd02"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/StaticTrustCache.img4",
+      "scope": "Preboot/boot",
+      "bytes": 327452,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "trst",
+        "description": "1",
+        "payloadOffset": 36,
+        "payloadBytes": 320304,
+        "payloadSha256": "502931dc9a5f632a3b5dcdb70c0fcdc7534fa17cbedb3987071f2e8f8bcb77fb",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-e333bf2f09d9fcc161bf"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/FUD/iBootData.img4",
+      "scope": "Preboot/boot",
+      "bytes": 76597,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "ibdt",
+        "description": "mBoot-20457.1.29",
+        "payloadOffset": 51,
+        "payloadBytes": 69424,
+        "payloadSha256": "2e0f3a2fc77466f942609e308bcbe6b4ee43bec552b314156629ef4e1ea54854",
+        "compression": "lzfse"
+      },
+      "evidenceId": "absolute-boot-artifact-6d57d3f83bc490c84878"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/base_system_root_hash.img4",
+      "scope": "Preboot/boot",
+      "bytes": 7351,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "csys",
+        "description": "0",
+        "payloadOffset": 31,
+        "payloadBytes": 208,
+        "payloadSha256": "9c8d61419ccb8d325194d56763d1df2127925341994143f795b13177639d7364",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-fbc7d1f0fc15f5052460"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/devicetree.img4",
+      "scope": "Preboot/boot",
+      "bytes": 70428,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "dtre",
+        "description": "EmbeddedDeviceTrees-12661.1.5",
+        "payloadOffset": 62,
+        "payloadBytes": 63244,
+        "payloadSha256": "10db5be270114daa0246e8494724150f6a9a2e290a59e1cbed7ea801d831284f",
+        "compression": "lzfse"
+      },
+      "evidenceId": "absolute-boot-artifact-49a66db7abc35956b697"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/iBoot.img4",
+      "scope": "Preboot/boot",
+      "bytes": 1109689,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "ibot",
+        "description": "mBoot-20457.1.29",
+        "payloadOffset": 51,
+        "payloadBytes": 1102486,
+        "payloadSha256": "8ae83d78cfa4bf2aee509542943a7fb5506d868523e8eddee4e53db158d6d672",
+        "compression": "lzfse"
+      },
+      "evidenceId": "absolute-boot-artifact-31093ef3d3ee4aa72476"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/boot/<boot-object-set>/usr/standalone/firmware/root_hash.img4",
+      "scope": "Preboot/boot",
+      "bytes": 7351,
+      "wholeContainerHash": "omitted: container may include personalized manifest",
+      "image": {
+        "container": "IMG4",
+        "imageType": "isys",
+        "description": "0",
+        "payloadOffset": 31,
+        "payloadBytes": 208,
+        "payloadSha256": "203e00e881a210cac4c3bcdeeb4ec4476b721e49ea8db5e5bee9da75ac0d0b58",
+        "compression": "unrecognized-or-none"
+      },
+      "evidenceId": "absolute-boot-artifact-d7ddf5ffd6dd595ba60d"
+    }
+  ],
+  "buildManifests": [
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore/BuildManifest.plist",
+      "sha256": "3d310b278dc94c717a3a2ab66abe931d774a9491c203632358a8ce19660eb132",
+      "productVersion": "27.0",
+      "productBuildVersion": "26A5421a",
+      "identities": [
+        {
+          "deviceClass": "j514map",
+          "variant": "macOS Customer Software Update",
+          "components": {
+            "ANE": "Firmware/ane/t603x_ane0_fw_erebus_pc5x.im4p",
+            "AOP": "Firmware/AOP/aopfw-mac15jaop.RELEASE.im4p",
+            "AVE": "Firmware/ave/AppleAVE2FW_H15M.im4p",
+            "Ap,BaseSystemTrustCache": "Firmware/022-20879-174.dmg.aea.trustcache",
+            "Ap,DCP2": "Firmware/dcp/t603xdcp.im4p",
+            "Ap,RestoreDCP2": "Firmware/dcp/t603xdcp_restore.im4p",
+            "Ap,RestoreSecurePageTableMonitor": "Firmware/sptm.t6031.release.im4p",
+            "Ap,RestoreTrustedExecutionMonitor": "Firmware/txm.macosx.release.im4p",
+            "Ap,SecurePageTableMonitor": "Firmware/sptm.t6031.release.im4p",
+            "Ap,SystemVolumeCanonicalMetadata": "Firmware/094-19942-128.dmg.aea.mtree",
+            "Ap,TrustedExecutionMonitor": "Firmware/txm.macosx.release.im4p",
+            "BaseSystem": "../Restore/022-20879-174.dmg.aea",
+            "BaseSystemVolume": "Firmware/022-20879-174.dmg.aea.root_hash",
+            "Cryptex1,AppOS": "094-20071-197.dmg",
+            "Cryptex1,AppTrustCache": "Firmware/094-20071-197.dmg.trustcache",
+            "Cryptex1,AppVolume": "Firmware/094-20071-197.dmg.root_hash",
+            "Cryptex1,RosettaOS": "094-86300-129.dmg",
+            "Cryptex1,RosettaTrustCache": "Firmware/094-86300-129.dmg.trustcache",
+            "Cryptex1,RosettaVolume": "Firmware/094-86300-129.dmg.root_hash",
+            "Cryptex1,SystemOS": "094-19967-135.dmg.aea",
+            "Cryptex1,SystemTrustCache": "Firmware/094-19967-135.dmg.aea.trustcache",
+            "Cryptex1,SystemVolume": "Firmware/094-19967-135.dmg.aea.root_hash",
+            "DeviceTree": "Firmware/all_flash/DeviceTree.j514map.im4p",
+            "GFX": "Firmware/agx/armfw_g15c.im4p",
+            "ISP": "Firmware/isp_bni/adc-aion-pc5x.im4p",
+            "InputDevice": "Firmware/J514M_InputDevice.im4p",
+            "KernelCache": "kernelcache.release.mac15j",
+            "MtpFirmware": "Firmware/J514M_MtpFirmware.im4p",
+            "Multitouch": "Firmware/J514m_Multitouch.im4p",
+            "OS": "../Restore/094-19942-128.dmg.aea",
+            "PMP": "Firmware/pmp/t6031pmp.im4p",
+            "RestoreDeviceTree": "Firmware/all_flash/DeviceTree.j514map.im4p",
+            "RestoreKernelCache": "kernelcache.release.mac15j",
+            "RestoreLogo": "Firmware/all_flash/applelogo@2x~mac-USBc.im4p",
+            "RestoreRamDisk": "../usr/standalone/update/ramdisk/arm64eSURamDisk.dmg",
+            "RestoreTrustCache": "Firmware/arm64eSURamDisk.dmg.trustcache",
+            "SIO": "Firmware/SmartIOFirmware_ASCv6.im4p",
+            "StaticTrustCache": "Firmware/094-19942-128.dmg.aea.trustcache",
+            "SystemVolume": "Firmware/094-19942-128.dmg.aea.root_hash",
+            "iBEC": "Firmware/dfu/iBEC.j514m.RELEASE.im4p",
+            "iBoot": "Firmware/all_flash/iBoot.j514m.RELEASE.im4p",
+            "iBootData": "Firmware/all_flash/iBootData.j514m.RELEASE.im4p"
+          }
+        }
+      ],
+      "evidenceId": "absolute-boot-manifest-fd85d000b1867da650ef"
+    },
+    {
+      "path": "/System/Volumes/Preboot/<volume>/restore-staged/BuildManifest.plist",
+      "sha256": "bbb76f221811e1c93b3d6fb1e46a7ee84e20f34db9ffb2fbdba5793c5125d15e",
+      "productVersion": "27.2",
+      "productBuildVersion": "26B5091g",
+      "identities": [
+        {
+          "deviceClass": "j514map",
+          "variant": "macOS Customer Software Update",
+          "components": {
+            "ANE": "Firmware/ane/t603x_ane0_fw_erebus_pc5x.im4p",
+            "AOP": "Firmware/AOP/aopfw-mac15jaop.RELEASE.im4p",
+            "AVE": "Firmware/ave/AppleAVE2FW_H15M.im4p",
+            "Ap,BaseSystemTrustCache": "Firmware/022-22510-028.dmg.aea.trustcache",
+            "Ap,DCP2": "Firmware/dcp/t603xdcp.im4p",
+            "Ap,RestoreDCP2": "Firmware/dcp/t603xdcp_restore.im4p",
+            "Ap,RestoreSecurePageTableMonitor": "Firmware/sptm.t6031.release.im4p",
+            "Ap,RestoreTrustedExecutionMonitor": "Firmware/txm.macosx.release.im4p",
+            "Ap,SecurePageTableMonitor": "Firmware/sptm.t6031.release.im4p",
+            "Ap,SystemVolumeCanonicalMetadata": "Firmware/141-67428-023.dmg.aea.mtree",
+            "Ap,TrustedExecutionMonitor": "Firmware/txm.macosx.release.im4p",
+            "BaseSystem": "../Restore/022-22510-028.dmg.aea",
+            "BaseSystemVolume": "Firmware/022-22510-028.dmg.aea.root_hash",
+            "Cryptex1,AppOS": "141-67435-028.dmg",
+            "Cryptex1,AppTrustCache": "Firmware/141-67435-028.dmg.trustcache",
+            "Cryptex1,AppVolume": "Firmware/141-67435-028.dmg.root_hash",
+            "Cryptex1,RosettaOS": "141-67405-028.dmg",
+            "Cryptex1,RosettaTrustCache": "Firmware/141-67405-028.dmg.trustcache",
+            "Cryptex1,RosettaVolume": "Firmware/141-67405-028.dmg.root_hash",
+            "Cryptex1,SystemOS": "141-67363-023.dmg.aea",
+            "Cryptex1,SystemTrustCache": "Firmware/141-67363-023.dmg.aea.trustcache",
+            "Cryptex1,SystemVolume": "Firmware/141-67363-023.dmg.aea.root_hash",
+            "DeviceTree": "Firmware/all_flash/DeviceTree.j514map.im4p",
+            "GFX": "Firmware/agx/armfw_g15c.im4p",
+            "ISP": "Firmware/isp_bni/adc-aion-pc5x.im4p",
+            "InputDevice": "Firmware/J514M_InputDevice.im4p",
+            "KernelCache": "kernelcache.release.mac15j",
+            "MtpFirmware": "Firmware/J514M_MtpFirmware.im4p",
+            "Multitouch": "Firmware/J514m_Multitouch.im4p",
+            "OS": "../Restore/141-67428-023.dmg.aea",
+            "PMP": "Firmware/pmp/t6031pmp.im4p",
+            "RestoreDeviceTree": "Firmware/all_flash/DeviceTree.j514map.im4p",
+            "RestoreKernelCache": "kernelcache.release.mac15j",
+            "RestoreLogo": "Firmware/all_flash/applelogo@2x~mac-USBc.im4p",
+            "RestoreRamDisk": "../usr/standalone/update/ramdisk/arm64eSURamDisk.dmg",
+            "RestoreTrustCache": "Firmware/arm64eSURamDisk.dmg.trustcache",
+            "SIO": "Firmware/SmartIOFirmware_ASCv6.im4p",
+            "StaticTrustCache": "Firmware/141-67428-023.dmg.aea.trustcache",
+            "SystemVolume": "Firmware/141-67428-023.dmg.aea.root_hash",
+            "iBEC": "Firmware/dfu/iBEC.j514m.RELEASE.im4p",
+            "iBoot": "Firmware/all_flash/iBoot.j514m.RELEASE.im4p",
+            "iBootData": "Firmware/all_flash/iBootData.j514m.RELEASE.im4p"
+          }
+        }
+      ],
+      "evidenceId": "absolute-boot-manifest-f1e310bb05230a738227"
+    }
+  ],
+  "bootToRestorePayloadMatches": [
+    {
+      "bootEvidenceId": "absolute-boot-artifact-9485ac70a1cb3ebb5a87",
+      "restoreEvidenceId": "absolute-boot-artifact-1eb8ff6aefe51877b0b3",
+      "payloadSha256": "32b4f7abcba4545407e6623cdb1bf81725eeba15fb586dc772b273ea281768ef"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-e6e98248d6d84848ae5f",
+      "restoreEvidenceId": "absolute-boot-artifact-efbbd85dc9bcd9740705",
+      "payloadSha256": "ed458531ac075d27745be5b34239298932e3da452757cee633eefce6361bdf41"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-b677b9c64837d8a5566f",
+      "restoreEvidenceId": "absolute-boot-artifact-f950f80d283abe68326b",
+      "payloadSha256": "b39ed33814f83111fd9ce72e3eb936889890f23e4be4d9db8efd700b6307fe43"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-fbf92de94778a4a3ff50",
+      "restoreEvidenceId": "absolute-boot-artifact-6223f745db8f34d35ad1",
+      "payloadSha256": "6d4176e6da54dca75716c52da89e8cd80967cc797697f5a8290d57b58145fd53"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-55d0b6c279e64350632b",
+      "restoreEvidenceId": "absolute-boot-artifact-82c5ac74ad4cdc3c0a67",
+      "payloadSha256": "00b8bceaf5b72aae983cbe1c79f8e9ec64ab89aca9969058a4679bb7fa915e17"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-a3c8d4d420f309cc804a",
+      "restoreEvidenceId": "absolute-boot-artifact-4d50a9dbdfdf740e8ac8",
+      "payloadSha256": "1ec663b5a919185bd2881884a8d15ee8e574d2000a01a39f13a68e441b297d08"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-efec85d1b953e9a14e44",
+      "restoreEvidenceId": "absolute-boot-artifact-fbde3c50cfef381fc19e",
+      "payloadSha256": "49d7a9f04eb5ea576e9f3d78250638fbfbf5a0d9478d0d98cad750a142ea5448"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-4dbb85fe706ba227f613",
+      "restoreEvidenceId": "absolute-boot-artifact-342c9ebbd2313c65f094",
+      "payloadSha256": "0fa13f5ecabdac5d96aee9200dfe34919cfac7727ae9b16a276277e16c1c7f3c"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-2d27ef36390d4bd1c8d7",
+      "restoreEvidenceId": "absolute-boot-artifact-1e72ded5a5f18da2a2a5",
+      "payloadSha256": "1eabb2750573311c618f2089ba630e0f686b6add9e1e9c2944803f48b2cc51ae"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-77c32ee67ce5a6003f50",
+      "restoreEvidenceId": "absolute-boot-artifact-1f84a528fc96d862ddd8",
+      "payloadSha256": "4e7ef4702d9cc9cbbb86bf1590162d989fb37f80f639b0b8adae8809bddacbdb"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-6e85a82fc384cd572f53",
+      "restoreEvidenceId": "absolute-boot-artifact-66551f034b0f291961cd",
+      "payloadSha256": "890532e92d0bf0650cf449407edfeb2d8d33cb0f52a4858847b1633d4f6a40d7"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-fb05ac3028a5efc60b8e",
+      "restoreEvidenceId": "absolute-boot-artifact-95f4f4be0c29b796bf01",
+      "payloadSha256": "8db60f62addb1da03198a4224043762fcd3decf91f38e2ab553fec70c3aaa42d"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-5804a5532afecafcbe35",
+      "restoreEvidenceId": "absolute-boot-artifact-473583fd3215b1a3213f",
+      "payloadSha256": "6accdd6471bc0e2a293be9b59eba5ffa7c4765e37ec69c82020fcd723f09109e"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-703ea5c60d4adb9ddd02",
+      "restoreEvidenceId": "absolute-boot-artifact-c44151834630a3f9b499",
+      "payloadSha256": "de8d3487365e0f13cd1bd873c7837d4b00f058d6cf10fcaa02e827aeddb54cdb"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-6d57d3f83bc490c84878",
+      "restoreEvidenceId": "absolute-boot-artifact-c1f8dfbfbcda0b3e9a50",
+      "payloadSha256": "2e0f3a2fc77466f942609e308bcbe6b4ee43bec552b314156629ef4e1ea54854"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-49a66db7abc35956b697",
+      "restoreEvidenceId": "absolute-boot-artifact-cd8bfdeea8288764682c",
+      "payloadSha256": "10db5be270114daa0246e8494724150f6a9a2e290a59e1cbed7ea801d831284f"
+    },
+    {
+      "bootEvidenceId": "absolute-boot-artifact-31093ef3d3ee4aa72476",
+      "restoreEvidenceId": "absolute-boot-artifact-6eb74917b577a6dadbc7",
+      "payloadSha256": "8ae83d78cfa4bf2aee509542943a7fb5506d868523e8eddee4e53db158d6d672"
+    }
+  ],
+  "rea": [
+    {
+      "operation": "inspect_macho",
+      "targetName": "kernel.release.t6031",
+      "evidenceId": "ev_65909f9a2ed46e58d4594cff09e4521adcb48b65b59faddbdf7cdb6765eb5dc6",
+      "exitCode": 0,
+      "record": "local/boot-firmware/kernel.release.t6031.rea-macho.json",
+      "recordSha256": "47f4c3b6a03b6ab2e7b5e244efc8c15bffa33776a01fc616282b4109fa464cdb",
+      "error": null
+    },
+    {
+      "operation": "inspect_macho",
+      "targetName": "sptm.t6031.release.decoded.bin",
+      "evidenceId": "ev_8b2f50690e88d66cceccb250f5f432d057b529ff078396a577ecb59cd088ebe5",
+      "exitCode": 0,
+      "record": "local/boot-firmware/sptm.t6031.release.decoded.bin.rea-macho.json",
+      "recordSha256": "96fc5064f0fb69008d2faaf873001df264f195264dd9113aaea887b07dee1f7e",
+      "error": null
+    },
+    {
+      "operation": "inspect_macho",
+      "targetName": "txm.macosx.release.decoded.bin",
+      "evidenceId": "ev_4b8e5605b1061cc3e3c6f6a17c18f5a62379a07684ac89d44573706dd66d4629",
+      "exitCode": 0,
+      "record": "local/boot-firmware/txm.macosx.release.decoded.bin.rea-macho.json",
+      "recordSha256": "2e238a6a119b45e08b2d1c6ea2eb357f997caaa57fe88e928b2f6894e767a52d",
+      "error": null
+    }
+  ],
+  "errors": [],
+  "limitations": [
+    "No device or firmware code was executed; no MMIO, flash, boot policy or system component was modified.",
+    "File presence and names do not establish that a firmware image was loaded or that its protocol is understood.",
+    "Personalized signatures, device identifiers, keys, LocalPolicy, live device-tree values and diagnostics are not captured.",
+    "Firmware payloads with unrecognized compression remain opaque; SEP is not decrypted or interpreted.",
+    "This is static format and interface discovery, not complete reverse engineering or hardware support."
+  ],
+  "evidenceId": "absolute-boot-capture-a8e3f99b08c9358e2222",
+  "completeRecord": {
+    "path": "local/boot-firmware/capture.json",
+    "sha256": "68fea7fda683432f1f3d5b1fd2c94e2d230acb6ccbfc48827f5736d0003f16b6"
+  }
+}

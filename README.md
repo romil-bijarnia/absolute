@@ -1,7 +1,13 @@
 # Absolute
 
-A macOS-style desktop with native macOS and Linux hosts, a shared Swift core,
-and an incremental path toward a bootable open-source system.
+An open-source operating-system project with native macOS and Linux desktop
+prototypes and a shared Swift core. The goal is macOS compatibility, with
+research spanning applications, system services, graphics, boot and firmware.
+
+[System research and current coverage](research/SYSTEM-COVERAGE.md) records
+what has been inspected, what has been implemented, and what remains open.
+Current deliverables are desktop prototypes, verified file-service behavior,
+and reproducible system research.
 
 Desktop Preview 0.3 includes:
 
@@ -13,6 +19,7 @@ Desktop Preview 0.3 includes:
 - Saved desktop sessions: window positions, sizes, order, minimized state, folders, view preferences, and wallpaper.
 - A native GTK 4 Linux desktop, with real mouse and keyboard interactions and session restoration.
 - A command-line host that uses the same file and session services on macOS and Linux.
+- File and session paths that preserve symbolic-link traversal, including dangling-link metadata and explicit follow/no-follow resolution.
 
 ## Run on your Mac
 
@@ -112,7 +119,7 @@ On this Mac, reproduce the Linux run in the project-owned Lima VM:
 ```
 
 The script starts an Ubuntu 24.04 ARM64 VM and runs a pinned Swift 6.2 container,
-with a separate Linux build cache. It runs the same 12 core tests and seven
+with a separate Linux build cache. It runs the same 22 core tests and fifteen
 integration checks as the macOS core host. The VM uses two CPUs, 4 GB of memory,
 and a 16 GB disk; its writable host mount is this project. Stop it when done with
 `limactl stop absolute-dev`. See [research/PORTABILITY.md](research/PORTABILITY.md)
@@ -133,9 +140,29 @@ ledger links observations to their evidence in [research/FINDINGS.md](research/F
 Reruns reuse successful records. The tool version, target identities, scope,
 and errors are retained so later investigations can build on this pass.
 
-This research is an initial static inspection of Dock and Finder. It has not
-completed macOS reverse engineering, recovered their implementations, or
-established compatibility with Apple's private protocols or application binaries.
+That script covers the initial Dock/Finder bundle inspection. The broader
+research now includes system inventory, native function analysis, firmware
+containers and monitor startup, shared-cache images, kernel interfaces and
+owned-process graphics/kernel probes. See the
+[coverage index](research/SYSTEM-COVERAGE.md) for evidence and limitations.
+
+On the reference Mac, individual investigations can be reproduced with:
+
+```sh
+python3 script/inventory_macos.py
+python3 script/research_kernel_abi.py
+python3 script/research_boot_firmware.py --rea
+python3 script/research_boot_monitors.py
+python3 script/research_graphics.py --probe
+python3 script/research_shared_cache.py
+python3 script/research_native_code.py
+python3 script/research_status.py
+```
+
+These workflows use Python, the installed macOS developer tools, and the
+project-local REA runtime. Native decompilation also requires Ghidra and a
+compatible Java installation. Full raw captures remain local. Passing a
+bounded probe does not establish complete macOS or firmware compatibility.
 
 ## Structure
 

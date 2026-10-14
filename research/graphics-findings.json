@@ -1,0 +1,2047 @@
+{
+  "bundleDeclarations": [
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "SkyLight",
+      "identifier": "com.apple.SkyLight",
+      "path": "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/Resources/Info.plist",
+      "personalities": {},
+      "sha256": "a360b0b00357540ddfe229aa9f8a1a3b9ef1f2886d40e8b8533d9318bb102245",
+      "version": null
+    },
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "CoreGraphics",
+      "identifier": "com.apple.CoreGraphics",
+      "path": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/Resources/Info.plist",
+      "personalities": {},
+      "sha256": "1f6d09f8fe0f2e792f28eeaff4b2466a2b075f0718106df1a49b1813510b8b66",
+      "version": "2050"
+    },
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "QuartzCore",
+      "identifier": "com.apple.QuartzCore",
+      "path": "/System/Library/Frameworks/QuartzCore.framework/Versions/A/Resources/Info.plist",
+      "personalities": {},
+      "sha256": "fb5a1442f5a98262671dda2f0bdcd7d6e0ed2f297a8014585e019e0b384f20c7",
+      "version": "1223.2.2"
+    },
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "Metal",
+      "identifier": "com.apple.Metal",
+      "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Resources/Info.plist",
+      "personalities": {},
+      "sha256": "ecc7a6477dc440750fa8312acf9022f792e032dd8305176dc1cd07b088e5ce4c",
+      "version": "382.5.3"
+    },
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "IOSurface",
+      "identifier": "com.apple.IOSurface",
+      "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/Resources/Info.plist",
+      "personalities": {},
+      "sha256": "9564f1c79641bfacb15e30bfa65834d64d1378c61134b729a0c1aff02c79e08b",
+      "version": "402.5"
+    },
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "CoreDisplay",
+      "identifier": "com.apple.CoreDisplay",
+      "path": "/System/Library/Frameworks/CoreDisplay.framework/Versions/A/Resources/Info.plist",
+      "personalities": {},
+      "sha256": "45bac2a9f9ba07a0396c2db21592229458ced49a7d1a9f38d8ce6519b3034a09",
+      "version": "291.4"
+    },
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "IOGPU",
+      "identifier": "com.apple.IOGPU",
+      "path": "/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/Resources/Info.plist",
+      "personalities": {},
+      "sha256": "d11a0f53c98cf1f067a0c15acb263523fc32fa6fc7fd4616bc2cb0c0f740ba7a",
+      "version": "162.11"
+    },
+    {
+      "declaredOSBundleLibraries": {},
+      "executable": "AGXMetalG15X_M1",
+      "identifier": "com.apple.AGXMetalG15X-M1",
+      "path": "/System/Library/Extensions/AGXMetalG15X_M1.bundle/Contents/Info.plist",
+      "personalities": {},
+      "sha256": "c1a087c90ae1a6c52acb0e17643f4d92a32dcb73bdb52eb021997a4bfed4ece2",
+      "version": "360.34.5"
+    },
+    {
+      "declaredOSBundleLibraries": {
+        "com.apple.driver.AppleARMPlatform": "1.0.0",
+        "com.apple.driver.AppleMobileFileIntegrity": "1.0.1",
+        "com.apple.driver.RTBuddy": "1.0.0",
+        "com.apple.iokit.CoreAnalyticsFamily": "1.0",
+        "com.apple.iokit.IOGPUFamily": "2.0.0",
+        "com.apple.iokit.IOReportFamily": "1.0",
+        "com.apple.iokit.IOSurface": "52.6.0",
+        "com.apple.kec.Libm": "1.0.0",
+        "com.apple.kpi.bsd": "8.0",
+        "com.apple.kpi.iokit": "8.0",
+        "com.apple.kpi.libkern": "8.0",
+        "com.apple.kpi.mach": "8.0",
+        "com.apple.kpi.private": "8.0",
+        "com.apple.kpi.unsupported": "8.0"
+      },
+      "executable": "AGXG15C",
+      "identifier": "com.apple.AGXG15C",
+      "path": "/System/Library/Extensions/AGXG15C.kext/Contents/Info.plist",
+      "personalities": {
+        "AGXArmFirmwareMapper": {
+          "IOClass": "AGXArmFirmwareMapper",
+          "IONameMatch": "iommu-mapper,gfx",
+          "IOProviderClass": "AppleARMIODevice"
+        },
+        "AGXG15C": {
+          "CFBundleIdentifier": "com.apple.AGXG15C",
+          "IOClass": "AGXAcceleratorG15X",
+          "IOGLBundleName": "AppleMetalOpenGLRenderer",
+          "IOGLESBundleName": "AppleMetalGLRenderer",
+          "IOMatchCategory": "IOAccelerator",
+          "IONameMatch": [
+            "gpu,t8015",
+            "gpu,t8027",
+            "gpu,t8030",
+            "gpu,t8103",
+            "gpu,t6031",
+            "gpu,t6032",
+            "gpu,t6034"
+          ],
+          "IOProviderClass": "AppleARMIODevice",
+          "IOSourceVersion": "360.34.5"
+        }
+      },
+      "sha256": "0b928a7f540872be6db741d50bb721eb53584dd6379eb8e0c058d50fe9d3baa4",
+      "version": "360.34.5"
+    },
+    {
+      "declaredOSBundleLibraries": {
+        "com.apple.driver.AppleMobileFileIntegrity": "1.0.1",
+        "com.apple.iokit.IOGraphicsFamily": "1.0.0b1",
+        "com.apple.iokit.IOPCIFamily": "1.0.0b1",
+        "com.apple.iokit.IOReportFamily": "1.0",
+        "com.apple.iokit.IOSurface": "87.0",
+        "com.apple.kpi.bsd": "9.0.0b1",
+        "com.apple.kpi.iokit": "9.0.0b1",
+        "com.apple.kpi.libkern": "9.0.0b1",
+        "com.apple.kpi.mach": "9.0.0b1",
+        "com.apple.kpi.private": "10.0.0d3",
+        "com.apple.kpi.unsupported": "9.0.0b1"
+      },
+      "executable": "IOGPUFamily",
+      "identifier": "com.apple.iokit.IOGPUFamily",
+      "path": "/System/Library/Extensions/IOGPUFamily.kext/Contents/Info.plist",
+      "personalities": {},
+      "sha256": "1094c63ec9bf2299582719d9662b6f31c479b78064f4785c6ba83509a1049926",
+      "version": "162.11"
+    },
+    {
+      "declaredOSBundleLibraries": {
+        "com.apple.kpi.bsd": "9.0.0b1",
+        "com.apple.kpi.iokit": "9.0.0b1",
+        "com.apple.kpi.libkern": "9.0.0b1",
+        "com.apple.kpi.mach": "9.0.0b1",
+        "com.apple.kpi.private": "9.0.0b1",
+        "com.apple.kpi.unsupported": "9.0.0b1"
+      },
+      "executable": "IOSurface",
+      "identifier": "com.apple.iokit.IOSurface",
+      "path": "/System/Library/Extensions/IOSurface.kext/Contents/Info.plist",
+      "personalities": {
+        "FirstPersonality": {
+          "CFBundleIdentifier": "com.apple.iokit.IOSurface",
+          "IOClass": "IOSurfaceRoot",
+          "IOMatchCategory": "IOSurfaceRoot",
+          "IOProviderClass": "IOResources",
+          "IOResourceMatch": "IOBSD"
+        }
+      },
+      "sha256": "d5b7952a07b3b321d1a69175bcce710555319f683e6264d598e15d986e56199b",
+      "version": "402.5"
+    }
+  ],
+  "cacheImages": [
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "upward weak-link",
+          "path": "/System/Library/PrivateFrameworks/BiomeLibrary.framework/Versions/A/BiomeLibrary"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/BaseBoard.framework/Versions/A/BaseBoard"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/BoardServices.framework/Versions/A/BoardServices"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/BackBoardServices.framework/Versions/A/BackBoardServices"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/BackBoardHIDEventFoundation.framework/Versions/A/BackBoardHIDEventFoundation"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libDiagnosticMessagesClient.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libz.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libbsm.0.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/Frameworks/VideoToolbox.framework/Versions/A/VideoToolbox"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/ProDisplayLibrary.framework/Versions/A/ProDisplayLibrary"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/TCC.framework/Versions/A/TCC"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libMobileGestalt.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/libSMC.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/WatchdogClient.framework/Versions/A/WatchdogClient"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Security.framework/Versions/A/Security"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libcompression.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/MultitouchSupport.framework/Versions/A/MultitouchSupport"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/DiskArbitration.framework/Versions/A/DiskArbitration"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/BackBoardHIDTouchEventProcessor.framework/Versions/A/BackBoardHIDTouchEventProcessor"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/CollectionsInternal.framework/Versions/A/CollectionsInternal"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/Gestures.framework/Versions/A/Gestures"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftAccelerate.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/swift/libswiftCore.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftCoreAudio.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/swift/libswiftCoreFoundation.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftDispatch.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftIOKit.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftMetal.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftOSLog.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/swift/libswiftObjectiveC.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftQuartzCore.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftXPC.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswift_Builtin_float.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/swift/libswiftos.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftsimd.dylib"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 2912,
+      "imagePath": "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight",
+      "key": "skylight",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "40023E42-B916-37BE-9392-FB32B85A2595",
+      "outputFile": "local/graphics/skylight-dyld-info.txt",
+      "outputSha256": "2d2a47f9cddbfb1ed14270167f1b0c3f444a219a996e6b464ef0f8b8e04f456d",
+      "regularFilePresent": false,
+      "selectedExportSeeds": [
+        {
+          "location": "0x003146D0",
+          "name": "_SLSGetWindowBounds"
+        },
+        {
+          "location": "0x0032F8F8",
+          "name": "_SLSMainConnectionID"
+        },
+        {
+          "location": "0x0030D78C",
+          "name": "_SLSNewWindow"
+        },
+        {
+          "location": "0x0030D85C",
+          "name": "_SLSNewWindowWithOpaqueShape"
+        },
+        {
+          "location": "0x0030D880",
+          "name": "_SLSNewWindowWithOpaqueShapeAndContext"
+        },
+        {
+          "location": "0x0030F1A8",
+          "name": "_SLSOrderWindow"
+        },
+        {
+          "location": "0x0030EEC4",
+          "name": "_SLSOrderWindowList"
+        },
+        {
+          "location": "0x00465628",
+          "name": "_SLSOrderWindowListWithGroups"
+        },
+        {
+          "location": "0x0030F20C",
+          "name": "_SLSOrderWindowListWithOperation"
+        },
+        {
+          "location": "0x00465744",
+          "name": "_SLSOrderWindowWithGroup"
+        },
+        {
+          "location": "0x0030E3B8",
+          "name": "_SLSReleaseWindow"
+        },
+        {
+          "location": "0x00046B40",
+          "name": "_SLSReleaseWindowAnimation"
+        },
+        {
+          "location": "0x0030E404",
+          "name": "_SLSReleaseWindowList"
+        },
+        {
+          "location": "0x00313F98",
+          "name": "_SLSSetWindowShape"
+        },
+        {
+          "location": "0x00313FB4",
+          "name": "_SLSSetWindowShapeInWindowCoordinates"
+        },
+        {
+          "location": "0x00313FF4",
+          "name": "_SLSSetWindowShapeInWindowCoordinatesWithWeighting"
+        },
+        {
+          "location": "0x00313FD8",
+          "name": "_SLSSetWindowShapeWithWeighting"
+        },
+        {
+          "location": "0x000C2B38",
+          "name": "_SLXServer"
+        }
+      ]
+    },
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "upward",
+          "path": "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight"
+        },
+        {
+          "attributes": "upward delay-init weak-link",
+          "path": "/System/Library/PrivateFrameworks/TextRecognition.framework/Versions/A/TextRecognition"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/ProtocolBuffer.framework/Versions/A/ProtocolBuffer"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libicucore.A.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/FontServices.framework/libFontParser.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libxml2.2.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libz.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Security.framework/Versions/A/Security"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/CollectionsInternal.framework/Versions/A/CollectionsInternal"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/swift/libswiftCore.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/swift/libswiftCoreFoundation.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftDispatch.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftIOKit.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftObjectiveC.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswiftXPC.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/swift/libswift_Builtin_float.dylib"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 5646,
+      "imagePath": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics",
+      "key": "coregraphics",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "F15FA7DD-77CD-3814-8648-4DD7D7B38D5B",
+      "outputFile": "local/graphics/coregraphics-dyld-info.txt",
+      "outputSha256": "de0bd9720445a3815616b228309eb32c04522376d2dab379b334c5d67c32278c",
+      "regularFilePresent": false,
+      "selectedExportSeeds": [
+        {
+          "location": "0x0001E4FC",
+          "name": "_CGContextCreate"
+        },
+        {
+          "location": "0x0009A2BC",
+          "name": "_CGContextCreateWithDelegate"
+        },
+        {
+          "location": "0x0001E518",
+          "name": "_CGContextCreateWithDelegateAndInfo"
+        },
+        {
+          "location": "0x000210DC",
+          "name": "_CGContextFillRect"
+        },
+        {
+          "location": "0x00021144",
+          "name": "_CGContextFillRects"
+        },
+        {
+          "location": "[re-export]",
+          "name": "_CGDisplayBounds"
+        },
+        {
+          "location": "[re-export]",
+          "name": "_CGGetActiveDisplayList"
+        },
+        {
+          "location": "[re-export]",
+          "name": "_CGWindowListCopyWindowInfo"
+        }
+      ]
+    },
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "re-export",
+          "path": "/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage"
+        },
+        {
+          "attributes": "re-export",
+          "path": "/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo"
+        },
+        {
+          "attributes": "re-export",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/FramePacing.framework/Versions/A/FramePacing"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/ASEProcessing.framework/Versions/A/ASEProcessing"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/Symbolication.framework/Versions/A/Symbolication"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/PhotosensitivityProcessing.framework/Versions/A/PhotosensitivityProcessing"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/TimeSync.framework/Versions/A/TimeSync"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/AppleMSG.framework/Versions/A/AppleMSG"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOMobileFramebuffer.framework/Versions/A/IOMobileFramebuffer"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/SILManager.framework/Versions/A/SILManager"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOSurfaceAccelerator.framework/Versions/A/IOSurfaceAccelerator"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/OpenGL.framework/Versions/A/OpenGL"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/usr/lib/libcompression.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libMobileGestalt.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libxml2.2.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Security.framework/Versions/A/Security"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 2079,
+      "imagePath": "/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore",
+      "key": "quartzcore",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "32AABE01-47FD-39D3-8718-883ED90717C5",
+      "outputFile": "local/graphics/quartzcore-dyld-info.txt",
+      "outputSha256": "771cd5fa06d65cb4d37f84500ba6a8431d3e33f791641c40372def7c13f9c1bd",
+      "regularFilePresent": false,
+      "selectedExportSeeds": [
+        {
+          "location": "0x5B49E9D8",
+          "name": "_OBJC_CLASS_$_CALayer"
+        },
+        {
+          "location": "0x5B49E1B8",
+          "name": "_OBJC_CLASS_$_CALayerHost"
+        },
+        {
+          "location": "0x5C828AC0",
+          "name": "_OBJC_CLASS_$_CALayerHostBindingsRenderReport"
+        },
+        {
+          "location": "0x5B49D7B8",
+          "name": "_OBJC_CLASS_$_CAMetalLayer"
+        }
+      ]
+    },
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "",
+          "path": "/usr/lib/libDiagnosticMessagesClient.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libllvm-flatbuffers.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libbz2.1.0.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/FramePacing.framework/Versions/A/FramePacing"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libMobileGestalt.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libcompression.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/libCoreFSCache.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Security.framework/Versions/A/Security"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/GPUCompiler.framework/Versions/32023/Libraries/libGPUCompilerUtils.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 1479,
+      "imagePath": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal",
+      "key": "metal",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "F3414D5A-575B-3E89-A1AE-27FD37E45B5A",
+      "outputFile": "local/graphics/metal-dyld-info.txt",
+      "outputSha256": "b5e16a415547eda782b45bbae8f78814794c450049400ab745baa1c73acf4844",
+      "regularFilePresent": false,
+      "selectedExportSeeds": [
+        {
+          "location": "0x00001828",
+          "name": "_MTLCopyAllDevices"
+        },
+        {
+          "location": "0x00025870",
+          "name": "_MTLCopyAllDevicesWithObserver"
+        },
+        {
+          "location": "0x00014EF8",
+          "name": "_MTLCreateSystemDefaultDevice"
+        }
+      ]
+    },
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 610,
+      "imagePath": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface",
+      "key": "iosurface",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "E43F5077-2102-3B68-9814-CF7E5E527AAF",
+      "outputFile": "local/graphics/iosurface-dyld-info.txt",
+      "outputSha256": "8a6475e5b59ce30ea651281c1bdd61b9b21f679516ed6166379c4109b5f61a3d",
+      "regularFilePresent": false,
+      "selectedExportSeeds": [
+        {
+          "location": "0x0000141C",
+          "name": "_IOSurfaceCreate"
+        },
+        {
+          "location": "0x0000E628",
+          "name": "_IOSurfaceCreateChildSurface"
+        },
+        {
+          "location": "0x00002A4C",
+          "name": "_IOSurfaceCreateMachPort"
+        },
+        {
+          "location": "0x0000E69C",
+          "name": "_IOSurfaceCreateMachPortWithOptions"
+        },
+        {
+          "location": "0x0000E2A0",
+          "name": "_IOSurfaceCreateWiringAssertion"
+        },
+        {
+          "location": "0x0000E6C4",
+          "name": "_IOSurfaceCreateXPCObject"
+        },
+        {
+          "location": "0x000022E4",
+          "name": "_IOSurfaceGetBaseAddress"
+        },
+        {
+          "location": "0x0000F010",
+          "name": "_IOSurfaceGetBaseAddressOfCompressedTileDataRegionOfPlane"
+        },
+        {
+          "location": "0x0000F160",
+          "name": "_IOSurfaceGetBaseAddressOfCompressedTileDataRegionOfSliceAndPlane"
+        },
+        {
+          "location": "0x0000EFF0",
+          "name": "_IOSurfaceGetBaseAddressOfCompressedTileHeaderRegionOfPlane"
+        },
+        {
+          "location": "0x0000F140",
+          "name": "_IOSurfaceGetBaseAddressOfCompressedTileHeaderRegionOfSliceAndPlane"
+        },
+        {
+          "location": "0x00002BF0",
+          "name": "_IOSurfaceGetBaseAddressOfPlane"
+        },
+        {
+          "location": "0x00002790",
+          "name": "_IOSurfaceLock"
+        },
+        {
+          "location": "0x0000E7E4",
+          "name": "_IOSurfaceLockPlane"
+        },
+        {
+          "location": "0x00002850",
+          "name": "_IOSurfaceUnlock"
+        },
+        {
+          "location": "0x0000E814",
+          "name": "_IOSurfaceUnlockPlane"
+        }
+      ]
+    },
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/GPUWrangler.framework/Versions/A/GPUWrangler"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOPresentment.framework/Versions/A/IOPresentment"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/DSExternalDisplay.framework/Versions/A/DSExternalDisplay"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libbsm.0.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libz.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libDiagnosticMessagesClient.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/SoftLinking.framework/Versions/A/SoftLinking"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 531,
+      "imagePath": "/System/Library/Frameworks/CoreDisplay.framework/Versions/A/CoreDisplay",
+      "key": "coredisplay",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "E903D03A-B898-39B6-8F16-C75DBE24E586",
+      "outputFile": "local/graphics/coredisplay-dyld-info.txt",
+      "outputSha256": "9b47fb51b40c2d5665281e72eb20f712a5997ce286a11bca20131bb39200319b",
+      "regularFilePresent": false,
+      "selectedExportSeeds": []
+    },
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "",
+          "path": "/usr/lib/libDiagnosticMessagesClient.dylib"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/FramePacing.framework/Versions/A/FramePacing"
+        },
+        {
+          "attributes": "weak-link",
+          "path": "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOAccelerator.framework/Versions/A/IOAccelerator"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 375,
+      "imagePath": "/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/IOGPU",
+      "key": "iogpu",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "96DEF1F9-60A3-3366-85ED-FB8A09E83524",
+      "outputFile": "local/graphics/iogpu-dyld-info.txt",
+      "outputSha256": "79708d6ad1bd43dfe3a8cee99512e469b049263d124db967a4a3cc03ad9eb62c",
+      "regularFilePresent": false,
+      "selectedExportSeeds": [
+        {
+          "location": "0x0001DC6C",
+          "name": "_IOGPUCommandQueueCreate"
+        },
+        {
+          "location": "0x0001E178",
+          "name": "_IOGPUCommandQueueDispatchAvailableCompletionNotifications"
+        },
+        {
+          "location": "0x0001DEAC",
+          "name": "_IOGPUCommandQueueGetConnect"
+        },
+        {
+          "location": "0x0001E170",
+          "name": "_IOGPUCommandQueueGetGlobalTraceObjectID"
+        },
+        {
+          "location": "0x0001DEF8",
+          "name": "_IOGPUCommandQueueGetID"
+        },
+        {
+          "location": "0x0001DC0C",
+          "name": "_IOGPUCommandQueueGetTypeID"
+        },
+        {
+          "location": "0x0001DEA0",
+          "name": "_IOGPUCommandQueueRelease"
+        },
+        {
+          "location": "0x0001DE94",
+          "name": "_IOGPUCommandQueueSetDispatchQueue"
+        },
+        {
+          "location": "0x0001E0AC",
+          "name": "_IOGPUCommandQueueSetPriorityAndBackground"
+        },
+        {
+          "location": "0x0001E124",
+          "name": "_IOGPUCommandQueueSetQualityOfService"
+        },
+        {
+          "location": "0x0001E180",
+          "name": "_IOGPUCommandQueueSetResourceGroups"
+        },
+        {
+          "location": "0x0001E22C",
+          "name": "_IOGPUCommandQueueSignalMTLEvent"
+        },
+        {
+          "location": "0x0001E1A4",
+          "name": "_IOGPUCommandQueueSignalSharedEvent"
+        },
+        {
+          "location": "0x0001DF40",
+          "name": "_IOGPUCommandQueueSubmitCommandBuffers"
+        },
+        {
+          "location": "0x0001E2B4",
+          "name": "_IOGPUCommandQueueSupportsBackgroundAppRole"
+        },
+        {
+          "location": "0x0001E26C",
+          "name": "_IOGPUCommandQueueWaitMTLEvent"
+        },
+        {
+          "location": "0x0001E1E4",
+          "name": "_IOGPUCommandQueueWaitSharedEvent"
+        },
+        {
+          "location": "0x0001D03C",
+          "name": "_IOGPUDeviceCheckAndLogSoftFaultCount"
+        },
+        {
+          "location": "0x0001C39C",
+          "name": "_IOGPUDeviceCreate"
+        },
+        {
+          "location": "0x0001D3E4",
+          "name": "_IOGPUDeviceCreateDeviceAssertion"
+        },
+        {
+          "location": "0x0001CCAC",
+          "name": "_IOGPUDeviceCreateDeviceShmem"
+        },
+        {
+          "location": "0x0001D24C",
+          "name": "_IOGPUDeviceCreateVNIODesc"
+        },
+        {
+          "location": "0x0001C3A4",
+          "name": "_IOGPUDeviceCreateWithOptions"
+        },
+        {
+          "location": "0x0001CE18",
+          "name": "_IOGPUDeviceDestroyDeviceShmem"
+        },
+        {
+          "location": "0x0001D35C",
+          "name": "_IOGPUDeviceDestroyVNIODesc"
+        },
+        {
+          "location": "0x0001CFDC",
+          "name": "_IOGPUDeviceGetAllocatedSize"
+        },
+        {
+          "location": "0x0001D180",
+          "name": "_IOGPUDeviceGetAppGPURole"
+        },
+        {
+          "location": "0x0001C6A4",
+          "name": "_IOGPUDeviceGetConfig"
+        },
+        {
+          "location": "0x0001C73C",
+          "name": "_IOGPUDeviceGetConfig64"
+        },
+        {
+          "location": "0x0001C890",
+          "name": "_IOGPUDeviceGetConnect"
+        },
+        {
+          "location": "0x0001CBEC",
+          "name": "_IOGPUDeviceGetCurrentTraceFilter"
+        },
+        {
+          "location": "0x0001CC78",
+          "name": "_IOGPUDeviceGetGlobalTraceObjectID"
+        },
+        {
+          "location": "0x0001C834",
+          "name": "_IOGPUDeviceGetMaxResourceSize"
+        },
+        {
+          "location": "0x0001CF14",
+          "name": "_IOGPUDeviceGetMemoryData"
+        },
+        {
+          "location": "0x0001C8D8",
+          "name": "_IOGPUDeviceGetName"
+        },
+        {
+          "location": "0x0001CA30",
+          "name": "_IOGPUDeviceGetNextGlobalTraceID"
+        },
+        {
+          "location": "0x0001C7D8",
+          "name": "_IOGPUDeviceGetSharedMemorySize"
+        },
+        {
+          "location": "0x0001C99C",
+          "name": "_IOGPUDeviceGetSurfaceInfo"
+        },
+        {
+          "location": "0x0001C324",
+          "name": "_IOGPUDeviceGetTypeID"
+        },
+        {
+          "location": "0x0001D4C0",
+          "name": "_IOGPUDevicePerformMapping"
+        },
+        {
+          "location": "0x0001C694",
+          "name": "_IOGPUDeviceRelease"
+        },
+        {
+          "location": "0x0001D0F8",
+          "name": "_IOGPUDeviceSetAppGPURole"
+        },
+        {
+          "location": "0x0001D224",
+          "name": "_IOGPUDeviceSetDisplayParams"
+        },
+        {
+          "location": "0x0001CC80",
+          "name": "_IOGPUDeviceSetWaitForGPUCallback"
+        },
+        {
+          "location": "0x0001C6A0",
+          "name": "_IOGPUDeviceTestEvent"
+        },
+        {
+          "location": "0x0001F1F0",
+          "name": "_IOGPUDeviceTestEventFast"
+        },
+        {
+          "location": "0x0001CAFC",
+          "name": "_IOGPUDeviceTraceEvent"
+        },
+        {
+          "location": "0x0001CB48",
+          "name": "_IOGPUDeviceTraceEventEnd"
+        },
+        {
+          "location": "0x0001CB20",
+          "name": "_IOGPUDeviceTraceEventStart"
+        },
+        {
+          "location": "0x0001CB70",
+          "name": "_IOGPUDeviceTraceObjectLabel"
+        },
+        {
+          "location": "0x0001EAD8",
+          "name": "_IOGPUResourceCheckSysMem"
+        },
+        {
+          "location": "0x0001E604",
+          "name": "_IOGPUResourceCreate"
+        },
+        {
+          "location": "0x0001EB18",
+          "name": "_IOGPUResourceCreateAllocationIdentifierSet"
+        },
+        {
+          "location": "0x0001EBB0",
+          "name": "_IOGPUResourceCreateIOSurface"
+        },
+        {
+          "location": "0x0001EEC0",
+          "name": "_IOGPUResourceDetachBacking"
+        },
+        {
+          "location": "0x0001EA2C",
+          "name": "_IOGPUResourceFinishEvent"
+        },
+        {
+          "location": "0x0001EB00",
+          "name": "_IOGPUResourceFinishSysMem"
+        },
+        {
+          "location": "0x0001F058",
+          "name": "_IOGPUResourceGeMetadataBytes"
+        },
+        {
+          "location": "0x0001E8E4",
+          "name": "_IOGPUResourceGetClientShared"
+        },
+        {
+          "location": "0x0001E948",
+          "name": "_IOGPUResourceGetClientSharedPrivate"
+        },
+        {
+          "location": "0x0001E848",
+          "name": "_IOGPUResourceGetDataBytes"
+        },
+        {
+          "location": "0x0001E8AC",
+          "name": "_IOGPUResourceGetDataSize"
+        },
+        {
+          "location": "0x0001E8BC",
+          "name": "_IOGPUResourceGetGPUVirtualAddress"
+        },
+        {
+          "location": "0x0001E8C4",
+          "name": "_IOGPUResourceGetGPUVirtualAddressLength"
+        },
+        {
+          "location": "0x0001EB2C",
+          "name": "_IOGPUResourceGetGlobalTraceObjectID"
+        },
+        {
+          "location": "0x0001E8CC",
+          "name": "_IOGPUResourceGetPrivate"
+        },
+        {
+          "location": "0x0001EB34",
+          "name": "_IOGPUResourceGetProtectionOptions"
+        },
+        {
+          "location": "0x0001E8B4",
+          "name": "_IOGPUResourceGetResidentDataSize"
+        },
+        {
+          "location": "0x0001F050",
+          "name": "_IOGPUResourceGetResourceType"
+        },
+        {
+          "location": "0x0001E5A4",
+          "name": "_IOGPUResourceGetTypeID"
+        },
+        {
+          "location": "0x0001EEB4",
+          "name": "_IOGPUResourceGroupGetAllocationSize"
+        },
+        {
+          "location": "0x0001EC6C",
+          "name": "_IOGPUResourceGroupUpdateResources"
+        },
+        {
+          "location": "0x00020B0C",
+          "name": "_IOGPUResourceListAddResource"
+        },
+        {
+          "location": "0x00020A60",
+          "name": "_IOGPUResourceListAddResourceNoThreshold"
+        },
+        {
+          "location": "0x00020A1C",
+          "name": "_IOGPUResourceListDestroy"
+        },
+        {
+          "location": "0x0002091C",
+          "name": "_IOGPUResourceListInit"
+        },
+        {
+          "location": "0x00020BB8",
+          "name": "_IOGPUResourceListMerge"
+        },
+        {
+          "location": "0x00020C98",
+          "name": "_IOGPUResourceListMergeLists"
+        },
+        {
+          "location": "0x00020CA4",
+          "name": "_IOGPUResourceListReset"
+        },
+        {
+          "location": "0x00020D60",
+          "name": "_IOGPUResourceListShowResources"
+        },
+        {
+          "location": "0x0001E83C",
+          "name": "_IOGPUResourceRelease"
+        },
+        {
+          "location": "0x0001EF3C",
+          "name": "_IOGPUResourceReplaceBackingWithBytes"
+        },
+        {
+          "location": "0x0001EF94",
+          "name": "_IOGPUResourceReplaceBackingWithRanges"
+        },
+        {
+          "location": "0x0001EB3C",
+          "name": "_IOGPUResourceSetOwnerIdentity"
+        },
+        {
+          "location": "0x0001E9BC",
+          "name": "_IOGPUResourceSetPurgeable"
+        },
+        {
+          "location": "0x0001EA14",
+          "name": "_IOGPUResourceTestEvent"
+        }
+      ]
+    },
+    {
+      "declaredDependencies": [
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/AggregateDictionary.framework/Versions/A/AggregateDictionary"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/CoreAnalytics.framework/Versions/A/CoreAnalytics"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/GPURawCounter.framework/Versions/A/GPURawCounter"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/PrivateFrameworks/IOGPU.framework/Versions/A/IOGPU"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libcompression.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libMobileGestalt.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/Metal.framework/Versions/A/Metal"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libobjc.A.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libc++.1.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/usr/lib/libSystem.B.dylib"
+        },
+        {
+          "attributes": "",
+          "path": "/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation"
+        }
+      ],
+      "evidenceType": "apple-dyld-info-static-observation",
+      "exportRows": 56,
+      "imagePath": "/System/Library/Extensions/AGXMetalG15X_M1.bundle/Contents/MacOS/AGXMetalG15X_M1",
+      "key": "agxmetalg15x_m1",
+      "limits": [
+        "An exported name is not a recovered signature or verified implementation.",
+        "Offsets are the installed dyld_info output, not standalone file offsets."
+      ],
+      "machOUuid": "C6ECAD9F-38C7-3D98-B26E-52C58EB50463",
+      "outputFile": "local/graphics/agxmetalg15x_m1-dyld-info.txt",
+      "outputSha256": "196ddefef4b547a3041398a4cdb25e438a3710928753ded17ac63edf437523d8",
+      "regularFilePresent": false,
+      "selectedExportSeeds": []
+    }
+  ],
+  "cacheMapSha256": "9bd6b24132902d34c45df05d024ffdf5e59f21cd3dc4dc9930547483c0fd4b32",
+  "capturedAt": "2026-10-14T07:16:35.654986+00:00",
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5421a",
+  "iosurfaceCode": {
+    "evidenceType": "apple-dyld-info-static-disassembly",
+    "image": "/System/Library/Frameworks/IOSurface.framework/Versions/A/IOSurface",
+    "limits": [
+      "This is assembly inspection, not REA or Ghidra pseudocode.",
+      "Only the selected functions were interpreted; other disassembly remains unreviewed.",
+      "Private structure offsets and selector values are observations for this captured image UUID.",
+      "Kernel implementations of the traps and cross-process surface sharing remain unexamined."
+    ],
+    "outputFile": "local/graphics/iosurface-disassembly.txt",
+    "outputSha256": "919aea83f5bc15a275949bebdf1150ca3b47718e1a981f68362b773400e31e92",
+    "resolvedCalls": {
+      "calls": [
+        {
+          "callOffset": 80,
+          "function": "IOSurfaceClientLock",
+          "targetEqualsIOConnectTrap3": true
+        },
+        {
+          "callOffset": 80,
+          "function": "IOSurfaceClientUnlock",
+          "targetEqualsIOConnectTrap3": true
+        }
+      ],
+      "evidenceType": "owned-process-mapped-code-observation",
+      "outputSha256": "650b722fe4c8cc4a622dc78b75977bcd312bf8fe038341c7cc5e43c3782a6220",
+      "sourceSha256": "b3dabb1adc8789b8f94bf014be2826ced926c415873fccf2271d803c8f64c3d3"
+    },
+    "selectedFunctions": [
+      {
+        "assemblySha256": "df871766b29b5be7a22bc1c669cb9275ee262fb7a919e723c249302147996c4a",
+        "instructionCount": 8,
+        "lastInstructionAddress": "0x18d4e13e8",
+        "name": "_IOSurfaceGetWidth",
+        "startAddress": "0x18d4e13cc"
+      },
+      {
+        "assemblySha256": "3c86ad8b8dc119dde7fc505ee896aea73e74c2516f2d2490e58a71e7efd71214",
+        "instructionCount": 2,
+        "lastInstructionAddress": "0x18d4e13f0",
+        "name": "_IOSurfaceClientGetWidth",
+        "startAddress": "0x18d4e13ec"
+      },
+      {
+        "assemblySha256": "c787024c9cc514af96c93536cee1e0055e1487be73e3dc977660ae7ded8d4582",
+        "instructionCount": 8,
+        "lastInstructionAddress": "0x18d4e1378",
+        "name": "_IOSurfaceGetBytesPerRow",
+        "startAddress": "0x18d4e135c"
+      },
+      {
+        "assemblySha256": "7792912b85444466d4d7b9f56fc883e5d1b0b32eeeb09475698cd66120a46a34",
+        "instructionCount": 20,
+        "lastInstructionAddress": "0x18d4e13c8",
+        "name": "_IOSurfaceClientGetBytesPerRow",
+        "startAddress": "0x18d4e137c"
+      },
+      {
+        "assemblySha256": "225a7ead8beed398859efab1ae4b3189fac20b4c417f2f46701c40dd5395bef4",
+        "instructionCount": 8,
+        "lastInstructionAddress": "0x18d4e14e0",
+        "name": "_IOSurfaceGetAllocSize",
+        "startAddress": "0x18d4e14c4"
+      },
+      {
+        "assemblySha256": "e0b29261f5ed5c34342e9f337757423632ad2d20cf9c25522b1eb30e257127a0",
+        "instructionCount": 2,
+        "lastInstructionAddress": "0x18d4e14e8",
+        "name": "_IOSurfaceClientGetAllocSize",
+        "startAddress": "0x18d4e14e4"
+      },
+      {
+        "assemblySha256": "b5df765397dbab2171f4f48967b219301c11c6f38d1992754bac3b9eadeb272a",
+        "instructionCount": 2,
+        "lastInstructionAddress": "0x18d4e12e0",
+        "name": "_IOSurfaceClientGetPlaneCount",
+        "startAddress": "0x18d4e12dc"
+      },
+      {
+        "assemblySha256": "b7f24c7f27d1796da8f63c52b08d1549242b50e26b0f1596f10ad889c5e24a3d",
+        "instructionCount": 10,
+        "lastInstructionAddress": "0x18d4e17b4",
+        "name": "_IOSurfaceLock",
+        "startAddress": "0x18d4e1790"
+      },
+      {
+        "assemblySha256": "e37f076256006fc460c3873601684ae5d09090ab7121c508f33051fce863d1c3",
+        "instructionCount": 38,
+        "lastInstructionAddress": "0x18d4e184c",
+        "name": "_IOSurfaceClientLock",
+        "startAddress": "0x18d4e17b8"
+      },
+      {
+        "assemblySha256": "6dff791e60e133c5f20e1f8583783a9dbf15de5451561f2526735a58c1c2dc19",
+        "instructionCount": 10,
+        "lastInstructionAddress": "0x18d4e1874",
+        "name": "_IOSurfaceUnlock",
+        "startAddress": "0x18d4e1850"
+      },
+      {
+        "assemblySha256": "c1d8a536ab1c45a7a44382a87b697a433f0f1f476a07fac3d33ecb99c077f7be",
+        "instructionCount": 38,
+        "lastInstructionAddress": "0x18d4e190c",
+        "name": "_IOSurfaceClientUnlock",
+        "startAddress": "0x18d4e1878"
+      },
+      {
+        "assemblySha256": "938e82e88b1f6427760879a1077f2dece8acf119b0b58ef6feafe63703ce6be9",
+        "instructionCount": 47,
+        "lastInstructionAddress": "0x18d4e4da8",
+        "name": "__ioSurfaceConnectInternal",
+        "startAddress": "0x18d4e4cf0"
+      }
+    ]
+  },
+  "limits": [
+    "No protected process was launched, attached to, injected into, or modified.",
+    "Only the two WindowServer bootstrap functions were decompiled, not SkyLight's server implementation.",
+    "Only selected IOSurface getter and lock/unlock code paths were inspected beyond WindowServer bootstrap.",
+    "No CoreGraphics renderer, Core Animation compositor, Metal compiler, AGX user-client, shader ISA or GPU firmware implementation was reconstructed.",
+    "A successful macOS Metal workload is not an open-source driver or evidence of Linux GPU support.",
+    "Hardware-specific AGX selection is observed on this M3 Max; it does not establish support for every Apple GPU.",
+    "Raw evidence remains local and is omitted from Git; no Apple binary or recovered pseudocode is included in this summary."
+  ],
+  "runningGpuAllowlistedProperties": [
+    {
+      "CFBundleIdentifier": "com.apple.AGXG15C",
+      "CFBundleIdentifierKernel": "com.apple.AGXG15C",
+      "IOClass": "AGXAcceleratorG15X",
+      "IOProviderClass": "AppleARMIODevice",
+      "MetalPluginName": "AGXMetalG15X_M1",
+      "gpu-core-count": 30,
+      "model": "Apple M3 Max"
+    }
+  ],
+  "runtimeProbe": {
+    "coreGraphicsBitmap": {
+      "allPixelsMatch": true,
+      "format": "RGBA8 premultiplied-last big-endian",
+      "height": 8,
+      "status": "passed",
+      "width": 8
+    },
+    "evidenceType": "owned-process-runtime-observation",
+    "ioSurfaceSharedMemory": {
+      "allocationBytes": 256,
+      "bytesPerElement": 4,
+      "bytesPerRow": 32,
+      "firstPixelRoundTrip": true,
+      "height": 8,
+      "planeCount": 0,
+      "readLockSeed": 1,
+      "readUnlockSeed": 1,
+      "status": "passed",
+      "width": 8,
+      "writeLockSeed": 1,
+      "writeUnlockSeed": 1
+    },
+    "metalBufferTransfer": {
+      "allBytesMatch": true,
+      "bytesCompared": 4096,
+      "commandStatus": "completed",
+      "deviceName": "Apple M3 Max",
+      "hasUnifiedMemory": true,
+      "status": "passed",
+      "supportsApple9": true,
+      "supportsRaytracing": true
+    },
+    "metalComputeShader": {
+      "allValuesMatch": true,
+      "commandStatus": "completed",
+      "status": "passed",
+      "threadExecutionWidth": 32,
+      "valuesCompared": 1024
+    },
+    "metalOffscreenRender": {
+      "allPixelsMatchWithinOneUnormStep": true,
+      "commandStatus": "completed",
+      "firstPixel": [
+        64,
+        128,
+        255,
+        255
+      ],
+      "format": "BGRA8Unorm",
+      "height": 16,
+      "status": "passed",
+      "width": 16
+    },
+    "outputSha256": "37f40ab0e593aae592db6900dc1b7de50e51c5712d81e1b9af4d15dbc18f2070",
+    "sourceSha256": "258af7f6b0c1310c18c219e8b8948dcc000079254b98c426a68e775b3f54c855"
+  },
+  "schema": 1,
+  "scope": "WindowServer bootstrap, twelve selected IOSurface functions, eight cached graphics images, selected declarations and owned-process probes",
+  "windowServer": {
+    "architectures": {
+      "exhaustive": true,
+      "items": [
+        {
+          "alignment": null,
+          "cpu_subtype": null,
+          "cpu_type": null,
+          "file_offset": null,
+          "name": "arm64e",
+          "size": null
+        }
+      ],
+      "limitations": [],
+      "total": 1
+    },
+    "bytes": 93824,
+    "entrypoints": {
+      "exhaustive": true,
+      "items": [
+        {
+          "file_offset": 1816
+        }
+      ],
+      "limitations": [],
+      "total": 1
+    },
+    "launchd": {
+      "EnablePressuredExit": false,
+      "EnableTransactions": false,
+      "Label": "com.apple.WindowServer",
+      "MachServices": {
+        "com.apple.CARenderServer": {
+          "HideUntilCheckIn": true
+        },
+        "com.apple.CoreDisplay.Notification": {
+          "HideUntilCheckIn": true,
+          "ResetAtClose": true
+        },
+        "com.apple.CoreDisplay.master": {
+          "HideUntilCheckIn": true
+        },
+        "com.apple.SpatialConnect.host": {
+          "HideUntilCheckIn": true
+        },
+        "com.apple.VirtualDisplay": {
+          "HideUntilCheckIn": true
+        },
+        "com.apple.backboard.hid-services.xpc": {
+          "_ExperimentalNonLaunching": true
+        },
+        "com.apple.iohideventsystem": {
+          "ResetAtClose": true
+        },
+        "com.apple.windowserver": true,
+        "com.apple.windowserver.active": {
+          "HideUntilCheckIn": true
+        },
+        "com.apple.windowserver.watchdog": {
+          "HideUntilCheckIn": true
+        }
+      },
+      "POSIXSpawnType": "Interactive",
+      "ProgramArguments": [
+        "/System/Library/PrivateFrameworks/SkyLight.framework/Resources/WindowServer",
+        "-daemon"
+      ],
+      "PublishesEvents": "com.apple.iohideventsystem.matching",
+      "_Conclave": "com.apple.backboardd.conclave",
+      "com.apple.private.gain-map-access": true
+    },
+    "launchdEvidenceId": "ev_8a09644361aa57ee921e8726b2b90652efb91954d7f135b926b17345827a1726",
+    "machoEvidenceId": "ev_46bd65339db57527fdc64100f48d0a26736fb8f9b97ba17fa6992ac54acbc505",
+    "machoFile": "local/graphics/windowserver-inspect-macho.json",
+    "nativeFunctions": [
+      {
+        "callees": [
+          {
+            "address": "0x100000798",
+            "name": "FUN_100000798"
+          },
+          {
+            "address": "0x100000c0c",
+            "name": "_SLXServer"
+          },
+          {
+            "address": "0x100000c1c",
+            "name": "___assert_rtn"
+          },
+          {
+            "address": "0x100000d2c",
+            "name": "_setegid"
+          },
+          {
+            "address": "0x100000d3c",
+            "name": "_seteuid"
+          }
+        ],
+        "evidenceId": "ev_381c395b2913ec1304e491e0d5d3ced7adae4dd75a2650fae497d8bc69b7d545",
+        "file": "local/graphics/windowserver-entry-function.json",
+        "limits": [
+          "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+          "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+          "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+          "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+          "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+          "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+          "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+          "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+          "Ghidra Listing reports a terminal call at 0x100000774 to 0x100000c1c ___assert_rtn (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return.",
+          "Ghidra Listing reports a terminal call at 0x100000794 to 0x100000c1c ___assert_rtn (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return.",
+          "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+          "This session uses Ghidra 12.1.3. The bridge is verified against 12.1.4; other 12.1.x builds are accepted and the observed version is reported."
+        ],
+        "procedure": {
+          "address": "0x100000718",
+          "body": {
+            "available": true,
+            "contains_entry": true,
+            "non_contiguous": false,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "end": "0x100000797",
+                "start": "0x100000718"
+              }
+            ],
+            "span_bytes": 128,
+            "total_bytes": 128
+          },
+          "name": "entry"
+        }
+      },
+      {
+        "callees": [
+          {
+            "address": "0x100000c2c",
+            "name": "___error"
+          },
+          {
+            "address": "0x100000c3c",
+            "name": "___stack_chk_fail"
+          },
+          {
+            "address": "0x100000c4c",
+            "name": "__os_log_debug_impl"
+          },
+          {
+            "address": "0x100000c5c",
+            "name": "__os_log_error_impl"
+          },
+          {
+            "address": "0x100000c6c",
+            "name": "__set_user_dir_suffix"
+          },
+          {
+            "address": "0x100000c7c",
+            "name": "_bzero"
+          },
+          {
+            "address": "0x100000c8c",
+            "name": "_confstr"
+          },
+          {
+            "address": "0x100000c9c",
+            "name": "_exit"
+          },
+          {
+            "address": "0x100000cac",
+            "name": "_free"
+          },
+          {
+            "address": "0x100000cbc",
+            "name": "_getenv"
+          },
+          {
+            "address": "0x100000ccc",
+            "name": "_getpwuid"
+          },
+          {
+            "address": "0x100000cdc",
+            "name": "_getuid"
+          },
+          {
+            "address": "0x100000cec",
+            "name": "_mkdir"
+          },
+          {
+            "address": "0x100000cfc",
+            "name": "_os_log_type_enabled"
+          },
+          {
+            "address": "0x100000d0c",
+            "name": "_realpath$DARWIN_EXTSN"
+          },
+          {
+            "address": "0x100000d1c",
+            "name": "_sandbox_init_with_parameters"
+          },
+          {
+            "address": "0x100000d4c",
+            "name": "_strerror"
+          }
+        ],
+        "evidenceId": "ev_8cc27a02040edbc46588468db1c4a331c2da4dc50b3ad349e400dcf9aabefd18",
+        "file": "local/graphics/windowserver-setup-function.json",
+        "limits": [
+          "The session serves operations only after Ghidra reports default auto-analysis complete; incomplete analysis does not expose partial results.",
+          "The imported Program and temporary project are ephemeral and deleted on close. Annotation operations edit session database metadata; original executable bytes are never written.",
+          "Cancelling an active Ghidra request terminates its ephemeral database and discards session annotations. The selected target remains open; the next provider query imports the original artifact again.",
+          "Default-space addresses use lowercase 0x-prefixed hexadecimal; other address spaces use <percent-encoded-space>:0x<hex>.",
+          "References cover the complete Ghidra function-body AddressSet and exact entry. Dossier incoming edges omit sources owned by that function; procedure_references also retains those internal edges.",
+          "The dossier combines Ghidra FunctionManager, Listing, ReferenceManager, BasicBlockModel, and decompiler observations; provider-specific pseudocode and assembly are not cross-provider text invariants.",
+          "Resolved reference metadata identifies computed, indirect, external, call, jump, and data edges; unresolved targetless flows remain unknown, and function classifications distinguish thunks and externals.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+          "The Java bridge serializes one function request per Program and lets each decompilation run until it completes or the caller cancels.",
+          "Ghidra Listing reports a terminal call at 0x100000b64 to 0x100000c9c _exit (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return.",
+          "Ghidra Listing reports a terminal call at 0x100000bb8 to 0x100000c3c ___stack_chk_fail (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return.",
+          "macOS sessions require a matching executable Ghidra native decompiler; REA checks for it but does not build native components or change Gatekeeper quarantine state.",
+          "This session uses Ghidra 12.1.3. The bridge is verified against 12.1.4; other 12.1.x builds are accepted and the observed version is reported."
+        ],
+        "procedure": {
+          "address": "0x100000798",
+          "body": {
+            "available": true,
+            "contains_entry": true,
+            "non_contiguous": false,
+            "provenance": "ghidra-function-body-address-set",
+            "ranges": [
+              {
+                "end": "0x100000c0b",
+                "start": "0x100000798"
+              }
+            ],
+            "span_bytes": 1140,
+            "total_bytes": 1140
+          },
+          "name": "FUN_100000798"
+        }
+      }
+    ],
+    "path": "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/Resources/WindowServer"
+  },
+  "windowServerSha256": "a5ec46a944529c91a92da14c64e1cf9dcfe0feda2a4580a307b961adbbdb31ac"
+}

@@ -1,0 +1,177 @@
+{
+  "bundle_count": 6692,
+  "bundle_kinds": {
+    "app-extension": 563,
+    "application": 333,
+    "bundle": 1219,
+    "component": 6,
+    "driver-extension": 22,
+    "framework": 3010,
+    "kernel-extension": 843,
+    "plugin": 146,
+    "preference-pane": 52,
+    "quicklook-generator": 19,
+    "screen-saver": 2,
+    "system-extension": 2,
+    "xpc-service": 475
+  },
+  "declared_mach_service_count": 2054,
+  "driver_personality_count": 2532,
+  "error_count": 90,
+  "evidence_id": "absolute-inventory-sha256:a79254d0f1363940fd2fa3d3a7a0b1f40c517fc20ab4540ccec4fbfe55a095b0",
+  "evidence_type": "static-observation",
+  "file_count": 334215,
+  "host": {
+    "build": "26A5421a",
+    "product": "macOS",
+    "version": "27.0"
+  },
+  "launch_job_count": 902,
+  "limitations": [
+    "This inventories selected readable filesystem roots, not all macOS code or running behavior.",
+    "Directory symlinks are recorded and not traversed; explicit bundle metadata paths can resolve symlinks.",
+    "Shared-cache images, compressed kernel collections, encrypted payloads and chip ROM require separate analysis.",
+    "Native header detection is structural inventory, not disassembly or a complete Mach-O validation.",
+    "Bundle roles and driver match declarations do not prove runtime activation.",
+    "Mach service names are plist declarations, not observed live endpoints or decoded protocols.",
+    "File byte totals count path occurrences, not unique physical storage or unique code."
+  ],
+  "local_capture": "research/local/system-catalog/20261014T071026575174Z",
+  "native_file_count": 5458,
+  "native_slice_architectures": {
+    "0x1000013": 229,
+    "arm64": 97,
+    "arm64e": 5311,
+    "x86_64": 4272
+  },
+  "native_slice_file_types": {
+    "bundle": 3122,
+    "dylib": 599,
+    "dylinker": 4,
+    "execute": 5952,
+    "gpu-execute": 229,
+    "kext-bundle": 3
+  },
+  "operation": "inventory-system-roots",
+  "path_count": 525909,
+  "roots": [
+    {
+      "counts": {
+        "directory": 326,
+        "file": 621,
+        "symlink": 36
+      },
+      "file_bytes": 132869614,
+      "present": true,
+      "root": "/Library/Apple/System/Library"
+    },
+    {
+      "counts": {
+        "directory": 10803,
+        "file": 14158,
+        "symlink": 128
+      },
+      "file_bytes": 938206040,
+      "present": true,
+      "root": "/System/Applications"
+    },
+    {
+      "counts": {
+        "directory": 113,
+        "file": 284,
+        "symlink": 3
+      },
+      "file_bytes": 661648,
+      "present": true,
+      "root": "/System/DriverKit"
+    },
+    {
+      "counts": {
+        "directory": 162809,
+        "file": 300870,
+        "symlink": 12410
+      },
+      "file_bytes": 85500184309,
+      "present": true,
+      "root": "/System/Library"
+    },
+    {
+      "counts": {
+        "file": 37
+      },
+      "file_bytes": 11587056,
+      "present": true,
+      "root": "/bin"
+    },
+    {
+      "counts": {
+        "file": 50,
+        "symlink": 22
+      },
+      "file_bytes": 7564704,
+      "present": true,
+      "root": "/sbin"
+    },
+    {
+      "counts": {
+        "file": 892,
+        "symlink": 42
+      },
+      "file_bytes": 230892583,
+      "present": true,
+      "root": "/usr/bin"
+    },
+    {
+      "counts": {
+        "directory": 98,
+        "file": 496,
+        "symlink": 31
+      },
+      "file_bytes": 35529014,
+      "present": true,
+      "root": "/usr/lib"
+    },
+    {
+      "counts": {
+        "directory": 184,
+        "file": 763,
+        "symlink": 9
+      },
+      "file_bytes": 515786957,
+      "present": true,
+      "root": "/usr/libexec"
+    },
+    {
+      "counts": {
+        "directory": 5,
+        "file": 202,
+        "symlink": 29
+      },
+      "file_bytes": 113630535,
+      "present": true,
+      "root": "/usr/sbin"
+    },
+    {
+      "counts": {
+        "directory": 887,
+        "file": 15732,
+        "symlink": 3526
+      },
+      "file_bytes": 546217171,
+      "present": true,
+      "root": "/usr/share"
+    },
+    {
+      "counts": {
+        "directory": 31,
+        "file": 110,
+        "symlink": 202
+      },
+      "file_bytes": 160417371,
+      "present": true,
+      "root": "/usr/standalone"
+    }
+  ],
+  "schema": 1,
+  "script_sha256": "1fe8b950ff7d73211f794783af6dc01993d7eed50250522501c1f0663a7d5436"
+}

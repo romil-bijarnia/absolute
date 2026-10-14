@@ -1,0 +1,985 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-14T07:06:37.886510+00:00",
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5421a",
+  "scope": "Native arm64e readlink/stat executable boundary plus isolated filesystem fixtures. This is not whole-system reverse engineering.",
+  "target": {
+    "paths": [
+      "/usr/bin/readlink",
+      "/usr/bin/stat"
+    ],
+    "sourceSha256": "aed132b62730b52035afddefc1b0b5b48beba1e7da3dfdc1afa00cd9273c984b",
+    "sourceBytes": 118576,
+    "sliceArchitecture": "arm64e",
+    "sliceSha256": "acbb9c11bb1be09052233bf7cd7b93f7a823a714b296d1a7a6e4789d826060e7",
+    "sliceBytes": 53040,
+    "derivation": "lipo -thin arm64e; slice used for static analysis only",
+    "sameFilesystemObject": true
+  },
+  "providers": {
+    "rea": "6.4.0",
+    "ghidra": "12.1.3"
+  },
+  "coverage": {
+    "functionDossiers": 6,
+    "recoveredProcedureBodyBytes": 4928,
+    "importedLibraryBodiesAnalyzed": 0,
+    "runtimeCases": 73,
+    "targetExecution": "Only installed readlink/stat commands; own fixture paths; no debugger, injection, protected-process attachment, or system-component modification"
+  },
+  "nativeEvidence": [
+    {
+      "address": "0x1000005e8",
+      "name": "entry",
+      "ranges": [
+        {
+          "start": "0x1000005e8",
+          "end": "0x10000099b"
+        }
+      ],
+      "bodyBytes": 948,
+      "instructionCount": 237,
+      "pseudocodePresent": true,
+      "evidenceId": "ev_2b5dff74dff188d7a6e3a5ab58c866f345fd4680d8aa72541326627f288df503",
+      "file": "research/local/native-code/readlink-entry.json",
+      "fileSha256": "6324bbf09e3cff1a13ddac058ffd00cb024888a9bebac9268cd9a8041a8a8c57",
+      "callees": [
+        {
+          "address": "0x10000099c",
+          "name": "FUN_10000099c",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001a30",
+          "name": "FUN_100001a30",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001a90",
+          "name": "___error",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x1",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001af0",
+          "name": "_errx",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x7",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b70",
+          "name": "_fstat",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0xf",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b80",
+          "name": "_getopt",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x10",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b90",
+          "name": "_getprogname",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x11",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001bc0",
+          "name": "_lstat",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x14",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001c00",
+          "name": "_stat",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x18",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001c10",
+          "name": "_strcmp",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x19",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001c60",
+          "name": "_warn",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x1e",
+            "provenance": "ghidra-function-manager"
+          }
+        }
+      ],
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "Ghidra Listing reports a terminal call at 0x100000998 to 0x100001af0 _errx (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return."
+      ],
+      "inferredRole": "Entry, invocation-name dispatch, option parsing, metadata retrieval, exit aggregation"
+    },
+    {
+      "address": "0x10000099c",
+      "name": "FUN_10000099c",
+      "ranges": [
+        {
+          "start": "0x10000099c",
+          "end": "0x100000e1f"
+        }
+      ],
+      "bodyBytes": 1156,
+      "instructionCount": 289,
+      "pseudocodePresent": true,
+      "evidenceId": "ev_b65cc55115143cf9af16656f0848cf4a2cb8c21de71a32e8d2a583c9d1d859b5",
+      "file": "research/local/native-code/readlink-formatter.json",
+      "fileSha256": "9bb3040597daeea1f55a484b2d1a9d93a69b937a3afc9161085741ad4ed0aead",
+      "callees": [
+        {
+          "address": "0x100000f18",
+          "name": "FUN_100000f18",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001aa0",
+          "name": "___stack_chk_fail",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x2",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001af0",
+          "name": "_errx",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x7",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b20",
+          "name": "_fflush",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0xa",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b50",
+          "name": "_fputc",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0xd",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001bf0",
+          "name": "_snprintf",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x17",
+            "provenance": "ghidra-function-manager"
+          }
+        }
+      ],
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "Ghidra Listing reports a terminal call at 0x100000e00 to 0x100001aa0 ___stack_chk_fail (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return.",
+        "Ghidra Listing reports a terminal call at 0x100000e1c to 0x100001af0 _errx (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return."
+      ],
+      "inferredRole": "Format parser and output emission"
+    },
+    {
+      "address": "0x100001a30",
+      "name": "FUN_100001a30",
+      "ranges": [
+        {
+          "start": "0x100001a30",
+          "end": "0x100001a73"
+        }
+      ],
+      "bodyBytes": 68,
+      "instructionCount": 17,
+      "pseudocodePresent": true,
+      "evidenceId": "ev_bc0d3d67eff8e6e8d541b4a5358ddcd5f7e65e8ded36170735e11ca4be351b42",
+      "file": "research/local/native-code/readlink-function-0x100001a30.json",
+      "fileSha256": "34e61e2f2627e401eaeb62a6c39d98ef2a5803f2198dcf74b8770658c02f1e5e",
+      "callees": [
+        {
+          "address": "0x100001b00",
+          "name": "_exit",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x8",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b40",
+          "name": "_fprintf",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0xc",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b90",
+          "name": "_getprogname",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x11",
+            "provenance": "ghidra-function-manager"
+          }
+        }
+      ],
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "Ghidra Listing reports a terminal call at 0x100001a70 to 0x100001b00 _exit (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return."
+      ],
+      "inferredRole": "Usage diagnostic and exit"
+    },
+    {
+      "address": "0x100000f18",
+      "name": "FUN_100000f18",
+      "ranges": [
+        {
+          "start": "0x100000f18",
+          "end": "0x10000197b"
+        }
+      ],
+      "bodyBytes": 2660,
+      "instructionCount": 665,
+      "pseudocodePresent": true,
+      "evidenceId": "ev_f87e16e04ccc925de0ea2446d89ecfe56983a594131a7be779f0ecf55faa5979",
+      "file": "research/local/native-code/readlink-field.json",
+      "fileSha256": "f7588f6e8b19f506b6e467c64bf34b23326d6d0f61830b0580b6b4b3acf09296",
+      "callees": [
+        {
+          "address": "0x100000ed4",
+          "name": "FUN_100000ed4",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100000f18",
+          "name": "FUN_100000f18",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001aa0",
+          "name": "___stack_chk_fail",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x2",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001ab0",
+          "name": "___strcat_chk",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x3",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001ac0",
+          "name": "___strlcpy_chk",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x4",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001ad0",
+          "name": "_devname",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x5",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001af0",
+          "name": "_errx",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x7",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b30",
+          "name": "_fmtcheck",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0xb",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001ba0",
+          "name": "_group_from_gid",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x12",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001bb0",
+          "name": "_localtime",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x13",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001bd0",
+          "name": "_readlink",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x15",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001be0",
+          "name": "_realpath$DARWIN_EXTSN",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x16",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001bf0",
+          "name": "_snprintf",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x17",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001c20",
+          "name": "_strftime",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x1a",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001c30",
+          "name": "_strlen",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x1b",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001c40",
+          "name": "_strmode",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x1c",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001c50",
+          "name": "_user_from_uid",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x1d",
+            "provenance": "ghidra-function-manager"
+          }
+        }
+      ],
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+        "Ghidra Listing reports a terminal call at 0x100001974 to 0x100001af0 _errx (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return.",
+        "Ghidra Listing reports a terminal call at 0x100001978 to 0x100001aa0 ___stack_chk_fail (external=false, thunk=true, hasNoReturn=true); fallthrough is excluded by Ghidra's flow model. This records Ghidra's FunctionManager flag, not an independent verification that the callee cannot return."
+      ],
+      "inferredRole": "Field rendering, literal link read, and canonical-path request"
+    },
+    {
+      "address": "0x100000ed4",
+      "name": "FUN_100000ed4",
+      "ranges": [
+        {
+          "start": "0x100000ed4",
+          "end": "0x100000f17"
+        }
+      ],
+      "bodyBytes": 68,
+      "instructionCount": 17,
+      "pseudocodePresent": true,
+      "evidenceId": "ev_e4ab2ebb1739c70c204bcfdaecfc9e6bee8c8b6a28521e3c3b786525c1466834",
+      "file": "research/local/native-code/readlink-function-0x100000ed4.json",
+      "fileSha256": "9307d3d2f2f0d970d2fd1c7ac76b1a0b6b79353239d7be19aaad3ff9df2599d9",
+      "callees": [
+        {
+          "address": "0x100001a74",
+          "name": "FUN_100001a74",
+          "classification": {
+            "external": false,
+            "thunk": false,
+            "thunk_target": null,
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b10",
+          "name": "_fflagstostr",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x9",
+            "provenance": "ghidra-function-manager"
+          }
+        },
+        {
+          "address": "0x100001b60",
+          "name": "_free",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0xe",
+            "provenance": "ghidra-function-manager"
+          }
+        }
+      ],
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ],
+      "inferredRole": "File-flags string helper; terminal error path is imperfectly decompiled"
+    },
+    {
+      "address": "0x100001a74",
+      "name": "FUN_100001a74",
+      "ranges": [
+        {
+          "start": "0x100001a74",
+          "end": "0x100001a8f"
+        }
+      ],
+      "bodyBytes": 28,
+      "instructionCount": 7,
+      "pseudocodePresent": true,
+      "evidenceId": "ev_5e5ba7e6220496d6b97b2a34c758ef1200a9184d21175a1e609bf8ba3c1717b3",
+      "file": "research/local/native-code/readlink-function-0x100001a74.json",
+      "fileSha256": "ca6c54ae1e6e70c9eaa387e2dad15a6ab5e20f57e3b7dd76ec5de7bbc3819180",
+      "callees": [
+        {
+          "address": "0x100001ae0",
+          "name": "_err",
+          "classification": {
+            "external": false,
+            "thunk": true,
+            "thunk_target": "EXTERNAL:0x6",
+            "provenance": "ghidra-function-manager"
+          }
+        }
+      ],
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ],
+      "inferredRole": "File-flags failure helper; terminal boundary is imperfectly decompiled"
+    }
+  ],
+  "runtimeEvidence": {
+    "file": "research/local/native-code/readlink-runtime.json",
+    "sha256": "9a1ea900d3c785ce56604238222456f3dbb37cd8538578ca50bc2dfd5b411519",
+    "method": "subprocess execution of installed system utilities; no debugger or process attachment",
+    "caseCount": 73,
+    "selectedCases": [
+      {
+        "case": "readlink:file-link",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "file-link"
+        ],
+        "exitCode": 0,
+        "stdout": "target.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink-f:file-link",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-f",
+          "file-link"
+        ],
+        "exitCode": 0,
+        "stdout": "<fixture>/target.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink:dangling-link",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "dangling-link"
+        ],
+        "exitCode": 0,
+        "stdout": "missing.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink-f:dangling-link",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-f",
+          "dangling-link"
+        ],
+        "exitCode": 1,
+        "stdout": "<fixture>/missing.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "stat:dangling-link",
+        "program": "/usr/bin/stat",
+        "arguments": [
+          "-f",
+          "%HT|%z|%p|%Y",
+          "dangling-link"
+        ],
+        "exitCode": 0,
+        "stdout": "Symbolic Link|11|120755|missing.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "stat-L:dangling-link",
+        "program": "/usr/bin/stat",
+        "arguments": [
+          "-L",
+          "-f",
+          "%HT|%z|%p|%Y",
+          "dangling-link"
+        ],
+        "exitCode": 0,
+        "stdout": "Symbolic Link|11|120755|missing.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink:chain-link",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "chain-link"
+        ],
+        "exitCode": 0,
+        "stdout": "file-link\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink:loop-a",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "loop-a"
+        ],
+        "exitCode": 0,
+        "stdout": "loop-b\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink-f:loop-a",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-f",
+          "loop-a"
+        ],
+        "exitCode": 1,
+        "stdout": "<fixture>/loop-b\n",
+        "stderr": ""
+      },
+      {
+        "case": "stat-L:loop-a",
+        "program": "/usr/bin/stat",
+        "arguments": [
+          "-L",
+          "-f",
+          "%HT|%z|%p|%Y",
+          "loop-a"
+        ],
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": "stat: loop-a: stat: Too many levels of symbolic links\n"
+      },
+      {
+        "case": "readlink-f:missing-parent-link",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-f",
+          "missing-parent-link"
+        ],
+        "exitCode": 1,
+        "stdout": "<fixture>/absent-directory\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink:target.txt",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "target.txt"
+        ],
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "case": "readlink-f:missing.txt",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-f",
+          "missing.txt"
+        ],
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "case": "readlink-f:non-directory-link",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-f",
+          "non-directory-link"
+        ],
+        "exitCode": 1,
+        "stdout": "<fixture>/target.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "stat-L:non-directory-link",
+        "program": "/usr/bin/stat",
+        "arguments": [
+          "-L",
+          "-f",
+          "%HT|%z|%p|%Y",
+          "non-directory-link"
+        ],
+        "exitCode": 1,
+        "stdout": "",
+        "stderr": "stat: non-directory-link: stat: Not a directory\n"
+      },
+      {
+        "case": "readlink-f:nested-link/../child.txt",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-f",
+          "nested-link/../child.txt"
+        ],
+        "exitCode": 0,
+        "stdout": "<fixture>/target-dir/child.txt\n",
+        "stderr": ""
+      },
+      {
+        "case": "stat:directory-link/",
+        "program": "/usr/bin/stat",
+        "arguments": [
+          "-f",
+          "%HT|%z|%p|%Y",
+          "directory-link/"
+        ],
+        "exitCode": 0,
+        "stdout": "Directory|128|40755|\n",
+        "stderr": ""
+      },
+      {
+        "case": "readlink-n",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "-n",
+          "file-link"
+        ],
+        "exitCode": 0,
+        "stdout": "target.txt",
+        "stderr": ""
+      },
+      {
+        "case": "readlink-multi-error",
+        "program": "/usr/bin/readlink",
+        "arguments": [
+          "file-link",
+          "target.txt",
+          "directory-link"
+        ],
+        "exitCode": 1,
+        "stdout": "target.txt\ntarget-dir\n",
+        "stderr": ""
+      }
+    ]
+  },
+  "observations": [
+    {
+      "id": "NC-001",
+      "classification": "static-observation-corroborated-by-filesystem-identity",
+      "statement": "The installed readlink and stat paths have identical SHA-256, device, and inode identities. The native entry compares the invocation name to readlink and selects different option and formatting paths.",
+      "nativeEvidence": [
+        "ev_2b5dff74dff188d7a6e3a5ab58c866f345fd4680d8aa72541326627f288df503"
+      ],
+      "addresses": [
+        "0x100000624",
+        "0x100000630"
+      ],
+      "runtimeSource": "programs"
+    },
+    {
+      "id": "NC-002",
+      "classification": "static-inference-corroborated-by-runtime",
+      "statement": "Default metadata acquisition uses lstat. The stat -L path attempts stat and retries lstat only for ENOENT. Dangling links remain reportable through this fallback; looping and non-directory targets fail instead.",
+      "nativeEvidence": [
+        "ev_2b5dff74dff188d7a6e3a5ab58c866f345fd4680d8aa72541326627f288df503"
+      ],
+      "addresses": [
+        "0x10000089c",
+        "0x1000008b0",
+        "0x1000008c0",
+        "0x1000008dc"
+      ],
+      "runtimeCases": [
+        "stat:dangling-link",
+        "stat-L:dangling-link",
+        "stat-L:loop-a",
+        "stat-L:non-directory-link"
+      ]
+    },
+    {
+      "id": "NC-003",
+      "classification": "static-inference-corroborated-by-runtime",
+      "statement": "The ordinary readlink path checks that the entry is a symbolic link and reads its stored target through the imported readlink function. It preserves relative text and returns targets of dangling links and loops without following them.",
+      "nativeEvidence": [
+        "ev_f87e16e04ccc925de0ea2446d89ecfe56983a594131a7be779f0ecf55faa5979"
+      ],
+      "addresses": [
+        "0x1000012f0"
+      ],
+      "runtimeCases": [
+        "readlink:dangling-link",
+        "readlink:chain-link",
+        "readlink:dotdot-link",
+        "readlink:loop-a",
+        "readlink:target.txt"
+      ]
+    },
+    {
+      "id": "NC-004",
+      "classification": "static-inference-corroborated-by-runtime",
+      "statement": "The canonical-path formatter calls imported realpath and records failure separately from its output buffer. The command can print an absolute or partial path while exiting unsuccessfully. Output text alone does not prove that a target exists or resolution succeeded.",
+      "nativeEvidence": [
+        "ev_f87e16e04ccc925de0ea2446d89ecfe56983a594131a7be779f0ecf55faa5979"
+      ],
+      "addresses": [
+        "0x100001390",
+        "0x100001394",
+        "0x1000013a0"
+      ],
+      "runtimeCases": [
+        "readlink-f:dangling-link",
+        "readlink-f:loop-a",
+        "readlink-f:missing-parent-link",
+        "readlink-f:non-directory-link",
+        "readlink-f:missing.txt"
+      ]
+    },
+    {
+      "id": "NC-005",
+      "classification": "runtime-observation",
+      "statement": "Filesystem traversal expands an intermediate directory link before processing a following parent component. With nested-link pointing to target-dir/nested, nested-link/../child.txt identifies target-dir/child.txt. Lexically deleting the link/.. pair first would identify a different path.",
+      "runtimeCases": [
+        "readlink-f:nested-link/../child.txt",
+        "stat:nested-link/../child.txt"
+      ]
+    },
+    {
+      "id": "NC-006",
+      "classification": "runtime-observation",
+      "statement": "A trailing slash on a directory link addresses the directory for metadata purposes; a trailing slash on a dangling link fails. Raw readlink -n omits its newline, and mixed valid/non-link operands preserve successful output while producing a failing aggregate status.",
+      "runtimeCases": [
+        "stat:directory-link/",
+        "stat:dangling-link/",
+        "readlink-n",
+        "readlink-multi-error"
+      ]
+    }
+  ],
+  "implementation": {
+    "classification": "original-implementation-choice-informed-by-observed-contract",
+    "files": [
+      "Sources/AbsoluteCore/FileService.swift",
+      "Sources/AbsoluteCore/FileResolution.swift",
+      "Tests/AbsoluteCoreTests/FileServiceTests.swift",
+      "Sources/AbsoluteCore/NavigationHistory.swift",
+      "Sources/AbsoluteCore/DesktopSnapshot.swift",
+      "Sources/AbsoluteCore/DesktopStateRepository.swift",
+      "Sources/AbsoluteCLI/AbsoluteCLI.swift",
+      "linux/Sources/AbsoluteLinux/AbsoluteLinux.swift",
+      "Tests/AbsoluteCoreTests/AbsoluteCoreTests.swift",
+      "Tests/AbsoluteCoreTests/DesktopStateTests.swift"
+    ],
+    "contract": [
+      "Directory listing, information, and reveal retain the requested entry identity and inspect a dangling symlink without requiring its target to exist.",
+      "The literal symbolicLinkDestination is distinct from a resolved URL.",
+      "resolve with noFollow inspects the final entry and reports notFollowed; resolve with follow requires successful realpath resolution. Intermediate components still follow filesystem path traversal.",
+      "Resolution returns notFound, notDirectory, symbolicLinkLoop, permissionDenied, or ioError with an available POSIX error code. A failed resolution never supplies a resolvedURL.",
+      "Input paths reach the filesystem without lexical removal of symlink/.. components.",
+      "Default FileService implementations that do not supply resolution report resolutionUnavailable; pre-existing API calls retain their signatures.",
+      "CLI parsing, Linux --project parsing, navigation history, browser snapshots, and supplied session-state paths preserve original symlink/.. meaning; session schema remains 1.",
+      "Atomic session saves through a symlink/.. parent write to the filesystem-selected directory and preserve an unrelated decoy at the lexically collapsed path.",
+      "Resolution, information, and reveal preserve the URL directory requirement. An explicit trailing slash rejects ordinary files and dangling links under both policies; a valid directory-link/ is inspected as its directory. URLs without that requirement keep link-entry metadata.",
+      "URL.path and withUnsafeFileSystemRepresentation both drop trailing slashes on the observed Mac and Linux Foundation versions. A shared conversion preserves hasDirectoryPath without lexically normalizing the rest of the path. CLI tilde expansion also retains the original trailing-slash requirement."
+    ],
+    "deliberateDifferences": [
+      "Absolute returns structured status and never exposes a partial realpath buffer as a successful resolvedURL. This is a deliberate API choice, not a claim to reproduce every readlink -f output byte.",
+      "Absolute strict follow resolution reports a missing target rather than adopting stat -L fallback as successful target resolution. No-follow entry metadata remains available separately."
+    ]
+  },
+  "limitations": [
+    "The six function dossiers are a bounded utility investigation, not a percentage of macOS completion.",
+    "Ghidra recognized imported thunks; the implementations of libSystem readlink, realpath, stat, lstat, and the kernel filesystem operations were not decompiled here.",
+    "Recovered pseudocode is not original source. Types are approximate; the field renderer reports unsettled type propagation. Two small error helpers show spurious decompiler fallthrough around terminal calls and are not treated as faithful source reconstructions.",
+    "Static call edges identify recovered targets, not a dynamic execution trace. Targetless/indirect calls may be absent.",
+    "Observed cases are on this macOS build and fixture filesystem. Concurrent path mutation, inaccessible parent directories, arbitrary non-UTF-8 names, mount transitions, sandbox restrictions, and very long links are not covered by the probes.",
+    "No Finder service runtime protocol, launchd internals, window server, driver, firmware, or boot implementation was recovered in this investigation."
+  ],
+  "verification": {
+    "macOS": {
+      "focusedCommand": "swift test --jobs 2 --filter FileServiceTests",
+      "focusedTestsPassed": 11,
+      "coreCommand": "./script/check_core.sh",
+      "unitTestsPassed": 22,
+      "cliIntegrationChecksPassed": 15,
+      "cliReport": "research/local/macos-core-report.json",
+      "additionalUnitTests": [
+        "testNavigationPreservesTraversalThroughSymbolicParent",
+        "testSnapshotAndStateLocationPreserveSymbolicParentTraversal",
+        "testDirectoryRequirementRejectsAnOrdinaryFile",
+        "testDirectoryRequirementTraversesDirectoryLink",
+        "testDirectoryRequirementRejectsDanglingLink"
+      ],
+      "newIntegrationChecks": [
+        "cli_info_preserves_symlink_parent",
+        "cli_ls_preserves_symlink_parent",
+        "cli_reveal_preserves_symlink_parent",
+        "cli_session_preserves_symlink_parent",
+        "session_write_preserves_symlink_parent",
+        "cli_directory_link_with_trailing_slash",
+        "cli_rejects_dangling_link_with_trailing_slash",
+        "cli_rejects_file_with_trailing_slash"
+      ],
+      "trailingSlashCLI": {
+        "file": "research/local/native-code/trailing-slash-cli.json",
+        "sha256": "0f66723c6fd967329a31d9f755f751e67c4c337a7b934ab5f676f69e3b3df73b",
+        "casesPassed": 12
+      }
+    },
+    "runtimeCaptureCommand": "python3 script/research_native_code.py",
+    "runtimeCasesCaptured": 73
+  }
+}
