@@ -202,7 +202,8 @@
       "reports": [
         "FINDINGS.md",
         "NATIVE-CODE.md",
-        "LINUX-DESKTOP.md"
+        "LINUX-DESKTOP.md",
+        "DOCK-MAGNIFICATION.md"
       ],
       "remaining": [
         "Finder and Dock behavior beyond current prototypes",

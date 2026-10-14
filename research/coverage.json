@@ -6,7 +6,7 @@
   "inputs": [
     {
       "file": "scope.json",
-      "sha256": "f275f86568dfb79083c5b337a70bfa8153dcf62a1447827abebfd19a94851c6e"
+      "sha256": "28dc0bec40f43a105a0b4e3b7769fe8307ce524f9828663e679229561935b9ee"
     },
     {
       "file": "system-inventory.json",
@@ -38,7 +38,7 @@
     },
     {
       "file": "implementation-verification.json",
-      "sha256": "3188e7b95ddf7cc29d8188c2ea33402097fffcd1ec5cea313b32dd01b8bbda46"
+      "sha256": "f3d8d2e5407873644432408555661e8f1ade0d7e17b6a7d4edd7428d3e68444f"
     },
     {
       "file": "mach-message-findings.json",
@@ -55,6 +55,10 @@
     {
       "file": "fedora-native-verification.json",
       "sha256": "b27949a80908531bfb0297bebda564f4fc80351e90e4fe6851f99626fb236902"
+    },
+    {
+      "file": "dock-magnification-findings.json",
+      "sha256": "3a38de1547e58581bcc0b0c676ff08c5966b42a835a7e16bcdd4c5addfbdb54d"
     }
   ],
   "limits": [
@@ -64,6 +68,7 @@
     "All subsystem scopes still contain unresolved work. No standalone macOS-compatible OS or firmware replacement is claimed."
   ],
   "metrics": {
+    "behavior_units_implemented": 1,
     "filesystem_runtime_cases_captured": 73,
     "firmware_and_boot_artifact_records": 180,
     "graphics_reference_probes_passed": 5,
@@ -300,7 +305,8 @@
       "reports": [
         "FINDINGS.md",
         "NATIVE-CODE.md",
-        "LINUX-DESKTOP.md"
+        "LINUX-DESKTOP.md",
+        "DOCK-MAGNIFICATION.md"
       ],
       "status": "partial"
     },

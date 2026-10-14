@@ -171,7 +171,7 @@
     "unit_command": "./script/check_core.sh",
     "unit_log": "research/local/mach-messages/macos-core-check.log",
     "unit_log_sha256": "c94de988f2616a28916f6bc02f889db1140f806f5d24639d92a87fe7ee4dd4a1",
-    "unit_tests_passed": 44
+    "unit_tests_passed": 55
   },
   "schema": 1,
   "scope": "Declared Absolute behavior and bounded native-reference replay; not whole-system equivalence.",
@@ -223,11 +223,14 @@
     "script/check_core.sh": "7b0cf8daaba852e8cbf23caceedd84484dd091b85e84b5b55b38f9d4a4061d3e",
     "script/check_linux.sh": "2e64e5ea42b0232e099e63acd268af52c02d91b8ba58a5457b8a6d51f7d60530",
     "script/check_linux_desktop.py": "6aa9e152c8c913f5bc968b24ac3c76935cd545b38dba1df491db9b50c7f00536",
-    "script/run_linux.sh": "3af4913bd3dab5ad33b192b93e872646d4a4ad6273ce11b7df4e1cb2e08d7b0d"
+    "script/run_linux.sh": "3af4913bd3dab5ad33b192b93e872646d4a4ad6273ce11b7df4e1cb2e08d7b0d",
+    "Sources/AbsoluteCore/DockMagnification.swift": "5a5b06893b0df113be70018075d4951bda4f9acd303787de582b5fad4af0de52",
+    "Tests/AbsoluteCoreTests/DockMagnificationTests.swift": "8902eddabda39beeb7397e85df670324de4cee6f6b35b7d9323d5fdcafdaac3d"
   },
   "verification_notes": [
     "Native desktop and restart checks were rerun after the macOS application discovery fix. A separate accessibility interaction pressed the real Safari Dock button and confirmed Safari activation.",
     "Core, CLI, Mach and Linux desktop sources are unchanged; their earlier verification records are retained. The Linux launcher change only adds viewport scaling to its printed viewer URL, and bash -n passed.",
-    "The scaled Linux viewer was checked at 1280x800 and 1024x680 after its first framebuffer arrived. The desktop and Dock fit, and the launcher opens and dismisses. The optional favicon returns 404; no application or transport errors were observed."
+    "The scaled Linux viewer was checked at 1280x800 and 1024x680 after its first framebuffer arrived. The desktop and Dock fit, and the launcher opens and dismisses. The optional favicon returns 404; no application or transport errors were observed.",
+    "2026-10-15: DockMagnification added; macOS unit tests re-run via script/check_core.sh (44 -> 55: 33 AbsoluteCore + 22 AbsoluteMach, all passed; CLI verify 16/16). The Linux count predates this unit and was not re-run; the GTK host and desktop/restart checks are unchanged."
   ]
 }

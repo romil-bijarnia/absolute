@@ -18,8 +18,11 @@ ready when the driver lands or on other supported hardware.
 Work proceeds one behavior at a time. Each unit observes the behavior on the
 reference Mac, records a specification with an executable check, and implements
 it for Plasma/KWin or as an Absolute component. System-wide inventories and
-research sweeps are not units of work. The first unit is Dock magnification;
-its evidence lives under `research/local/dock-magnification/`.
+research sweeps are not units of work. The first unit, Dock magnification, is
+complete ([research/DOCK-MAGNIFICATION.md](research/DOCK-MAGNIFICATION.md));
+its raw evidence lives under `research/local/dock-magnification/`. Next on the
+Dock: hover magnification in the GTK host using that model, then the minimise
+effects whose dossiers the same pass retained.
 
 ## Foundation: Fedora, Asahi and macOS compatibility
 

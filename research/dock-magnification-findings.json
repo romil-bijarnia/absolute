@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-14T17:12:46.179549+00:00",
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5421a",
+  "scope": "Static recovery of Dock magnification geometry and ramp timing from the installed Dock executable. No process was executed, attached to or modified.",
+  "target": {
+    "path": "/System/Library/CoreServices/Dock.app/Contents/MacOS/Dock",
+    "sourceSha256": "c8e55d01cbfa33eb68b6d90707da5fd4bd13b27349295e0e732f87eb5263488f",
+    "sourceBytes": 4843616,
+    "copySha256": "c8e55d01cbfa33eb68b6d90707da5fd4bd13b27349295e0e732f87eb5263488f",
+    "architecture": "arm64e",
+    "derivation": "byte copy of the thin arm64e executable"
+  },
+  "providers": {
+    "rea": "6.4.0",
+    "ghidra": "12.1.3",
+    "overviewEvidenceId": "ev_85af54bc9c359715bbf2f34409497c1ea1c752ddb3c67d4013d78c18eaf78996",
+    "procedureCount": 29434,
+    "searchEvidenceId": "ev_69ecb48060b8cba759377d332fc4e6d7c35e296bd97ecf804605f8107f1c39ba"
+  },
+  "procedures": {
+    "0x100011b54": {
+      "role": "fish state: fishCenter from the pointer, fishSize, realScale and currentFish",
+      "ghidraName": "FUN_100011b54",
+      "bodyBytes": 660,
+      "callers": [
+        "DockBar::updateWithContext:showDockWindow:transaction:",
+        "DockBar::quitUpdate"
+      ],
+      "evidenceId": "ev_db14f49a6e9d93be3bb7f60016519034efa6ee7d19ffa58aefdea05590efc99d"
+    },
+    "0x100011de8": {
+      "role": "per-tile layout: both tile edges displaced through the sine profile",
+      "ghidraName": "FUN_100011de8",
+      "bodyBytes": 1312,
+      "callers": [
+        "DockBar::updateWithContext:showDockWindow:transaction:",
+        "DockBar::quitUpdate"
+      ],
+      "evidenceId": "ev_f5f09a4463deb462cbbddae21369a5f8d63ed62648c88f3d38b15d8ed2e16c89"
+    },
+    "0x1000128f0": {
+      "role": "bar frame: bar edges displaced through the same profile plus distanceSides",
+      "ghidraName": "FUN_1000128f0",
+      "bodyBytes": 3236,
+      "callers": [
+        "DockBar::updateWithContext:showDockWindow:transaction:",
+        "DockBar::quitUpdate"
+      ],
+      "evidenceId": "ev_9b463fd4f35d2e2be1ab991cf511c8c8115719c1ce2761ef14b3718351ea0766"
+    },
+    "0x10007e930": {
+      "role": "-[DockBar updateWithContext:showDockWindow:transaction:], the update loop",
+      "ghidraName": "DockBar::updateWithContext:showDockWindow:transaction:",
+      "bodyBytes": 10680,
+      "callers": [],
+      "evidenceId": "ev_9143415d350ef71f5bd80b5deaf89759f97a6ac3ce31103e26f915bb15109220"
+    },
+    "0x1000502b4": {
+      "role": "DockFloatAnimatedProperty time step: linear or cosine progress, then interpolate:",
+      "ghidraName": "FUN_1000502b4",
+      "bodyBytes": 172,
+      "callers": [
+        "DOCKLabelLayer::update",
+        "Tile::updateTransing",
+        "Tile::updateMoving",
+        "Tile::updateSqueezing",
+        "Tile::updateBlending",
+        "Tile::updateIndicatorBlending",
+        "Tile::updateScaling",
+        "DockBar::updateWithContext:showDockWindow:transaction:",
+        "DockBar::quitUpdate"
+      ],
+      "evidenceId": "ev_ddb9a9438558bab2f013487c4ed0bc0035c23cce746d82893a0893f2c08eca87"
+    }
+  },
+  "namedProcedures": {
+    "DockBar::currentFish": "0x1002567e4",
+    "DockBar::externalFishTile": "0x100255c08",
+    "DockBar::fSize": "0x10025324c",
+    "DockBar::fish": "0x100256684",
+    "DockBar::fishCenter": "0x100256724",
+    "DockBar::fishSize": "0x1002566c4",
+    "DockBar::fishSpeed": "0x100253240",
+    "DockBar::forcedFisheye": "0x100256844",
+    "DockBar::forcingFisheye": "0x1002568ac",
+    "DockBar::handleFishCompletionIfNeeded": "0x100081a40",
+    "DockBar::setCurrentFish:": "0x100256814",
+    "DockBar::setExternalFishTile:": "0x100255c48",
+    "DockBar::setFishCenter:": "0x100256754",
+    "DockBar::setFishSize:": "0x1002566f4",
+    "DockBar::setForcedFisheye:": "0x100256878",
+    "DockBar::setForcingFisheye:": "0x1002568e0",
+    "DockBar::startFishing": "0x10005f154",
+    "DockBar::stopFishing": "0x10005f288",
+    "DockFloatAnimatedProperty::copyWithZone:": "0x100050230",
+    "DockFloatAnimatedProperty::interpolate:": "0x100050294"
+  },
+  "constants": {
+    "fSize": {
+      "getter": "-[DockBar fSize]",
+      "address": "0x10025324c",
+      "instruction": "1e211000",
+      "form": "fmov s0, #imm8",
+      "value": 3.0
+    },
+    "fishSpeed": {
+      "getter": "-[DockBar fishSpeed]",
+      "address": "0x100253240",
+      "instruction": "52a84508 1e270100",
+      "form": "mov w, #bits; fmov s0, w",
+      "value": 42.0
+    },
+    "pi": {
+      "address": "0x1003086d0",
+      "value": 3.1415927410125732,
+      "note": "double literal used by the fish-state normaliser; the per-tile profile uses the float literal at 0x1003086e8"
+    }
+  },
+  "model": {
+    "fishSize": "fSize * tileSize",
+    "realScale": "fish * (largeSize - tileSize) / 2 / sin(pi * tileSize / (4 * fishSize))",
+    "currentFish": "fish * (largeSize - tileSize)",
+    "profile": "S(d) = -1 if d <= -fishSize; 1 if d >= fishSize; sin(pi * d / (2 * fishSize)) otherwise",
+    "displacement": "D(x) = x + realScale * S(x - fishCenter)",
+    "tileExtent": "[D(position), D(position + width)] along the bar; size across the bar = D(centre + tileSize/2) - D(centre - tileSize/2)",
+    "barExtent": "[D(barLeft) - distanceSides, D(barRight) + distanceSides]",
+    "inactive": "realScale = currentFish = 0 when magnification is off or largeSize <= tileSize",
+    "rampDurationMilliseconds": "floor(fishSpeed * ln(|sizeChange| / 2 + 1) + 1); moveSpeed while dragging",
+    "rampProgress": "linear in time; DockFloatAnimatedProperty applies 0.5 - 0.5 cos(pi t) only when an easing function is attached, and no code attaches one"
+  },
+  "implementation": {
+    "source": "Sources/AbsoluteCore/DockMagnification.swift",
+    "tests": "Tests/AbsoluteCoreTests/DockMagnificationTests.swift"
+  },
+  "limitations": [
+    "Static analysis only; the running Dock was not observed, so pointer sampling, frame timing and rendering were not measured.",
+    "Dock arithmetic is single precision; the model uses double precision and the tests allow 0.01 pt of difference.",
+    "Addresses are specific to build 26A5421a and must be rediscovered for another build.",
+    "The externalFishTile and dragging paths are recorded but not modelled."
+  ]
+}

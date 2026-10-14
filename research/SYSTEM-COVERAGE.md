@@ -47,6 +47,7 @@ macOS and Ubuntu preview results below.
 | Mach-message native checks passed | 211 |
 | Recorded Mach operations replayed per pass | 386 |
 | Selected kernel-send function-start spans inspected | 6 |
+| Behavior units specified, implemented and tested | 1 |
 
 These counts measure different kinds of work and overlap. They do not form
 a completion percentage. File names, export names and dependency edges do
@@ -69,9 +70,15 @@ with two name assignments on both hosts, comparing returned bytes, rights,
 queue state, timeouts and trailers. See
 [MACH-COMPATIBILITY.md](MACH-COMPATIBILITY.md).
 
+The first behavior unit is Dock magnification: the fish geometry and ramp
+timing recovered from the installed Dock are implemented as
+`DockMagnification` in AbsoluteCore, with 5 Dock procedures
+decompiled and the two measured constants decoded from the binary. See
+[DOCK-MAGNIFICATION.md](DOCK-MAGNIFICATION.md).
+
 | Verification | macOS | Linux |
 | --- | ---: | ---: |
-| Unit tests | 44 | 43 |
+| Unit tests | 55 | 43 |
 | CLI integration checks | 16 | 16 |
 | Desktop and restart checks | 33 | 27 |
 
@@ -96,7 +103,7 @@ runs in a development VM; it is not a self-contained bootable OS image.
 | Security and identity | Inventory only | [SYSTEM-INVENTORY](SYSTEM-INVENTORY.md), [BOOT-FIRMWARE](BOOT-FIRMWARE.md) | Keychain and authentication behavior |
 | Audio, video and imaging | Inventory only | [SYSTEM-INVENTORY](SYSTEM-INVENTORY.md), [SHARED-CACHE](SHARED-CACHE.md) | CoreAudio graph, timing and device behavior |
 | Input and accessibility | Inventory only | [SYSTEM-INVENTORY](SYSTEM-INVENTORY.md) | HID and event delivery |
-| Desktop and applications | Partial investigation | [FINDINGS](FINDINGS.md), [NATIVE-CODE](NATIVE-CODE.md), [LINUX-DESKTOP](LINUX-DESKTOP.md) | Finder and Dock behavior beyond current prototypes |
+| Desktop and applications | Partial investigation | [FINDINGS](FINDINGS.md), [NATIVE-CODE](NATIVE-CODE.md), [LINUX-DESKTOP](LINUX-DESKTOP.md), [DOCK-MAGNIFICATION](DOCK-MAGNIFICATION.md) | Finder and Dock behavior beyond current prototypes |
 | Power and thermal management | Inventory only | [SYSTEM-INVENTORY](SYSTEM-INVENTORY.md), [BOOT-FIRMWARE](BOOT-FIRMWARE.md) | Sleep, wake and shutdown transitions |
 | Installation, updates and recovery | Inventory only | [SYSTEM-INVENTORY](SYSTEM-INVENTORY.md), [BOOT-FIRMWARE](BOOT-FIRMWARE.md) | Installation and update state machines |
 | Text, localization and printing | Inventory only | [SYSTEM-INVENTORY](SYSTEM-INVENTORY.md), [SHARED-CACHE](SHARED-CACHE.md) | Text shaping and font contracts |

@@ -22,6 +22,7 @@ INPUTS = {
     "mach_kernel": "mach-kernel-findings.json",
     "mach_compatibility": "mach-compatibility.json",
     "fedora_native": "fedora-native-verification.json",
+    "dock_magnification": "dock-magnification-findings.json",
 }
 
 
@@ -127,6 +128,7 @@ def generate():
         "mach_native_checks": oracle["check_count"],
         "mach_reference_operations": sum(len(item["operations"]) for item in oracle["scenarios"]),
         "kernel_send_function_start_spans": data["mach_kernel"]["coverage"]["functionStartSpansDisassembled"],
+        "behavior_units_implemented": 1 if data["dock_magnification"]["implementation"]["tests"] else 0,
     }
     summary = {
         "schema": 1, "overall_status": "in_progress", "completion_percentage": None,
@@ -161,6 +163,7 @@ def generate():
         "mach_native_checks": "Mach-message native checks passed",
         "mach_reference_operations": "Recorded Mach operations replayed per pass",
         "kernel_send_function_start_spans": "Selected kernel-send function-start spans inspected",
+        "behavior_units_implemented": "Behavior units specified, implemented and tested",
     }
     lines = [
         "# System research coverage", "",
@@ -201,6 +204,11 @@ def generate():
         "with two name assignments on both hosts, comparing returned bytes, rights,",
         "queue state, timeouts and trailers. See",
         "[MACH-COMPATIBILITY.md](MACH-COMPATIBILITY.md).", "",
+        "The first behavior unit is Dock magnification: the fish geometry and ramp",
+        "timing recovered from the installed Dock are implemented as",
+        "`DockMagnification` in AbsoluteCore, with " + str(len(data["dock_magnification"]["procedures"])) + " Dock procedures",
+        "decompiled and the two measured constants decoded from the binary. See",
+        "[DOCK-MAGNIFICATION.md](DOCK-MAGNIFICATION.md).", "",
         "| Verification | macOS | Linux |", "| --- | ---: | ---: |",
         "| Unit tests | " + str(verification["macos"]["unit_tests_passed"]) + " | "
             + str(verification["linux"]["unit_tests_passed"]) + " |",
