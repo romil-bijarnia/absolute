@@ -1,0 +1,279 @@
+{
+  "schema": 1,
+  "evidenceType": "static-observation",
+  "host": {
+    "ProductName": "macOS",
+    "ProductVersion": "27.0",
+    "BuildVersion": "26A5421a"
+  },
+  "rea": "6.4.0",
+  "applications": [
+    {
+      "name": "Dock",
+      "target": "/System/Library/CoreServices/Dock.app",
+      "evidence": [
+        {
+          "operation": "inspect_artifact",
+          "evidenceId": "ev_4fbbc1a7fb113472fbb46aeef1882bcd80b3e3dd463ae57f10833e6968da9aff",
+          "file": "local/dock-inspect-artifact.json"
+        },
+        {
+          "operation": "inspect_plist",
+          "evidenceId": "ev_2439a1d1e895e0b6acd725b1571a37bff7b2d8f485891532189358f4b6e98181",
+          "file": "local/dock-inspect-plist.json"
+        },
+        {
+          "operation": "inspect_macho",
+          "evidenceId": "ev_9d0aba5ef7556f54148145fb56878c95919dfb87abe8068439f374a2fd730f82",
+          "file": "local/dock-inspect-macho.json"
+        },
+        {
+          "operation": "trace_dylib_resolution",
+          "evidenceId": "ev_ec40c3ad104ea2208883775dfccacd60df9d78da4ff8b675577be670c561a49f",
+          "file": "local/dock-trace-dylib-resolution.json"
+        }
+      ],
+      "inventory": {
+        "evidenceId": "ev_31810df59535198d407f292e448738d6315caa35973565df3ddfde9ec5b9cb92",
+        "manifestId": "agm_5af7db35f254e68bdd8c5db87acb09b63669639e786fdce281fe38a9908bb32d",
+        "bundleSha256": "23551efb1c7821fbc0ca4211d89462d08c6cd34cb15151b42d9678b8d450b486",
+        "uniqueContentNodes": 496,
+        "pathOccurrences": 700,
+        "regularFileOccurrences": 416
+      },
+      "declarations": {
+        "identifier": "com.apple.dock",
+        "executable": "Dock",
+        "name": "Dock",
+        "version": "2571.0.6.402",
+        "short_version": "1.8",
+        "minimumSystemVersion": "27.0",
+        "agentUiElement": true,
+        "principalClass": null,
+        "mainNib": null,
+        "services": [],
+        "urlSchemes": []
+      },
+      "mainExecutable": {
+        "path": "Contents/MacOS/Dock",
+        "sha256": "c8e55d01cbfa33eb68b6d90707da5fd4bd13b27349295e0e732f87eb5263488f",
+        "bytes": 4843616,
+        "architectures": [
+          "arm64e"
+        ],
+        "build": [
+          {
+            "platform": "1",
+            "minimum_os": "27.0",
+            "sdk": "27.0",
+            "tools": [
+              {
+                "name": "3",
+                "version": "27037.1"
+              }
+            ]
+          }
+        ]
+      },
+      "executableRoots": [
+        {
+          "image": "Contents/MacOS/Dock",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/PlugIns/DockControls.appex/Contents/MacOS/DockControls",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/XPCServices/DockHelper.xpc/Contents/MacOS/DockHelper",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/XPCServices/com.apple.dock.external.extra.arm64.xpc/Contents/MacOS/com.apple.dock.external.extra.arm64",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/XPCServices/com.apple.dock.extra.xpc/Contents/MacOS/com.apple.dock.extra",
+          "architecture": "arm64e"
+        }
+      ],
+      "dynamicBoundary": {
+        "totalDeclaredEdges": 161,
+        "mainDeclaredDylibEdges": 83,
+        "weakDeclaredEdges": 47,
+        "resolutionStatuses": {
+          "undetermined": 161
+        },
+        "selectedPublicFrameworkLoads": [
+          "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook",
+          "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+          "/System/Library/Frameworks/SwiftUICore.framework/Versions/A/SwiftUICore"
+        ],
+        "selectedServiceFrameworkLoads": [
+          "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight",
+          "/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv",
+          "/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices",
+          "/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices",
+          "/System/Library/PrivateFrameworks/WindowManager.framework/Versions/A/WindowManager",
+          "/System/Library/PrivateFrameworks/WindowManagement.framework/Versions/A/WindowManagement"
+        ],
+        "coverage": {
+          "status": "complete",
+          "unparsed_images": [],
+          "roots_without_architecture": []
+        }
+      }
+    },
+    {
+      "name": "Finder",
+      "target": "/System/Library/CoreServices/Finder.app",
+      "evidence": [
+        {
+          "operation": "inspect_artifact",
+          "evidenceId": "ev_777aa96eba4c4062620b7bd6b3c1e118fb088f7629b5a96ff2de23cedda369e2",
+          "file": "local/finder-inspect-artifact.json"
+        },
+        {
+          "operation": "inspect_plist",
+          "evidenceId": "ev_31c54504362348f15aa441089a325a6ea845f7430983bbd974e73fe6df6940f8",
+          "file": "local/finder-inspect-plist.json"
+        },
+        {
+          "operation": "inspect_macho",
+          "evidenceId": "ev_785ae250d2782d74de905a10105921055080912e463b217c8960f41608de6913",
+          "file": "local/finder-inspect-macho.json"
+        },
+        {
+          "operation": "trace_dylib_resolution",
+          "evidenceId": "ev_fc28f1e16f5df310e4e9d9f8917713b6838fd739fde2a1ce33cd377501a1fa01",
+          "file": "local/finder-trace-dylib-resolution.json"
+        }
+      ],
+      "inventory": {
+        "evidenceId": "ev_06ea5757c106cc80135df400f363837f9e9e5f07d0ce77eaf267141d163517d4",
+        "manifestId": "agm_935a13f3dc39534d1a0c908f6ac63d44137b6785e3d57afb203c3492b61a43d5",
+        "bundleSha256": "b62bd056b3220f7ff9d6abf9a1ab166f020397a4a78dee6bde45be556f3e8d16",
+        "uniqueContentNodes": 2761,
+        "pathOccurrences": 3836,
+        "regularFileOccurrences": 3250
+      },
+      "declarations": {
+        "identifier": "com.apple.finder",
+        "executable": "Finder",
+        "name": "Finder",
+        "version": "1865",
+        "short_version": "27.0",
+        "minimumSystemVersion": "27.0",
+        "agentUiElement": null,
+        "principalClass": "TApplication",
+        "mainNib": "Application",
+        "services": [
+          "open",
+          "reveal",
+          "showInfo"
+        ],
+        "urlSchemes": [
+          "afp",
+          "file",
+          "ftp",
+          "smb",
+          "cifs",
+          "nwnode"
+        ]
+      },
+      "mainExecutable": {
+        "path": "Contents/MacOS/Finder",
+        "sha256": "8dfcb8db7781cabfee036c7c693ba99ffdc769077910149ea95b795082715e36",
+        "bytes": 13116272,
+        "architectures": [
+          "arm64e"
+        ],
+        "build": [
+          {
+            "platform": "1",
+            "minimum_os": "27.0",
+            "sdk": "27.0",
+            "tools": [
+              {
+                "name": "3",
+                "version": "27037.1"
+              }
+            ]
+          }
+        ]
+      },
+      "executableRoots": [
+        {
+          "image": "Contents/Applications/AirDrop.app/Contents/MacOS/AirDrop",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/Applications/All My Files.app/Contents/MacOS/All My Files",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/Applications/Computer.app/Contents/MacOS/Computer",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/Applications/Network.app/Contents/MacOS/Network",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/Applications/Recents.app/Contents/MacOS/Recents",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/Applications/iCloud Drive.app/Contents/MacOS/iCloud Drive",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/MacOS/Finder",
+          "architecture": "arm64e"
+        },
+        {
+          "image": "Contents/PlugIns/FileSearch.appex/Contents/MacOS/FileSearch",
+          "architecture": "arm64e"
+        }
+      ],
+      "dynamicBoundary": {
+        "totalDeclaredEdges": 166,
+        "mainDeclaredDylibEdges": 125,
+        "weakDeclaredEdges": 24,
+        "resolutionStatuses": {
+          "undetermined": 166
+        },
+        "selectedPublicFrameworkLoads": [
+          "/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit",
+          "/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation",
+          "/System/Library/Frameworks/FileProvider.framework/Versions/A/FileProvider",
+          "/System/Library/Frameworks/QuickLookUI.framework/Versions/A/QuickLookUI",
+          "/System/Library/Frameworks/UniformTypeIdentifiers.framework/Versions/A/UniformTypeIdentifiers",
+          "/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook",
+          "/System/Library/Frameworks/CoreSpotlight.framework/Versions/A/CoreSpotlight",
+          "/System/Library/Frameworks/SwiftUI.framework/Versions/A/SwiftUI"
+        ],
+        "selectedServiceFrameworkLoads": [
+          "/System/Library/PrivateFrameworks/DesktopServicesUI.framework/Versions/A/DesktopServicesUI",
+          "/System/Library/PrivateFrameworks/DesktopServicesPriv.framework/Versions/A/DesktopServicesPriv",
+          "/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices",
+          "/System/Library/PrivateFrameworks/SkyLight.framework/Versions/A/SkyLight"
+        ],
+        "coverage": {
+          "status": "complete",
+          "unparsed_images": [],
+          "roots_without_architecture": []
+        }
+      }
+    }
+  ],
+  "inference": "The desktop depends on services outside the two app bundles. Rebuilding their observable behavior requires separate replacements for those service boundaries.",
+  "limitations": [
+    "This capture inventories files and parses static declarations. It does not observe app execution or recover original source.",
+    "Outside-target and undetermined dependencies are not evidence of missing libraries. System libraries may be supplied by the dyld shared cache.",
+    "Names of nested executables establish inventory, not which processes run or their behavior.",
+    "Mach-O import/export symbol inventories may omit stripped or toolchain-hidden symbols.",
+    "No window-server, driver, boot, kernel, or runtime behavior was analyzed."
+  ]
+}

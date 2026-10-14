@@ -1,0 +1,9 @@
+{
+  "name": "absolute-research-tools",
+  "private": true,
+  "description": "Project-local REA and its supported Node runtime",
+  "dependencies": {
+    "node": "^24.15.0",
+    "rea-agents": "6.4.0"
+  }
+}

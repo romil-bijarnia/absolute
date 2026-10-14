@@ -1,0 +1,7 @@
+.build/
+.swiftpm/
+dist/
+tools/node_modules/
+.DS_Store
+research/local/
+*.log
