@@ -56,7 +56,7 @@ case "$MODE" in
             --volume absolute-linux-state:/absolute-state --env XDG_STATE_HOME=/absolute-state \
             --publish "127.0.0.1:$DESKTOP_PORT:6080" "$IMAGE_NAME" \
             bash linux/container/start-desktop.sh "$ROOT_DIR" /absolute-linux-build >/dev/null
-        echo "Absolute Linux desktop: http://localhost:$DESKTOP_PORT/vnc_lite.html"
+        echo "Absolute Linux desktop: http://localhost:$DESKTOP_PORT/vnc_lite.html?scale=true"
         echo "Startup logs: limactl shell $VM_NAME nerdctl logs $CONTAINER_NAME"
         ;;
 esac

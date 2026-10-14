@@ -39,7 +39,10 @@ final class DesktopStore {
         } else { self.stateRepository = DesktopStateRepository() }
         Task { await restoreSavedSession() }
         Task {
-            applications = await Task.detached(priority: .utility) { MacHost.applications() }.value
+            let registeredApplications = host.pinnedApplicationURLs()
+            applications = await Task.detached(priority: .utility) {
+                MacHost.applications(including: registeredApplications)
+            }.value
             catalogLoading = false
         }
     }

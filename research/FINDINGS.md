@@ -59,3 +59,62 @@ tools/node_modules/node/bin/node script/research_macos.mjs
 ```
 
 By default the script reuses complete records captured on the same macOS build. Add `--refresh` to inspect again; earlier records are preserved. It also writes `findings.json` and this ledger from retained canonical Evidence. All target inspections are static.
+
+## Physical Fedora installation
+
+Read-only inspection on 2026-10-14 found an existing Fedora installation on the
+internal physical disk of the Apple M3 Max / Mac15,10 reference laptop. Its BLS
+boot entry identifies **Fedora Linux Asahi Remix 44, KDE Plasma Desktop Edition**,
+with kernel `7.1.6-400.asahi.fc44.aarch64+16k` and a Btrfs `root` subvolume.
+
+The Fedora EFI partition contains m1n1 v1.6.1, an embedded U-Boot 2026.07
+payload, shim and GRUB. The separate ext-family BOOT partition contains the
+matching kernel, initramfs, configuration and Apple device trees. GRUB's saved
+entry matches the installed kernel and stores `boot_success=1`; this is
+historical metadata, not a new boot test or proof of current hardware health.
+
+The sanitized local record is
+`research/local/physical-fedora-boot-20261014.json`, SHA-256
+`01314a69f2952e5626dbf876f97025a8c3a92a4b4508d33407afe6ba4216615f`.
+This observation is separate from the earlier macOS inventory counts.
+
+The implementation target is this physical Fedora/Asahi installation, developed
+into the user's macOS replacement. The user explicitly rejected a VM deliverable.
+Native boot, running release, session integration and hardware behavior remain
+to be checked from within Fedora before deployment readiness is claimed.
+
+## Native Fedora system packages
+
+On 2026-10-14, `script/research_fedora_installation.py` opened the physical Btrfs
+partition read-only using Dissect's Btrfs parser. It inspected selected system
+files and queried an in-memory copy of the installed RPM database. All 2,249
+package headers matched their name index, SQLite's quick check passed, and the
+database WAL was empty. These are static records, not executions of Fedora code.
+
+`/usr/lib/os-release` identifies Fedora Linux Asahi Remix 44, KDE Plasma Desktop
+Edition. Selected installed versions are:
+
+| Component | Version |
+| --- | --- |
+| Plasma, KWin and Plasma Login Manager | 6.7.4 |
+| Qt | 6.11.2 |
+| GTK / GLib | 4.22.4 / 2.88.3 |
+| Mesa | 26.1.8 |
+| Dolphin / Konsole | 26.08.0 |
+| Firefox | 155.0 |
+
+The configured display manager is `plasmalogin.service`; the installed Plasma
+session is Wayland. Fedora and Breeze appearance packages are present.
+The system RPM records and checked system paths lack Swift, Clang, GCC, and
+GTK/GLib development files. A toolchain at an uninspected location is not ruled out.
+
+The local evidence is `research/local/fedora-installation-findings.json`,
+identity `absolute-fedora-installation-2617fbd241f6d8acadeb`, SHA-256
+`d220545aba51f9f013a2b6d022b475eece3859da8875f2dc04182386a6ca909b`.
+It contains selected package versions, upstream license labels, system defaults
+and application IDs. User homes, private keys and personal documents were outside
+the inspection scope.
+
+These findings support integrating Absolute with the existing Plasma/KWin
+session and installed applications. They do not establish active desktop settings,
+rendering performance or working hardware, which require native runtime checks.

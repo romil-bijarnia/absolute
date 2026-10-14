@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3840" height="2160" viewBox="0 0 3840 2160">
+  <title>Absolute Ocean</title>
+  <desc>Original blue ocean curves on a deep navy and teal gradient.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#071b32"/>
+      <stop offset="0.48" stop-color="#11496f"/>
+      <stop offset="1" stop-color="#31a7b6"/>
+    </linearGradient>
+    <linearGradient id="deep" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#07172b"/>
+      <stop offset="1" stop-color="#115277"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6ed7dc" stop-opacity="0.19"/>
+      <stop offset="1" stop-color="#2392a4" stop-opacity="0.02"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0H3840V2160H0Z"/>
+  <path fill="#1d7595" fill-opacity="0.34" d="M0 896C560 1550 1110 1220 1770 843C2460 449 3150 321 3840 683V2160H0Z"/>
+  <path fill="url(#glow)" d="M0 1130C711 1741 1318 1230 2030 1010C2729 794 3315 683 3840 1017V2160H0Z"/>
+  <path fill="#104361" fill-opacity="0.46" d="M0 1290C725 1820 1440 1400 2150 1208C2810 1029 3350 1000 3840 1287V2160H0Z"/>
+  <path fill="url(#deep)" fill-opacity="0.71" d="M0 1530C802 1958 1562 1539 2321 1457C2911 1393 3468 1450 3840 1710V2160H0Z"/>
+</svg>

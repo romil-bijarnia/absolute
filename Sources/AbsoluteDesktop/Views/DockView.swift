@@ -6,7 +6,7 @@ struct DockView: View {
     @Environment(\.openSettings) private var openSettings
 
     private var pinnedApps: [InstalledApplication] {
-        ["com.apple.Safari", "com.apple.Terminal", "com.apple.Notes", "com.apple.TextEdit", "com.apple.Preview"]
+        MacHost.pinnedApplicationIdentifiers
             .compactMap { id in desktop.applications.first { $0.bundleIdentifier == id } }
     }
 

@@ -21,6 +21,7 @@ INPUTS = {
     "mach_messages": "mach-message-findings.json",
     "mach_kernel": "mach-kernel-findings.json",
     "mach_compatibility": "mach-compatibility.json",
+    "fedora_native": "fedora-native-verification.json",
 }
 
 
@@ -90,6 +91,18 @@ def generate():
         if sha((ROOT / name).read_bytes()) != expected:
             raise ValueError("Mach conformance is stale for " + name)
 
+    native = data["fedora_native"]
+    native_paths = {str(path.relative_to(ROOT)) for path in (ROOT / "linux/fedora").rglob("*") if path.is_file()}
+    native_paths.update({"script/install_fedora.sh", "script/check_fedora.sh", "script/package_fedora.py"})
+    if native_paths != set(native["source_files_sha256"]):
+        raise ValueError("Native Fedora package membership changed; refresh its verification")
+    for name, expected in native["source_files_sha256"].items():
+        if sha((ROOT / name).read_bytes()) != expected:
+            raise ValueError("Native Fedora package verification is stale for " + name)
+    if not native["static_validation"]["passed"] or any(
+            not all(record["checks"].values()) for record in native["static_validation"]["records"]):
+        raise ValueError("Native Fedora package static checks did not pass")
+
     metrics = {
         "readable_regular_file_paths": inventory["file_count"],
         "mach_o_file_paths": inventory["native_file_count"],
@@ -118,6 +131,10 @@ def generate():
     summary = {
         "schema": 1, "overall_status": "in_progress", "completion_percentage": None,
         "reference_host": inventory["host"], "objective": scope["objective"],
+        "implementation_strategy": scope["implementation_strategy"],
+        "backlog_interpretation": scope["backlog_interpretation"],
+        "native_fedora": {"status": native["status"], "version": native["version"],
+                          "runtime_validation": native["native_validation"]},
         "completion_rule": scope["completion_rule"], "metrics": metrics,
         "subsystems": scope["subsystems"], "inputs": inputs,
         "limits": [
@@ -151,6 +168,20 @@ def generate():
         "The requested scope includes graphics, boot and firmware. The current",
         "reference is macOS " + inventory["host"]["version"] + ", build " + inventory["host"]["build"] + ".",
         "This index is generated from the linked reports and their hashed JSON records.", "",
+        "## Implementation approach", "",
+        scope["implementation_strategy"], "",
+        scope["backlog_interpretation"], "",
+        "See [ROADMAP.md](../ROADMAP.md) for the Fedora/Asahi integration sequence",
+        "and the current physical-hardware support boundary.", "",
+        "## Native Fedora package", "",
+        "Version " + native["version"] + " is prepared for the existing physical Fedora installation.",
+        "Its [installer and Plasma profile](../linux/fedora/README.md) have structural,",
+        "backup/restore and source-archive checks recorded in",
+        "[fedora-native-verification.json](fedora-native-verification.json).", "",
+        "Status: **" + native["status"] + "**. Native compilation, profile activation,",
+        "rendered desktop behavior and hardware acceptance have not been verified",
+        "from the current macOS session. These checks are separate from the older",
+        "macOS and Ubuntu preview results below.", "",
         "## Measured work", "",
         "| Measurement | Count |", "| --- | ---: |",
         *["| " + title[key] + " | " + format(value, ",") + " |" for key, value in metrics.items()], "",
@@ -192,7 +223,8 @@ def generate():
     lines += [
         "", "The full open-question list is in [scope.json](scope.json). A component",
         "can be completed only for a stated target and contract after its behavior",
-        "is established, implemented in Absolute, and checked against the reference.",
+        "is established, supplied by an integrated upstream component or implemented",
+        "in Absolute, and checked against the reference.",
         "No subsystem is marked complete by this pass.", "",
         "## Reproduce and extend", "",
         "Investigation-specific commands appear in each report. Run",

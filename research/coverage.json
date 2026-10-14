@@ -1,10 +1,12 @@
 {
+  "backlog_interpretation": "The subsystem backlog includes research, compatibility and integration gaps. Open items do not automatically require rewriting the kernel, drivers, firmware or services. Reused components count toward a stated contract only after integration and verification on the intended target.",
   "completion_percentage": null,
-  "completion_rule": "A component is complete only for an explicit target and contract after evidence, implementation and differential/integration verification. Artifact counts are not a whole-OS completion measure.",
+  "completion_rule": "A component is complete only for an explicit target and contract after evidence, upstream integration or local implementation, and differential/integration verification. Artifact counts are not a whole-OS completion measure.",
+  "implementation_strategy": "Target the existing Fedora KDE/Asahi installation on the physical Mac. The user explicitly rejected a VM deliverable. Reuse its operating-system foundation, session services and supported Apple Silicon components, and implement Absolute's desktop and macOS-compatible interfaces above them.",
   "inputs": [
     {
       "file": "scope.json",
-      "sha256": "584a76a017ecda08fc061722ba85ca07d87c7ac89ee2f4b3225fcfbabd238269"
+      "sha256": "f275f86568dfb79083c5b337a70bfa8153dcf62a1447827abebfd19a94851c6e"
     },
     {
       "file": "system-inventory.json",
@@ -36,7 +38,7 @@
     },
     {
       "file": "implementation-verification.json",
-      "sha256": "7b73d3df098de55de222ca4c7c5bc4e94bc1ed35df5d564d7665407fb4067d48"
+      "sha256": "3188e7b95ddf7cc29d8188c2ea33402097fffcd1ec5cea313b32dd01b8bbda46"
     },
     {
       "file": "mach-message-findings.json",
@@ -49,6 +51,10 @@
     {
       "file": "mach-compatibility.json",
       "sha256": "bc763d0c1b9e23995580aff3db6bf1dc585b90a9af5e2fc57bb6494c2d2340cc"
+    },
+    {
+      "file": "fedora-native-verification.json",
+      "sha256": "b27949a80908531bfb0297bebda564f4fc80351e90e4fe6851f99626fb236902"
     }
   ],
   "limits": [
@@ -75,7 +81,18 @@
     "shared_cache_dependency_edges": 89379,
     "shared_cache_images": 4083
   },
-  "objective": "Build Absolute into an open-source macOS-compatible system; research scope includes graphics, boot and firmware.",
+  "native_fedora": {
+    "runtime_validation": {
+      "application_interactions": "not_run",
+      "build": "not_run",
+      "hardware_acceptance": "not_run",
+      "profile_activation": "not_run",
+      "rendered_desktop": "not_run"
+    },
+    "status": "native-validation-pending",
+    "version": "0.4.0-dev"
+  },
+  "objective": "Build Absolute into the user's macOS replacement on the physical Mac, using the existing Fedora/Asahi installation and macOS reverse engineering; research scope includes graphics, boot and firmware.",
   "overall_status": "in_progress",
   "reference_host": {
     "build": "26A5421a",

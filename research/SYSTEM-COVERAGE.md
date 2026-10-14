@@ -6,6 +6,27 @@ The requested scope includes graphics, boot and firmware. The current
 reference is macOS 27.0, build 26A5421a.
 This index is generated from the linked reports and their hashed JSON records.
 
+## Implementation approach
+
+Target the existing Fedora KDE/Asahi installation on the physical Mac. The user explicitly rejected a VM deliverable. Reuse its operating-system foundation, session services and supported Apple Silicon components, and implement Absolute's desktop and macOS-compatible interfaces above them.
+
+The subsystem backlog includes research, compatibility and integration gaps. Open items do not automatically require rewriting the kernel, drivers, firmware or services. Reused components count toward a stated contract only after integration and verification on the intended target.
+
+See [ROADMAP.md](../ROADMAP.md) for the Fedora/Asahi integration sequence
+and the current physical-hardware support boundary.
+
+## Native Fedora package
+
+Version 0.4.0-dev is prepared for the existing physical Fedora installation.
+Its [installer and Plasma profile](../linux/fedora/README.md) have structural,
+backup/restore and source-archive checks recorded in
+[fedora-native-verification.json](fedora-native-verification.json).
+
+Status: **native-validation-pending**. Native compilation, profile activation,
+rendered desktop behavior and hardware acceptance have not been verified
+from the current macOS session. These checks are separate from the older
+macOS and Ubuntu preview results below.
+
 ## Measured work
 
 | Measurement | Count |
@@ -84,7 +105,8 @@ runs in a development VM; it is not a self-contained bootable OS image.
 
 The full open-question list is in [scope.json](scope.json). A component
 can be completed only for a stated target and contract after its behavior
-is established, implemented in Absolute, and checked against the reference.
+is established, supplied by an integrated upstream component or implemented
+in Absolute, and checked against the reference.
 No subsystem is marked complete by this pass.
 
 ## Reproduce and extend

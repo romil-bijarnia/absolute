@@ -4,6 +4,48 @@ This checkpoint is saved on the main branch of
 [romil-bijarnia/absolute](https://github.com/romil-bijarnia/absolute).
 The local checkout is `/Users/romilbijarnia/absolute`.
 
+## Implementation direction
+
+Combine Fedora/Asahi with macOS reverse engineering. Fedora supplies the
+planned operating-system base; Asahi supplies reusable Apple Silicon boot,
+driver and graphics work where supported. Absolute supplies desktop behavior
+and macOS compatibility above those components. Prefer upstream integration
+before writing replacements, and preserve the full firmware research scope.
+
+The target is the existing Fedora/Asahi installation on the physical Mac,
+developed into the user's macOS replacement. The user explicitly rejected a VM
+deliverable. The Ubuntu VM below is historical development infrastructure.
+Read [ROADMAP.md](ROADMAP.md) for the model-specific support boundary. The
+research backlog records unresolved behavior and integration as well as new
+implementation; it is not a list of components that must all be written afresh.
+
+Read-only inspection on 2026-10-14 found Fedora Linux with KDE Plasma boot
+volumes and Fedora EFI, ext-family BOOT and Btrfs partitions on the internal
+disk. The physical boot entry identifies Fedora Linux Asahi Remix 44, KDE
+Plasma Desktop Edition, with kernel `7.1.6-400.asahi.fc44.aarch64+16k`.
+Matching m1n1, U-Boot, GRUB, kernel and initramfs artifacts are present.
+See [the installation observation](research/FINDINGS.md#physical-fedora-installation).
+The installed Fedora session still needs
+to be booted and inspected before claiming native Absolute or hardware readiness.
+The accidentally started `absolute-fedora` VM was stopped and removed; its
+unfinished configuration and desktop patch are archived under gitignored
+`research/local/cancelled-fedora-vm-work/`.
+
+Read-only Btrfs inspection also confirms Fedora Asahi 44 in `/usr/lib/os-release`
+and installed Plasma/KWin 6.7.4, Qt 6.11.2, GTK 4.22.4, Mesa 26.1.8,
+Dolphin/Konsole 26.08.0 and Firefox 155.0. The installed Plasma session uses
+Wayland and `plasmalogin.service`. Swift and the required development packages
+are absent from the system package database. The selected system evidence is
+`research/local/fedora-installation-findings.json`; see
+[FINDINGS.md](research/FINDINGS.md#native-fedora-system-packages).
+
+Native delivery sources now include `script/install_fedora.sh`,
+`script/check_fedora.sh` and `linux/fedora/plasma/`. They prepare a user-local
+build/install and a backed-up Plasma profile using real Fedora applications.
+`script/package_fedora.py` creates an explicitly allowlisted source archive.
+Native installation, profile rendering and physical-hardware acceptance have
+not run while macOS is the active operating system.
+
 ## Working software
 
 - Native macOS desktop prototype: Files, Dock, launcher, floating windows,
@@ -17,7 +59,7 @@ The local checkout is `/Users/romilbijarnia/absolute`.
   accounting, timeout/error behavior and default receive trailers.
 
 The Linux preview is available locally at
-[http://localhost:6090/vnc_lite.html](http://localhost:6090/vnc_lite.html).
+[http://localhost:6090/vnc_lite.html?scale=true](http://localhost:6090/vnc_lite.html?scale=true).
 The VM is named `absolute-dev`; its desktop container is `absolute-desktop`.
 Browsing is read-only in the desktop UI. External application launching is
 implemented, but it is not covered by the graphical test suites.
@@ -72,8 +114,9 @@ replacement firmware. The Linux preview uses an existing Ubuntu VM.
 Mach IPC, descriptors, vouchers, reply rights, blocking waits or trap handling.
 The native C oracle remains independent of that implementation.
 
-Static firmware analysis does not supply Boot ROM, decrypted SEP code or a
-working physical-Mac boot path. All subsystem scopes remain open.
+Static firmware analysis does not supply Boot ROM or decrypted SEP code.
+The existing physical Fedora boot artifacts are separate from Absolute;
+native deployment and boot verification of Absolute remain open.
 
 ## Commands
 
@@ -100,12 +143,14 @@ volume. Tests use isolated state. The project is the VM's writable Mac mount.
 
 ## Next implementation boundaries
 
-1. Package a self-contained bootable VM image with its desktop and dependencies.
-2. Add a compositor and session lifecycle for external application windows.
+1. Boot and inspect the existing physical Fedora KDE/Asahi installation.
+2. Package Absolute for that installation and integrate its existing compositor,
+   application windows and session lifecycle; verify directly on the Mac.
 3. Expand the measured Mach contract into a cross-process transport and broader
    rights/message handling, keeping each addition tied to native observations.
-4. Continue the kernel trap, driver and graphics protocols listed in the
-   coverage backlog. Inventories and isolated probes do not close those scopes.
+4. Map required kernel and service behavior onto the Linux base, integrate Asahi
+   hardware support where available, and investigate the remaining compatibility
+   gaps. Inventories and isolated probes do not close those scopes.
 
 Read [AGENTS.md](AGENTS.md) before changing code. Preserve the user’s preference
 for direct action, concise updates, and no authorship acknowledgements.

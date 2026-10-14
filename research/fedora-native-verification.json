@@ -1,0 +1,113 @@
+{
+  "captured_at": "2026-10-14T11:07:58.500994+00:00",
+  "installed_system_reference": {
+    "evidence_id": "absolute-fedora-installation-2617fbd241f6d8acadeb",
+    "local_report": "research/local/fedora-installation-findings.json",
+    "sha256": "d220545aba51f9f013a2b6d022b475eece3859da8875f2dc04182386a6ca909b"
+  },
+  "limits": [
+    "The active operating system was macOS during this work.",
+    "Structural, fixture and archive checks do not establish native Fedora behavior.",
+    "No VM was used for this native delivery package.",
+    "The package reuses installed Fedora/KDE applications; macOS binary compatibility remains open.",
+    "No physical Fedora configuration, boot policy or disk partitions were modified."
+  ],
+  "native_validation": {
+    "application_interactions": "not_run",
+    "build": "not_run",
+    "hardware_acceptance": "not_run",
+    "profile_activation": "not_run",
+    "rendered_desktop": "not_run"
+  },
+  "prepared_components": [
+    "User-local native installer and Swift build",
+    "Plasma desktop profile with native application menu and Dock",
+    "Configuration backup, restore and guarded uninstall",
+    "Read-only live Fedora readiness and profile checks",
+    "Manifest-verified source archive"
+  ],
+  "schema": 1,
+  "source_files_sha256": {
+    "linux/fedora/README.md": "2d1059202179cae6b89171e608d850581db2c0b4b1fe2992dfd3f364318eb925",
+    "linux/fedora/plasma/README.md": "41baebefb77b0c7ed53fbe3986661050cec871b1474811f19f8752b0f67b9f97",
+    "linux/fedora/plasma/org.absolute.desktop/contents/defaults": "c03ae4fc7ae760e446e29625f998e0fa4290f04d3e8c4a2c683eaa11e9f891a0",
+    "linux/fedora/plasma/org.absolute.desktop/contents/images/absolute-symbolic.svg": "bc891294673403eb88c2b912325c6738be5a67682440687bc56430e7a32e8601",
+    "linux/fedora/plasma/org.absolute.desktop/contents/images/ocean.svg": "2f92fa6abe4378717f0f205afb9df565fc0a6e0a76e92e61af742ff214d435a9",
+    "linux/fedora/plasma/org.absolute.desktop/contents/layouts/org.kde.plasma.desktop-layout.js": "50f55a67620e919a4889975e6502d73b80bf010acc0cbe711645cc77a6f9c146",
+    "linux/fedora/plasma/org.absolute.desktop/metadata.json": "15be0e27b78d44b6798e40c965433203cd0b29133a0f47ae11f49f8218f58889",
+    "linux/fedora/plasma/profile.json": "b0363c84c34d0c070829ff726de5bb7a807d193070bc6b0a3e6b69821b9aef3f",
+    "script/check_fedora.sh": "3d756fc3ee0c2f1e805ab0904f957c18009c0ecda90daeaa7463a22e4b8993b9",
+    "script/install_fedora.sh": "b3ab80e1f6dddbf497cda32642661bd2a904623b4bab2d89484894a98bba513e",
+    "script/package_fedora.py": "497b2512ef244e6bf1832d792fb1aa92af54113684de671e36e4c67e2babcd30"
+  },
+  "static_validation": {
+    "passed": true,
+    "platform": "macOS",
+    "records": [
+      {
+        "checks": {
+          "absolute-symbolic.svg_safe_svg": true,
+          "archive_tampering_rejected": true,
+          "archive_traversal_rejected": true,
+          "layout_javascript_syntax": true,
+          "macos_diagnostic_guard": true,
+          "macos_guard_--apply-desktop": true,
+          "macos_guard_--install": true,
+          "macos_guard_--restore-desktop": true,
+          "macos_guard_--uninstall": true,
+          "ocean.svg_safe_svg": true,
+          "profile_ids_match": true,
+          "script/check_fedora.sh_bash_syntax": true,
+          "script/check_fedora.sh_embedded_python": true,
+          "script/check_fedora.sh_help": true,
+          "script/install_fedora.sh_bash_syntax": true,
+          "script/install_fedora.sh_embedded_python": true,
+          "script/install_fedora.sh_help": true,
+          "script/package_fedora.py_python_syntax": true,
+          "script/research_fedora_installation.py_python_syntax": true,
+          "source_archive_excludes_local_captures": true,
+          "source_archive_reproducible": true
+        },
+        "local_report": "research/local/fedora-source-package-validation.json",
+        "sha256": "783553ae5089146158f1487668a73444a2c4a42b6da1903b24db0902457e3db3"
+      },
+      {
+        "checks": {
+          "backup_restore_paths_with_spaces": true,
+          "generate_launcher_path_with_spaces": true,
+          "plasma_inspection_javascript_syntax": true,
+          "preserve_unrelated_settings": true,
+          "reject_preference_symlinks_before_activation": true,
+          "reject_tampered_restore_manifest": true,
+          "remove_originally_absent_settings": true,
+          "restore_file_and_directory_contents": true,
+          "retain_displaced_preferences": true,
+          "shell_and_embedded_python_syntax": true
+        },
+        "local_report": "research/local/fedora-native-tooling-validation.json",
+        "sha256": "a2fd55e1462ae55859c86a5f593d7e12a3866513fa8588baa4e68b4c88b25176"
+      },
+      {
+        "checks": {
+          "allow_clean_saved_and_live_layout": true,
+          "allow_clean_saved_layout_with_no_shell": true,
+          "reject_encoded_saved_asset_reference": true,
+          "reject_live_absolute_panels": true,
+          "reject_live_absolute_wallpaper": true,
+          "reject_nested_preference_directory_link": true,
+          "reject_nested_preference_file_link": true,
+          "reject_saved_panel_after_global_theme_switch": true,
+          "reject_saved_wallpaper_reference": true,
+          "reject_top_level_preference_link": true,
+          "reject_unverifiable_live_layout": true,
+          "uninstall_probe_javascript_syntax": true
+        },
+        "local_report": "research/local/fedora-native-uninstall-validation.json",
+        "sha256": "33f7b3e6a9a3ce3d9c6c4104325c44ed41850d1c1585311cb688d3ef13f04076"
+      }
+    ]
+  },
+  "status": "native-validation-pending",
+  "target": "Existing Fedora Asahi 44 KDE installation on the physical Apple M3 Max / Mac15,10",
+  "version": "0.4.0-dev"
+}

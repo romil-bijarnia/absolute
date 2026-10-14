@@ -1,6 +1,24 @@
 {
-  "captured_at": "2026-10-14T08:48:27.057381+00:00",
+  "captured_at": "2026-10-14T09:16:26.998095+00:00",
   "linux": {
+    "browser_preview": {
+      "check_count": 10,
+      "checks": {
+        "1024x680_desktop_fits": true,
+        "1024x680_desktop_painted": true,
+        "1024x680_launcher_dismisses": true,
+        "1024x680_launcher_opens": true,
+        "1280x800_desktop_fits": true,
+        "1280x800_desktop_painted": true,
+        "1280x800_launcher_dismisses": true,
+        "1280x800_launcher_opens": true,
+        "no_page_errors": true,
+        "no_transport_failures": true
+      },
+      "local_report": "research/local/preview-check-20261014-201522/browser-results.json",
+      "passed": true,
+      "sha256": "9d4e1bd0af244bff67aff0cb3f8e0725cbe347cdd2a1a93874b4a8372dfa611d"
+    },
     "cli": {
       "check_count": 16,
       "checks": {
@@ -120,9 +138,9 @@
         "reveal_navigates_and_selects": true,
         "state_save_has_no_error": true
       },
-      "local_report": "research/local/ui-check-20261014-193916/results.json",
+      "local_report": "research/local/ui-check-20261014-201251/results.json",
       "passed": true,
-      "sha256": "130b4213aac152da42d40c37aa3280bd474e5df03d3486592e1622860a5a0dc5"
+      "sha256": "9ed432dfce18a4aaac7fce415e4fec5fae8ef6bab980e87e2023c1ba60d5a310"
     },
     "restart": {
       "check_count": 7,
@@ -135,9 +153,20 @@
         "restored_folders_loaded": true,
         "window_layout_and_minimization_restored": true
       },
-      "local_report": "research/local/ui-check-20261014-193916/restore-results.json",
+      "local_report": "research/local/ui-check-20261014-201251/restore-results.json",
       "passed": true,
-      "sha256": "1eef356274a4c36340843dff1671a1a343665bb8cde03376d7bb7c46628bff9d"
+      "sha256": "5e9432f18b057c5c48725f9e41ce4439ab62414d0b78b24be77aa71009cbb060"
+    },
+    "safari_dock": {
+      "check_count": 3,
+      "checks": {
+        "dock_press_succeeded": true,
+        "safari_activated": true,
+        "safari_dock_button_present": true
+      },
+      "local_report": "research/local/ui-check-20261014-201251/safari-dock-check.json",
+      "passed": true,
+      "sha256": "b7efd02d71b12afac46fe5313b37696598404e7e730e65e6e92e655e00ab2f31"
     },
     "unit_command": "./script/check_core.sh",
     "unit_log": "research/local/mach-messages/macos-core-check.log",
@@ -160,13 +189,13 @@
     "Sources/AbsoluteCore/TextPreviewReader.swift": "a813dfcdbf585238da4e6376fadc1f328380c164631199de80f7d5d852935669",
     "Sources/AbsoluteDesktop/App/AbsoluteDesktopApp.swift": "5c1a056da592a2011ab52314ef67e4859c314e863ee373d75192a5651dab67a7",
     "Sources/AbsoluteDesktop/Services/AppSelfCheck.swift": "195995297f62b1e21a357e0071ed7ea3b72695afcb2c0cb349741af8e38861eb",
-    "Sources/AbsoluteDesktop/Services/MacHost.swift": "6dfe8a84e28611d754854dbe34a6c66262d463376bb5a047928c15d43cc1ae18",
-    "Sources/AbsoluteDesktop/Stores/DesktopStore.swift": "66c1ffae499e206eb148db50f9210202af4050c57e62575192427b0f8d529348",
+    "Sources/AbsoluteDesktop/Services/MacHost.swift": "d0f3d3f44170b061631c91ca63c9a4fc1b8a57d2dd30967de19a20c52d412b50",
+    "Sources/AbsoluteDesktop/Stores/DesktopStore.swift": "ccf81391d80a3ae7947cf4ab111393ccf3edd3514e3ef8544d0d97e9c232e5fb",
     "Sources/AbsoluteDesktop/Stores/FileBrowserStore.swift": "7ff9ff1764a747a884a0a230475ec09026d2153d54f26fa5409f925012a0c2ce",
     "Sources/AbsoluteDesktop/Views/AppearanceSettings.swift": "a9042ee1864a07a505a428d83e987ab2799a8a069d240a082041991bf44ba10f",
     "Sources/AbsoluteDesktop/Views/DesktopView.swift": "45321f0934af338214fc311830c34bdefa020259f235fde9193b314e19518ff8",
     "Sources/AbsoluteDesktop/Views/DesktopWindowView.swift": "a19d475cfdef7e9472821cdd79800d541a50da100b8eb036b0daffcb58bab575",
-    "Sources/AbsoluteDesktop/Views/DockView.swift": "8f032cf7bc6221ec1905e925924fc096c76e9a75750fc38f9a6fe1c2e6461344",
+    "Sources/AbsoluteDesktop/Views/DockView.swift": "a841294b8f0c8f72b86f7d9b1e77411808f79089e15575d713de2555e1866120",
     "Sources/AbsoluteDesktop/Views/FileBrowserView.swift": "f3716e19852064e35d488f6f7d58b02c71cff5b46b5225bc5071c0f7cd4a8505",
     "Sources/AbsoluteDesktop/Views/FileInfoView.swift": "973060af2a874e157a7278b6d500ffb271e6a07a3a2771029f9b8dbda072e505",
     "Sources/AbsoluteDesktop/Views/LauncherView.swift": "0e0bda5fc75e574a20a4a9b23b1240e82f87e1235b2c6e7298806faeaf3c435a",
@@ -194,6 +223,11 @@
     "script/check_core.sh": "7b0cf8daaba852e8cbf23caceedd84484dd091b85e84b5b55b38f9d4a4061d3e",
     "script/check_linux.sh": "2e64e5ea42b0232e099e63acd268af52c02d91b8ba58a5457b8a6d51f7d60530",
     "script/check_linux_desktop.py": "6aa9e152c8c913f5bc968b24ac3c76935cd545b38dba1df491db9b50c7f00536",
-    "script/run_linux.sh": "787b37dcffbc98065a32f2d4bd96cee44019537d3759e1e0fa7719f494fcadf2"
-  }
+    "script/run_linux.sh": "3af4913bd3dab5ad33b192b93e872646d4a4ad6273ce11b7df4e1cb2e08d7b0d"
+  },
+  "verification_notes": [
+    "Native desktop and restart checks were rerun after the macOS application discovery fix. A separate accessibility interaction pressed the real Safari Dock button and confirmed Safari activation.",
+    "Core, CLI, Mach and Linux desktop sources are unchanged; their earlier verification records are retained. The Linux launcher change only adds viewport scaling to its printed viewer URL, and bash -n passed.",
+    "The scaled Linux viewer was checked at 1280x800 and 1024x680 after its first framebuffer arrived. The desktop and Dock fit, and the launcher opens and dismisses. The optional favicon returns 404; no application or transport errors were observed."
+  ]
 }

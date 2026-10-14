@@ -1,5 +1,44 @@
 # Development sequence
 
+## Foundation: Fedora, Asahi and macOS compatibility
+
+Build Absolute by combining existing open-source infrastructure with macOS
+reverse engineering. Prefer integrating maintained upstream components before
+writing new implementations. Keep investigation of the full system, including
+firmware, in scope; an open research question is not automatically a requirement
+to replace the corresponding component.
+
+| Layer | Planned foundation | Absolute's work |
+| --- | --- | --- |
+| General operating system | The existing Fedora installation, kernel, packages and system services | Integrate Absolute into the physical Mac's desktop session and daily workflow |
+| Apple Silicon hardware | Asahi boot tooling, kernel support, drivers and graphics work where available | Integrate matching upstream versions, verify the target Mac and address specific gaps |
+| macOS experience and application interfaces | Observations and reverse engineering of the reference Mac, plus suitable open-source components | Implement and verify desktop behavior, framework/API compatibility and application execution |
+
+[Fedora Asahi Remix](https://asahilinux.org/fedora/) combines Fedora with Asahi's
+Apple Silicon work. Asahi also documents the components needed by other systems
+in its [distribution guidelines](https://asahilinux.org/docs/alt/policy/).
+Keep upstream component licenses and provenance with reused code and packages.
+
+The development Mac reports Apple M3 Max, model `Mac15,10`. On 2026-10-14,
+Asahi's [M3 support table](https://asahilinux.org/docs/platform/feature-support/m3/)
+lists M3 Max GPU support as TBA and DCP support as WIP; boot-framebuffer output
+is listed for the corresponding MacBook Pro family. Recheck those entries
+when checking the installed system's actual hardware behavior. The user has
+explicitly rejected a VM deliverable; the target is this physical Mac.
+
+## Existing physical installation
+
+On 2026-10-14, read-only inspection found Fedora Linux with KDE Plasma APFS
+boot volumes, a 524.3 MB Fedora EFI partition, a 1.1 GB ext-family BOOT
+partition and a 518.6 GB Btrfs partition on the internal disk. Fedora boot
+files include m1n1, GRUB and kernel `7.1.6-400.asahi.fc44.aarch64+16k`.
+These observations establish installation artifacts; boot success, the running
+Fedora release and hardware health still need verification inside that system.
+
+Use this installation as the base. Inspect its Plasma/KWin session, packages
+and hardware support before choosing integration changes. The intended result
+is the user's macOS replacement running directly on the laptop.
+
 ## Completed: Desktop previews 0.1 and 0.2
 
 Build the development host on the existing Mac. Keep desktop state, directory
@@ -55,14 +94,20 @@ See [research/LINUX-DESKTOP.md](research/LINUX-DESKTOP.md).
 The development VM exposes its virtual display through a local browser viewer.
 Window management currently covers the desktop's own Files windows.
 
-## Next: Self-contained bootable system
+## Next: Native Fedora edition on this Mac
 
-Package the desktop with an existing open-source base and start it automatically
-in a VM without mounting the Mac source directory. Add a compositor,
-input and display handling, login/session management, settings, notifications,
-desktop file operations, installation, and updates. Verify the initial image
-and its external application windows in a VM before targeting hardware.
+Verify the existing Fedora installation while booted on the physical Mac:
+release and kernel, Plasma/KWin session, display rendering, input, networking,
+audio, storage and power behavior. Package and install Absolute's components
+into that environment, reusing its compositor, file manager, settings,
+notifications, applications, installation and update facilities.
 
-Choose kernel and hardware targets using the working second host. Supporting
-macOS application binaries requires a compatible loader, runtimes, frameworks,
-and operating-system interfaces beyond the visible desktop.
+Validate the resulting desktop, real application windows and saved sessions
+through native use and a restart. This is the delivery path for replacing
+macOS in daily use. Preserve the existing boot/recovery layout during development;
+partition removal is not a prerequisite for implementing the replacement.
+
+Reuse Asahi's installed boot path and supported hardware components, and Linux
+process, memory, storage and networking facilities. Continue macOS reverse
+engineering for compatible loading, runtimes, frameworks and operating-system
+interfaces, with each addition checked against the reference Mac.

@@ -1,0 +1,13 @@
+{
+    "KPackageStructure": "Plasma/LookAndFeel",
+    "KPlugin": {
+        "Id": "org.absolute.desktop",
+        "Name": "Absolute",
+        "Description": "An ocean desktop with an application menu bar and a floating Dock for KDE Plasma 6.",
+        "Version": "0.1.0",
+        "License": "MIT",
+        "Authors": [
+            { "Name": "Absolute contributors" }
+        ]
+    }
+}

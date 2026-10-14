@@ -6,10 +6,42 @@ An open-source operating-system project with native macOS and Linux desktop
 prototypes and a shared Swift core. The goal is macOS compatibility, with
 research spanning applications, system services, graphics, boot and firmware.
 
+The intended system combines Fedora's operating-system base, Asahi's Apple
+Silicon support, and Absolute's desktop and macOS-compatible implementations
+informed by reverse engineering. Reuse upstream components wherever they meet
+the required behavior. The delivery target is the existing Fedora/Asahi
+installation on the user's physical Mac, developed into a daily macOS replacement.
+The Ubuntu VM preview below records earlier development work; it is not the
+requested deliverable. See [ROADMAP.md](ROADMAP.md).
+
 [System research and current coverage](research/SYSTEM-COVERAGE.md) records
 what has been inspected, what has been implemented, and what remains open.
 Current deliverables are desktop prototypes, verified file-service behavior,
-and reproducible system research.
+reproducible system research, and a native Fedora installer and Plasma profile
+awaiting validation in the physical Fedora session.
+
+## Native Fedora edition
+
+The existing Fedora Asahi KDE system is the deployment target. From a terminal
+in that physical Fedora installation, the source package supports:
+
+```sh
+bash script/install_fedora.sh --check
+bash script/install_fedora.sh --install --apply-desktop
+```
+
+The installer builds and installs the optional Swift/GTK preview and adds the
+Absolute Plasma profile. The profile uses the installed KWin compositor and real
+Dolphin, Firefox, Konsole and Settings applications. Its top menu bar, floating
+Dock, dark appearance and ocean wallpaper are applied after backing up the
+existing KDE preferences. Installation alone, without `--apply-desktop`, leaves
+the active layout intact.
+
+See [native installation, verification and restore instructions](linux/fedora/README.md).
+The source package can be built with `python3 script/package_fedora.py` and is
+marked `native-validation-pending` until its real Fedora checks pass.
+
+## Development previews
 
 Desktop Preview 0.3 includes:
 
@@ -24,7 +56,7 @@ Desktop Preview 0.3 includes:
 - File and session paths that preserve symbolic-link traversal, including dangling-link metadata and explicit follow/no-follow resolution.
 - A portable inline Mach-message component checked against native macOS observations on both macOS and Linux.
 
-## Run on your Mac
+## Run the macOS development preview
 
 Requires macOS 14 or newer and a Swift 6 toolchain. The application has no remote
 Swift package dependencies.
@@ -65,7 +97,10 @@ its error appears in the Absolute menu. On Linux the default state location is
 `$XDG_STATE_HOME/absolute/desktop-session.json`, falling back to
 `~/.local/state/absolute/desktop-session.json`.
 
-## Run the Linux desktop
+## Legacy Linux VM preview
+
+The following Lima commands reproduce the earlier VM preview. Native Fedora
+deployment on the physical Mac is the current development target.
 
 On an Apple Silicon Mac with Lima installed:
 
@@ -73,9 +108,11 @@ On an Apple Silicon Mac with Lima installed:
 ./script/run_linux.sh
 ```
 
-Open [the local desktop viewer](http://localhost:6090/vnc_lite.html). The viewer
+Open [the local desktop viewer](http://localhost:6090/vnc_lite.html?scale=true). The viewer
 streams a real GTK desktop running inside the project-owned Ubuntu VM. Linux
 renders the interface; noVNC carries its display and input to your browser.
+The desktop scales to fit the browser window. Allow a few seconds after connecting
+for the first desktop frame to appear.
 The VM mounts this project and keeps build caches and desktop state in separate
 container volumes.
 
@@ -198,7 +235,8 @@ still need a compositor and complete session integration. A standalone system
 also needs system services, boot integration, and hardware support. Native Mac
 application compatibility is a separate implementation effort.
 
-The next slice is a self-contained bootable VM image that starts the desktop
-without a mounted Mac source directory. See [ROADMAP.md](ROADMAP.md).
+The next slice is native integration with the existing Fedora KDE/Asahi system
+on the physical Mac, including application windows and session behavior.
+See [ROADMAP.md](ROADMAP.md).
 
 Original project code is available under the MIT license.

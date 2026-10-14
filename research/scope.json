@@ -1,9 +1,11 @@
 {
   "schema": 1,
-  "objective": "Build Absolute into an open-source macOS-compatible system; research scope includes graphics, boot and firmware.",
+  "objective": "Build Absolute into the user's macOS replacement on the physical Mac, using the existing Fedora/Asahi installation and macOS reverse engineering; research scope includes graphics, boot and firmware.",
+  "implementation_strategy": "Target the existing Fedora KDE/Asahi installation on the physical Mac. The user explicitly rejected a VM deliverable. Reuse its operating-system foundation, session services and supported Apple Silicon components, and implement Absolute's desktop and macOS-compatible interfaces above them.",
+  "backlog_interpretation": "The subsystem backlog includes research, compatibility and integration gaps. Open items do not automatically require rewriting the kernel, drivers, firmware or services. Reused components count toward a stated contract only after integration and verification on the intended target.",
   "overall_status": "in_progress",
   "completion_percentage": null,
-  "completion_rule": "A component is complete only for an explicit target and contract after evidence, implementation and differential/integration verification. Artifact counts are not a whole-OS completion measure.",
+  "completion_rule": "A component is complete only for an explicit target and contract after evidence, upstream integration or local implementation, and differential/integration verification. Artifact counts are not a whole-OS completion measure.",
   "subsystems": [
     {
       "id": "boot_chain",

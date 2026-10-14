@@ -1,0 +1,29 @@
+{
+    "schemaVersion": 1,
+    "pluginId": "org.absolute.desktop",
+    "packageDirectory": "org.absolute.desktop",
+    "minimumPlasmaMajor": 6,
+    "requiredWidgetIds": [
+        "org.kde.plasma.kickoff",
+        "org.kde.plasma.appmenu",
+        "org.kde.plasma.panelspacer",
+        "org.kde.plasma.systemtray",
+        "org.kde.plasma.digitalclock",
+        "org.kde.plasma.icontasks",
+        "org.kde.plasma.showdesktop"
+    ],
+    "requiredApplicationDesktopIds": [
+        ["org.kde.dolphin.desktop"],
+        ["firefox.desktop", "org.mozilla.firefox.desktop"],
+        ["org.kde.konsole.desktop"],
+        ["systemsettings.desktop", "org.kde.systemsettings.desktop"]
+    ],
+    "appearance": {
+        "colorScheme": "BreezeDark",
+        "widgetStyle": "Breeze",
+        "iconTheme": "breeze-dark",
+        "plasmaTheme": "default"
+    },
+    "panelRoles": ["topbar", "dock"],
+    "wallpaper": "org.absolute.desktop/contents/images/ocean.svg"
+}
