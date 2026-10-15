@@ -313,6 +313,8 @@ apply_settings() {
     write_setting kwinrc Windows Placement Centered
     write_setting kwinrc org.kde.kdecoration2 ButtonsOnLeft XIA
     write_setting kwinrc org.kde.kdecoration2 ButtonsOnRight ""
+    # The Mac shows no tooltips on the lights.
+    write_setting kwinrc org.kde.kdecoration2 ShowToolTips false
     write_setting kwinrc org.kde.kdecoration2 BorderSize None
     write_setting kwinrc org.kde.kdecoration2 BorderSizeAuto false
     write_setting kwinrc TabBox LayoutName big_icons
@@ -553,7 +555,7 @@ DOCK_BUILD_PACKAGES=(cmake extra-cmake-modules gcc-c++ kwin-devel qt6-qtbase-dev
     kf6-kauth-devel kf6-kcolorscheme-devel wayland-devel kf6-kio-devel qt6-qtmultimedia-devel qt6-qtpdf)
 
 install_dock() {
-    note "Building Absolute's Dock, Spotlight, Launchpad, Quick Look and the Genie effect (sudo for packages and the effect)"
+    note "Building Absolute's Dock, Spotlight, Launchpad, Quick Look, the window decoration and the Genie effect (sudo for packages and the effect)"
     local missing=()
     for package in "${DOCK_BUILD_PACKAGES[@]}"; do rpm -q "$package" >/dev/null 2>&1 || missing+=("$package"); done
     if [[ ${#missing[@]} -gt 0 ]]; then sudo dnf -y -q install --skip-unavailable "${missing[@]}"; fi
@@ -585,6 +587,12 @@ install_dock() {
     cmake -S "$ROOT_DIR/linux/kwin/genie" -B "$build/genie" -DCMAKE_BUILD_TYPE=Release >/dev/null
     cmake --build "$build/genie" -j"$(nproc)" >/dev/null
     sudo cmake --install "$build/genie" >/dev/null
+    # Absolute's window decoration: the Mac's titlebar, lights, corners and shadow.
+    cmake -S "$ROOT_DIR/linux/kwin/decoration" -B "$build/decoration" -DCMAKE_BUILD_TYPE=Release >/dev/null
+    cmake --build "$build/decoration" -j"$(nproc)" >/dev/null
+    sudo cmake --install "$build/decoration" >/dev/null
+    write_setting kwinrc org.kde.kdecoration2 library org.absolute.decoration
+    kwriteconfig6 --file kwinrc --group org.kde.kdecoration2 --key theme --delete
     # The Dock starts with the session and takes the Plasma dock panel's place. KWin
     # only grants the window-management protocol to clients whose desktop entry declares
     # it, matched by executable path, so the entry is installed as an application too.
@@ -633,7 +641,7 @@ EOF
         set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Alt+F2"
         set_shortcut org.absolute.Spotlight.desktop _launch Spotlight Spotlight "Meta+Space" "Alt+Space"
     fi
-    note "Dock, Spotlight, Launchpad, Quick Look and the Genie effect installed (Dock config in $CONFIG_DIR/absolute/dockrc)."
+    note "Dock, Spotlight, Launchpad, Quick Look, the window decoration and the Genie effect installed (Dock config in $CONFIG_DIR/absolute/dockrc)."
 }
 
 restore_desktop() {

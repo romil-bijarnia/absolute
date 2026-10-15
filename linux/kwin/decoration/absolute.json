@@ -1,0 +1,14 @@
+{
+    "KPlugin": {
+        "Description": "Absolute's window frame: the Mac's titlebar, lights, corners and shadow",
+        "EnabledByDefault": true,
+        "Id": "org.absolute.decoration",
+        "License": "MIT",
+        "Name": "Absolute",
+        "Version": "0.1.0"
+    },
+    "org.kde.kdecoration3": {
+        "blur": false,
+        "recommendedBorderSize": "None"
+    }
+}
