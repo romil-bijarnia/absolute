@@ -164,6 +164,9 @@ users:
     ssh_authorized_keys:
       - $pubkey
 ssh_pwauth: true
+packages:
+  - spice-vdagent
+  - qemu-guest-agent
 growpart:
   mode: auto
   devices: ["/"]
