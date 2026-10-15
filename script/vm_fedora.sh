@@ -52,6 +52,8 @@ Usage: script/vm_fedora.sh COMMAND [ARGS]
   utm               Wrap the machine in a UTM bundle (Absolute.utm) with GPU-accelerated
                     graphics; open it in UTM for smooth animations. Needs UTM installed
                     (brew install --cask utm). The script keeps using the same disk.
+  display           Pin the guest's display to WIDTHxHEIGHT at 2x for the session and the
+                    login screen (KWin otherwise picks QEMU's small default under UTM).
   reset             Delete the disk and seed so create starts over. Keeps the download.
 
 Machine directory: $VM_DIR (override with ABSOLUTE_VM_DIR)
@@ -484,8 +486,41 @@ EOF
     printf 'UTM bundle ready: %s\nOpen it with: open %q\n' "$BUNDLE" "$BUNDLE"
 }
 
+display_pin() {
+    # Under UTM the guest sees QEMU's 1280x800 as the preferred mode and KWin takes it,
+    # which at 2x is a 640x400-point desktop. The kernel parameter from the seed adds the
+    # Mac-sized mode; this selects it in the running session and copies the choice to the
+    # login screen's greeter so both match the full-screen window pixel for pixel.
+    ssh "${ssh_opts[@]}" "$VM_USER@$GUEST_HOST" "export XDG_RUNTIME_DIR=/run/user/\$(id -u) WAYLAND_DISPLAY=wayland-0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/\$(id -u)/bus QT_QPA_PLATFORM=wayland
+        kscreen-doctor output.Virtual-1.mode.${WIDTH}x${HEIGHT}@60 output.Virtual-1.scale.2 >/dev/null 2>&1 || { echo 'No running session to set the display in; sign in first.'; exit 1; }
+        sleep 3
+        sudo python3 - <<'PY'
+import json, pwd
+src = json.load(open('/home/$VM_USER/.config/kwinoutputconfig.json'))
+entry = next(e for s in src if s['name'] == 'outputs' for e in s['data'] if e.get('connectorName') == 'Virtual-1')
+try:
+    home = pwd.getpwnam('plasmalogin').pw_dir
+except KeyError:
+    raise SystemExit('session set to %dx%d at 2x' % (entry['mode']['width'], entry['mode']['height']))
+path = home + '/.config/kwinoutputconfig.json'
+try:
+    d = json.load(open(path))
+except FileNotFoundError:
+    d = [{'name': 'outputs', 'data': [dict(entry)]}, {'name': 'setups', 'data': []}]
+for s in d:
+    if s['name'] != 'outputs': continue
+    for e in s['data']:
+        if e.get('connectorName') == 'Virtual-1':
+            e['mode'] = entry['mode']; e['scale'] = entry['scale']
+json.dump(d, open(path, 'w'), indent=1)
+print('session and login screen set to %dx%d at 2x' % (entry['mode']['width'], entry['mode']['height']))
+PY
+        sudo chown plasmalogin:plasmalogin /var/lib/plasmalogin/.config/kwinoutputconfig.json 2>/dev/null || true"
+}
+
 case "${1:-}" in
     create) create ;;
+    display) display_pin ;;
     utm) utm_bundle ;;
     start) start "${2:-}" ;;
     stop) stop ;;

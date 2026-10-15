@@ -59,6 +59,12 @@ bash script/vm_fedora.sh utm          # once: wraps the disk in Absolute.utm wit
 open ~/.local/share/absolute/vm/Absolute.utm
 ```
 
+After the first sign-in under UTM, run `bash script/vm_fedora.sh display` once:
+KWin otherwise takes QEMU's 1280x800 as the preferred mode, which at 2x is a
+640x400-point desktop. The command selects the 3456x2160 mode (added by a
+kernel parameter from the seed), so UTM's full screen shows the desktop pixel
+for pixel, and copies the choice to the login screen.
+
 UTM is sandboxed, so the disk and its base image move inside the bundle; the
 script keeps using that disk, reaches the machine through UTM's shared network
 (the address leased to the machine's MAC) and refuses to start its own QEMU
