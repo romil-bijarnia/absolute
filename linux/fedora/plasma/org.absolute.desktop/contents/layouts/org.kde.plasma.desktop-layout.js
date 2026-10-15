@@ -158,7 +158,8 @@
     configure(tray, "General", {
         scaleIconsToFit: false,
         extraItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
-        knownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
+        // Every applet id counts as already known, so no tray plasmoid gets auto-enabled.
+        knownItems: knownWidgetTypes.join(","),
         shownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
         hiddenItems: ""
     });

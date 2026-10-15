@@ -338,24 +338,6 @@ apply_settings() {
     set_shortcut kwin "Window Close" KWin "Close Window" "Meta+Q" "Alt+F4"
     set_shortcut kwin "Window Minimize" KWin "Minimize Window" "Meta+H" "Meta+PgDown"
     set_shortcut kwin "Show Desktop" KWin "Peek at Desktop" "F11" "Meta+D"
-    # The system tray keeps its settings in its own inner containment, which the layout
-    # script cannot reach: Wi-Fi and battery only, nothing hidden, so no overflow chevron.
-    python3 - "$CONFIG_DIR/plasma-org.kde.plasma.desktop-appletsrc" <<'PY'
-import re, sys
-path = sys.argv[1]
-text = open(path).read()
-trays = re.findall(r"\[Containments\]\[(\d+)\]\nactivityId=[^\n]*\n(?:[^\[]*\n)*?plugin=org\.kde\.plasma\.private\.systemtray", text)
-if not trays:
-    trays = [m.group(1) for m in re.finditer(r"\[Containments\]\[(\d+)\]\n((?:(?!\[).*\n)*)", text) if "plugin=org.kde.plasma.private.systemtray" in m.group(2)]
-open("/tmp/absolute-tray-ids", "w").write(" ".join(trays))
-PY
-    for tray in $(cat /tmp/absolute-tray-ids 2>/dev/null); do
-        for key in extraItems knownItems shownItems; do
-            kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc --group Containments --group "$tray" --group General --key "$key" "org.kde.plasma.networkmanagement,org.kde.plasma.battery"
-        done
-        kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc --group Containments --group "$tray" --group General --key hiddenItems ""
-    done
-    rm -f /tmp/absolute-tray-ids
     # No update badge from Discover's notifier in the bar; Discover itself still updates.
     mkdir -p "$CONFIG_DIR/autostart"
     printf '[Desktop Entry]\nType=Application\nName=Discover Notifier\nHidden=true\n' > "$CONFIG_DIR/autostart/org.kde.discover.notifier.desktop"
