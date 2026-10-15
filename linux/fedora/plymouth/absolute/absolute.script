@@ -1,0 +1,79 @@
+// Absolute boot splash: black, the mark above centre, a thin progress bar under it.
+// The bar fills with boot progress; a password prompt (encrypted disks) replaces it.
+
+Window.SetBackgroundTopColor(0, 0, 0);
+Window.SetBackgroundBottomColor(0, 0, 0);
+
+screen.width = Window.GetWidth();
+screen.height = Window.GetHeight();
+screen.centreX = Window.GetX() + screen.width / 2;
+screen.centreY = Window.GetY() + screen.height / 2;
+
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.sprite.SetX(screen.centreX - logo.image.GetWidth() / 2);
+logo.sprite.SetY(screen.centreY - logo.image.GetHeight() / 2 - screen.height * 0.04);
+logo.sprite.SetZ(10);
+
+bar.track = Image("track.png");
+bar.fill = Image("fill.png");
+bar.y = logo.sprite.GetY() + logo.image.GetHeight() + screen.height * 0.07;
+bar.x = screen.centreX - bar.track.GetWidth() / 2;
+bar.trackSprite = Sprite(bar.track);
+bar.trackSprite.SetPosition(bar.x, bar.y, 5);
+bar.fillSprite = Sprite();
+bar.fillSprite.SetPosition(bar.x, bar.y, 6);
+bar.progress = 0;
+
+fun setProgress(progress) {
+    if (progress < bar.progress) progress = bar.progress;
+    if (progress > 1) progress = 1;
+    bar.progress = progress;
+    width = Math.Int(bar.track.GetWidth() * progress);
+    if (width < 1) width = 1;
+    bar.fillSprite.SetImage(bar.fill.Scale(width, bar.fill.GetHeight()));
+}
+
+fun bootProgress(duration, progress) {
+    setProgress(progress);
+}
+Plymouth.SetBootProgressFunction(bootProgress);
+
+// Password prompt for encrypted volumes: text and bullets where the bar sits.
+prompt.sprite = Sprite();
+prompt.sprite.SetPosition(0, 0, 20);
+bullets.sprite = Sprite();
+bullets.sprite.SetPosition(0, 0, 20);
+
+fun displayPassword(promptText, bulletCount) {
+    bar.trackSprite.SetOpacity(0);
+    bar.fillSprite.SetOpacity(0);
+    text = Image.Text(promptText, 0.85, 0.85, 0.85, 1, "Sans 14");
+    prompt.sprite.SetImage(text);
+    prompt.sprite.SetX(screen.centreX - text.GetWidth() / 2);
+    prompt.sprite.SetY(bar.y - text.GetHeight() - 12);
+    dots = "";
+    for (i = 0; i < bulletCount; i++) dots += "•";
+    dotsImage = Image.Text(dots, 1, 1, 1, 1, "Sans 18");
+    bullets.sprite.SetImage(dotsImage);
+    bullets.sprite.SetX(screen.centreX - dotsImage.GetWidth() / 2);
+    bullets.sprite.SetY(bar.y);
+}
+
+fun displayNormal() {
+    prompt.sprite.SetImage(Image.Text("", 0, 0, 0, 0));
+    bullets.sprite.SetImage(Image.Text("", 0, 0, 0, 0));
+    bar.trackSprite.SetOpacity(1);
+    bar.fillSprite.SetOpacity(1);
+}
+
+fun displayMessage(text) {
+    message = Image.Text(text, 0.7, 0.7, 0.7, 1, "Sans 12");
+    msg.sprite = Sprite(message);
+    msg.sprite.SetPosition(screen.centreX - message.GetWidth() / 2, screen.height - message.GetHeight() - 40, 20);
+}
+
+Plymouth.SetDisplayPasswordFunction(displayPassword);
+Plymouth.SetDisplayNormalFunction(displayNormal);
+Plymouth.SetMessageFunction(displayMessage);
+Plymouth.SetQuitFunction(fun() { setProgress(1); });

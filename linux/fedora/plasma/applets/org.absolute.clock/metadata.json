@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "Absolute contributors" }],
+        "Category": "Date and Time",
+        "Description": "The menu bar clock; a click opens Notification Centre",
+        "Icon": "clock",
+        "Id": "org.absolute.clock",
+        "License": "MIT",
+        "Name": "Clock",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

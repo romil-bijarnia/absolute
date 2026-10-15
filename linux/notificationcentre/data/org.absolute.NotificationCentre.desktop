@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Notification Centre
+Comment=Absolute's notification history
+Exec=absolute-notificationcentre --toggle
+Icon=notifications
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-StartupNotify=false

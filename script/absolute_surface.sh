@@ -219,6 +219,8 @@ EOF
     # Konsole profile matching the Mac's terminal: black, soft grey text, JetBrains Mono.
     mkdir -p "$DATA_DIR/konsole"
     cp "$ROOT_DIR/linux/fedora/konsole/Absolute.profile" "$ROOT_DIR/linux/fedora/konsole/Absolute.colorscheme" "$DATA_DIR/konsole/"
+    # Absolute's own sound theme, synthesised here (freedesktop sound naming).
+    python3 "$ROOT_DIR/script/sounds_absolute.py" "$DATA_DIR/sounds/absolute"
 }
 
 desktop_backup() {
@@ -315,6 +317,9 @@ apply_settings() {
     write_setting kwinrc org.kde.kdecoration2 ButtonsOnRight ""
     # The Mac shows no tooltips on the lights.
     write_setting kwinrc org.kde.kdecoration2 ShowToolTips false
+    # Modal dialogs slide out of the titlebar, as sheets do; system sounds are Absolute's.
+    write_setting kwinrc Plugins sheetEnabled true
+    write_setting kdeglobals Sounds Theme absolute
     write_setting kwinrc org.kde.kdecoration2 BorderSize None
     write_setting kwinrc org.kde.kdecoration2 BorderSizeAuto false
     write_setting kwinrc TabBox LayoutName big_icons
@@ -511,9 +516,31 @@ install_login_screen() {
     else
         note "No supported login manager found; login screen left as it is."
     fi
+    install_boot_splash
 }
 
 TOSHY_COMMIT=51bfa66c360b45a0ca74be6afcb2528b8217f9af
+
+install_boot_splash() {
+    # Plymouth: black, the Absolute mark and a progress bar; rebuilds the initramfs.
+    command -v plymouth-set-default-theme >/dev/null || { note "Plymouth is not installed; boot splash skipped."; return; }
+    note "Installing the boot splash (sudo, rebuilds the initramfs)"
+    local stage="$CACHE_DIR/absolute/plymouth" logo_png="$DATA_DIR/absolute/absolute-logo.png"
+    rm -rf "$stage"; mkdir -p "$stage" "$DATA_DIR/absolute"
+    if [[ ! -f "$logo_png" ]]; then
+        local logo_svg="$PROFILE_DIR/contents/images/absolute-symbolic.svg"
+        if command -v rsvg-convert >/dev/null; then rsvg-convert -w 512 -h 512 "$logo_svg" -o "$logo_png"
+        elif command -v magick >/dev/null; then magick -background none -density 600 "$logo_svg" -resize 512x512 "$logo_png"; fi
+    fi
+    [[ -f "$logo_png" ]] || { note "No renderer for the logo (rsvg-convert or ImageMagick); boot splash skipped."; return; }
+    python3 "$ROOT_DIR/script/plymouth_assets.py" "$logo_png" "$stage"
+    cp "$ROOT_DIR/linux/fedora/plymouth/absolute/absolute.plymouth" "$ROOT_DIR/linux/fedora/plymouth/absolute/absolute.script" "$stage/"
+    sudo rm -rf /usr/share/plymouth/themes/absolute
+    sudo cp -r "$stage" /usr/share/plymouth/themes/absolute
+    sudo chmod -R a+rX /usr/share/plymouth/themes/absolute
+    sudo plymouth-set-default-theme -R absolute
+    if command -v grubby >/dev/null; then sudo grubby --update-kernel=ALL --args="rhgb quiet" >/dev/null 2>&1 || true; fi
+}
 
 install_mac_keys() {
     # Toshy remaps the keyboard per application (xwaykeyz on evdev, a KWin script for
@@ -555,7 +582,7 @@ DOCK_BUILD_PACKAGES=(cmake extra-cmake-modules gcc-c++ kwin-devel qt6-qtbase-dev
     kf6-kauth-devel kf6-kcolorscheme-devel wayland-devel kf6-kio-devel qt6-qtmultimedia-devel qt6-qtpdf)
 
 install_dock() {
-    note "Building Absolute's Dock, Spotlight, Launchpad, Quick Look, the window decoration and the Genie effect (sudo for packages and the effect)"
+    note "Building Absolute's Dock, Spotlight, Launchpad, Quick Look, Notification Centre, the window decoration and the Genie effect (sudo for packages and the effect)"
     local missing=()
     for package in "${DOCK_BUILD_PACKAGES[@]}"; do rpm -q "$package" >/dev/null 2>&1 || missing+=("$package"); done
     if [[ ${#missing[@]} -gt 0 ]]; then sudo dnf -y -q install --skip-unavailable "${missing[@]}"; fi
@@ -576,6 +603,12 @@ install_dock() {
     # Launchpad: the Dock tile toggles it; the service copy starts hidden with the session.
     sed "s|^Exec=.*|Exec=$HOME/.local/bin/absolute-launchpad --toggle|" "$ROOT_DIR/linux/launchpad/data/org.absolute.Launchpad.desktop" > "$DATA_DIR/applications/org.absolute.Launchpad.desktop"
     printf '[Desktop Entry]\nType=Application\nName=Launchpad service\nExec=%s/.local/bin/absolute-launchpad\nNoDisplay=true\nOnlyShowIn=KDE;\nX-KDE-autostart-phase=2\n' "$HOME" > "$CONFIG_DIR/autostart/org.absolute.Launchpad.desktop"
+    cmake -S "$ROOT_DIR/linux/notificationcentre" -B "$build/notificationcentre" -DCMAKE_BUILD_TYPE=Release >/dev/null
+    cmake --build "$build/notificationcentre" -j"$(nproc)" >/dev/null
+    install -m 0755 "$build/notificationcentre/absolute-notificationcentre" "$HOME/.local/bin/absolute-notificationcentre"
+    # Notification Centre: the clock applet toggles it; the service copy starts hidden.
+    sed "s|^Exec=.*|Exec=$HOME/.local/bin/absolute-notificationcentre --toggle|" "$ROOT_DIR/linux/notificationcentre/data/org.absolute.NotificationCentre.desktop" > "$DATA_DIR/applications/org.absolute.NotificationCentre.desktop"
+    printf '[Desktop Entry]\nType=Application\nName=Notification Centre service\nExec=%s/.local/bin/absolute-notificationcentre\nNoDisplay=true\nOnlyShowIn=KDE;\nX-KDE-autostart-phase=2\n' "$HOME" > "$CONFIG_DIR/autostart/org.absolute.NotificationCentre.desktop"
     cmake -S "$ROOT_DIR/linux/quicklook" -B "$build/quicklook" -DCMAKE_BUILD_TYPE=Release >/dev/null
     cmake --build "$build/quicklook" -j"$(nproc)" >/dev/null
     install -m 0755 "$build/quicklook/absolute-quicklook" "$HOME/.local/bin/absolute-quicklook"
@@ -635,13 +668,15 @@ EOF
         (setsid "$HOME/.local/bin/absolute-spotlight" >/dev/null 2>&1 &)
         pkill -f "^[^ ]*/absolute-launchpad" >/dev/null 2>&1 || true
         (setsid "$HOME/.local/bin/absolute-launchpad" >/dev/null 2>&1 &)
+        pkill -f "^[^ ]*/absolute-notificationcentre" >/dev/null 2>&1 || true
+        (setsid "$HOME/.local/bin/absolute-notificationcentre" >/dev/null 2>&1 &)
         update-desktop-database "$DATA_DIR/applications" >/dev/null 2>&1 || true
         kbuildsycoca6 >/dev/null 2>&1 || true
         # The Mac keyboard remapper turns Cmd+Space into Alt+Space, so Spotlight takes both.
         set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Alt+F2"
         set_shortcut org.absolute.Spotlight.desktop _launch Spotlight Spotlight "Meta+Space" "Alt+Space"
     fi
-    note "Dock, Spotlight, Launchpad, Quick Look, the window decoration and the Genie effect installed (Dock config in $CONFIG_DIR/absolute/dockrc)."
+    note "Dock, Spotlight, Launchpad, Quick Look, Notification Centre, the window decoration and the Genie effect installed (Dock config in $CONFIG_DIR/absolute/dockrc)."
 }
 
 restore_desktop() {

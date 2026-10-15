@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=Absolute
+Description=A black screen, the Absolute mark and a progress bar, the way a Mac boots
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/absolute
+ScriptFile=/usr/share/plymouth/themes/absolute/absolute.script

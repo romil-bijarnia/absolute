@@ -54,7 +54,7 @@ done when it is screenshotted next to the Mac and committed.
 | 8 | Finder: sidebar sections, toolbar, column view, Quick Look, Get Info, path bar, icons | mostly done 15 Oct 2026: Dolphin runs as Finder (`absolute_surface.sh --finder`, part of `--apply`): Favourites and Locations sidebar, Finder toolbar order with icons only, icon view at 64 px with previews, full status bar, the Finder name in the bar and titles (en_AU catalog), Cmd+I opens Get Info; Quick Look is Absolute's own panel (`linux/quicklook`: images, text, PDF, video, audio, icon and details for the rest, arrows, Return opens, Space closes) from Finder's context menu. Open: column view and the Space key inside Finder (both need a Dolphin patch or Absolute's own Finder), a path bar at the bottom, the root volume shown as a named drive |
 | 9 | System Settings with the Mac sidebar and page layout; About Absolute | not started |
 | 10 | Login screen, lock screen, boot splash; menus, dialogs, sheets, cursor, sounds | not started |
-| 11 | Move onto the real Fedora partition and keep working from inside it | not started |
+| 11 | Move onto the real Fedora partition and keep working from inside it | not started; the Fedora Asahi partition was removed from the Mac on 15 Oct 2026 at Romil's request to reclaim 520 GB for macOS, so this item now begins with a fresh Asahi install (installer from asahilinux.org, about 30 minutes plus the download), then `absolute_surface.sh --all --mac-keys --dock --login-screen` on it |
 
 Rules: work in the VM over ssh; build an Absolute component when KDE cannot be
 configured into it, an app when a piece needs one; reverse engineer only where

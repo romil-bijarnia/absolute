@@ -14,7 +14,8 @@
         "org.kde.plasma.trash",
         "org.absolute.appname",
         "org.absolute.spotlight",
-        "org.absolute.controlcentre"
+        "org.absolute.controlcentre",
+        "org.absolute.clock"
     ],
     "requiredApplicationDesktopIds": [
         ["org.kde.dolphin.desktop"],

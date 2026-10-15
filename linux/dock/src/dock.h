@@ -38,6 +38,9 @@ public:
     // input region is the column above it so magnified tiles stay clickable.
     Q_INVOKABLE void setGlass(qreal x, qreal y, qreal width, qreal height, qreal radius);
     Q_INVOKABLE void setExclusiveZone(int pixels);
+    // Autohide: while hidden only a 2 px strip along the screen edge takes the pointer;
+    // while shown, the band from 10 px beyond the glass to the edge (the Mac's shape).
+    Q_INVOKABLE void setHiddenStrip(bool hidden);
     Q_INVOKABLE void openPath(const QString &path);
     Q_INVOKABLE void openTrash();
     Q_INVOKABLE void runCommand(const QString &command);
@@ -62,6 +65,7 @@ private:
     int m_largeSize = 128;
     bool m_magnification = true;
     bool m_autohide = false;
+    bool m_hiddenStrip = false;
     QStringList m_launchers;
     QString m_launchpadCommand;
 };

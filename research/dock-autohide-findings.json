@@ -1,0 +1,475 @@
+{
+  "schema": 1,
+  "recordedAt": "2026-10-15T10:09:40.401358+00:00",
+  "host": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0\nBuildVersion:\t\t26A5421a",
+  "scope": "Static recovery of the Dock's autohide timing, trigger geometry and slide model from the installed Dock executable. No process was executed, attached to or modified, and no preference was changed.",
+  "target": {
+    "path": "/System/Library/CoreServices/Dock.app/Contents/MacOS/Dock",
+    "sourceSha256": "c8e55d01cbfa33eb68b6d90707da5fd4bd13b27349295e0e732f87eb5263488f",
+    "sourceBytes": 4843616,
+    "copy": "research/local/dock-magnification/Dock.arm64e",
+    "copySha256": "c8e55d01cbfa33eb68b6d90707da5fd4bd13b27349295e0e732f87eb5263488f",
+    "architecture": "arm64e",
+    "derivation": "byte copy of the thin arm64e executable",
+    "build": "26A5421a"
+  },
+  "providers": {
+    "rea": "6.4.0",
+    "ghidra": "12.1.3",
+    "searchEvidenceId": "ev_b46082d67b6ed1b3b499fb324077b641c87618121b350ba58c1bc47a8c73a76b",
+    "snapshots": [
+      "research/local/dock-autohide/dock-snapshot.json",
+      "research/local/dock-autohide/dock-snapshot-a.json",
+      "research/local/dock-autohide/dock-snapshot-b.json"
+    ],
+    "otool": "otool -tV dump retained from the magnification pass; objc_msgSend stubs, CFString constants, float literals and ivar offsets resolved by research/local/dock-autohide/annotate_otool.py"
+  },
+  "procedures": {
+    "0x100070534": {
+      "role": "-[DockBarMouseEventHandler _handleMoveEvent:type:]: MouseEntered arms the autohide-delay (or dig) timer, MouseMoved re-arms it beyond the 2 pt / 5 pt tolerance, MouseExited cancels it or posts the mouse-leave event",
+      "ghidraName": "DockBarMouseEventHandler::_handleMoveEvent:type:",
+      "bodyBytes": 2016,
+      "callers": [
+        "DockBarMouseEventHandler::handleMouseEvent:type:"
+      ],
+      "evidenceId": "ev_a6a3841f630594e07696a9d38fe49a1e203136f26e6a468b92cfd8e95fe67bcd",
+      "dossier": "research/local/dock-autohide/dock-fn-100070534.json"
+    },
+    "0x10006edbc": {
+      "role": "-[DockBarMouseEventHandler initWithConnection:]: reads autohide-delay (default 0.15 s) and the four digduration-* preferences",
+      "ghidraName": "DockBarMouseEventHandler::initWithConnection:",
+      "bodyBytes": 292,
+      "callers": [],
+      "evidenceId": "ev_9de5e7280d80fdc0113a888c10b3fbad631a75d66e754e67d53b83731ab5bbed",
+      "dossier": "research/local/dock-autohide/dock-fn-10006edbc.json"
+    },
+    "0x10007107c": {
+      "role": "-[DOCKPreferences autohideDelayPref]: proxy for the mouse handler's _autohideDelay",
+      "ghidraName": "DOCKPreferences::autohideDelayPref",
+      "bodyBytes": 60,
+      "callers": [],
+      "evidenceId": "ev_a3e1188aa4246afc774e0482aba017fd23aa6583983ea94f3898356affb1b0a9",
+      "dossier": "research/local/dock-autohide/dock-fn-10007107c.json"
+    },
+    "0x100070288": {
+      "role": "-[DockBarMouseEventHandler _mouseEnterHelper:location:allowSwitchingBetweenDisplays:]: posts the mouse-enter event, refuses while a button is held without a drag",
+      "ghidraName": "DockBarMouseEventHandler::_mouseEnterHelper:location:allowSwitchingBetweenDisplays:",
+      "bodyBytes": 456,
+      "callers": [
+        "DockBarMouseEventHandler::_handleMoveEvent:type:"
+      ],
+      "evidenceId": "ev_cf42c8864ddba8acb254918523de3ff74e755ad252173737acad593df6f877bc",
+      "dossier": "research/local/dock-autohide/dock-fn-100070288.json"
+    },
+    "0x10005f2c4": {
+      "role": "-[DockBar startAutoShow]: autoHide -> 0 over floor(ln(delta/2+1)+1) * autoHideSpeed ms",
+      "ghidraName": "DockBar::startAutoShow",
+      "bodyBytes": 500,
+      "callers": [
+        "DockBar::startAutoShowAndShowAllWindows",
+        "DockBar::updateWithContext:showDockWindow:transaction:"
+      ],
+      "evidenceId": "ev_0647821ec51291354536a4085a01ef5056ab4e2ee1bfc7386622eede32ff9ba3",
+      "dossier": "research/local/dock-autohide/dock-fn-10005f2c4.json"
+    },
+    "0x10005f59c": {
+      "role": "-[DockBar startAutoHide]: autoHide -> 1 over floor(ln(delta/2+1)+1) * autoHideSpeed ms",
+      "ghidraName": "DockBar::startAutoHide",
+      "bodyBytes": 348,
+      "callers": [
+        "DockBar::handleDockEventMouseLeave:",
+        "DockBar::handleDockEventDragLeave:",
+        "DockBar::handleDockEventAutohideEnabled:setRect:context:"
+      ],
+      "evidenceId": "ev_bebf3dac0c4b3036d67b9ab8b6d558c5ff3835fe266a11b6b75dda83b0cfad4b",
+      "dossier": "research/local/dock-autohide/dock-fn-10005f59c.json"
+    },
+    "0x100095468": {
+      "role": "-[DockBar handleDockEventMouseEnter:]: myInBar from inBarRect, then startAutoShowAndShowAllWindows when hidden or hiding",
+      "ghidraName": "DockBar::handleDockEventMouseEnter:",
+      "bodyBytes": 524,
+      "callers": [],
+      "evidenceId": "ev_53c168c9a6e82eb47a04114c6f5fc70a78a798610d9136cb7e241a9133e971e5",
+      "dossier": "research/local/dock-autohide/dock-fn-100095468.json"
+    },
+    "0x1000956b8": {
+      "role": "-[DockBar handleDockEventMouseLeave:]: startAutoHide immediately when autoHideOn and nothing is being dragged",
+      "ghidraName": "DockBar::handleDockEventMouseLeave:",
+      "bodyBytes": 464,
+      "callers": [],
+      "evidenceId": "ev_18a67f372d836a4aac46284dbe325d53c9d3cd94143fbd6a9c02f6fe1e29e510",
+      "dossier": "research/local/dock-autohide/dock-fn-1000956b8.json"
+    },
+    "0x100098768": {
+      "role": "-[DockBar handleDockEventAutohideEnabled:setRect:context:]: preference change; hides at once unless the pointer is in inBarRect",
+      "ghidraName": "DockBar::handleDockEventAutohideEnabled:setRect:context:",
+      "bodyBytes": 672,
+      "callers": [],
+      "evidenceId": "ev_ffeb2cefe886a152ee478c193f235b5db2d21aa12166499f21ebb0a35b57571c",
+      "dossier": "research/local/dock-autohide/dock-fn-100098768.json"
+    },
+    "0x1000812e8": {
+      "role": "autoHideOffset = (distanceTop + tileSize + distanceBottom + 10) * autoHide.now",
+      "ghidraName": "FUN_1000812e8",
+      "bodyBytes": 144,
+      "callers": [
+        "FUN_10001171c",
+        "DockBar::updateWithContext:showDockWindow:transaction:"
+      ],
+      "evidenceId": "ev_aa36f5df0b640e22ebae54043b106ad31334ffb5ae26a3434bed4ec8671c1548",
+      "dossier": "research/local/dock-autohide/dock-fn-1000812e8.json"
+    },
+    "0x100257e34": {
+      "role": "DockBar setup: creates the autoHide and fish properties with easing kind 1, autoHideSpeed = 60 * autohide-time-modifier, launch reveal 500 ms after start over 550 ms",
+      "ghidraName": "FUN_100257e34",
+      "bodyBytes": 3564,
+      "callers": [
+        "DockBar::initWithEnvironment:spaces:processUIModeManager:minimizedWindowList:"
+      ],
+      "evidenceId": "ev_ee10d0afaa8f854627fa3825b0a020bd5413daa6b28ae20378d198a9055fcf6e",
+      "dossier": "research/local/dock-autohide/dock-fn-100257e34.json"
+    },
+    "0x1000502b4": {
+      "role": "DockFloatAnimatedProperty step: p = elapsed/duration, 0.5 - 0.5 cos(pi p) when the easing field is non-zero, then interpolate:",
+      "ghidraName": "FUN_1000502b4",
+      "bodyBytes": 172,
+      "callers": [
+        "DOCKLabelLayer::update",
+        "Tile::updateTransing",
+        "Tile::updateMoving",
+        "Tile::updateSqueezing",
+        "Tile::updateBlending",
+        "Tile::updateIndicatorBlending",
+        "Tile::updateScaling",
+        "DockBar::updateWithContext:showDockWindow:transaction:",
+        "DockBar::quitUpdate"
+      ],
+      "evidenceId": "ev_ddb9a9438558bab2f013487c4ed0bc0035c23cce746d82893a0893f2c08eca87",
+      "dossier": "research/local/dock-autohide/dock-fn-1000502b4.json"
+    }
+  },
+  "namedProcedures": {
+    "DOCKAutoHideDisabledEvent::initWithSetRect:": "0x100015424",
+    "DOCKAutoHideDisabledEvent::performWithDelegate:context:": "0x100078f54",
+    "DOCKAutoHideEnabledEvent::initWithSetRect:": "0x1000174e0",
+    "DOCKAutoHideEnabledEvent::performWithDelegate:context:": "0x100078f40",
+    "DOCKPreferences::autoReorderSpacesPref": "0x100190ce4",
+    "DOCKPreferences::autohideDelayPref": "0x10007107c",
+    "DOCKPreferences::durationDigAnglePref": "0x100071320",
+    "DOCKPreferences::durationDigDurationPref": "0x100071140",
+    "DOCKPreferences::durationDigPerFrameDurationPref": "0x100071230",
+    "DOCKPreferences::enterMissionControlByTopWindowDragPref": "0x1001a9c34",
+    "DOCKPreferences::groupWindowsByApplicationPref": "0x1001a9b50",
+    "DOCKPreferences::minimizeToApplicationPref": "0x10005ff34",
+    "DOCKPreferences::preferences": "0x10008a460",
+    "DOCKPreferences::setAutoReorderSpacesPref:": "0x100190d24",
+    "DOCKPreferences::setAutohideDelayPref:": "0x1000710b8",
+    "DOCKPreferences::setDurationDigAnglePref:": "0x10007135c",
+    "DOCKPreferences::setDurationDigDurationPref:": "0x10007117c",
+    "DOCKPreferences::setDurationDigPerFrameDurationPref:": "0x10007126c",
+    "DOCKPreferences::setEnterMissionControlByTopWindowDragPref:": "0x1001a9c74",
+    "DOCKPreferences::setGroupWindowsByApplicationPref:": "0x1001a9b88",
+    "DOCKPreferences::setMinimizeToApplicationPref:": "0x10005ff80",
+    "DOCKPreferences::setShowAppExposeGestureEnabledPref:": "0x1001a99a0",
+    "DOCKPreferences::setShowDesktopGestureEnabledPref:": "0x1001a9a94",
+    "DOCKPreferences::setShowMissionControlGestureEnabledPref:": "0x1001a989c",
+    "DOCKPreferences::setShowProcessIndicatorsPref:": "0x100060048",
+    "DOCKPreferences::setShowRecentsPref:": "0x100060268",
+    "DOCKPreferences::setValue:forUndefinedKey:": "0x10008a498",
+    "DOCKPreferences::showAppExposeGestureEnabledPref": "0x1001a9968",
+    "DOCKPreferences::showDesktopGestureEnabledPref": "0x1001a9a5c",
+    "DOCKPreferences::showMissionControlGestureEnabledPref": "0x1001a985c",
+    "DOCKPreferences::showProcessIndicatorsPref": "0x10005fffc",
+    "DOCKPreferences::showRecentsPref": "0x100060258",
+    "DOCKPreferences::valueForUndefinedKey:": "0x10008a490",
+    "DockBar::autoHide": "0x100256cfc",
+    "DockBar::autoHideOffset": "0x100256d3c",
+    "DockBar::autoHideOn": "0x100257064",
+    "DockBar::autoHideSpeed": "0x100256d9c",
+    "DockBar::handleDockEventAutohideEnabled:setRect:context:": "0x100098768",
+    "DockBar::hideAllWindowsIfNecessaryWithTransaction:": "0x10005dce0",
+    "DockBar::hideAllWindowsWithTransaction:": "0x10005d970",
+    "DockBar::inBarRect": "0x100257c08",
+    "DockBar::myInBar": "0x1002570ec",
+    "DockBar::setAutoHideOffset:": "0x100256d6c",
+    "DockBar::setAutoHideOn:": "0x100257098",
+    "DockBar::setAutoHideSpeed:": "0x100256dcc",
+    "DockBar::setInBarRect:": "0x100257c38",
+    "DockBar::setMyInBar:": "0x100257120",
+    "DockBar::showAllWindowsIfNecessaryWithTransaction:": "0x10005e050",
+    "DockBar::showAllWindowsWithTransaction:": "0x10005df50",
+    "DockBar::startAutoHide": "0x10005f59c",
+    "DockBar::startAutoShow": "0x10005f2c4",
+    "DockBar::startAutoShowAndShowAllWindows": "0x10005f4b8",
+    "DockBar::updateWithContext:showDockWindow:transaction:": "0x10007e930",
+    "DockEventQueue::addAutoHideDisabled:": "0x100077c3c",
+    "DockEventQueue::addAutoHideEnabled:": "0x100077ba4",
+    "DockEventQueue::removeAllAutoHideEvents": "0x100077ce0",
+    "DockFloatAnimatedProperty::copyWithZone:": "0x100050230",
+    "DockFloatAnimatedProperty::interpolate:": "0x100050294"
+  },
+  "constants": {
+    "autohideDelaySeconds": {
+      "value": 0.15,
+      "unit": "s",
+      "confidence": "high",
+      "preference": "autohide-delay (com.apple.dock)",
+      "readAt": "0x10006ee34-0x10006ee48 in -[DockBarMouseEventHandler initWithConnection:]",
+      "literal": "float 0.15000000596046448 at 0x100308980",
+      "storedIn": "DockBarMouseEventHandler._autohideDelay (ivar offset 0x68)",
+      "role": "delay between the pointer entering the edge strip and the show starting, when the Dock is hidden or hiding",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x10006edbc",
+        "dossier 0x100070534"
+      ]
+    },
+    "autohideTimeModifierDefault": {
+      "value": 1.0,
+      "unit": "multiplier",
+      "confidence": "high",
+      "preference": "autohide-time-modifier (com.apple.dock)",
+      "readAt": "0x1002586cc-0x1002586f0 in the DockBar setup function 0x100257e34",
+      "literal": "fmov s0, #1.0 at 0x1002586e8 passed as the default to the float-preference helper 0x1000066c8",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x100257e34"
+      ]
+    },
+    "autoHideSpeed": {
+      "value": 60.0,
+      "unit": "ms per duration step",
+      "confidence": "high",
+      "formula": "autoHideSpeed = 60 * autohide-time-modifier",
+      "readAt": "mov w8, #0x42700000 (60.0f) at 0x1002586fc; fmul at 0x100258704; stored to DockBar.autoHideSpeed (ivar 420) at 0x100258710",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x100257e34"
+      ]
+    },
+    "slideDurationMilliseconds": {
+      "formula": "floor(ln(|delta| / 2 + 1) + 1) * autoHideSpeed",
+      "unit": "ms",
+      "confidence": "high",
+      "deltaShow": "|size - (distanceTop + tileSize + distanceBottom + currentFish - autoHideOffset)|, size = largeSize when magnifying and the pointer is in the bar while fish animates, else tileSize",
+      "deltaHide": "|autoHideOffset - (distanceTop + tileSize + distanceBottom + currentFish)|",
+      "readAt": "0x10005f2e4-0x10005f3b4 (startAutoShow) and 0x10005f5b8-0x10005f620 (startAutoHide)",
+      "defaultResult": "240 ms for the default geometry in both directions (delta 80 pt hiding, 74 pt showing)",
+      "range": "60 ms (delta < 3.44 pt) to 300 ms (delta >= 107.2 pt) at modifier 1.0; 240 ms for 38.2 <= delta < 107.2",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x10005f2c4",
+        "dossier 0x10005f59c"
+      ]
+    },
+    "easing": {
+      "value": "p' = 0.5 - 0.5 * cos(pi * p), p = clamp((now - start) / duration, 0, 1)",
+      "confidence": "high",
+      "readAt": "0x10005031c-0x100050344 in the property step 0x1000502b4; the easing field (+0x18) is set to 1 by the direct initialiser 0x1002dd2d8 called with w1 = 1 at 0x100258620-0x100258624 (autoHide) and 0x100258768-0x10025876c (fish)",
+      "note": "DOCK-MAGNIFICATION.md states the fish ramp is linear because no easing function is attached; the initialiser stores 1 in that field for both properties, so both ramps are cosine-eased. This should be re-checked in that unit.",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x1000502b4",
+        "dossier 0x100257e34"
+      ]
+    },
+    "hiddenOffset": {
+      "formula": "autoHideOffset = (distanceTop + tileSize + distanceBottom + 10) * autoHide.now",
+      "unit": "pt",
+      "confidence": "high",
+      "readAt": "0x100081304-0x100081358 (FUN_1000812e8, called from the update loop at 0x100080150) and 0x10025868c-0x1002586c8 at setup",
+      "defaultResult": "90 pt for the default 64 pt tile: the 80 pt bar plus 10 pt, so no strip of the bar stays visible",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x1000812e8",
+        "dossier 0x100257e34"
+      ]
+    },
+    "pointerLeaveHideDelay": {
+      "value": 0,
+      "unit": "s",
+      "confidence": "high",
+      "readAt": "0x100095870-0x100095880: handleDockEventMouseLeave: calls startAutoHide directly when autoHideOn; the MouseExited path 0x100070950-0x100070960 posts the leave event through DockEventQueue.addMouseLeave (0x100077298), which only coalesces",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x1000956b8",
+        "dossier 0x100070534"
+      ]
+    },
+    "moveTolerancePoints": {
+      "mouse": 2.0,
+      "tablet": 5.0,
+      "unit": "pt",
+      "confidence": "high",
+      "readAt": "0x100070c20-0x100070c4c: kCGMouseEventSubtype 0 selects 2.0, otherwise 5.0; a move farther than that from the armed point re-arms the delay timer at 0x100070c50-0x100070c84",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x100070534"
+      ]
+    },
+    "edgeStripThicknessPoints": {
+      "value": 2.0,
+      "unit": "pt",
+      "confidence": "high",
+      "readAt": "0x1000130d8-0x100013100 (bottom), 0x10001316c-0x100013184 (left), 0x1000131f0-0x100013214 (right) in the bar-frame function 0x1000128f0; initial strip at 0x10005bd8c-0x10005be88 in -[DockBar activate]",
+      "role": "with autohide on, once the bar's in-bar band is thinner than 2 pt the event rect becomes a 2 pt strip along the whole stage edge",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x1000128f0 (research/local/dock-magnification)"
+      ]
+    },
+    "inBarBandAbovePoints": {
+      "value": 10.0,
+      "unit": "pt",
+      "confidence": "high",
+      "readAt": "fmov s0, #-10.0 at 0x100012fbc (bottom), 0x100012f24 (left) and fmov s0, #10.0 at 0x100012e8c (right) in 0x1000128f0",
+      "role": "the in-bar band and, with autohide on, the event rect reach 10 pt past the tiles' outer edge",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py"
+      ]
+    },
+    "backgroundEventMask": {
+      "value": "0x360",
+      "bits": [
+        5,
+        6,
+        8,
+        9
+      ],
+      "meaning": "MouseMoved, LeftMouseDragged, MouseEntered, MouseExited",
+      "confidence": "high",
+      "readAt": "initial word at 0x1003fa108 (__DATA); loaded at 0x10005bea0, 0x100013274, 0x10025e35c, 0x10025e60c; bit 10 is added during drags at 0x1000b3edc and removed at 0x1000b4010",
+      "appliedBy": "0x10000b0cc -> -[BackgroundEventsController setMask:shape:] (0x1000df8d8) -> CGSSetBackgroundEventMaskAndShape at 0x1000df9e4 with DockBar.rect",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py"
+      ]
+    },
+    "digDuration": {
+      "durationSeconds": 0.25,
+      "perFrameSeconds": 0.1,
+      "angleDegrees": 25.0,
+      "log": false,
+      "confidence": "high",
+      "preferences": [
+        "digduration-duration",
+        "digduration-perframe",
+        "digduration-angle",
+        "digduration-log"
+      ],
+      "readAt": "0x10006ee4c-0x10006ee9c in -[DockBarMouseEventHandler initWithConnection:]",
+      "role": "replaces the autohide delay when the pointer enters from a non-user space (a full-screen app) or on another display with a mouse: the pointer must keep pushing toward the edge, with no more than perFrame between moves and within angle of the edge normal, for duration",
+      "readAtUse": "0x1000709a4-0x100070a74 (arm), 0x100070ac8-0x100070bc0 (re-arm on move), 0x100070d14-0x100070e5c (fire)",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x10006edbc",
+        "dossier 0x100070534"
+      ]
+    },
+    "launchReveal": {
+      "delayMilliseconds": 500,
+      "durationMilliseconds": 550,
+      "confidence": "high",
+      "readAt": "0x10025863c-0x100258680: autoHide starts at 1 (hidden) and animates to autoHideOn ? 1 : 0 starting mainMillis + 500 for 550 ms",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x100257e34"
+      ]
+    },
+    "geometryDefaults": {
+      "distanceTop": 6.0,
+      "distanceBottom": 10.0,
+      "distanceSides": 8.0,
+      "tileInset": 1.0,
+      "tileSize": "ceil(tilesize) when 0 < tilesize < 257, else 64 (52 when the main display is at most 800 pt tall)",
+      "largeSize": "ceil(largesize) when 0 < largesize < 513, else 128",
+      "confidence": "high",
+      "readAt": "0x100258378-0x1002583ac (distances), 0x100008578-0x100008618 (tilesize), 0x10000861c-0x1000086a0 (largesize)",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py",
+        "dossier 0x100257e34"
+      ]
+    },
+    "autohideDefault": {
+      "value": false,
+      "confidence": "high",
+      "readAt": "0x1000086a4-0x1000086e8 reads the autohide boolean preference with default NO",
+      "evidence": [
+        "research/local/dock-magnification/Dock.otool.txt annotated by research/local/dock-autohide/annotate_otool.py"
+      ]
+    }
+  },
+  "model": {
+    "events": "The Dock registers a background-event shape with the window server (mask 0x360). The window server delivers MouseEntered (8), MouseExited (9) and MouseMoved (5) for that shape to -[DockBarMouseEventHandler _handleMoveEvent:type:].",
+    "shape": "DockBar.rect, recomputed by the bar-frame function 0x1000128f0 on every update and pushed when it changes. Autohide off: the in-bar rect, [D(barLeft) - distanceSides, D(barRight) + distanceSides] along the edge and from 10 pt beyond the tiles' outer edge to the screen edge across it. Autohide on: the full stage length along the edge, same band across it; when that band is under 2 pt (bar hidden) it becomes a 2 pt strip along the whole screen edge.",
+    "show": "MouseEntered while the Dock is hidden or hiding: arm a one-shot dispatch timer on the main queue for autohideDelay (0.15 s). A MouseMoved more than 2 pt (mouse) or 5 pt (tablet) from the armed point re-arms it. MouseExited cancels it. On fire, _mouseEnterHelper posts a mouse-enter event; handleDockEventMouseEnter: calls startAutoShowAndShowAllWindows, which animates autoHide from its current value to 0. While the Dock is visible, re-entry posts the event immediately.",
+    "hide": "MouseExited with no timer pending posts a mouse-leave event; handleDockEventMouseLeave: calls startAutoHide at once (autoHide -> 1). No hide delay exists; only the slide duration applies.",
+    "offset": "autoHideOffset = (distanceTop + tileSize + distanceBottom + 10) * autoHide.now, applied along the hide axis by the bar-frame function; 0 shown, bar height + 10 pt hidden.",
+    "duration": "ms = floor(ln(delta / 2 + 1) + 1) * 60 * autohide-time-modifier; delta is the remaining travel described above. 240 ms for the default geometry.",
+    "curve": "DockFloatAnimatedProperty with easing kind 1: now = from + (to - from) * (0.5 - 0.5 cos(pi * clamp(t / duration, 0, 1)))."
+  },
+  "workedExamples": [
+    {
+      "tileSize": 64,
+      "note": "default on this Mac",
+      "barHeight": 80,
+      "hiddenOffset": 90,
+      "hideDeltaPoints": 80,
+      "hideMilliseconds": 240,
+      "showDeltaPoints": 74,
+      "showMilliseconds": 240
+    },
+    {
+      "tileSize": 52,
+      "note": "default on displays at most 800 pt tall",
+      "barHeight": 68,
+      "hiddenOffset": 78,
+      "hideDeltaPoints": 68,
+      "hideMilliseconds": 240,
+      "showDeltaPoints": 62,
+      "showMilliseconds": 240
+    },
+    {
+      "tileSize": 48,
+      "note": "common custom size",
+      "barHeight": 64,
+      "hiddenOffset": 74,
+      "hideDeltaPoints": 64,
+      "hideMilliseconds": 240,
+      "showDeltaPoints": 58,
+      "showMilliseconds": 240
+    },
+    {
+      "tileSize": 16,
+      "note": "smallest tile",
+      "barHeight": 32,
+      "hiddenOffset": 42,
+      "hideDeltaPoints": 32,
+      "hideMilliseconds": 180,
+      "showDeltaPoints": 26,
+      "showMilliseconds": 180
+    },
+    {
+      "tileSize": 128,
+      "note": "largest tile",
+      "barHeight": 144,
+      "hiddenOffset": 154,
+      "hideDeltaPoints": 144,
+      "hideMilliseconds": 300,
+      "showDeltaPoints": 138,
+      "showMilliseconds": 300
+    }
+  ],
+  "limitations": [
+    "Static reading only; no pointer, timer or frame timing was measured on the running Dock.",
+    "The window server's delivery latency for background MouseEntered/MouseExited events and dispatch's timer leeway (requested 0) are not in this binary.",
+    "stageWidth and stageHeight are DisplayDescriptor properties read as the usable edge length; their derivation from the display was not traced.",
+    "The dig-duration path, display switching, temporarily revealed Dock (DockVisibility) and the drag-leave path are recorded from the code but not modelled.",
+    "Addresses, offsets and constants are specific to build 26A5421a.",
+    "Three REA function runs ended in provider_timeout (330 s): 0x10007107c and 0x100098768 while a second Ghidra instance was running, 0x1000956b8 alone. All three were repeated successfully; the failed envelopes are kept as dock-fn-<address>.failed-<timestamp>.json."
+  ],
+  "retriedRuns": [
+    "dock-fn-10007107c.failed-1792057540.json",
+    "dock-fn-1000956b8.failed-1792058443.json",
+    "dock-fn-100098768.failed-1792057540.json"
+  ]
+}

@@ -102,7 +102,19 @@ void Dock::applyGlass()
     KWindowEffects::enableBackgroundContrast(m_window, true, 0.6, 1.0, 0.9, glass);
     // Everything above the glass, between its edges, must take clicks: magnified tiles
     // rise well above it. The rest of the strip stays transparent to input.
-    m_window->setMask(QRegion(QRect(int(x), 0, int(width), int(y + height + 1))));
+    if (m_hiddenStrip) {
+        m_window->setMask(QRegion(QRect(0, m_window->height() - 2, m_window->width(), 2)));
+    } else if (m_autohide) {
+        m_window->setMask(QRegion(QRect(int(x) - 10, 0, int(width) + 20, m_window->height())));
+    } else {
+        m_window->setMask(QRegion(QRect(int(x), 0, int(width), int(y + height + 1))));
+    }
+}
+
+void Dock::setHiddenStrip(bool hidden)
+{
+    m_hiddenStrip = hidden;
+    applyGlass();
 }
 
 void Dock::setExclusiveZone(int pixels)

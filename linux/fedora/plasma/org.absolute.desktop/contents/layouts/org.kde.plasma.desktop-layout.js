@@ -18,7 +18,8 @@
         "org.kde.plasma.trash",
         "org.absolute.appname",
         "org.absolute.spotlight",
-        "org.absolute.controlcentre"
+        "org.absolute.controlcentre",
+        "org.absolute.clock"
     ];
     if (parseInt(applicationVersion, 10) < 6) {
         throw new Error("Absolute requires KDE Plasma 6.");
@@ -157,26 +158,19 @@
     var tray = widget(menubar, "org.kde.plasma.systemtray");
     configure(tray, "General", {
         scaleIconsToFit: false,
-        // Plasma's notifications applet is the notification server itself, so it stays.
-        extraItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery,org.kde.plasma.notifications",
+        // Absolute's Notification Centre owns the notification service, so Plasma's
+        // notifications applet stays out of the tray (it would take the service first).
+        extraItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
         // Every applet id counts as already known, so no tray plasmoid gets auto-enabled.
         knownItems: knownWidgetTypes.join(","),
-        shownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery,org.kde.plasma.notifications",
+        shownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
         hiddenItems: ""
     });
     widget(menubar, "org.absolute.spotlight");
     widget(menubar, "org.absolute.controlcentre");
-    configure(widget(menubar, "org.kde.plasma.digitalclock"), "Appearance", {
-        showDate: true,
-        dateFormat: "custom",
-        customDateFormat: "ddd d MMM",
-        dateDisplayFormat: 1,
-        showSeconds: 0,
-        use24hFormat: 0,
-        fontWeight: 500
-    });
+    widget(menubar, "org.absolute.clock");
     settle(menubar, ["org.kde.plasma.kickoff", "org.absolute.appname", "org.kde.plasma.appmenu", "org.kde.plasma.panelspacer",
-                     "org.kde.plasma.systemtray", "org.absolute.spotlight", "org.absolute.controlcentre", "org.kde.plasma.digitalclock"]);
+                     "org.kde.plasma.systemtray", "org.absolute.spotlight", "org.absolute.controlcentre", "org.absolute.clock"]);
 
     // Dock: Launchpad, the applications, running windows, then the Trash. When Absolute's
     // own Dock is installed it takes this place, and no Plasma panel is created for it.

@@ -23,6 +23,42 @@ Window {
     readonly property int headroom: large + Math.round(tile * 0.75)
     height: headroom + glassHeight + bottomMargin
 
+    // Autohide, from research/DOCK-AUTOHIDE.md: the bar slides by distanceTop + tile +
+    // distanceBottom + 10 (nothing stays on screen), the show starts 0.15 s after the
+    // pointer rests on a 2 px strip along the edge, the hide starts as soon as it leaves
+    // the band 10 px beyond the glass, and both slides take floor(ln(d/2 + 1) + 1) × 60 ms
+    // with a cosine ease, d being the travel left.
+    readonly property bool autohide: dockHost.autohide
+    readonly property real hiddenOffset: glassHeight + bottomMargin + 10
+    property real hideOffset: 0
+    property bool hidden: false
+    function slideDuration(distance) { return Math.floor(Math.log(distance / 2 + 1) + 1) * 60; }
+    NumberAnimation { id: slide; target: root; property: "hideOffset"; easing.type: Easing.InOutSine }
+    function slideTo(target) {
+        slide.stop();
+        slide.duration = slideDuration(Math.abs(target - hideOffset));
+        slide.to = target;
+        slide.start();
+    }
+    function showBar() {
+        if (!autohide) { return; }
+        showTimer.stop();
+        hidden = false;
+        dockHost.setHiddenStrip(false);
+        slideTo(0);
+    }
+    function hideBar() {
+        if (!autohide || hidden) { return; }
+        hidden = true;
+        fish = 0;
+        slideTo(hiddenOffset);
+    }
+    onHideOffsetChanged: if (hidden && hideOffset >= hiddenOffset - 0.5) { dockHost.setHiddenStrip(true); }
+    Timer { id: showTimer; interval: 150; onTriggered: root.showBar() }
+    property point armedPoint: Qt.point(-100, -100)
+    // The Mac reveals the Dock 500 ms after launch, then it hides.
+    Timer { id: launchHide; interval: 500; running: root.autohide; onTriggered: root.hideBar() }
+
     // The fish: 0 at rest, 1 fully magnified, ramping linearly over the measured duration.
     property real fish: 0
     property real center: 0
@@ -33,7 +69,9 @@ Window {
     // Unmagnified layout: slots left to right. The left section is the task tiles with
     // Launchpad in slot 1; the right section, after the separator, holds Downloads and Trash.
     readonly property int leftCount: Math.max(taskRepeater.count, 1) + 1
-    readonly property int rightCount: 2
+    // Minimised windows take tiles right of the separator, before Downloads and Trash.
+    readonly property int rightCount: 2 + minimisedRepeater.count
+    readonly property int nextMinimisedSlot: leftCount + minimisedRepeater.count
     readonly property int slotCount: leftCount + rightCount
     readonly property int separatorWidth: Math.round(tile * 0.4)
     readonly property real barLength: slotCount * tile + (slotCount - 1) * spacing + separatorWidth
@@ -63,7 +101,7 @@ Window {
             dockHost.setGlass(glassX, glassY, glassW, glassHeight, glassRadius);
         }
     }
-    Component.onCompleted: dockHost.setExclusiveZone(glassHeight + bottomMargin)
+    Component.onCompleted: dockHost.setExclusiveZone(autohide ? 0 : glassHeight + bottomMargin)
 
     TaskManager.VirtualDesktopInfo { id: virtualDesktopInfo }
     TaskManager.ActivityInfo { id: activityInfo }
@@ -82,42 +120,169 @@ Window {
         separateLaunchers: false
         Component.onCompleted: launcherList = dockHost.launchers
     }
+    // Only the minimised windows, one tile each.
+    TaskManager.TasksModel {
+        id: minimisedModel
+        virtualDesktop: virtualDesktopInfo.currentDesktop
+        activity: activityInfo.currentActivity
+        filterByVirtualDesktop: false
+        filterByActivity: false
+        filterByScreen: false
+        filterMinimized: false
+        filterNotMinimized: true
+        sortMode: TaskManager.TasksModel.SortManual
+        groupMode: TaskManager.TasksModel.GroupDisabled
+        launchInPlace: false
+        separateLaunchers: false
+    }
 
-    // Glass
-    Rectangle {
-        id: glass
-        x: root.glassX
-        y: root.glassY
-        width: root.glassW
-        height: root.glassHeight
-        radius: root.glassRadius
-        color: Qt.rgba(0.13, 0.14, 0.19, 0.58)
-        border.width: 1
-        border.color: Qt.rgba(1, 1, 1, 0.16)
-        Rectangle {   // inner highlight along the top edge
-            x: 1; y: 1; width: parent.width - 2; height: 1
-            color: Qt.rgba(1, 1, 1, 0.10)
+    // Everything visible slides together when the bar hides.
+    Item {
+        id: content
+        anchors.fill: parent
+        transform: Translate { y: root.hideOffset }
+        // Glass
+        Rectangle {
+            id: glass
+            x: root.glassX
+            y: root.glassY
+            width: root.glassW
+            height: root.glassHeight
+            radius: root.glassRadius
+            color: Qt.rgba(0.13, 0.14, 0.19, 0.58)
+            border.width: 1
+            border.color: Qt.rgba(1, 1, 1, 0.16)
+            Rectangle {   // inner highlight along the top edge
+                x: 1; y: 1; width: parent.width - 2; height: 1
+                color: Qt.rgba(1, 1, 1, 0.10)
+            }
+        }
+
+        // Separator between the application section and the right section.
+        Rectangle {
+            x: root.slotStart(root.leftCount) - root.separatorWidth / 2 - 0.5
+            y: root.glassY + root.pad * 0.9
+            width: 1
+            height: root.glassHeight - root.pad * 1.8
+            color: Qt.rgba(1, 1, 1, 0.22)
+            // The separator sits in the unmagnified bar; displace it like a tile edge.
+            transform: Translate { x: Mag.displace(root.slotStart(root.leftCount) - root.separatorWidth / 2, root.center, root.tile, root.large, root.fish) - (root.slotStart(root.leftCount) - root.separatorWidth / 2) }
+        }
+
+        // Application tiles from the task model.
+        Repeater {
+            id: taskRepeater
+            model: tasksModel
+            delegate: Tile {
+                id: taskTile
+                required property int index
+                required property var model
+                slot: root.taskSlot(index)
+                icon: model.decoration
+                label: model.display
+                running: model.IsWindow || model.IsGroupParent
+                active: model.IsActive
+                startup: model.IsStartup
+                onClicked: {
+                    const idx = tasksModel.makeModelIndex(index);
+                    if (model.IsLauncher) {
+                        tasksModel.requestNewInstance(idx);
+                    } else if (model.IsGroupParent) {
+                        tasksModel.requestActivate(tasksModel.makeModelIndex(index, 0));
+                    } else {
+                        tasksModel.requestActivate(idx);
+                    }
+                }
+                onRightClicked: root.openMenu(index, model.IsLauncher, model.IsWindow || model.IsGroupParent, model.IsGroupParent ? model.ChildCount : 1, model.LauncherUrlWithoutIcon, taskTile)
+                // Where a window of this application minimises to: the next free tile right
+                // of the separator, as the Mac does unless "minimise into application icon" is on.
+                function publish() {
+                    const target = Qt.rect(root.slotStart(root.nextMinimisedSlot), root.glassY + root.pad, root.tile, root.tile);
+                    if (model.IsGroupParent) {
+                        for (let c = 0; c < model.ChildCount; ++c) {
+                            tasksModel.requestPublishDelegateGeometry(tasksModel.makeModelIndex(index, c), target, root);
+                        }
+                    } else if (model.IsWindow) {
+                        tasksModel.requestPublishDelegateGeometry(tasksModel.makeModelIndex(index), target, root);
+                    }
+                }
+                Timer { id: publishTimer; interval: 120; onTriggered: taskTile.publish() }
+                onRunningChanged: publishTimer.restart()
+                onXChanged: publishTimer.restart()
+                onWidthChanged: publishTimer.restart()
+                Component.onCompleted: publishTimer.restart()
+                Connections {
+                    target: minimisedRepeater
+                    function onCountChanged() { publishTimer.restart(); }
+                }
+            }
+        }
+
+        Tile {
+            slot: 1
+            icon: "qrc:/qml/launchpad.svg"
+            label: "Launchpad"
+            onClicked: dockHost.openLaunchpad()
+        }
+        // Minimised windows: a tile each, restored with a click; a window un-minimises from it.
+        Repeater {
+            id: minimisedRepeater
+            model: minimisedModel
+            delegate: Tile {
+                id: minimisedTile
+                required property int index
+                required property var model
+                slot: root.leftCount + index
+                icon: model.decoration
+                label: model.display
+                onClicked: minimisedModel.requestToggleMinimized(minimisedModel.makeModelIndex(index))
+                function publish() {
+                    minimisedModel.requestPublishDelegateGeometry(minimisedModel.makeModelIndex(index), Qt.rect(0, 0, width, height), minimisedTile.iconItem);
+                }
+                Timer { id: minimisedPublish; interval: 120; onTriggered: minimisedTile.publish() }
+                onXChanged: minimisedPublish.restart()
+                onWidthChanged: minimisedPublish.restart()
+                Component.onCompleted: minimisedPublish.restart()
+            }
+        }
+        Tile {
+            slot: root.leftCount + minimisedRepeater.count
+            icon: "folder-download"
+            label: "Downloads"
+            onClicked: dockHost.openPath(dockHost.homePath + "/Downloads")
+        }
+        Tile {
+            slot: root.leftCount + minimisedRepeater.count + 1
+            icon: dockHost.trashEmpty ? "user-trash" : "user-trash-full"
+            label: "Trash"
+            onClicked: dockHost.openTrash()
         }
     }
 
-    // Separator between the application section and the right section.
-    Rectangle {
-        x: root.slotStart(root.leftCount) - root.separatorWidth / 2 - 0.5
-        y: root.glassY + root.pad * 0.9
-        width: 1
-        height: root.glassHeight - root.pad * 1.8
-        color: Qt.rgba(1, 1, 1, 0.22)
-        // The separator sits in the unmagnified bar; displace it like a tile edge.
-        transform: Translate { x: Mag.displace(root.slotStart(root.leftCount) - root.separatorWidth / 2, root.center, root.tile, root.large, root.fish) - (root.slotStart(root.leftCount) - root.separatorWidth / 2) }
-    }
-
-    // Pointer tracking over the glass column.
+    // Pointer tracking over the glass column, and the autohide trigger.
     HoverHandler {
         id: hover
         onPointChanged: root.trackPointer(point.position)
-        onHoveredChanged: if (!hovered) { root.fish = 0; }
+        onHoveredChanged: {
+            if (!hovered) {
+                root.fish = 0;
+                showTimer.stop();
+                root.hideBar();
+            } else if (root.hidden) {
+                root.armedPoint = point.position;
+                showTimer.restart();
+            }
+        }
     }
     function trackPointer(p) {
+        if (hidden) {
+            // Moving more than 2 px from the armed point re-arms the 0.15 s delay.
+            if (Math.abs(p.x - armedPoint.x) > 2 || Math.abs(p.y - armedPoint.y) > 2) {
+                armedPoint = p;
+                showTimer.restart();
+            }
+            return;
+        }
         const over = p.x >= glassX && p.x <= glassX + glassW && p.y >= glassY - (large - tile) && p.y <= height;
         if (over) {
             center = Math.min(Math.max(p.x, slotStart(0)), slotStart(slotCount - 1) + tile);
@@ -125,68 +290,6 @@ Window {
         } else {
             fish = 0;
         }
-    }
-
-    // Application tiles from the task model.
-    Repeater {
-        id: taskRepeater
-        model: tasksModel
-        delegate: Tile {
-            id: taskTile
-            required property int index
-            required property var model
-            slot: root.taskSlot(index)
-            icon: model.decoration
-            label: model.display
-            running: model.IsWindow || model.IsGroupParent
-            active: model.IsActive
-            startup: model.IsStartup
-            onClicked: {
-                const idx = tasksModel.makeModelIndex(index);
-                if (model.IsLauncher) {
-                    tasksModel.requestNewInstance(idx);
-                } else if (model.IsGroupParent) {
-                    tasksModel.requestActivate(tasksModel.makeModelIndex(index, 0));
-                } else {
-                    tasksModel.requestActivate(idx);
-                }
-            }
-            onRightClicked: root.openMenu(index, model.IsLauncher, model.IsWindow || model.IsGroupParent, model.IsGroupParent ? model.ChildCount : 1, model.LauncherUrlWithoutIcon, taskTile)
-            // Where a window of this application minimises to: the tile itself.
-            function publish() {
-                if (model.IsGroupParent) {
-                    for (let c = 0; c < model.ChildCount; ++c) {
-                        tasksModel.requestPublishDelegateGeometry(tasksModel.makeModelIndex(index, c), Qt.rect(0, 0, width, height), taskTile.iconItem);
-                    }
-                } else if (model.IsWindow) {
-                    tasksModel.requestPublishDelegateGeometry(tasksModel.makeModelIndex(index), Qt.rect(0, 0, width, height), taskTile.iconItem);
-                }
-            }
-            Timer { id: publishTimer; interval: 120; onTriggered: taskTile.publish() }
-            onRunningChanged: publishTimer.restart()
-            onXChanged: publishTimer.restart()
-            onWidthChanged: publishTimer.restart()
-            Component.onCompleted: publishTimer.restart()
-        }
-    }
-
-    Tile {
-        slot: 1
-        icon: "qrc:/qml/launchpad.svg"
-        label: "Launchpad"
-        onClicked: dockHost.openLaunchpad()
-    }
-    Tile {
-        slot: root.leftCount
-        icon: "folder-download"
-        label: "Downloads"
-        onClicked: dockHost.openPath(dockHost.homePath + "/Downloads")
-    }
-    Tile {
-        slot: root.leftCount + 1
-        icon: dockHost.trashEmpty ? "user-trash" : "user-trash-full"
-        label: "Trash"
-        onClicked: dockHost.openTrash()
     }
 
     // Context menu for application tiles.

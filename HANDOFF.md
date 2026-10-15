@@ -55,7 +55,31 @@ on Ctrl+Up and Meta+Up; a `pkill -f` pattern must not match the ssh shell's
 own command line; `script/vm_fedora.sh push` wipes build directories under the
 pushed tree, so builds go under `~/.cache/absolute/build`. The VM now runs as
 a UTM bundle for GPU acceleration (`vm_fedora.sh utm`), pinned to 3456x2160 at
-2x. The roadmap table carries the state of every goal item.
+2x. Later the same night: Launchpad (`linux/launchpad`), Finder through Dolphin
+(`--finder`: sidebar, toolbar, views, the Finder name through en_AU catalogs),
+Quick Look (`linux/quicklook`, a layer surface so it never becomes a Dock task),
+About Absolute (`kcm-about-distrorc` with the rendered logo), and Absolute's own
+KDecoration3 window decoration (`linux/kwin/decoration`) drawn to numbers read
+from the Mac through AppKit (32 pt titlebar, 14 pt lights at 9/32/55 pt, 16 pt
+corners). In progress: `linux/notificationcentre`, which owns the notification
+service (it sets the `_plasma_dbus_master` property so libnotificationmanager
+registers the name), draws the top-right popups and the right-edge history, and
+is opened from the `org.absolute.clock` applet that replaces Plasma's clock; the
+layout keeps Plasma's notifications applet out of the tray for that reason.
+Fedora's Qt logging config hides debug output, so QML diagnostics use
+`console.warn`. The roadmap table carries the state of every goal item.
+
+Late that night Romil had the Fedora Asahi partitions removed from the Mac to
+free 520 GB for macOS (the stub, EFI, /boot and root partitions; the macOS
+container grew to 994.7 GB). The copy of the stub's boot files taken first was
+lost when the Mac froze mid-operation and was force-restarted; nothing on the
+partition was unique (installed 14 October, booted once). Running Absolute on
+real hardware therefore starts with a fresh Asahi install; until then the
+Fedora 44 VM is the only rig. The Dock's autohide numbers were recovered from
+Apple's Dock by REA the same night (`research/DOCK-AUTOHIDE.md`) and the Dock
+code carries them, untested in the VM at the time of this note, together with
+the minimised-window tiles, the Plymouth theme, the sound set and the
+Notification Centre fix.
 
 ## Implementation direction
 
