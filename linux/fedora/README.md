@@ -49,7 +49,7 @@ bash script/vm_fedora.sh stop
 ```
 
 The machine lives under `~/.local/share/absolute/vm`. Its user is `romil`
-(password `absolute`), signs in automatically, and runs at 2880x1800 with
+(password `absolute`), signs in automatically, and runs at 3456x2160 with
 2x scaling. Homebrew's QEMU has no virgl, so under `start --window` the
 desktop is software rendered and animations crawl. For smooth animations run
 it under UTM (`brew install --cask utm`, free):

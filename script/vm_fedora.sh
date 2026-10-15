@@ -30,8 +30,8 @@ VM_USER=romil
 VM_PASSWORD=absolute
 CPUS="${ABSOLUTE_VM_CPUS:-8}"
 MEMORY="${ABSOLUTE_VM_MEMORY:-12G}"
-WIDTH="${ABSOLUTE_VM_WIDTH:-2880}"
-HEIGHT="${ABSOLUTE_VM_HEIGHT:-1800}"
+WIDTH="${ABSOLUTE_VM_WIDTH:-3456}"
+HEIGHT="${ABSOLUTE_VM_HEIGHT:-2160}"
 
 usage() {
     cat <<EOF
@@ -179,6 +179,10 @@ write_files:
       Relogin=false
   - path: /etc/absolute-vm
     content: "This Fedora runs inside Absolute's virtual machine on the Mac.\n"
+runcmd:
+  # A display mode matching the Mac's full screen (under the notch), so UTM at full
+  # screen shows the desktop pixel for pixel; KWin takes it as the preferred mode.
+  - grubby --update-kernel=ALL --args="video=Virtual-1:${WIDTH}x${HEIGHT}@60"
 EOF
     rm -f "$SEED"
     hdiutil makehybrid -quiet -iso -joliet -default-volume-name cidata -o "$SEED" "$seed_dir"
