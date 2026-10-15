@@ -31,7 +31,7 @@ WHITESUR_GTK=d5782652d412137e26fb8ff55b55a5572e4c6995
 PACKAGES=(plasma-desktop plasma-workspace sddm sddm-kcm kde-gtk-config breeze-gtk kvantum
           dolphin konsole kate gwenview elisa okular ark spectacle kcalc plasma-systemmonitor
           plasma-discover firefox keepassxc
-          rsms-inter-fonts jetbrains-mono-fonts
+          rsms-inter-fonts jetbrains-mono-fonts brightnessctl
           git python3-numpy python3-pillow rsync)
 
 DO_PACKAGES=true; DO_THEMES=true; DO_PROFILE=true; DO_APPLY=false; DO_SDDM=false; DO_FIREFOX=true; DO_MAC_KEYS=false; DO_DOCK=false
@@ -180,6 +180,14 @@ install_profile() {
     rm -rf "$PROFILE_DIR"
     mv "$staged" "$PROFILE_DIR"
     note "Installed the Absolute profile at $PROFILE_DIR"
+    # Absolute's own menu bar applets: application name, search, Control Centre.
+    mkdir -p "$DATA_DIR/plasma/plasmoids"
+    for applet in "$ROOT_DIR"/linux/fedora/plasma/applets/*/; do
+        local id
+        id="$(basename "$applet")"
+        rm -rf "$DATA_DIR/plasma/plasmoids/$id"
+        cp -a "$applet" "$DATA_DIR/plasma/plasmoids/$id"
+    done
     # The same image as a wallpaper package, so it is listed in System Settings > Wallpaper.
     local pack="$DATA_DIR/wallpapers/Absolute"
     mkdir -p "$pack/contents/images"
@@ -289,6 +297,10 @@ apply_settings() {
     write_setting kwinrc Plugins blurEnabled true
     write_setting kwinrc Plugins overviewEnabled true
     write_setting kwinrc Plugins contrastEnabled true
+    # Windows open and close with the Mac's quick scale, not Plasma's fade.
+    write_setting kwinrc Plugins scaleEnabled true
+    write_setting kwinrc Plugins fadeEnabled false
+    write_setting kwinrc Plugins glideEnabled false
     write_setting kwinrc Windows Placement Centered
     write_setting kwinrc org.kde.kdecoration2 ButtonsOnLeft XIA
     write_setting kwinrc org.kde.kdecoration2 ButtonsOnRight ""
@@ -326,6 +338,27 @@ apply_settings() {
     set_shortcut kwin "Window Close" KWin "Close Window" "Meta+Q" "Alt+F4"
     set_shortcut kwin "Window Minimize" KWin "Minimize Window" "Meta+H" "Meta+PgDown"
     set_shortcut kwin "Show Desktop" KWin "Peek at Desktop" "F11" "Meta+D"
+    # The system tray keeps its settings in its own inner containment, which the layout
+    # script cannot reach: Wi-Fi and battery only, nothing hidden, so no overflow chevron.
+    python3 - "$CONFIG_DIR/plasma-org.kde.plasma.desktop-appletsrc" <<'PY'
+import re, sys
+path = sys.argv[1]
+text = open(path).read()
+trays = re.findall(r"\[Containments\]\[(\d+)\]\nactivityId=[^\n]*\n(?:[^\[]*\n)*?plugin=org\.kde\.plasma\.private\.systemtray", text)
+if not trays:
+    trays = [m.group(1) for m in re.finditer(r"\[Containments\]\[(\d+)\]\n((?:(?!\[).*\n)*)", text) if "plugin=org.kde.plasma.private.systemtray" in m.group(2)]
+open("/tmp/absolute-tray-ids", "w").write(" ".join(trays))
+PY
+    for tray in $(cat /tmp/absolute-tray-ids 2>/dev/null); do
+        for key in extraItems knownItems shownItems; do
+            kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc --group Containments --group "$tray" --group General --key "$key" "org.kde.plasma.networkmanagement,org.kde.plasma.battery"
+        done
+        kwriteconfig6 --file plasma-org.kde.plasma.desktop-appletsrc --group Containments --group "$tray" --group General --key hiddenItems ""
+    done
+    rm -f /tmp/absolute-tray-ids
+    # No update badge from Discover's notifier in the bar; Discover itself still updates.
+    mkdir -p "$CONFIG_DIR/autostart"
+    printf '[Desktop Entry]\nType=Application\nName=Discover Notifier\nHidden=true\n' > "$CONFIG_DIR/autostart/org.kde.discover.notifier.desktop"
     # GTK applications follow the theme through Plasma's GTK bridge when it is running.
     if command -v dbus-send >/dev/null && [[ -n "${DBUS_SESSION_BUS_ADDRESS:-}" ]]; then
         dbus-send --session --dest=org.kde.GtkConfig --type=method_call /GtkConfig org.kde.GtkConfig.setGtkTheme string:WhiteSur-Dark 2>/dev/null || true

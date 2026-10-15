@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "Absolute contributors" }],
+        "Category": "Utilities",
+        "Description": "The search icon in the menu bar; opens the search panel",
+        "Icon": "search",
+        "Id": "org.absolute.spotlight",
+        "License": "MIT",
+        "Name": "Search",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

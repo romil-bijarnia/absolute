@@ -1,0 +1,14 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "Absolute contributors" }],
+        "Category": "System Information",
+        "Description": "Control Centre: Wi-Fi, Bluetooth, Focus, display and sound in one glass panel",
+        "Icon": "configure",
+        "Id": "org.absolute.controlcentre",
+        "License": "MIT",
+        "Name": "Control Centre",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
+}

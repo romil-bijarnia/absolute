@@ -1,0 +1,15 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [{ "Name": "Absolute contributors" }],
+        "Category": "Windows and Tasks",
+        "Description": "The active application's name, in the menu bar, with its Hide and Quit menu",
+        "Icon": "window",
+        "Id": "org.absolute.appname",
+        "License": "MIT",
+        "Name": "Application Name",
+        "Version": "0.1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": ["org.kde.plasma.multitasking"]
+}

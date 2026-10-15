@@ -15,7 +15,10 @@
         "org.kde.plasma.digitalclock",
         "org.kde.plasma.icontasks",
         "org.kde.plasma.kickerdash",
-        "org.kde.plasma.trash"
+        "org.kde.plasma.trash",
+        "org.absolute.appname",
+        "org.absolute.spotlight",
+        "org.absolute.controlcentre"
     ];
     if (parseInt(applicationVersion, 10) < 6) {
         throw new Error("Absolute requires KDE Plasma 6.");
@@ -131,7 +134,7 @@
     var menubar = panelForRole("topbar");
     menubar.screen = 0;
     menubar.location = "top";
-    menubar.height = 30;
+    menubar.height = 37;   // the Mac's menu bar on a display with a notch
     menubar.lengthMode = "fill";
     menubar.alignment = "center";
     menubar.offset = 0;
@@ -144,13 +147,23 @@
         menuLabel: "",
         showActionButtonCaption: false
     });
+    widget(menubar, "org.absolute.appname");
     configure(widget(menubar, "org.kde.plasma.appmenu"), "General", {
         compactView: false
     });
     widget(menubar, "org.kde.plasma.panelspacer");
-    configure(widget(menubar, "org.kde.plasma.systemtray"), "General", {
-        scaleIconsToFit: false
+    // The tray carries what the Mac's bar carries: Wi-Fi and battery. Everything else
+    // is not loaded, so no overflow chevron appears.
+    var tray = widget(menubar, "org.kde.plasma.systemtray");
+    configure(tray, "General", {
+        scaleIconsToFit: false,
+        extraItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
+        knownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
+        shownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
+        hiddenItems: ""
     });
+    widget(menubar, "org.absolute.spotlight");
+    widget(menubar, "org.absolute.controlcentre");
     configure(widget(menubar, "org.kde.plasma.digitalclock"), "Appearance", {
         showDate: true,
         dateFormat: "custom",
@@ -160,12 +173,12 @@
         use24hFormat: 0,
         fontWeight: 500
     });
-    settle(menubar, ["org.kde.plasma.kickoff", "org.kde.plasma.appmenu", "org.kde.plasma.panelspacer",
-                     "org.kde.plasma.systemtray", "org.kde.plasma.digitalclock"]);
+    settle(menubar, ["org.kde.plasma.kickoff", "org.absolute.appname", "org.kde.plasma.appmenu", "org.kde.plasma.panelspacer",
+                     "org.kde.plasma.systemtray", "org.absolute.spotlight", "org.absolute.controlcentre", "org.kde.plasma.digitalclock"]);
 
     // Dock: Launchpad, the applications, running windows, then the Trash. When Absolute's
     // own Dock is installed it takes this place, and no Plasma panel is created for it.
-    var ownDock = fileExists(userDataPath("home") + "/.local/bin/absolute-dock");
+    var ownDock = fileExists(userDataPath("config") + "/autostart/org.absolute.Dock.desktop");
     if (ownDock) {
         panels().forEach(function (p) {
             var g = p.currentConfigGroup;
