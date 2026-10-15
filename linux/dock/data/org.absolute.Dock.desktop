@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Absolute Dock
+Comment=The Dock of Absolute's desktop
+Exec=absolute-dock
+Icon=user-desktop
+NoDisplay=true
+X-KDE-autostart-phase=1
+OnlyShowIn=KDE;

@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/Main.qml</file>
+        <file>qml/Tile.qml</file>
+        <file>qml/Magnification.js</file>
+        <file>qml/launchpad.svg</file>
+    </qresource>
+</RCC>

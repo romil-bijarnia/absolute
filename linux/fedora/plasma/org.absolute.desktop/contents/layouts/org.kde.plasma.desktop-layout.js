@@ -163,8 +163,20 @@
     settle(menubar, ["org.kde.plasma.kickoff", "org.kde.plasma.appmenu", "org.kde.plasma.panelspacer",
                      "org.kde.plasma.systemtray", "org.kde.plasma.digitalclock"]);
 
-    // Dock: Launchpad, the applications, running windows, then the Trash.
-    var dock = panelForRole("dock");
+    // Dock: Launchpad, the applications, running windows, then the Trash. When Absolute's
+    // own Dock is installed it takes this place, and no Plasma panel is created for it.
+    var ownDock = fileExists(userDataPath("home") + "/.local/bin/absolute-dock");
+    if (ownDock) {
+        panels().forEach(function (p) {
+            var g = p.currentConfigGroup;
+            p.currentConfigGroup = ["Absolute"];
+            var r = p.readConfig("role", "");
+            p.currentConfigGroup = g;
+            if (r === "dock") { p.remove(); }
+        });
+    }
+    var dock = ownDock ? null : panelForRole("dock");
+    if (dock) {
     dock.screen = 0;
     dock.location = "bottom";
     dock.height = 64;
@@ -198,6 +210,7 @@
     });
     widget(dock, "org.kde.plasma.trash");
     settle(dock, ["org.kde.plasma.kickerdash", "org.kde.plasma.icontasks", "org.kde.plasma.trash"]);
+    }
 
     var currentDesktops = desktopsForActivity(currentActivity());
     for (var desktopIndex = 0; desktopIndex < currentDesktops.length; desktopIndex++) {

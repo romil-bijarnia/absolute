@@ -34,7 +34,7 @@ PACKAGES=(plasma-desktop plasma-workspace sddm sddm-kcm kde-gtk-config breeze-gt
           rsms-inter-fonts jetbrains-mono-fonts
           git python3-numpy python3-pillow rsync)
 
-DO_PACKAGES=true; DO_THEMES=true; DO_PROFILE=true; DO_APPLY=false; DO_SDDM=false; DO_FIREFOX=true; DO_MAC_KEYS=false
+DO_PACKAGES=true; DO_THEMES=true; DO_PROFILE=true; DO_APPLY=false; DO_SDDM=false; DO_FIREFOX=true; DO_MAC_KEYS=false; DO_DOCK=false
 ACTION=install
 ACTION_SET=false
 RESTORE_DIR=
@@ -42,7 +42,7 @@ RESTORE_DIR=
 usage() {
     cat <<'EOF'
 Usage: script/absolute_surface.sh [--check | --install | --apply | --all | --restore BACKUP]
-       options: --no-packages --no-themes --no-firefox --login-screen --mac-keys
+       options: --no-packages --no-themes --no-firefox --login-screen --mac-keys --dock
 
 --check       Report what is installed and active; changes nothing.
 --install     Install packages (sudo dnf), WhiteSur themes (user-local), fonts, the
@@ -56,6 +56,9 @@ Usage: script/absolute_surface.sh [--check | --install | --apply | --all | --res
               (Fedora 44+) or SDDM. Uses sudo.
 --mac-keys    Mac keyboard in every application through Toshy (Cmd+C/V/Q/W/T/Tab and
               the rest, terminal-aware), fetched at a pinned commit. Needs a sign-out.
+--dock        Build and install Absolute's Dock (replaces the Plasma dock panel) and the
+              Genie minimise effect for KWin, from this checkout. Needs sudo for the
+              build packages and the effect plugin; the Dock starts with the session.
 --restore     Restore a preferences backup made by --apply.
 EOF
 }
@@ -71,6 +74,7 @@ while [[ $# -gt 0 ]]; do
         --all) ACTION=all; ACTION_SET=true ;;
         --sddm|--login-screen) DO_SDDM=true; [[ "$ACTION_SET" == true ]] || ACTION=login ;;
         --mac-keys) DO_MAC_KEYS=true; [[ "$ACTION_SET" == true ]] || ACTION=mackeys ;;
+        --dock) DO_DOCK=true; [[ "$ACTION_SET" == true ]] || ACTION=dock ;;
         --no-packages) DO_PACKAGES=false ;;
         --no-themes) DO_THEMES=false ;;
         --no-firefox) DO_FIREFOX=false ;;
@@ -439,6 +443,62 @@ PY
     note "Mac keys installed. Sign out and back in once; Toshy starts with the session."
 }
 
+DOCK_BUILD_PACKAGES=(cmake extra-cmake-modules gcc-c++ kwin-devel qt6-qtbase-devel qt6-qtdeclarative-devel
+    layer-shell-qt-devel kf6-kwindowsystem-devel kf6-kconfig-devel kf6-kcoreaddons-devel libepoxy-devel
+    libdrm-devel mesa-libgbm-devel libxcb-devel xcb-util-devel xcb-util-cursor-devel xcb-util-wm-devel
+    xcb-util-keysyms-devel xcb-util-image-devel kf6-kidletime-devel kf6-kcrash-devel kf6-kdecoration-devel
+    lcms2-devel libdisplay-info-devel libinput-devel pixman-devel kf6-kpackage-devel kf6-kcmutils-devel
+    kf6-knotifications-devel kf6-kservice-devel kf6-ksvg-devel kf6-kguiaddons-devel plasma-activities-devel
+    kf6-kauth-devel kf6-kcolorscheme-devel wayland-devel)
+
+install_dock() {
+    note "Building Absolute's Dock and the Genie effect (sudo for packages and the effect)"
+    local missing=()
+    for package in "${DOCK_BUILD_PACKAGES[@]}"; do rpm -q "$package" >/dev/null 2>&1 || missing+=("$package"); done
+    if [[ ${#missing[@]} -gt 0 ]]; then sudo dnf -y -q install --skip-unavailable "${missing[@]}"; fi
+    local build="$CACHE_DIR/absolute/build"
+    mkdir -p "$build" "$HOME/.local/bin" "$CONFIG_DIR/autostart" "$CONFIG_DIR/absolute"
+    cmake -S "$ROOT_DIR/linux/dock" -B "$build/dock" -DCMAKE_BUILD_TYPE=Release >/dev/null
+    cmake --build "$build/dock" -j"$(nproc)" >/dev/null
+    install -m 0755 "$build/dock/absolute-dock" "$HOME/.local/bin/absolute-dock"
+    cmake -S "$ROOT_DIR/linux/kwin/genie" -B "$build/genie" -DCMAKE_BUILD_TYPE=Release >/dev/null
+    cmake --build "$build/genie" -j"$(nproc)" >/dev/null
+    sudo cmake --install "$build/genie" >/dev/null
+    # The Dock starts with the session and takes the Plasma dock panel's place.
+    cat > "$CONFIG_DIR/autostart/org.absolute.Dock.desktop" <<EOF
+[Desktop Entry]
+Type=Application
+Name=Absolute Dock
+Exec=$HOME/.local/bin/absolute-dock
+Icon=user-desktop
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-autostart-phase=1
+EOF
+    if [[ ! -f "$CONFIG_DIR/absolute/dockrc" ]]; then
+        cat > "$CONFIG_DIR/absolute/dockrc" <<'EOF'
+; Absolute Dock. Sizes in points, as the Mac's Dock keys them.
+tileSize=64
+largeSize=128
+magnification=true
+autohide=false
+EOF
+    fi
+    # Genie replaces Magic Lamp and Squash as the minimise animation.
+    write_setting kwinrc Plugins absolute_genieEnabled true
+    write_setting kwinrc Plugins magiclampEnabled false
+    write_setting kwinrc Plugins squashEnabled false
+    if plasma_running; then
+        session_env
+        busctl --user call org.kde.KWin /KWin org.kde.KWin reconfigure >/dev/null 2>&1 || true
+        busctl --user call org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell evaluateScript s \
+            'panels().forEach(function (p) { var g = p.currentConfigGroup; p.currentConfigGroup = ["Absolute"]; var role = p.readConfig("role", ""); p.currentConfigGroup = g; if (role === "dock") { p.remove(); } });' >/dev/null 2>&1 || true
+        pkill -x absolute-dock >/dev/null 2>&1 || true
+        (setsid "$HOME/.local/bin/absolute-dock" >/dev/null 2>&1 &)
+    fi
+    note "Dock installed: $HOME/.local/bin/absolute-dock (config in $CONFIG_DIR/absolute/dockrc), Genie effect enabled."
+}
+
 restore_desktop() {
     [[ -d "$RESTORE_DIR" && -f "$RESTORE_DIR/manifest.json" ]] || fail 'Choose a backup directory containing manifest.json.'
     session_env
@@ -500,8 +560,10 @@ case "$ACTION" in
         if sudo -n true 2>/dev/null || [[ "$DO_SDDM" == true ]]; then install_login_screen
         else note "Login screen skipped (sudo would prompt); run --login-screen later."; fi
         if [[ "$DO_MAC_KEYS" == true ]]; then install_mac_keys; fi
+        if [[ "$DO_DOCK" == true ]]; then install_dock; fi
         ;;
     login) install_login_screen ;;
     mackeys) install_mac_keys ;;
+    dock) install_dock ;;
     restore) restore_desktop ;;
 esac

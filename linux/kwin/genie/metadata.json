@@ -1,0 +1,12 @@
+{
+    "KPlugin": {
+        "Category": "Appearance",
+        "Description": "Minimise windows into the Dock with the Genie funnel measured from macOS",
+        "EnabledByDefault": false,
+        "License": "MIT",
+        "Name": "Absolute Genie"
+    },
+    "org.kde.kwin.effect": {
+        "exclusiveGroup": "minimize"
+    }
+}
