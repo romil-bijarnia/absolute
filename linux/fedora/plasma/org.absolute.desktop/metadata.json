@@ -3,8 +3,8 @@
     "KPlugin": {
         "Id": "org.absolute.desktop",
         "Name": "Absolute",
-        "Description": "An ocean desktop with an application menu bar and a floating Dock for KDE Plasma 6.",
-        "Version": "0.1.0",
+        "Description": "A macOS-like desktop for KDE Plasma 6: menu bar, floating Dock, WhiteSur appearance and Absolute's night wallpaper.",
+        "Version": "0.2.0",
         "License": "MIT",
         "Authors": [
             { "Name": "Absolute contributors" }

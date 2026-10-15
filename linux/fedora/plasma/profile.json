@@ -1,5 +1,5 @@
 {
-    "schemaVersion": 1,
+    "schemaVersion": 2,
     "pluginId": "org.absolute.desktop",
     "packageDirectory": "org.absolute.desktop",
     "minimumPlasmaMajor": 6,
@@ -10,7 +10,8 @@
         "org.kde.plasma.systemtray",
         "org.kde.plasma.digitalclock",
         "org.kde.plasma.icontasks",
-        "org.kde.plasma.showdesktop"
+        "org.kde.plasma.kickerdash",
+        "org.kde.plasma.trash"
     ],
     "requiredApplicationDesktopIds": [
         ["org.kde.dolphin.desktop"],
@@ -18,12 +19,30 @@
         ["org.kde.konsole.desktop"],
         ["systemsettings.desktop", "org.kde.systemsettings.desktop"]
     ],
+    "optionalApplicationDesktopIds": [
+        ["org.kde.gwenview.desktop"],
+        ["org.kde.elisa.desktop"],
+        ["org.kde.kate.desktop"],
+        ["org.keepassxc.KeePassXC.desktop", "keepassxc.desktop"],
+        ["org.kde.discover.desktop"]
+    ],
     "appearance": {
-        "colorScheme": "BreezeDark",
-        "widgetStyle": "Breeze",
-        "iconTheme": "breeze-dark",
-        "plasmaTheme": "default"
+        "colorScheme": "WhiteSurDark",
+        "widgetStyle": "kvantum-dark",
+        "iconTheme": "WhiteSur-dark",
+        "cursorTheme": "WhiteSur-cursors",
+        "plasmaTheme": "WhiteSur-dark",
+        "windowDecoration": "__aurorae__svg__WhiteSur-dark",
+        "splash": "com.github.vinceliuice.WhiteSur-dark",
+        "fonts": {"interface": "Inter", "monospace": "JetBrains Mono"}
+    },
+    "dependencies": {
+        "WhiteSur-kde": {"url": "https://github.com/vinceliuice/WhiteSur-kde", "commit": "cf4df59"},
+        "WhiteSur-icon-theme": {"url": "https://github.com/vinceliuice/WhiteSur-icon-theme", "commit": "73d8040"},
+        "WhiteSur-cursors": {"url": "https://github.com/vinceliuice/WhiteSur-cursors", "commit": "e190baf"},
+        "WhiteSur-gtk-theme": {"url": "https://github.com/vinceliuice/WhiteSur-gtk-theme", "commit": "d578265"}
     },
     "panelRoles": ["topbar", "dock"],
-    "wallpaper": "org.absolute.desktop/contents/images/ocean.svg"
+    "wallpaper": "org.absolute.desktop/contents/images/absolute-night.png",
+    "wallpaperGenerator": "script/wallpaper_absolute.py"
 }

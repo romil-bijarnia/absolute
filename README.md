@@ -21,30 +21,33 @@ Dock and implemented as `DockMagnification` and `DockMinimise` in `AbsoluteCore`
 each with a browser demo under `research/`.
 [System research and current coverage](research/SYSTEM-COVERAGE.md) records
 what has been inspected, what has been implemented, and what remains open.
-Current deliverables are desktop prototypes, verified file-service behavior,
-reproducible system research, and a native Fedora installer and Plasma profile
-awaiting validation in the physical Fedora session.
+Current deliverables are the Fedora surface installer (built and checked in a
+Fedora 44 virtual machine on the Mac), the two measured Dock behaviors with
+their demos, desktop prototypes, verified file-service behavior and
+reproducible system research.
 
 ## Native Fedora edition
 
 The existing Fedora Asahi KDE system is the deployment target. From a terminal
-in that physical Fedora installation, the source package supports:
+in a Fedora KDE Plasma 6 session, physical or in the project's virtual machine:
 
 ```sh
-bash script/install_fedora.sh --check
-bash script/install_fedora.sh --install --apply-desktop
+bash script/absolute_surface.sh --all
 ```
 
-The installer builds and installs the optional Swift/GTK preview and adds the
-Absolute Plasma profile. The profile uses the installed KWin compositor and real
-Dolphin, Firefox, Konsole and Settings applications. Its top menu bar, floating
-Dock, dark appearance and ocean wallpaper are applied after backing up the
-existing KDE preferences. Installation alone, without `--apply-desktop`, leaves
-the active layout intact.
+That installs the packages, fetches WhiteSur at pinned commits, renders the
+wallpaper, applies the Absolute Plasma profile after backing up the current
+preferences, sets the window, font, search, notification and shortcut
+behaviour, and themes the login screen. The result is the macOS-like surface:
+menu bar with the active application's menus, floating Dock with the Fedora
+applications in their Mac roles, traffic-light window decorations, Inter,
+Magic Lamp minimise, Overview, centred search on Meta+Space. See
+[linux/fedora/README.md](linux/fedora/README.md) for each step, the restore
+command and the virtual machine (`script/vm_fedora.sh`) used to build it.
 
-See [native installation, verification and restore instructions](linux/fedora/README.md).
-The source package can be built with `python3 script/package_fedora.py` and is
-marked `native-validation-pending` until its real Fedora checks pass.
+`script/install_fedora.sh --install` additionally builds the optional Swift/GTK
+preview on the physical installation; its `--apply-desktop` delegates to the
+surface installer.
 
 ## Development previews
 

@@ -4,6 +4,39 @@ This checkpoint is saved on the main branch of
 [romil-bijarnia/absolute](https://github.com/romil-bijarnia/absolute).
 The local checkout is `/Users/romilbijarnia/absolute`.
 
+## Fedora surface, 15 October 2026 evening
+
+Romil's instruction that evening: stop delivering one effect at a time and make
+Fedora look like macOS as a whole first, then switch to that system and keep
+building from inside it. `script/absolute_surface.sh` is that deliverable:
+`--all` installs packages, fetches WhiteSur (KDE, icons, cursors, GTK) at the
+commits pinned in `linux/fedora/plasma/profile.json`, renders the wallpaper
+with `script/wallpaper_absolute.py`, applies the `org.absolute.desktop`
+profile (menu bar, floating Dock, WhiteSur appearance, Inter and JetBrains
+Mono) after a preferences backup, sets KWin (Magic Lamp, blur, Overview,
+centred placement, no borders), the centred search, notifications top right,
+the lock screen, the Konsole profile and the shortcuts through the shortcut
+service, and sets up the login screen (Plasma Login Manager on Fedora 44:
+wallpaper in `/etc/plasmalogin.conf`, theme assets copied for its greeter
+user).
+
+It was built and verified inside a Fedora 44 aarch64 virtual machine created
+by `script/vm_fedora.sh` (Homebrew QEMU with the Hypervisor framework, cloud
+image plus cloud-init, under `~/.local/share/absolute/vm`). Screenshots were
+taken through QEMU's monitor after each change; the desktop, Dolphin, Konsole,
+System Settings, the search, Overview, Launchpad and the login screen all
+render as intended. Plasma there is 6.7.5, the same major release as the
+physical Fedora Asahi 44 installation, whose boot partition records a
+successful boot on 14 October 2026 (`grubenv` `boot_success=1`). Not yet done
+on the physical Mac: running the installer there (it needs a Plasma session
+on that machine), the Firefox WhiteSur tweak, Mac-style modifier remapping for
+applications (Toshy or keyd), and the measured Dock behaviors on this surface.
+Quirks learnt: Qt 6 font strings must use the sixteen-field form; Plasma 6.7
+puts the first widget added to a fresh panel at its end (the layout script
+settles the order); the shortcut service lives inside `kwin_wayland` and
+rewrites `kglobalshortcutsrc`, so shortcuts are set over DBus; the login
+manager ignores its `conf.d`.
+
 ## Implementation direction
 
 Current direction (2026-10-15): the ultimate goal is an open-source macOS
@@ -28,8 +61,9 @@ and macOS compatibility above those components. Prefer upstream integration
 before writing replacements, and preserve the full firmware research scope.
 
 The target is the existing Fedora/Asahi installation on the physical Mac,
-developed into the user's macOS replacement. The user explicitly rejected a VM
-deliverable. The Ubuntu VM below is historical development infrastructure.
+developed into the user's macOS replacement. A VM is not the deliverable; the Fedora 44
+machine from `script/vm_fedora.sh` is the rig the surface is built and checked
+in, and the Ubuntu VM below is historical development infrastructure.
 Read [ROADMAP.md](ROADMAP.md) for the model-specific support boundary. The
 research backlog records unresolved behavior and integration as well as new
 implementation; it is not a list of components that must all be written afresh.
@@ -158,9 +192,11 @@ volume. Tests use isolated state. The project is the VM's writable Mac mount.
 
 ## Next implementation boundaries
 
-1. Boot and inspect the existing physical Fedora KDE/Asahi installation.
-2. Package Absolute for that installation and integrate its existing compositor,
-   application windows and session lifecycle; verify directly on the Mac.
+1. Boot the physical Fedora Asahi installation, clone the repository there and
+   run `bash script/absolute_surface.sh --all`; compare with the VM screenshots.
+2. Put the measured Dock behaviors on this surface (GTK host pointer handling
+   for magnification, a KWin effect for the minimise meshes), then Mac-style
+   modifier remapping and the Passwords migration (KeePassXC).
 3. Expand the measured Mach contract into a cross-process transport and broader
    rights/message handling, keeping each addition tied to native observations.
 4. Map required kernel and service behavior onto the Linux base, integrate Asahi

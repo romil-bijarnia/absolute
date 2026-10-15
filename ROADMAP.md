@@ -19,6 +19,22 @@ framebuffer with software rendering. Daily use on this Mac waits on that driver
 work, which this project cannot close. Development continues so the result is
 ready when the driver lands or on other supported hardware.
 
+Evening of 15 October 2026, after the second unit: the whole surface comes
+first, then the behaviors. Romil wanted to open Fedora and see macOS, not one
+effect at a time, so `script/absolute_surface.sh` now turns a Fedora KDE
+session into the complete look in one run (menu bar with global menus,
+floating Dock, WhiteSur decorations, icons and cursors, Inter, the night
+wallpaper, Magic Lamp, Overview, centred search, Mac-style shortcuts, Konsole
+profile, login screen). It was built and checked inside a Fedora 44 virtual
+machine on the Mac (`script/vm_fedora.sh`), which is the development rig, not
+the deliverable; the same installer runs unchanged on the physical Fedora
+Asahi installation. The Fedora boot partition's `grubenv` carries
+`boot_success=1` written on 14 October 2026 04:35 on a Fedora Asahi Remix 44
+install (kernel 7.1.6-400.asahi), so this Mac has booted Fedora into a user
+session at least once; the GPU remains software rendered until Asahi's M3
+driver lands. The measured behaviors (magnification, minimise) are layered on
+top of this surface next.
+
 Work proceeds one behavior at a time. Each unit observes the behavior on the
 reference Mac, records a specification with an executable check, and implements
 it for Plasma/KWin or as an Absolute component. System-wide inventories and

@@ -197,18 +197,10 @@ PY
 }
 
 apply_desktop() {
-    plasma_preflight
-    if [[ "$ACTION" != install ]]; then install_profile; fi
-    local backup
-    backup="$(desktop_backup)"
-    printf 'Preferences backup: %s\n' "$backup"
-    printf 'Restore command: bash %q --restore-desktop %q\n' "$ROOT_DIR/script/install_fedora.sh" "$backup"
-    plasma-apply-lookandfeel --apply org.absolute.desktop --resetLayout || fail "Profile activation failed. Restore the backup at: $backup"
-    if ! bash "$ROOT_DIR/script/check_fedora.sh" --verify-profile --json > "$backup/applied-profile-check.json"; then
-        fail "Profile activation could not be verified. Review $backup/applied-profile-check.json and restore the backup if needed: $backup"
-    fi
-    printf '%s\n' 'Absolute Plasma topbar, Dock, and required widgets are present. Visual behavior and physical hardware still require interactive checks.'
-    printf 'Native evidence: %s\n' "$backup/applied-profile-check.json"
+    # The desktop surface (WhiteSur, fonts, wallpaper, layout, shortcuts, login screen)
+    # is owned by script/absolute_surface.sh; it takes its own preferences backup.
+    bash "$ROOT_DIR/script/absolute_surface.sh" --install --no-packages
+    bash "$ROOT_DIR/script/absolute_surface.sh" --apply
 }
 
 restore_desktop() {

@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
-// Native Plasma panels and applets; KWin continues to manage application windows.
+// Absolute's desktop layout for KDE Plasma 6: a menu bar across the top and a
+// floating Dock at the bottom, laid out the way macOS lays out its own.
+// KWin keeps managing application windows; every piece here is a native
+// Plasma panel or applet.
 (function () {
     "use strict";
 
@@ -11,7 +14,8 @@
         "org.kde.plasma.systemtray",
         "org.kde.plasma.digitalclock",
         "org.kde.plasma.icontasks",
-        "org.kde.plasma.showdesktop"
+        "org.kde.plasma.kickerdash",
+        "org.kde.plasma.trash"
     ];
     if (parseInt(applicationVersion, 10) < 6) {
         throw new Error("Absolute requires KDE Plasma 6.");
@@ -23,9 +27,13 @@
     }
 
     var assetDirectory = userDataPath("data", "plasma/look-and-feel/" + profile + "/contents/images").replace(/\/+$/, "");
-    var wallpaperPath = assetDirectory + "/ocean.svg";
-    var iconPath = assetDirectory + "/absolute-symbolic.svg";
-    if (!fileExists(wallpaperPath) || !fileExists(iconPath)) {
+    var wallpaperPath = assetDirectory + "/absolute-night.png";
+    if (!fileExists(wallpaperPath)) {
+        wallpaperPath = assetDirectory + "/ocean.svg";
+    }
+    var menuIconPath = assetDirectory + "/absolute-symbolic.svg";
+    var launchpadIconPath = assetDirectory + "/launchpad.svg";
+    if (!fileExists(wallpaperPath) || !fileExists(menuIconPath) || !fileExists(launchpadIconPath)) {
         throw new Error("Install Absolute's complete user-local theme before applying its layout.");
     }
 
@@ -35,16 +43,30 @@
                 return candidates[index];
             }
         }
-        throw new Error("Required desktop application is missing: " + candidates.join(" or "));
+        return null;
     }
 
-    // Resolve each application before changing any panel. These are real Fedora apps.
-    var launcherIds = [
-        installedDesktop(["org.kde.dolphin.desktop"]),
-        installedDesktop(["firefox.desktop", "org.mozilla.firefox.desktop"]),
-        installedDesktop(["org.kde.konsole.desktop"]),
-        installedDesktop(["systemsettings.desktop", "org.kde.systemsettings.desktop"])
+    // The Dock, left to right, with the macOS role each Fedora application plays.
+    // Applications that are not installed are skipped, so the Dock never has a dead tile.
+    var dockApplications = [
+        ["org.kde.dolphin.desktop"],                                   // Finder
+        ["firefox.desktop", "org.mozilla.firefox.desktop"],            // Safari
+        ["org.kde.gwenview.desktop"],                                  // Photos
+        ["org.kde.elisa.desktop"],                                     // Music
+        ["org.kde.kate.desktop"],                                      // Notes
+        ["org.keepassxc.KeePassXC.desktop", "keepassxc.desktop"],      // Passwords
+        ["org.kde.konsole.desktop"],                                   // Terminal
+        ["org.kde.discover.desktop"],                                  // App Store
+        ["systemsettings.desktop", "org.kde.systemsettings.desktop"]   // System Settings
     ];
+    var launcherIds = [];
+    for (var a = 0; a < dockApplications.length; a++) {
+        var id = installedDesktop(dockApplications[a]);
+        if (id) { launcherIds.push("applications:" + id); }
+    }
+    if (launcherIds.length === 0) {
+        throw new Error("None of the Dock's applications are installed.");
+    }
 
     function panelForRole(role) {
         var existing = panels();
@@ -56,6 +78,8 @@
                 candidate.readConfig("role", "") === role;
             candidate.currentConfigGroup = oldGroup;
             if (matches) {
+                // Rebuild the panel's contents from scratch so a second run gives the same order.
+                candidate.widgets().forEach(function (old) { old.remove(); });
                 return candidate;
             }
         }
@@ -67,11 +91,27 @@
         return created;
     }
 
-    function widget(panel, plugin, index) {
-        var existing = panel.widgets(plugin);
-        var result = existing.length ? existing[0] : panel.addWidget(plugin);
-        result.index = index;
-        return result;
+    // Widgets are appended in reading order. Plasma 6.7 puts the first widget added to
+    // a fresh panel at its end, so settle() moves any widget whose position differs from
+    // the intended one; moving only misplaced widgets avoids the setter's off-by-one when
+    // a widget is assigned the index it already has.
+    function widget(panel, plugin) {
+        return panel.addWidget(plugin);
+    }
+
+    function settle(panel, order) {
+        for (var pass = 0; pass < 4; pass++) {
+            var moved = false;
+            for (var position = 0; position < order.length; position++) {
+                var found = panel.widgets(order[position]);
+                if (found.length && found[0].index !== position) {
+                    found[0].index = position;
+                    moved = true;
+                    break;
+                }
+            }
+            if (!moved) { return; }
+        }
     }
 
     function configure(applet, group, values) {
@@ -82,35 +122,43 @@
         applet.currentConfigGroup = [];
     }
 
-    // Reuse our marked panels if the script is run again. Unrelated panels are
-    // removed only by Plasma's deliberate --resetLayout flow, after installer backup.
-    var topbar = panelForRole("topbar");
-    topbar.screen = 0;
-    topbar.location = "top";
-    topbar.height = 34;
-    topbar.lengthMode = "fill";
-    topbar.alignment = "center";
-    topbar.offset = 0;
-    topbar.hiding = "none";
-    topbar.floating = false;
-    topbar.opacity = "translucent";
+    // Menu bar: logo menu, the active application's menus, then status items and the clock.
+    var menubar = panelForRole("topbar");
+    menubar.screen = 0;
+    menubar.location = "top";
+    menubar.height = 30;
+    menubar.lengthMode = "fill";
+    menubar.alignment = "center";
+    menubar.offset = 0;
+    menubar.hiding = "none";
+    menubar.floating = false;
+    menubar.opacity = "translucent";
 
-    configure(widget(topbar, "org.kde.plasma.kickoff", 0), "General", {
-        icon: iconPath,
-        menuLabel: "Absolute"
+    configure(widget(menubar, "org.kde.plasma.kickoff"), "General", {
+        icon: menuIconPath,
+        menuLabel: "",
+        showActionButtonCaption: false
     });
-    widget(topbar, "org.kde.plasma.appmenu", 1);
-    widget(topbar, "org.kde.plasma.panelspacer", 2);
-    widget(topbar, "org.kde.plasma.systemtray", 3);
-    configure(widget(topbar, "org.kde.plasma.digitalclock", 4), "Appearance", {
+    configure(widget(menubar, "org.kde.plasma.appmenu"), "General", {
+        compactView: false
+    });
+    widget(menubar, "org.kde.plasma.panelspacer");
+    configure(widget(menubar, "org.kde.plasma.systemtray"), "General", {
+        scaleIconsToFit: false
+    });
+    configure(widget(menubar, "org.kde.plasma.digitalclock"), "Appearance", {
         showDate: true,
         dateFormat: "custom",
-        customDateFormat: "ddd, d MMM",
+        customDateFormat: "ddd d MMM",
         dateDisplayFormat: 1,
         showSeconds: 0,
-        use24hFormat: 1
+        use24hFormat: 0,
+        fontWeight: 500
     });
+    settle(menubar, ["org.kde.plasma.kickoff", "org.kde.plasma.appmenu", "org.kde.plasma.panelspacer",
+                     "org.kde.plasma.systemtray", "org.kde.plasma.digitalclock"]);
 
+    // Dock: Launchpad, the applications, running windows, then the Trash.
     var dock = panelForRole("dock");
     dock.screen = 0;
     dock.location = "bottom";
@@ -118,19 +166,33 @@
     dock.lengthMode = "fit";
     dock.alignment = "center";
     dock.offset = 0;
-    dock.hiding = "dodgewindows";
+    dock.hiding = "none";
     dock.floating = true;
     dock.opacity = "translucent";
-    configure(widget(dock, "org.kde.plasma.icontasks", 0), "General", {
-        launchers: launcherIds.map(function (id) { return "applications:" + id; }).join(","),
+
+    var launchpad = widget(dock, "org.kde.plasma.kickerdash");
+    configure(launchpad, "General", {
+        icon: launchpadIconPath,
+        useCustomButtonImage: true,
+        customButtonImage: launchpadIconPath
+    });
+    launchpad.globalShortcut = "F4";
+
+    configure(widget(dock, "org.kde.plasma.icontasks"), "General", {
+        launchers: launcherIds.join(","),
         separateLaunchers: false,
         groupingStrategy: 1,
         sortingStrategy: 1,
         showOnlyCurrentDesktop: false,
         showOnlyCurrentScreen: false,
-        iconSpacing: 1
+        showOnlyCurrentActivity: false,
+        iconSpacing: 1,
+        maxStripes: 1,
+        indicateAudioStreams: false,
+        showToolTips: true
     });
-    widget(dock, "org.kde.plasma.showdesktop", 1);
+    widget(dock, "org.kde.plasma.trash");
+    settle(dock, ["org.kde.plasma.kickerdash", "org.kde.plasma.icontasks", "org.kde.plasma.trash"]);
 
     var currentDesktops = desktopsForActivity(currentActivity());
     for (var desktopIndex = 0; desktopIndex < currentDesktops.length; desktopIndex++) {
@@ -138,7 +200,8 @@
         desktop.wallpaperPlugin = "org.kde.image";
         desktop.currentConfigGroup = ["Wallpaper", "org.kde.image", "General"];
         desktop.writeConfig("Image", "file://" + encodeURI(wallpaperPath));
+        desktop.writeConfig("FillMode", 2);
         desktop.currentConfigGroup = [];
     }
-    print("Absolute layout configured with native Plasma panels and application launchers.");
+    print("Absolute layout configured: menu bar, Dock with " + launcherIds.length + " applications, wallpaper.");
 }());
