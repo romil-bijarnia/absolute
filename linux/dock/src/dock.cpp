@@ -10,6 +10,7 @@
 #include <QDBusPendingCall>
 #include <QDesktopServices>
 #include <QDir>
+#include <QFileInfo>
 #include <QPainterPath>
 #include <QProcess>
 #include <QQuickWindow>
@@ -129,8 +130,13 @@ void Dock::runCommand(const QString &command)
 
 void Dock::openLaunchpad()
 {
+    const QString local = QDir::homePath() + QStringLiteral("/.local/bin/") + m_launchpadCommand;
+    if (QFileInfo::exists(local)) {
+        QProcess::startDetached(local, {QStringLiteral("--toggle")});
+        return;
+    }
     if (!QStandardPaths::findExecutable(m_launchpadCommand).isEmpty()) {
-        runCommand(m_launchpadCommand);
+        runCommand(m_launchpadCommand + QStringLiteral(" --toggle"));
         return;
     }
     // Until Absolute's Launchpad exists, the search panel is the nearest thing.

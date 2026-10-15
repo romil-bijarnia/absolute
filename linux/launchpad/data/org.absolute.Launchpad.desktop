@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Launchpad
+Comment=Absolute's application grid
+Exec=absolute-launchpad --toggle
+Icon=applications-all
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-StartupNotify=false
