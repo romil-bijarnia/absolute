@@ -35,6 +35,31 @@ session at least once; the GPU remains software rendered until Asahi's M3
 driver lands. The measured behaviors (magnification, minimise) are layered on
 top of this surface next.
 
+## Goal, set 15 October 2026 evening
+
+Make Absolute indistinguishable from macOS in daily use, in the VM first, then
+on the real Fedora on the Mac. The reference is the Mac next to it. Behaviour
+and look are cloned, assets are drawn, never Apple's. Dark only. Each item is
+done when it is screenshotted next to the Mac and committed.
+
+| # | Item | State |
+| --- | --- | --- |
+| 1 | Mac keyboard in every app (Cmd shortcuts, terminal included); trackpad gestures | keyboard done 15 Oct 2026 (`absolute_surface.sh --mac-keys`, checked in the VM: Cmd+A/C/V/Q/T, Cmd+Space, Ctrl+C in Konsole); gestures need the real trackpad (item 11) |
+| 2 | Passwords: Apple Passwords export into KeePassXC, Firefox autofill, Dock tile | waiting on the export |
+| 3 | Dock: Finder, Launchpad, apps, separator, Downloads, Trash; measured magnification and Genie; bounce, dots, menus, autohide | not started |
+| 4 | Menu bar: logo, bold app name, app menus, Control Centre, Spotlight icon, battery, Wi-Fi, clock; Mac metrics | not started |
+| 5 | Windows: traffic lights, corner radius, shadows, titlebar heights, open/close zoom | not started |
+| 6 | Spotlight panel, notifications and Notification Centre, Cmd+Tab switcher | not started |
+| 7 | Launchpad paged grid, Mission Control with Spaces | not started |
+| 8 | Finder: sidebar sections, toolbar, column view, Quick Look, Get Info, path bar, icons | not started |
+| 9 | System Settings with the Mac sidebar and page layout; About Absolute | not started |
+| 10 | Login screen, lock screen, boot splash; menus, dialogs, sheets, cursor, sounds | not started |
+| 11 | Move onto the real Fedora partition and keep working from inside it | not started |
+
+Rules: work in the VM over ssh; build an Absolute component when KDE cannot be
+configured into it, an app when a piece needs one; reverse engineer only where
+a number lives in Apple's code; everything else is measured on the Mac.
+
 Work proceeds one behavior at a time. Each unit observes the behavior on the
 reference Mac, records a specification with an executable check, and implements
 it for Plasma/KWin or as an Absolute component. System-wide inventories and

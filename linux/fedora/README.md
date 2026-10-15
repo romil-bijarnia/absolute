@@ -35,6 +35,15 @@ bash script/absolute_surface.sh --restore DIR    # undo an --apply from its back
 Sign out and back in once after `--apply` so every application picks up the
 fonts and theme.
 
+`--mac-keys` adds the Mac keyboard: Toshy (pinned commit) remaps per
+application, so Cmd+C/V/X/Z/A, Cmd+Q, Cmd+W, Cmd+T, Cmd+Tab and Cmd+Space do
+what they do on a Mac in every app, with Cmd+C copying in the terminal while
+Ctrl+C still interrupts. The keyboard reaches a virtual machine as "QEMU Virtio
+Keyboard" and the Mac as its internal keyboard; both are declared Apple layouts
+in Toshy's config. Because physical Ctrl then reaches KWin as Meta, Overview is
+bound to both Ctrl+Up and Meta+Up and App Exposé to Ctrl+Down and Meta+Down.
+Needs one sign-out; Toshy's tray icon is hidden to keep the menu bar clean.
+
 ## The virtual machine
 
 `script/vm_fedora.sh` builds a Fedora 44 aarch64 machine with Homebrew's QEMU

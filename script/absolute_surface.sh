@@ -34,7 +34,7 @@ PACKAGES=(plasma-desktop plasma-workspace sddm sddm-kcm kde-gtk-config breeze-gt
           rsms-inter-fonts jetbrains-mono-fonts
           git python3-numpy python3-pillow rsync)
 
-DO_PACKAGES=true; DO_THEMES=true; DO_PROFILE=true; DO_APPLY=false; DO_SDDM=false; DO_FIREFOX=true
+DO_PACKAGES=true; DO_THEMES=true; DO_PROFILE=true; DO_APPLY=false; DO_SDDM=false; DO_FIREFOX=true; DO_MAC_KEYS=false
 ACTION=install
 ACTION_SET=false
 RESTORE_DIR=
@@ -42,7 +42,7 @@ RESTORE_DIR=
 usage() {
     cat <<'EOF'
 Usage: script/absolute_surface.sh [--check | --install | --apply | --all | --restore BACKUP]
-       options: --no-packages --no-themes --no-firefox --login-screen
+       options: --no-packages --no-themes --no-firefox --login-screen --mac-keys
 
 --check       Report what is installed and active; changes nothing.
 --install     Install packages (sudo dnf), WhiteSur themes (user-local), fonts, the
@@ -54,6 +54,8 @@ Usage: script/absolute_surface.sh [--check | --install | --apply | --all | --res
               Set up the login screen (alone, or together with another action): Absolute's
               wallpaper, WhiteSur colours, icons and cursors, for Plasma Login Manager
               (Fedora 44+) or SDDM. Uses sudo.
+--mac-keys    Mac keyboard in every application through Toshy (Cmd+C/V/Q/W/T/Tab and
+              the rest, terminal-aware), fetched at a pinned commit. Needs a sign-out.
 --restore     Restore a preferences backup made by --apply.
 EOF
 }
@@ -68,6 +70,7 @@ while [[ $# -gt 0 ]]; do
         --apply) ACTION=apply; ACTION_SET=true ;;
         --all) ACTION=all; ACTION_SET=true ;;
         --sddm|--login-screen) DO_SDDM=true; [[ "$ACTION_SET" == true ]] || ACTION=login ;;
+        --mac-keys) DO_MAC_KEYS=true; [[ "$ACTION_SET" == true ]] || ACTION=mackeys ;;
         --no-packages) DO_PACKAGES=false ;;
         --no-themes) DO_THEMES=false ;;
         --no-firefox) DO_FIREFOX=false ;;
@@ -246,6 +249,8 @@ special = {"space": 0x20, "tab": 0x01000001, "esc": 0x01000000, "escape": 0x0100
            "up": 0x01000013, "down": 0x01000015, "left": 0x01000012, "right": 0x01000014, "pgup": 0x01000016, "pgdown": 0x01000017,
            "home": 0x01000010, "end": 0x01000011, "backspace": 0x01000003, "delete": 0x01000007, "print": 0x01000009}
 codes = []
+if sys.argv[1:] == ["none"]:
+    print("0"); raise SystemExit
 for chord in sys.argv[1:]:
     code = 0
     for part in chord.split("+"):
@@ -305,7 +310,13 @@ apply_settings() {
     # Shortcuts a Mac hand expects, with Plasma's defaults kept as alternatives. KWin hosts
     # the shortcut service in Plasma 6.7 and keeps its own copy, so they are set through it.
     set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Meta+Space" "Alt+Space" "Alt+F2"
-    set_shortcut kwin Overview KWin "Toggle Overview" "Ctrl+Up" "Meta+W"
+    # Mission Control on Ctrl+Up and App Expose on Ctrl+Down. With the Mac keyboard remapper
+    # active, physical Ctrl reaches KWin as Meta, so both spellings are bound and the
+    # quick-tile defaults that used Meta+Up/Down give way.
+    set_shortcut kwin Overview KWin "Toggle Overview" "Ctrl+Up" "Meta+Up" "Meta+W"
+    set_shortcut kwin "Window Quick Tile Top" KWin "Quick Tile Window to the Top" none
+    set_shortcut kwin ExposeClass KWin "Toggle Present Windows (Window class)" "Ctrl+Down" "Meta+Down" "Meta+F7"
+    set_shortcut kwin "Window Quick Tile Bottom" KWin "Quick Tile Window to the Bottom" none
     set_shortcut kwin "Walk Through Windows" KWin "Walk Through Windows" "Meta+Tab" "Alt+Tab"
     set_shortcut kwin "Walk Through Windows (Reverse)" KWin "Walk Through Windows (Reverse)" "Meta+Shift+Tab" "Alt+Shift+Tab"
     set_shortcut kwin "Window Close" KWin "Close Window" "Meta+Q" "Alt+F4"
@@ -395,6 +406,39 @@ install_login_screen() {
     fi
 }
 
+TOSHY_COMMIT=51bfa66c360b45a0ca74be6afcb2528b8217f9af
+
+install_mac_keys() {
+    # Toshy remaps the keyboard per application (xwaykeyz on evdev, a KWin script for
+    # the active window), so Cmd behaves as on a Mac everywhere, including terminals.
+    note "Installing Toshy for Mac-style shortcuts (sudo for packages)"
+    sudo dnf -y -q install gcc python3-devel wayland-devel wayland-protocols-devel libxkbcommon-devel \
+        cairo-gobject-devel gobject-introspection-devel dbus-devel systemd-devel >/dev/null
+    fetch_pinned toshy https://github.com/RedBearAK/toshy "$TOSHY_COMMIT"
+    session_env
+    (cd "$THEME_CACHE/toshy" && yes | ./setup_toshy.py install --fancy-pants > "$CACHE_DIR/absolute/toshy-install.log" 2>&1) \
+        || fail "Toshy's installer failed; see $CACHE_DIR/absolute/toshy-install.log"
+    python3 - "$CONFIG_DIR/toshy/toshy_config.py" <<'PY'
+import re, sys
+path = sys.argv[1]
+text = open(path).read()
+block = """keyboards_UserCustom_dct = {
+    # Absolute: the Mac keyboard reaches a virtual machine under the QEMU names, and the
+    # physical Mac under its own; the Cmd key arrives as Super, an Apple layout.
+    'QEMU Virtio Keyboard': 'Apple',
+    'QEMU QEMU USB Keyboard': 'Apple',
+    'Apple Internal Keyboard / Trackpad': 'Apple',
+    'Apple SPI Keyboard': 'Apple',
+}"""
+text, count = re.subn(r"keyboards_UserCustom_dct = \{.*?\n\}", block, text, count=1, flags=re.S)
+if count != 1:
+    raise SystemExit("Toshy config has no keyboards_UserCustom_dct block")
+open(path, "w").write(text)
+print("Toshy keyboard types set")
+PY
+    note "Mac keys installed. Sign out and back in once; Toshy starts with the session."
+}
+
 restore_desktop() {
     [[ -d "$RESTORE_DIR" && -f "$RESTORE_DIR/manifest.json" ]] || fail 'Choose a backup directory containing manifest.json.'
     session_env
@@ -455,7 +499,9 @@ case "$ACTION" in
         apply_desktop
         if sudo -n true 2>/dev/null || [[ "$DO_SDDM" == true ]]; then install_login_screen
         else note "Login screen skipped (sudo would prompt); run --login-screen later."; fi
+        if [[ "$DO_MAC_KEYS" == true ]]; then install_mac_keys; fi
         ;;
     login) install_login_screen ;;
+    mackeys) install_mac_keys ;;
     restore) restore_desktop ;;
 esac
