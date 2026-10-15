@@ -44,10 +44,13 @@ in Toshy's config. Because physical Ctrl then reaches KWin as Meta, Overview is
 bound to both Ctrl+Up and Meta+Up and App Exposé to Ctrl+Down and Meta+Down.
 Needs one sign-out; Toshy's tray icon is hidden to keep the menu bar clean.
 
-`--dock` builds and installs Absolute's own Dock (`linux/dock`) and the Genie
-minimise effect for KWin (`linux/kwin/genie`) from the checkout, starts the
-Dock with the session and removes the Plasma dock panel. See
-[linux/dock/README.md](../dock/README.md).
+`--dock` builds and installs Absolute's own Dock (`linux/dock`), Spotlight
+(`linux/spotlight`), Launchpad (`linux/launchpad`) and the Genie minimise effect
+for KWin (`linux/kwin/genie`) from the checkout, starts the Dock, Spotlight and
+Launchpad services with the session, binds Meta+Space and Alt+Space to Spotlight
+(KRunner moves to Alt+F2) and removes the Plasma dock panel. See
+[linux/dock/README.md](../dock/README.md), [linux/spotlight/README.md](../spotlight/README.md)
+and [linux/launchpad/README.md](../launchpad/README.md).
 
 ## The virtual machine
 
