@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Quick Look
+Comment=Preview files without opening them
+Exec=absolute-quicklook %F
+Icon=view-preview
+NoDisplay=true
+OnlyShowIn=KDE;
+X-KDE-StartupNotify=false

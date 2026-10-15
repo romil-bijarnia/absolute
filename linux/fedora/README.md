@@ -45,12 +45,21 @@ bound to both Ctrl+Up and Meta+Up and App Exposé to Ctrl+Down and Meta+Down.
 Needs one sign-out; Toshy's tray icon is hidden to keep the menu bar clean.
 
 `--dock` builds and installs Absolute's own Dock (`linux/dock`), Spotlight
-(`linux/spotlight`), Launchpad (`linux/launchpad`) and the Genie minimise effect
-for KWin (`linux/kwin/genie`) from the checkout, starts the Dock, Spotlight and
-Launchpad services with the session, binds Meta+Space and Alt+Space to Spotlight
-(KRunner moves to Alt+F2) and removes the Plasma dock panel. See
-[linux/dock/README.md](../dock/README.md), [linux/spotlight/README.md](../spotlight/README.md)
-and [linux/launchpad/README.md](../launchpad/README.md).
+(`linux/spotlight`), Launchpad (`linux/launchpad`), Quick Look (`linux/quicklook`)
+and the Genie minimise effect for KWin (`linux/kwin/genie`) from the checkout,
+starts the Dock, Spotlight and Launchpad services with the session, binds
+Meta+Space and Alt+Space to Spotlight (KRunner moves to Alt+F2), adds Quick Look
+to Finder's context menu and removes the Plasma dock panel. See
+[linux/dock/README.md](../dock/README.md), [linux/spotlight/README.md](../spotlight/README.md),
+[linux/launchpad/README.md](../launchpad/README.md) and
+[linux/quicklook/README.md](../quicklook/README.md).
+
+`--finder` makes Dolphin present itself as Finder: the Favourites and Locations
+sidebar (`linux/fedora/dolphin/user-places.xbel.in`), the toolbar order
+(`dolphinui.rc`), icon view with previews, the full status bar, and the Finder
+name through a small en_AU translation catalog (`kio6.en_AU.po`,
+`dolphin.en_AU.po`; the session language becomes en_AU). It is part of
+`--apply` as well.
 
 ## The virtual machine
 

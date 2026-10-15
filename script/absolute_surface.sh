@@ -529,10 +529,10 @@ DOCK_BUILD_PACKAGES=(cmake extra-cmake-modules gcc-c++ kwin-devel qt6-qtbase-dev
     xcb-util-keysyms-devel xcb-util-image-devel kf6-kidletime-devel kf6-kcrash-devel kf6-kdecoration-devel
     lcms2-devel libdisplay-info-devel libinput-devel pixman-devel kf6-kpackage-devel kf6-kcmutils-devel
     kf6-knotifications-devel kf6-kservice-devel kf6-ksvg-devel kf6-kguiaddons-devel plasma-activities-devel
-    kf6-kauth-devel kf6-kcolorscheme-devel wayland-devel kf6-kio-devel)
+    kf6-kauth-devel kf6-kcolorscheme-devel wayland-devel kf6-kio-devel qt6-qtmultimedia-devel qt6-qtpdf)
 
 install_dock() {
-    note "Building Absolute's Dock, Spotlight, Launchpad and the Genie effect (sudo for packages and the effect)"
+    note "Building Absolute's Dock, Spotlight, Launchpad, Quick Look and the Genie effect (sudo for packages and the effect)"
     local missing=()
     for package in "${DOCK_BUILD_PACKAGES[@]}"; do rpm -q "$package" >/dev/null 2>&1 || missing+=("$package"); done
     if [[ ${#missing[@]} -gt 0 ]]; then sudo dnf -y -q install --skip-unavailable "${missing[@]}"; fi
@@ -553,6 +553,14 @@ install_dock() {
     # Launchpad: the Dock tile toggles it; the service copy starts hidden with the session.
     sed "s|^Exec=.*|Exec=$HOME/.local/bin/absolute-launchpad --toggle|" "$ROOT_DIR/linux/launchpad/data/org.absolute.Launchpad.desktop" > "$DATA_DIR/applications/org.absolute.Launchpad.desktop"
     printf '[Desktop Entry]\nType=Application\nName=Launchpad service\nExec=%s/.local/bin/absolute-launchpad\nNoDisplay=true\nOnlyShowIn=KDE;\nX-KDE-autostart-phase=2\n' "$HOME" > "$CONFIG_DIR/autostart/org.absolute.Launchpad.desktop"
+    cmake -S "$ROOT_DIR/linux/quicklook" -B "$build/quicklook" -DCMAKE_BUILD_TYPE=Release >/dev/null
+    cmake --build "$build/quicklook" -j"$(nproc)" >/dev/null
+    install -m 0755 "$build/quicklook/absolute-quicklook" "$HOME/.local/bin/absolute-quicklook"
+    # Quick Look: launcher entry plus Finder's context-menu entry.
+    sed "s|^Exec=.*|Exec=$HOME/.local/bin/absolute-quicklook %F|" "$ROOT_DIR/linux/quicklook/data/org.absolute.QuickLook.desktop" > "$DATA_DIR/applications/org.absolute.QuickLook.desktop"
+    mkdir -p "$DATA_DIR/kio/servicemenus"
+    sed "s|^Exec=.*|Exec=$HOME/.local/bin/absolute-quicklook %F|" "$ROOT_DIR/linux/quicklook/data/absolute-quicklook-servicemenu.desktop" > "$DATA_DIR/kio/servicemenus/absolute-quicklook.desktop"
+    chmod +x "$DATA_DIR/kio/servicemenus/absolute-quicklook.desktop"
     cmake -S "$ROOT_DIR/linux/kwin/genie" -B "$build/genie" -DCMAKE_BUILD_TYPE=Release >/dev/null
     cmake --build "$build/genie" -j"$(nproc)" >/dev/null
     sudo cmake --install "$build/genie" >/dev/null
@@ -604,7 +612,7 @@ EOF
         set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Alt+F2"
         set_shortcut org.absolute.Spotlight.desktop _launch Spotlight Spotlight "Meta+Space" "Alt+Space"
     fi
-    note "Dock, Spotlight, Launchpad and the Genie effect installed (Dock config in $CONFIG_DIR/absolute/dockrc)."
+    note "Dock, Spotlight, Launchpad, Quick Look and the Genie effect installed (Dock config in $CONFIG_DIR/absolute/dockrc)."
 }
 
 restore_desktop() {
