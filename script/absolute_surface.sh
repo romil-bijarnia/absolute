@@ -362,6 +362,26 @@ apply_settings() {
     fi
 }
 
+apply_about() {
+    # About Absolute: the About page in System Settings shows Absolute's name, version
+    # and logo instead of the distribution's.
+    mkdir -p "$DATA_DIR/absolute"
+    local logo_svg="$PROFILE_DIR/contents/images/absolute-symbolic.svg" logo_png="$DATA_DIR/absolute/absolute-logo.png"
+    if [[ -f "$logo_svg" ]]; then
+        if command -v rsvg-convert >/dev/null; then
+            rsvg-convert -w 512 -h 512 "$logo_svg" -o "$logo_png"
+        elif command -v magick >/dev/null; then
+            magick -background none -density 600 "$logo_svg" -resize 512x512 "$logo_png"
+        fi
+    fi
+    write_setting kcm-about-distrorc General Name Absolute
+    write_setting kcm-about-distrorc General Version 0.2
+    write_setting kcm-about-distrorc General Variant Night
+    write_setting kcm-about-distrorc General Website https://github.com/romil-bijarnia/absolute
+    write_setting kcm-about-distrorc General UseOSReleaseVersion false
+    [[ -f "$logo_png" ]] && write_setting kcm-about-distrorc General LogoPath "$logo_png"
+}
+
 apply_finder() {
     note "Finder: Dolphin's sidebar, toolbar, views and name"
     local src="$ROOT_DIR/linux/fedora/dolphin"
@@ -433,6 +453,7 @@ apply_desktop() {
     plasma-apply-lookandfeel --apply "$PROFILE_ID" --resetLayout || fail "Profile activation failed; restore the backup at $backup"
     apply_settings
     apply_finder
+    apply_about
     reload_session
     note "Absolute's desktop is active. Sign out and back in once so every application picks up the fonts and theme."
 }
@@ -526,7 +547,7 @@ PY
 DOCK_BUILD_PACKAGES=(cmake extra-cmake-modules gcc-c++ kwin-devel qt6-qtbase-devel qt6-qtdeclarative-devel
     layer-shell-qt-devel kf6-kwindowsystem-devel kf6-kconfig-devel kf6-kcoreaddons-devel libepoxy-devel
     libdrm-devel mesa-libgbm-devel libxcb-devel xcb-util-devel xcb-util-cursor-devel xcb-util-wm-devel
-    xcb-util-keysyms-devel xcb-util-image-devel kf6-kidletime-devel kf6-kcrash-devel kf6-kdecoration-devel
+    xcb-util-keysyms-devel xcb-util-image-devel kf6-kidletime-devel kf6-kcrash-devel kdecoration-devel
     lcms2-devel libdisplay-info-devel libinput-devel pixman-devel kf6-kpackage-devel kf6-kcmutils-devel
     kf6-knotifications-devel kf6-kservice-devel kf6-ksvg-devel kf6-kguiaddons-devel plasma-activities-devel
     kf6-kauth-devel kf6-kcolorscheme-devel wayland-devel kf6-kio-devel qt6-qtmultimedia-devel qt6-qtpdf)
@@ -681,6 +702,6 @@ case "$ACTION" in
     login) install_login_screen ;;
     mackeys) install_mac_keys ;;
     dock) install_dock ;;
-    finder) apply_finder ;;
+    finder) apply_finder; apply_about ;;
     restore) restore_desktop ;;
 esac
