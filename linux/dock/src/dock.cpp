@@ -6,6 +6,7 @@
 
 #include <QDBusConnection>
 #include <QDBusMessage>
+#include <QDebug>
 #include <QDBusPendingCall>
 #include <QDesktopServices>
 #include <QDir>
@@ -136,6 +137,11 @@ void Dock::openLaunchpad()
     QDBusMessage call = QDBusMessage::createMethodCall(QStringLiteral("org.kde.krunner"), QStringLiteral("/App"),
                                                        QStringLiteral("org.kde.krunner.App"), QStringLiteral("display"));
     QDBusConnection::sessionBus().asyncCall(call);
+}
+
+void Dock::trace(const QString &message)
+{
+    qWarning().noquote() << "Dock:" << message;
 }
 
 void Dock::showAllWindows()

@@ -163,9 +163,9 @@ Window {
                 }
             }
             Timer { id: publishTimer; interval: 120; onTriggered: taskTile.publish() }
+            onRunningChanged: publishTimer.restart()
             onXChanged: publishTimer.restart()
             onWidthChanged: publishTimer.restart()
-            onRunningChanged: publishTimer.restart()
             Component.onCompleted: publishTimer.restart()
         }
     }

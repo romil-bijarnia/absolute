@@ -72,12 +72,15 @@ Item {
     }
 
     HoverHandler { id: hover }
-    TapHandler {
-        acceptedButtons: Qt.LeftButton
-        onTapped: tile.clicked()
-    }
-    TapHandler {
-        acceptedButtons: Qt.RightButton
-        onTapped: tile.rightClicked()
+    MouseArea {
+        anchors.fill: parent
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: mouse => {
+            if (mouse.button === Qt.RightButton) {
+                tile.rightClicked();
+            } else {
+                tile.clicked();
+            }
+        }
     }
 }

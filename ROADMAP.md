@@ -46,7 +46,7 @@ done when it is screenshotted next to the Mac and committed.
 | --- | --- | --- |
 | 1 | Mac keyboard in every app (Cmd shortcuts, terminal included); trackpad gestures | keyboard done 15 Oct 2026 (`absolute_surface.sh --mac-keys`, checked in the VM: Cmd+A/C/V/Q/T, Cmd+Space, Ctrl+C in Konsole); gestures need the real trackpad (item 11) |
 | 2 | Passwords: Apple Passwords export into KeePassXC, Firefox autofill, Dock tile | waiting on the export |
-| 3 | Dock: Finder, Launchpad, apps, separator, Downloads, Trash; measured magnification and Genie; bounce, dots, menus, autohide | not started |
+| 3 | Dock: Finder, Launchpad, apps, separator, Downloads, Trash; measured magnification and Genie; bounce, dots, menus, autohide | Dock shipped 15 Oct 2026 (`linux/dock`, `absolute_surface.sh --dock`): Finder, Launchpad, apps, separator, Downloads, Trash, measured magnification, labels, bounce, running dots, context menus; Genie minimise as the KWin effect `linux/kwin/genie`, checked frame by frame in the VM. Open: autohide timing, minimised-window tiles on the right, Launchpad tile order |
 | 4 | Menu bar: logo, bold app name, app menus, Control Centre, Spotlight icon, battery, Wi-Fi, clock; Mac metrics | not started |
 | 5 | Windows: traffic lights, corner radius, shadows, titlebar heights, open/close zoom | not started |
 | 6 | Spotlight panel, notifications and Notification Centre, Cmd+Tab switcher | not started |

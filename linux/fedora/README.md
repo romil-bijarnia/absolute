@@ -44,6 +44,11 @@ in Toshy's config. Because physical Ctrl then reaches KWin as Meta, Overview is
 bound to both Ctrl+Up and Meta+Up and App Exposé to Ctrl+Down and Meta+Down.
 Needs one sign-out; Toshy's tray icon is hidden to keep the menu bar clean.
 
+`--dock` builds and installs Absolute's own Dock (`linux/dock`) and the Genie
+minimise effect for KWin (`linux/kwin/genie`) from the checkout, starts the
+Dock with the session and removes the Plasma dock panel. See
+[linux/dock/README.md](../dock/README.md).
+
 ## The virtual machine
 
 `script/vm_fedora.sh` builds a Fedora 44 aarch64 machine with Homebrew's QEMU

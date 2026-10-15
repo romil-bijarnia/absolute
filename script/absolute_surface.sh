@@ -464,8 +464,12 @@ install_dock() {
     cmake -S "$ROOT_DIR/linux/kwin/genie" -B "$build/genie" -DCMAKE_BUILD_TYPE=Release >/dev/null
     cmake --build "$build/genie" -j"$(nproc)" >/dev/null
     sudo cmake --install "$build/genie" >/dev/null
-    # The Dock starts with the session and takes the Plasma dock panel's place.
-    cat > "$CONFIG_DIR/autostart/org.absolute.Dock.desktop" <<EOF
+    # The Dock starts with the session and takes the Plasma dock panel's place. KWin
+    # only grants the window-management protocol to clients whose desktop entry declares
+    # it, matched by executable path, so the entry is installed as an application too.
+    mkdir -p "$DATA_DIR/applications"
+    for target in "$DATA_DIR/applications/org.absolute.Dock.desktop" "$CONFIG_DIR/autostart/org.absolute.Dock.desktop"; do
+        cat > "$target" <<EOF
 [Desktop Entry]
 Type=Application
 Name=Absolute Dock
@@ -474,7 +478,10 @@ Icon=user-desktop
 NoDisplay=true
 OnlyShowIn=KDE;
 X-KDE-autostart-phase=1
+X-KDE-Wayland-Interfaces=org_kde_plasma_window_management
 EOF
+    done
+    update-desktop-database "$DATA_DIR/applications" >/dev/null 2>&1 || true
     if [[ ! -f "$CONFIG_DIR/absolute/dockrc" ]]; then
         cat > "$CONFIG_DIR/absolute/dockrc" <<'EOF'
 ; Absolute Dock. Sizes in points, as the Mac's Dock keys them.

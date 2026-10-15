@@ -43,6 +43,7 @@ public:
     Q_INVOKABLE void runCommand(const QString &command);
     Q_INVOKABLE void openLaunchpad();
     Q_INVOKABLE void showAllWindows();
+    Q_INVOKABLE void trace(const QString &message);
 
 Q_SIGNALS:
     void trashChanged();

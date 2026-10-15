@@ -3,6 +3,8 @@
 #include "effect/effecthandler.h"
 
 #include <QEasingCurve>
+#include <KConfigGroup>
+#include <KSharedConfig>
 #include <algorithm>
 #include <cmath>
 
@@ -119,7 +121,10 @@ bool GenieEffect::supported()
 void GenieEffect::reconfigure(ReconfigureFlags)
 {
     // DockBar::effectDur for the Genie: 500 ms, scaled by the global animation speed.
-    m_duration = animationTime(500ms);
+    // kwinrc [Effect-absolute_genie] Duration overrides it (milliseconds).
+    const KConfigGroup group = effects->config()->group(QStringLiteral("Effect-absolute_genie"));
+    const int configured = group.readEntry(QStringLiteral("Duration"), 500);
+    m_duration = animationTime(std::chrono::milliseconds(configured > 0 ? configured : 500));
 }
 
 void GenieEffect::prePaintScreen(ScreenPrePaintData &data)
