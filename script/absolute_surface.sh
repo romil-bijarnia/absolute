@@ -173,6 +173,27 @@ install_profile() {
     rm -rf "$PROFILE_DIR"
     mv "$staged" "$PROFILE_DIR"
     note "Installed the Absolute profile at $PROFILE_DIR"
+    # The same image as a wallpaper package, so it is listed in System Settings > Wallpaper.
+    local pack="$DATA_DIR/wallpapers/Absolute"
+    mkdir -p "$pack/contents/images"
+    cp "$PROFILE_DIR/contents/images/absolute-night.png" "$pack/contents/images/$WALLPAPER_SIZE.png"
+    python3 - "$pack/contents/images/$WALLPAPER_SIZE.png" "$pack/contents/screenshot.png" <<'PY'
+import sys
+from PIL import Image
+image = Image.open(sys.argv[1]); image.thumbnail((800, 800)); image.save(sys.argv[2])
+PY
+    cat > "$pack/metadata.json" <<'EOF'
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Id": "Absolute",
+        "Name": "Absolute Night",
+        "Description": "Glassy ribbons of light over a deep blue night.",
+        "Authors": [{"Name": "Absolute contributors"}],
+        "License": "MIT"
+    }
+}
+EOF
     # Konsole profile matching the Mac's terminal: black, soft grey text, JetBrains Mono.
     mkdir -p "$DATA_DIR/konsole"
     cp "$ROOT_DIR/linux/fedora/konsole/Absolute.profile" "$ROOT_DIR/linux/fedora/konsole/Absolute.colorscheme" "$DATA_DIR/konsole/"

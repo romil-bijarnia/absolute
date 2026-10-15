@@ -27,7 +27,12 @@
     }
 
     var assetDirectory = userDataPath("data", "plasma/look-and-feel/" + profile + "/contents/images").replace(/\/+$/, "");
-    var wallpaperPath = assetDirectory + "/absolute-night.png";
+    // Prefer the wallpaper package, so System Settings shows it selected; fall back to the
+    // theme's own copy, then to the ocean vector.
+    var wallpaperPath = userDataPath("data", "wallpapers/Absolute").replace(/\/+$/, "");
+    if (!fileExists(wallpaperPath + "/metadata.json")) {
+        wallpaperPath = assetDirectory + "/absolute-night.png";
+    }
     if (!fileExists(wallpaperPath)) {
         wallpaperPath = assetDirectory + "/ocean.svg";
     }
