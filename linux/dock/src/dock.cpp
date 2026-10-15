@@ -134,6 +134,10 @@ void Dock::openLaunchpad()
         return;
     }
     // Until Absolute's Launchpad exists, the search panel is the nearest thing.
+    if (!QStandardPaths::findExecutable(QStringLiteral("absolute-spotlight"), {QDir::homePath() + QStringLiteral("/.local/bin")}).isEmpty()) {
+        QProcess::startDetached(QDir::homePath() + QStringLiteral("/.local/bin/absolute-spotlight"), {QStringLiteral("--toggle")});
+        return;
+    }
     QDBusMessage call = QDBusMessage::createMethodCall(QStringLiteral("org.kde.krunner"), QStringLiteral("/App"),
                                                        QStringLiteral("org.kde.krunner.App"), QStringLiteral("display"));
     QDBusConnection::sessionBus().asyncCall(call);

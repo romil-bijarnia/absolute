@@ -31,6 +31,6 @@ PlasmoidItem {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: executable.connectSource("busctl --user call org.kde.krunner /App org.kde.krunner.App display")
+        onClicked: executable.connectSource("sh -c 'if [ -x \"$HOME/.local/bin/absolute-spotlight\" ]; then \"$HOME/.local/bin/absolute-spotlight\" --toggle; else busctl --user call org.kde.krunner /App org.kde.krunner.App display; fi'")
     }
 }

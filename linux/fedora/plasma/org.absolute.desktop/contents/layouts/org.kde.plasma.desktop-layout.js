@@ -157,10 +157,11 @@
     var tray = widget(menubar, "org.kde.plasma.systemtray");
     configure(tray, "General", {
         scaleIconsToFit: false,
-        extraItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
+        // Plasma's notifications applet is the notification server itself, so it stays.
+        extraItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery,org.kde.plasma.notifications",
         // Every applet id counts as already known, so no tray plasmoid gets auto-enabled.
         knownItems: knownWidgetTypes.join(","),
-        shownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery",
+        shownItems: "org.kde.plasma.networkmanagement,org.kde.plasma.battery,org.kde.plasma.notifications",
         hiddenItems: ""
     });
     widget(menubar, "org.absolute.spotlight");

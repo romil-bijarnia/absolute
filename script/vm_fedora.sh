@@ -49,6 +49,8 @@ Usage: script/vm_fedora.sh COMMAND [ARGS]
   key               Send a key chord to the machine, e.g. "meta-space" or "ret".
   type TEXT         Type ASCII text into the machine.
   mouse X Y [BTN]   Move the pointer to absolute X,Y and click (left by default).
+  hold CHORD SECS [NAME]
+                    Hold a key chord down for SECS seconds, taking shots/NAME.png meanwhile.
   utm               Wrap the machine in a UTM bundle (Absolute.utm) with GPU-accelerated
                     graphics; open it in UTM for smooth animations. Needs UTM installed
                     (brew install --cask utm). The script keeps using the same disk.
@@ -518,8 +520,34 @@ PY
         sudo chown plasmalogin:plasmalogin /var/lib/plasmalogin/.config/kwinoutputconfig.json 2>/dev/null || true"
 }
 
+hold_keys() {
+    running || fail "Not running."
+    local chord="$1" seconds="$2" name="${3:-}"
+    python3 - "$chord" <<'PY' > "$VM_DIR/.hold-keys"
+import json, sys
+names = {"meta": "meta_l", "super": "meta_l", "cmd": "meta_l", "ctrl": "ctrl", "alt": "alt", "shift": "shift",
+         "space": "spc", "tab": "tab", "esc": "esc", "up": "up", "down": "down", "left": "left", "right": "right"}
+print(" ".join(names.get(part.lower(), part.lower()) for part in sys.argv[1].split("-")))
+PY
+    local keys
+    keys="$(cat "$VM_DIR/.hold-keys")"; rm -f "$VM_DIR/.hold-keys"
+    for key in $keys; do
+        qmp input-send-event "{\"events\": [{\"type\": \"key\", \"data\": {\"down\": true, \"key\": {\"type\": \"qcode\", \"data\": \"$key\"}}}]}" >/dev/null
+        sleep 0.15
+    done
+    sleep "$seconds"
+    [[ -n "$name" ]] && shot "$name" >/dev/null
+    local reversed=""
+    for key in $keys; do reversed="$key $reversed"; done
+    for key in $reversed; do
+        qmp input-send-event "{\"events\": [{\"type\": \"key\", \"data\": {\"down\": false, \"key\": {\"type\": \"qcode\", \"data\": \"$key\"}}}]}" >/dev/null
+    done
+    [[ -n "$name" ]] && printf '%s\n' "$SHOTS/$name.png"
+}
+
 case "${1:-}" in
     create) create ;;
+    hold) [[ $# -ge 3 ]] || { usage >&2; exit 2; }; hold_keys "$2" "$3" "${4:-}" ;;
     display) display_pin ;;
     utm) utm_bundle ;;
     start) start "${2:-}" ;;

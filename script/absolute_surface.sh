@@ -90,8 +90,14 @@ source /etc/os-release
 [[ "${ID:-}" == fedora ]] || fail 'This installer targets Fedora.'
 [[ "$EUID" -ne 0 ]] || fail 'Run as your normal user, without sudo.'
 
+plasma_running() { pgrep -u "$EUID" -x plasmashell >/dev/null; }
+
 # When run over SSH into a machine with a Plasma session, pick up that session's bus.
 session_env() {
+    # Prefer the running session's own environment (config dirs, platform theme, sockets).
+    if plasma_running && [[ -f "$ROOT_DIR/script/session_env.py" ]]; then
+        eval "$(python3 "$ROOT_DIR/script/session_env.py" 2>/dev/null)" || true
+    fi
     local uid runtime
     uid="$(id -u)"; runtime="${XDG_RUNTIME_DIR:-/run/user/$uid}"
     export XDG_RUNTIME_DIR="$runtime"
@@ -104,8 +110,6 @@ session_env() {
     export QT_QPA_PLATFORM="${QT_QPA_PLATFORM:-wayland}"
     [[ -n "${XDG_CURRENT_DESKTOP:-}" ]] || export XDG_CURRENT_DESKTOP=KDE
 }
-
-plasma_running() { pgrep -u "$EUID" -x plasmashell >/dev/null; }
 
 install_packages() {
     local missing=()
@@ -282,6 +286,8 @@ set_shortcut() {
     local component="$1" action="$2" component_name="$3" action_name="$4"; shift 4
     local keys
     keys="$(qt_key_codes "$@")" || return 1
+    # A new component (a .desktop launcher) must be registered before it can hold keys.
+    busctl --user call org.kde.kglobalaccel /kglobalaccel org.kde.KGlobalAccel doRegister as 4 "$component" "$action" "$component_name" "$action_name" >/dev/null 2>&1 || true
     # 6 = NoAutoloading | SetPresent: replace whatever the service holds for this action.
     # shellcheck disable=SC2086
     if ! busctl --user call org.kde.kglobalaccel /kglobalaccel org.kde.KGlobalAccel setShortcutKeys "asa(ai)u" 4 "$component" "$action" "$component_name" "$action_name" $keys 6 >/dev/null 2>&1; then
@@ -325,7 +331,12 @@ apply_settings() {
     write_setting konsolerc KonsoleWindow ShowMenuBarByDefault false
     # Shortcuts a Mac hand expects, with Plasma's defaults kept as alternatives. KWin hosts
     # the shortcut service in Plasma 6.7 and keeps its own copy, so they are set through it.
-    set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Meta+Space" "Alt+Space" "Alt+F2"
+    if [[ -x "$HOME/.local/bin/absolute-spotlight" ]]; then
+        set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Alt+Space" "Alt+F2"
+        set_shortcut org.absolute.Spotlight.desktop _launch Spotlight Spotlight "Meta+Space"
+    else
+        set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Meta+Space" "Alt+Space" "Alt+F2"
+    fi
     # Mission Control on Ctrl+Up and App Expose on Ctrl+Down. With the Mac keyboard remapper
     # active, physical Ctrl reaches KWin as Meta, so both spellings are bound and the
     # quick-tile defaults that used Meta+Up/Down give way.
@@ -476,6 +487,12 @@ install_dock() {
     cmake -S "$ROOT_DIR/linux/dock" -B "$build/dock" -DCMAKE_BUILD_TYPE=Release >/dev/null
     cmake --build "$build/dock" -j"$(nproc)" >/dev/null
     install -m 0755 "$build/dock/absolute-dock" "$HOME/.local/bin/absolute-dock"
+    cmake -S "$ROOT_DIR/linux/spotlight" -B "$build/spotlight" -DCMAKE_BUILD_TYPE=Release >/dev/null
+    cmake --build "$build/spotlight" -j"$(nproc)" >/dev/null
+    install -m 0755 "$build/spotlight/absolute-spotlight" "$HOME/.local/bin/absolute-spotlight"
+    # Spotlight: the launcher entry carries Meta+Space; the service copy starts hidden.
+    sed "s|^Exec=.*|Exec=$HOME/.local/bin/absolute-spotlight --toggle|" "$ROOT_DIR/linux/spotlight/data/org.absolute.Spotlight.desktop" > "$DATA_DIR/applications/org.absolute.Spotlight.desktop"
+    printf '[Desktop Entry]\nType=Application\nName=Spotlight service\nExec=%s/.local/bin/absolute-spotlight\nNoDisplay=true\nOnlyShowIn=KDE;\nX-KDE-autostart-phase=2\n' "$HOME" > "$CONFIG_DIR/autostart/org.absolute.Spotlight.desktop"
     cmake -S "$ROOT_DIR/linux/kwin/genie" -B "$build/genie" -DCMAKE_BUILD_TYPE=Release >/dev/null
     cmake --build "$build/genie" -j"$(nproc)" >/dev/null
     sudo cmake --install "$build/genie" >/dev/null
@@ -517,8 +534,14 @@ EOF
             'panels().forEach(function (p) { var g = p.currentConfigGroup; p.currentConfigGroup = ["Absolute"]; var role = p.readConfig("role", ""); p.currentConfigGroup = g; if (role === "dock") { p.remove(); } });' >/dev/null 2>&1 || true
         pkill -x absolute-dock >/dev/null 2>&1 || true
         (setsid "$HOME/.local/bin/absolute-dock" >/dev/null 2>&1 &)
+        pkill -f "absolute-spotlight" >/dev/null 2>&1 || true
+        (setsid "$HOME/.local/bin/absolute-spotlight" >/dev/null 2>&1 &)
+        update-desktop-database "$DATA_DIR/applications" >/dev/null 2>&1 || true
+        kbuildsycoca6 >/dev/null 2>&1 || true
+        set_shortcut org.kde.krunner.desktop _launch KRunner KRunner "Alt+Space" "Alt+F2"
+        set_shortcut org.absolute.Spotlight.desktop _launch Spotlight Spotlight "Meta+Space"
     fi
-    note "Dock installed: $HOME/.local/bin/absolute-dock (config in $CONFIG_DIR/absolute/dockrc), Genie effect enabled."
+    note "Dock, Spotlight and the Genie effect installed (Dock config in $CONFIG_DIR/absolute/dockrc)."
 }
 
 restore_desktop() {
