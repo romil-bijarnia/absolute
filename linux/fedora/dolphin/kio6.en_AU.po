@@ -1,0 +1,25 @@
+# Absolute: Finder's sidebar section names over KIO's places model.
+msgid ""
+msgstr ""
+"Project-Id-Version: absolute\n"
+"Language: en_AU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "@item"
+msgid "Places"
+msgstr "Favourites"
+
+msgctxt "@item"
+msgid "Devices"
+msgstr "Locations"
+
+msgctxt "@item"
+msgid "Removable Devices"
+msgstr "Removable"
+
+msgctxt "@item"
+msgid "Remote"
+msgstr "Network"

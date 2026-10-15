@@ -34,7 +34,7 @@ PACKAGES=(plasma-desktop plasma-workspace sddm sddm-kcm kde-gtk-config breeze-gt
           rsms-inter-fonts jetbrains-mono-fonts brightnessctl
           git python3-numpy python3-pillow rsync)
 
-DO_PACKAGES=true; DO_THEMES=true; DO_PROFILE=true; DO_APPLY=false; DO_SDDM=false; DO_FIREFOX=true; DO_MAC_KEYS=false; DO_DOCK=false
+DO_PACKAGES=true; DO_THEMES=true; DO_PROFILE=true; DO_APPLY=false; DO_SDDM=false; DO_FIREFOX=true; DO_MAC_KEYS=false; DO_DOCK=false; DO_FINDER=false
 ACTION=install
 ACTION_SET=false
 RESTORE_DIR=
@@ -42,7 +42,7 @@ RESTORE_DIR=
 usage() {
     cat <<'EOF'
 Usage: script/absolute_surface.sh [--check | --install | --apply | --all | --restore BACKUP]
-       options: --no-packages --no-themes --no-firefox --login-screen --mac-keys --dock
+       options: --no-packages --no-themes --no-firefox --login-screen --mac-keys --dock --finder
 
 --check       Report what is installed and active; changes nothing.
 --install     Install packages (sudo dnf), WhiteSur themes (user-local), fonts, the
@@ -59,6 +59,8 @@ Usage: script/absolute_surface.sh [--check | --install | --apply | --all | --res
 --dock        Build and install Absolute's Dock (replaces the Plasma dock panel) and the
               Genie minimise effect for KWin, from this checkout. Needs sudo for the
               build packages and the effect plugin; the Dock starts with the session.
+--finder      Dolphin as Finder: the sidebar sections, toolbar order, icon view with
+              previews, the status bar and the Finder name (also part of --apply).
 --restore     Restore a preferences backup made by --apply.
 EOF
 }
@@ -75,6 +77,7 @@ while [[ $# -gt 0 ]]; do
         --sddm|--login-screen) DO_SDDM=true; [[ "$ACTION_SET" == true ]] || ACTION=login ;;
         --mac-keys) DO_MAC_KEYS=true; [[ "$ACTION_SET" == true ]] || ACTION=mackeys ;;
         --dock) DO_DOCK=true; [[ "$ACTION_SET" == true ]] || ACTION=dock ;;
+        --finder) DO_FINDER=true; [[ "$ACTION_SET" == true ]] || ACTION=finder ;;
         --no-packages) DO_PACKAGES=false ;;
         --no-themes) DO_THEMES=false ;;
         --no-firefox) DO_FIREFOX=false ;;
@@ -359,6 +362,55 @@ apply_settings() {
     fi
 }
 
+apply_finder() {
+    note "Finder: Dolphin's sidebar, toolbar, views and name"
+    local src="$ROOT_DIR/linux/fedora/dolphin"
+    mkdir -p "$DATA_DIR/kxmlgui5/dolphin" "$DATA_DIR/dolphin/view_properties/global" "$DATA_DIR/applications" "$DATA_DIR/locale/en_AU/LC_MESSAGES"
+    # Sidebar: Recents, Applications, the user's folders and home under Favourites,
+    # drives under Locations, Network. The previous sidebar is kept once beside it.
+    if [[ -f "$DATA_DIR/user-places.xbel" && ! -f "$DATA_DIR/user-places.xbel.before-absolute" ]]; then
+        cp "$DATA_DIR/user-places.xbel" "$DATA_DIR/user-places.xbel.before-absolute"
+    fi
+    sed -e "s|@HOME@|$HOME|g" -e "s|@USER@|$USER|g" "$src/user-places.xbel.in" > "$DATA_DIR/user-places.xbel"
+    # Toolbar: back, forward, breadcrumb, view chooser, sorting, search, action menu.
+    cp "$src/dolphinui.rc" "$DATA_DIR/kxmlgui5/dolphin/dolphinui.rc"
+    # Views: icons at 64 px with previews in every folder, sorted by name, full status bar.
+    write_setting dolphinrc General GlobalViewProps true
+    write_setting dolphinrc General ShowFullPath false
+    write_setting dolphinrc General ShowFullPathInTitlebar false
+    write_setting dolphinrc General RememberOpenedTabs false
+    write_setting dolphinrc General ShowStatusBar FullWidth
+    write_setting dolphinrc General ShowZoomSlider false
+    write_setting dolphinrc General ShowSelectionToggle false
+    write_setting dolphinrc General ShowToolTips false
+    write_setting dolphinrc General EditableUrl false
+    write_setting dolphinrc IconsMode IconSize 64
+    write_setting dolphinrc IconsMode PreviewSize 64
+    write_setting dolphinrc DetailsMode IconSize 16
+    write_setting dolphinrc DetailsMode PreviewSize 16
+    write_setting dolphinrc MainWindow ToolBarsMovable Disabled
+    write_setting dolphinrc "MainWindow/Toolbar mainToolBar" ToolButtonStyle IconOnly
+    cat > "$DATA_DIR/dolphin/view_properties/global/.directory" <<EOF
+[Dolphin]
+PreviewsShown=true
+SortOrder=0
+SortRole=text
+Timestamp=$(date +%Y,%-m,%-d,%-H,%-M,%-S)
+Version=4
+ViewMode=0
+EOF
+    # The file manager presents itself as Finder: launcher name, and its own name
+    # through an en_AU catalog, which also names the sidebar sections as Finder does.
+    sed -e 's/^Name=.*/Name=Finder/' -e '/^Name\[/d' -e 's/^GenericName=.*/GenericName=File Manager/' -e '/^GenericName\[/d' \
+        /usr/share/applications/org.kde.dolphin.desktop > "$DATA_DIR/applications/org.kde.dolphin.desktop"
+    msgfmt -o "$DATA_DIR/locale/en_AU/LC_MESSAGES/kio6.mo" "$src/kio6.en_AU.po"
+    msgfmt -o "$DATA_DIR/locale/en_AU/LC_MESSAGES/dolphin.mo" "$src/dolphin.en_AU.po"
+    write_setting plasma-localerc Translations LANGUAGE en_AU
+    update-desktop-database "$DATA_DIR/applications" >/dev/null 2>&1 || true
+    kbuildsycoca6 >/dev/null 2>&1 || true
+    note "Finder applied; the section names and the Finder name show after the next sign-in (LANGUAGE=en_AU)."
+}
+
 reload_session() {
     busctl --user call org.kde.KWin /KWin org.kde.KWin reconfigure >/dev/null 2>&1 || true
     systemctl --user restart plasma-krunner.service 2>/dev/null || true
@@ -380,6 +432,7 @@ apply_desktop() {
     printf 'Restore with: bash %q --restore %q\n' "$ROOT_DIR/script/absolute_surface.sh" "$backup"
     plasma-apply-lookandfeel --apply "$PROFILE_ID" --resetLayout || fail "Profile activation failed; restore the backup at $backup"
     apply_settings
+    apply_finder
     reload_session
     note "Absolute's desktop is active. Sign out and back in once so every application picks up the fonts and theme."
 }
@@ -620,5 +673,6 @@ case "$ACTION" in
     login) install_login_screen ;;
     mackeys) install_mac_keys ;;
     dock) install_dock ;;
+    finder) apply_finder ;;
     restore) restore_desktop ;;
 esac

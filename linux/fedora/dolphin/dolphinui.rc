@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE gui SYSTEM "kpartgui.dtd">
+<!-- Absolute: Finder's toolbar order. Back and forward, the breadcrumb, the view
+     chooser, sorting, search, then the action menu. Merged over Dolphin's own file,
+     which keeps the menus. -->
+<gui name="dolphin" version="49">
+    <ToolBar noMerge="1" name="mainToolBar" >
+        <text context="@title:menu">Main Toolbar</text>
+        <Action name="go_back" />
+        <Action name="go_forward" />
+        <Action name="url_navigators" />
+        <Action name="view_mode" />
+        <Action name="sort" />
+        <Action name="toggle_search" />
+        <Action name="hamburger_menu" />
+    </ToolBar>
+</gui>

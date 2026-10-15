@@ -37,6 +37,26 @@ settles the order); the shortcut service lives inside `kwin_wayland` and
 rewrites `kglobalshortcutsrc`, so shortcuts are set over DBus; the login
 manager ignores its `conf.d`.
 
+## Goal phase, 15 October 2026 night
+
+Romil then set the goal recorded at the top of `ROADMAP.md`: Absolute
+indistinguishable from macOS in daily use, in the VM first, then on the real
+Fedora. Work since: Toshy makes the keyboard behave as a Mac's in every
+application (`--mac-keys`); the Dock, Spotlight and Launchpad are Absolute's
+own Qt Quick layer-shell applications under `linux/dock`, `linux/spotlight` and
+`linux/launchpad`, built and started by `--dock` together with the Genie
+minimise effect `linux/kwin/genie`; the menu bar carries the Absolute applets
+(`org.absolute.appname`, `org.absolute.spotlight`, `org.absolute.controlcentre`).
+Lessons: KWin grants the window-management protocol only to clients whose
+desktop entry declares `X-KDE-Wayland-Interfaces`, matched by executable path;
+Toshy turns Cmd+Space into Alt+Space, so Spotlight is bound to both and
+KRunner moved to Alt+F2; physical Ctrl reaches KWin as Meta, so Overview sits
+on Ctrl+Up and Meta+Up; a `pkill -f` pattern must not match the ssh shell's
+own command line; `script/vm_fedora.sh push` wipes build directories under the
+pushed tree, so builds go under `~/.cache/absolute/build`. The VM now runs as
+a UTM bundle for GPU acceleration (`vm_fedora.sh utm`), pinned to 3456x2160 at
+2x. The roadmap table carries the state of every goal item.
+
 ## Implementation direction
 
 Current direction (2026-10-15): the ultimate goal is an open-source macOS
