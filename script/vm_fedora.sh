@@ -13,7 +13,9 @@ RELEASE=44
 IMAGE_NAME="Fedora-Cloud-Base-Generic-44-1.7.aarch64.qcow2"
 IMAGE_URL="https://dl.fedoraproject.org/pub/fedora/linux/releases/$RELEASE/Cloud/aarch64/images/$IMAGE_NAME"
 CHECKSUM_URL="https://dl.fedoraproject.org/pub/fedora/linux/releases/$RELEASE/Cloud/aarch64/images/Fedora-Cloud-$RELEASE-1.7-aarch64-CHECKSUM"
+BUNDLE="$VM_DIR/Absolute.utm"
 DISK="$VM_DIR/absolute.qcow2"
+[[ -f "$BUNDLE/Data/absolute.qcow2" ]] && DISK="$BUNDLE/Data/absolute.qcow2"
 DISK_SIZE="${ABSOLUTE_VM_DISK:-48G}"
 SEED="$VM_DIR/seed.iso"
 EFI_CODE="${ABSOLUTE_EFI_CODE:-/opt/homebrew/share/qemu/edk2-aarch64-code.fd}"
@@ -47,6 +49,9 @@ Usage: script/vm_fedora.sh COMMAND [ARGS]
   key               Send a key chord to the machine, e.g. "meta-space" or "ret".
   type TEXT         Type ASCII text into the machine.
   mouse X Y [BTN]   Move the pointer to absolute X,Y and click (left by default).
+  utm               Wrap the machine in a UTM bundle (Absolute.utm) with GPU-accelerated
+                    graphics; open it in UTM for smooth animations. Needs UTM installed
+                    (brew install --cask utm). The script keeps using the same disk.
   reset             Delete the disk and seed so create starts over. Keeps the download.
 
 Machine directory: $VM_DIR (override with ABSOLUTE_VM_DIR)
@@ -84,7 +89,30 @@ print(json.dumps(reply.get("return", {})))
 PY
 }
 
-ssh_opts=(-i "$KEY" -p "$SSH_PORT" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=10)
+guest_address() {
+    # Under UTM the machine sits on Apple's shared vmnet, so it is reached by the address
+    # the host's DHCP server leased to its MAC; under plain QEMU, by the forwarded port.
+    if [[ -f "$BUNDLE/config.plist" ]] && ! running; then
+        local mac lease
+        mac="$(/usr/libexec/PlistBuddy -c 'Print :Network:0:MacAddress' "$BUNDLE/config.plist" 2>/dev/null || true)"
+        lease="$(python3 - "$mac" <<'PY'
+import os, re, sys
+mac = sys.argv[1].lower()
+def norm(m): return ":".join(p.zfill(2) for p in m.lower().split(":"))
+path = "/var/db/dhcpd_leases"
+text = open(path).read() if os.path.exists(path) else ""
+for block in text.split("{")[1:]:
+    fields = dict(re.findall(r"\s*(\w+)=(\S+)", block))
+    if norm(fields.get("hw_address", "1,0").split(",")[-1]) == norm(mac):
+        print(fields.get("ip_address", "")); break
+PY
+)"
+        if [[ -n "$lease" ]]; then printf '%s 22\n' "$lease"; return 0; fi
+    fi
+    printf '127.0.0.1 %s\n' "$SSH_PORT"
+}
+read -r GUEST_HOST GUEST_PORT < <(guest_address)
+ssh_opts=(-i "$KEY" -p "$GUEST_PORT" -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=10)
 
 create() {
     require qemu-system-aarch64 "brew install qemu"
@@ -92,6 +120,9 @@ create() {
     require hdiutil "part of macOS"
     [[ -f "$EFI_CODE" ]] || fail "UEFI firmware not found at $EFI_CODE"
     mkdir -p "$VM_DIR" "$SHOTS"
+    if [[ -f "$BUNDLE/Data/$IMAGE_NAME" && ! -f "$VM_DIR/$IMAGE_NAME" ]]; then
+        printf 'Machine already lives in %s\n' "$BUNDLE"; return 0
+    fi
     if [[ ! -f "$VM_DIR/$IMAGE_NAME" ]]; then
         printf 'Downloading %s\n' "$IMAGE_NAME"
         curl -L --fail -o "$VM_DIR/$IMAGE_NAME.part" "$IMAGE_URL"
@@ -158,6 +189,9 @@ start() {
     [[ "${1:-}" == "--window" ]] && window=true
     [[ -f "$DISK" && -f "$SEED" ]] || fail "Run create first."
     running && fail "Already running (pid $(cat "$PIDFILE"))."
+    if command -v utmctl >/dev/null && utmctl list 2>/dev/null | grep -q "started *Absolute"; then
+        fail "The machine is running under UTM; stop it there first (or use UTM for the window)."
+    fi
     rm -f "$QMP"
     local display=(-display none -audiodev none,id=snd0)
     if [[ "$window" == true ]]; then display=(-display cocoa,show-cursor=on,zoom-to-fit=on -audiodev coreaudio,id=snd0); fi
@@ -199,6 +233,8 @@ stop() {
 status() {
     if running; then
         printf 'Running (pid %s). SSH: ssh -i %s -p %s %s@127.0.0.1\n' "$(cat "$PIDFILE")" "$KEY" "$SSH_PORT" "$VM_USER"
+    elif [[ -f "$BUNDLE/config.plist" ]] && command -v utmctl >/dev/null && utmctl list 2>/dev/null | grep -q "started *Absolute"; then
+        printf 'Running under UTM at %s. SSH: bash script/vm_fedora.sh ssh\n' "$GUEST_HOST"
     else
         printf 'Not running. Disk: %s\n' "$([[ -f "$DISK" ]] && echo "$DISK" || echo "not created")"
     fi
@@ -264,16 +300,194 @@ mouse() {
     fi
 }
 
+
+utm_bundle() {
+    [[ -d /Applications/UTM.app ]] || fail "UTM is not installed: brew install --cask utm"
+    running && fail "Stop the machine first."
+    [[ -f "$DISK" ]] || fail "Run create first."
+    local data="$BUNDLE/Data"
+    mkdir -p "$data"
+    if [[ "$DISK" != "$data/absolute.qcow2" ]]; then
+        # The overlay references the cloud image by absolute path; UTM's sandbox can only
+        # see files inside the bundle, so both move in and the reference becomes relative.
+        mv "$VM_DIR/$IMAGE_NAME" "$data/$IMAGE_NAME"
+        mv "$DISK" "$data/absolute.qcow2"
+        qemu-img rebase -u -F qcow2 -b "$IMAGE_NAME" "$data/absolute.qcow2"
+        DISK="$data/absolute.qcow2"
+    fi
+    local uuid mac
+    uuid="$(uuidgen)"
+    mac="$(printf '52:54:00:%02X:%02X:%02X' $((RANDOM % 256)) $((RANDOM % 256)) $((RANDOM % 256)))"
+    local memory_mib=$(( ${MEMORY%G} * 1024 ))
+    cat > "$BUNDLE/config.plist" <<EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Backend</key>
+	<string>QEMU</string>
+	<key>ConfigurationVersion</key>
+	<integer>4</integer>
+	<key>Display</key>
+	<array>
+		<dict>
+			<key>DownscalingFilter</key>
+			<string>Linear</string>
+			<key>DynamicResolution</key>
+			<true/>
+			<key>Hardware</key>
+			<string>virtio-gpu-gl-pci</string>
+			<key>NativeResolution</key>
+			<true/>
+			<key>UpscalingFilter</key>
+			<string>Linear</string>
+		</dict>
+	</array>
+	<key>Drive</key>
+	<array>
+		<dict>
+			<key>Identifier</key>
+			<string>$(uuidgen)</string>
+			<key>ImageName</key>
+			<string>absolute.qcow2</string>
+			<key>ImageType</key>
+			<string>Disk</string>
+			<key>Interface</key>
+			<string>VirtIO</string>
+			<key>InterfaceVersion</key>
+			<integer>1</integer>
+			<key>ReadOnly</key>
+			<false/>
+		</dict>
+	</array>
+	<key>Information</key>
+	<dict>
+		<key>Icon</key>
+		<string>fedora</string>
+		<key>IconCustom</key>
+		<false/>
+		<key>Name</key>
+		<string>Absolute</string>
+		<key>Notes</key>
+		<string>Absolute's Fedora desktop. User romil, password absolute.</string>
+		<key>UUID</key>
+		<string>$uuid</string>
+	</dict>
+	<key>Input</key>
+	<dict>
+		<key>MaximumUsbShare</key>
+		<integer>3</integer>
+		<key>UsbBusSupport</key>
+		<string>3.0</string>
+		<key>UsbSharing</key>
+		<false/>
+	</dict>
+	<key>Network</key>
+	<array>
+		<dict>
+			<key>Hardware</key>
+			<string>virtio-net-pci</string>
+			<key>IsolateFromHost</key>
+			<false/>
+			<key>MacAddress</key>
+			<string>$mac</string>
+			<key>Mode</key>
+			<string>Shared</string>
+			<key>PortForward</key>
+			<array>
+				<dict>
+					<key>GuestPort</key>
+					<integer>22</integer>
+					<key>HostAddress</key>
+					<string>127.0.0.1</string>
+					<key>HostPort</key>
+					<integer>$SSH_PORT</integer>
+					<key>Protocol</key>
+					<string>TCP</string>
+				</dict>
+			</array>
+		</dict>
+	</array>
+	<key>QEMU</key>
+	<dict>
+		<key>AdditionalArguments</key>
+		<array/>
+		<key>BalloonDevice</key>
+		<false/>
+		<key>DebugLog</key>
+		<false/>
+		<key>Hypervisor</key>
+		<true/>
+		<key>PS2Controller</key>
+		<false/>
+		<key>RNGDevice</key>
+		<true/>
+		<key>RTCLocalTime</key>
+		<false/>
+		<key>TPMDevice</key>
+		<false/>
+		<key>TSO</key>
+		<false/>
+		<key>UEFIBoot</key>
+		<true/>
+	</dict>
+	<key>Serial</key>
+	<array/>
+	<key>Sharing</key>
+	<dict>
+		<key>ClipboardSharing</key>
+		<true/>
+		<key>DirectoryShareMode</key>
+		<string>None</string>
+		<key>DirectoryShareReadOnly</key>
+		<false/>
+	</dict>
+	<key>Sound</key>
+	<array>
+		<dict>
+			<key>Hardware</key>
+			<string>intel-hda</string>
+		</dict>
+	</array>
+	<key>System</key>
+	<dict>
+		<key>Architecture</key>
+		<string>aarch64</string>
+		<key>CPU</key>
+		<string>default</string>
+		<key>CPUCount</key>
+		<integer>$CPUS</integer>
+		<key>CPUFlagsAdd</key>
+		<array/>
+		<key>CPUFlagsRemove</key>
+		<array/>
+		<key>ForceMulticore</key>
+		<false/>
+		<key>JITCacheSize</key>
+		<integer>0</integer>
+		<key>MemorySize</key>
+		<integer>$memory_mib</integer>
+		<key>Target</key>
+		<string>virt</string>
+	</dict>
+</dict>
+</plist>
+EOF
+    plutil -lint "$BUNDLE/config.plist" >/dev/null
+    printf 'UTM bundle ready: %s\nOpen it with: open %q\n' "$BUNDLE" "$BUNDLE"
+}
+
 case "${1:-}" in
     create) create ;;
+    utm) utm_bundle ;;
     start) start "${2:-}" ;;
     stop) stop ;;
     status) status ;;
-    ssh) shift; exec ssh "${ssh_opts[@]}" "$VM_USER@127.0.0.1" "$@" ;;
+    ssh) shift; exec ssh "${ssh_opts[@]}" "$VM_USER@$GUEST_HOST" "$@" ;;
     push) [[ $# -ge 3 ]] || { usage >&2; exit 2; }
           require rsync "brew install rsync"
           src="$2"; dest="$3"; shift 3
-          exec rsync -az --delete -e "ssh ${ssh_opts[*]}" "$@" "$src" "$VM_USER@127.0.0.1:$dest" ;;
+          exec rsync -az --delete -e "ssh ${ssh_opts[*]}" "$@" "$src" "$VM_USER@$GUEST_HOST:$dest" ;;
     shot) shot "${2:-}" ;;
     key) [[ $# -ge 2 ]] || { usage >&2; exit 2; }; send_key "$2" "${3:-100}" ;;
     type) [[ $# -eq 2 ]] || { usage >&2; exit 2; }; type_text "$2" ;;

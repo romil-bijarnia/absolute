@@ -50,9 +50,20 @@ bash script/vm_fedora.sh stop
 
 The machine lives under `~/.local/share/absolute/vm`. Its user is `romil`
 (password `absolute`), signs in automatically, and runs at 2880x1800 with
-2x scaling. Graphics are software rendered (Homebrew's QEMU has no virgl), so
-animations are slower than on hardware. The surface was built and checked in
-this machine: `push` the checkout in and run the installer over `ssh`.
+2x scaling. Homebrew's QEMU has no virgl, so under `start --window` the
+desktop is software rendered and animations crawl. For smooth animations run
+it under UTM (`brew install --cask utm`, free):
+
+```sh
+bash script/vm_fedora.sh utm          # once: wraps the disk in Absolute.utm with virtio-gpu-gl
+open ~/.local/share/absolute/vm/Absolute.utm
+```
+
+UTM is sandboxed, so the disk and its base image move inside the bundle; the
+script keeps using that disk, reaches the machine through UTM's shared network
+(the address leased to the machine's MAC) and refuses to start its own QEMU
+while UTM has the machine running. The surface was built and checked in this
+machine: `push` the checkout in and run the installer over `ssh`.
 
 ## The native preview application
 
